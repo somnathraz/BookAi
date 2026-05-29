@@ -15,9 +15,25 @@ function isLocal(url: string): boolean {
   return url.includes("localhost") || url.includes("127.0.0.1") || url.includes("@/");
 }
 
+/** Vercel's Neon integration often prefixes vars (e.g. bookAi_DATABASE_URL). */
+function resolveDatabaseUrl(): string | undefined {
+  const names = [
+    "DATABASE_URL",
+    "bookAi_DATABASE_URL",
+    "POSTGRES_URL",
+    "bookAi_POSTGRES_URL",
+    "bookAi_POSTGRES_PRISMA_URL",
+  ];
+  for (const name of names) {
+    const v = process.env[name]?.trim();
+    if (v) return v;
+  }
+  return undefined;
+}
+
 export function getSql(): Sql | null {
   if (_sql !== undefined) return _sql;
-  const url = process.env.DATABASE_URL?.trim();
+  const url = resolveDatabaseUrl();
   if (!url) {
     _sql = null;
     return null;
