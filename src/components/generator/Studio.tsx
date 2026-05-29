@@ -11,6 +11,7 @@ import {
   ExternalLink,
   FileText,
   Globe,
+  LayoutGrid,
   Loader2,
   MapPin,
   Quote,
@@ -233,54 +234,95 @@ export function Studio() {
     const displayUrl = shareUrl();
 
     return (
-      <div className="min-h-screen">
-        <div className="sticky top-0 z-50 flex items-center justify-between gap-3 border-b border-border/60 bg-background/80 px-4 py-3 backdrop-blur">
-          <Button variant="ghost" size="sm" onClick={() => setStep("review")}>
-            <ArrowLeft className="size-4" />
-            Back to editor
-          </Button>
-          <div className="flex items-center gap-2">
-            {liveHref ? (
-              <>
-                <a
-                  href={liveHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hidden max-w-[min(100%,20rem)] items-center gap-1.5 truncate rounded-full border px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground sm:inline-flex"
-                  title={displayUrl ?? undefined}
-                >
-                  <span className="shrink-0 text-foreground">Live at</span>
-                  <span className="truncate font-mono">
-                    {displayUrl?.replace(/^https?:\/\//, "") ?? `/${slug}`}
-                  </span>
-                  <ExternalLink className="size-3.5 shrink-0" />
-                </a>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="hidden rounded-full sm:inline-flex"
-                  onClick={() => void copyShareUrl()}
-                >
-                  {copied ? (
-                    <Check className="size-4" />
-                  ) : (
-                    <Copy className="size-4" />
-                  )}
-                  {copied ? "Copied" : "Copy link"}
-                </Button>
-              </>
-            ) : (
-              <Badge variant="outline" className="hidden rounded-full sm:inline-flex">
-                Live preview
-              </Badge>
-            )}
-          </div>
-        </div>
+      <div className="min-h-screen pb-28">
+        {/* Generated site fills full viewport */}
         <GeneratedSite
           site={site}
           theme={previewTheme}
           onThemeChange={setPreviewTheme}
         />
+
+        {/* Floating bottom bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2, ease: EASE }}
+          className="fixed bottom-5 left-1/2 z-50 w-[calc(100%-2rem)] max-w-2xl -translate-x-1/2"
+        >
+          <div className="flex items-stretch overflow-hidden rounded-2xl border border-border/70 bg-background/92 shadow-2xl shadow-black/12 backdrop-blur-xl dark:bg-background/88">
+
+            {/* Back to editor */}
+            <button
+              type="button"
+              onClick={() => setStep("review")}
+              className="flex items-center gap-2 px-4 py-3.5 text-sm font-medium transition-colors hover:bg-accent"
+            >
+              <ArrowLeft className="size-4 shrink-0" />
+              <span className="hidden sm:inline">Edit</span>
+            </button>
+
+            <div className="my-2.5 w-px bg-border/70" />
+
+            {/* Verified email */}
+            {verifiedEmail ? (
+              <>
+                <div className="flex min-w-0 items-center gap-2 px-4 py-3.5">
+                  <BadgeCheck className="size-4 shrink-0 text-emerald-500" strokeWidth={2} />
+                  <span className="max-w-[10rem] truncate text-xs text-muted-foreground sm:max-w-[14rem]">
+                    {verifiedEmail}
+                  </span>
+                </div>
+                <div className="my-2.5 w-px bg-border/70" />
+              </>
+            ) : null}
+
+            {/* Shareable link + copy */}
+            <div className="flex min-w-0 flex-1 items-center">
+              {liveHref ? (
+                <a
+                  href={liveHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex min-w-0 flex-1 items-center gap-1.5 px-4 py-3.5 transition-colors hover:bg-accent"
+                  title={displayUrl ?? undefined}
+                >
+                  <ExternalLink className="size-3.5 shrink-0 text-muted-foreground" />
+                  <span className="truncate font-mono text-xs text-muted-foreground">
+                    {displayUrl?.replace(/^https?:\/\//, "") ?? `/${slug}`}
+                  </span>
+                </a>
+              ) : (
+                <span className="flex-1 px-4 py-3.5 text-xs text-muted-foreground">
+                  Live preview
+                </span>
+              )}
+              <button
+                type="button"
+                onClick={() => void copyShareUrl()}
+                className="flex items-center gap-1.5 border-l border-border/70 px-4 py-3.5 text-sm font-medium transition-colors hover:bg-accent"
+              >
+                {copied ? (
+                  <Check className="size-4 shrink-0 text-emerald-500" />
+                ) : (
+                  <Copy className="size-4 shrink-0" />
+                )}
+                <span className="hidden sm:inline">{copied ? "Copied!" : "Copy"}</span>
+              </button>
+            </div>
+
+            <div className="my-2.5 w-px bg-border/70" />
+
+            {/* My sites */}
+            <a
+              href="/dashboard"
+              className="flex items-center gap-2 px-4 py-3.5 text-sm font-medium transition-colors hover:bg-accent"
+            >
+              <LayoutGrid className="size-4 shrink-0" />
+              <span className="hidden sm:inline">My sites</span>
+            </a>
+
+          </div>
+        </motion.div>
       </div>
     );
   }

@@ -11,8 +11,10 @@ import {
   Linkedin,
   Loader2,
   MapPin,
+  Monitor,
   Search,
   Share2,
+  Smartphone,
   Upload,
   type LucideIcon,
 } from "lucide-react";
@@ -82,51 +84,99 @@ function isValidMapsShareUrl(url: string): boolean {
   );
 }
 
-const MAPS_STEPS: { icon: LucideIcon; title: string; detail: string }[] = [
+type StepDef = { icon: LucideIcon; title: string; detail: string };
+
+const MOBILE_STEPS: StepDef[] = [
   {
     icon: Search,
-    title: "Open Google Maps",
-    detail: "Search for your business by name",
+    title: "Open the Google Maps app",
+    detail: "Search for your business and tap on it to open the business card",
   },
   {
     icon: Share2,
-    title: "Tap Share",
-    detail: 'Tap the share icon on the business card (looks like an arrow pointing out)',
+    title: 'Tap "Share" on the business card',
+    detail: 'Scroll down the bottom sheet and tap the Share button (arrow icon)',
   },
   {
     icon: Copy,
     title: 'Tap "Copy link"',
-    detail: "You'll get a short maps.app.goo.gl/… link",
+    detail: "You'll get a short maps.app.goo.gl/… link copied to your clipboard",
   },
   {
     icon: Link2,
     title: "Paste it below",
-    detail: "That's it — we extract reviews, photos, and hours automatically",
+    detail: "We extract reviews, photos, hours, and location automatically",
+  },
+];
+
+const DESKTOP_STEPS: StepDef[] = [
+  {
+    icon: Search,
+    title: "Open maps.google.com",
+    detail: "Search for your business and click on it in the results",
+  },
+  {
+    icon: Share2,
+    title: 'Click the Share button',
+    detail: 'Click the Share icon (arrow icon) on the left panel of the business',
+  },
+  {
+    icon: Copy,
+    title: 'Click "Copy link"',
+    detail: "You'll get a short maps.app.goo.gl/… link copied to your clipboard",
+  },
+  {
+    icon: Link2,
+    title: "Paste it below",
+    detail: "We extract reviews, photos, hours, and location automatically",
   },
 ];
 
 function MapsShareGuide({ url }: { url: string }) {
+  const [tab, setTab] = useState<"mobile" | "desktop">("mobile");
   const hasUrl = url.length > 8;
   const isValid = isValidMapsShareUrl(url);
+  const steps = tab === "mobile" ? MOBILE_STEPS : DESKTOP_STEPS;
+
   return (
     <div className="overflow-hidden rounded-xl border border-border/70 bg-card/60">
-      {/* Header — "only format we accept" */}
+      {/* Header */}
       <div className="flex items-center justify-between gap-3 border-b border-border/60 bg-muted/50 px-4 py-2.5">
         <p className="text-xs font-medium text-foreground">
-          We only accept Google Maps Share links
+          Only accepts Google Maps Share links
         </p>
         <span className="shrink-0 rounded-md border border-border/70 bg-background/80 px-2 py-0.5 font-mono text-[11px] text-muted-foreground">
           maps.app.goo.gl/…
         </span>
       </div>
 
+      {/* Mobile / Desktop tab toggle */}
+      <div className="flex border-b border-border/60">
+        {(["mobile", "desktop"] as const).map((t) => (
+          <button
+            key={t}
+            type="button"
+            onClick={() => setTab(t)}
+            className={`flex flex-1 items-center justify-center gap-1.5 py-2 text-xs font-medium transition-colors ${
+              tab === t
+                ? "border-b-2 border-foreground text-foreground"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            {t === "mobile" ? (
+              <Smartphone className="size-3.5" />
+            ) : (
+              <Monitor className="size-3.5" />
+            )}
+            {t === "mobile" ? "Mobile app" : "Desktop browser"}
+          </button>
+        ))}
+      </div>
+
       {/* Steps */}
       <ol className="flex flex-col divide-y divide-border/50">
-        {MAPS_STEPS.map(({ icon: Icon, title, detail }, i) => (
-          <li
-            key={i}
-            className="flex items-start gap-3 px-4 py-3"
-          >
+        {steps.map(({ icon: Icon, title, detail }, i) => (
+          <li key={i} className="flex items-start gap-3 px-4 py-3">
             <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-foreground text-[11px] font-semibold text-background">
               {i + 1}
             </span>
@@ -141,16 +191,18 @@ function MapsShareGuide({ url }: { url: string }) {
         ))}
       </ol>
 
-      {/* Status strip — shows once user starts typing */}
+      {/* Live validation strip */}
       {hasUrl ? (
         <div
           className={
             isValid
-              ? "flex items-center gap-2 border-t border-emerald-500/20 bg-emerald-500/8 px-4 py-2 text-xs font-medium text-emerald-700 dark:text-emerald-300"
-              : "flex items-center gap-2 border-t border-destructive/20 bg-destructive/8 px-4 py-2 text-xs font-medium text-destructive"
+              ? "flex items-center gap-2 border-t border-emerald-500/20 bg-emerald-500/10 px-4 py-2 text-xs font-medium text-emerald-700 dark:text-emerald-300"
+              : "flex items-center gap-2 border-t border-destructive/20 bg-destructive/10 px-4 py-2 text-xs font-medium text-destructive"
           }
         >
-          <span className={`size-1.5 rounded-full ${isValid ? "bg-emerald-500" : "bg-destructive"}`} />
+          <span
+            className={`size-1.5 rounded-full ${isValid ? "bg-emerald-500" : "bg-destructive"}`}
+          />
           {isValid
             ? "Looks good — this is a valid Google Maps link"
             : "This doesn't look like a maps.app.goo.gl Share link"}
