@@ -1,0 +1,295 @@
+// The stable contract every generated site renders from.
+// Today a template produces this; later an AI provider (Claude / Gemini / OpenAI)
+// produces the same shape from a resume, Google Maps reviews, or LinkedIn data.
+
+export type ThemeMode = "light" | "dark";
+
+export type BusinessDomain =
+  | "developer"
+  | "designer"
+  | "doctor"
+  | "consultant"
+  | "photographer"
+  | "restaurant"
+  | "fitness"
+  | "other";
+
+// Outbound links we surface as contact / social buttons. All optional —
+// the renderer only shows the ones that are present.
+export interface SocialLinks {
+  whatsapp?: string; // raw phone-ish string; rendered via wa.me/<digits>
+  github?: string;
+  linkedin?: string;
+  instagram?: string;
+  website?: string;
+}
+
+export interface SiteIdentity {
+  name: string;
+  tagline: string;
+  intro: string;
+  domain: BusinessDomain;
+  location?: string;
+  email?: string;
+  phone?: string;
+  /** Headshot / logo as a data URL or remote URL. Resumes & LinkedIn don't
+   *  expose one, so the user is asked to upload it in the analysis step. */
+  photo?: string;
+  socials?: SocialLinks;
+}
+
+export interface Stat {
+  label: string;
+  value: string;
+}
+
+export interface SiteBio {
+  heading: string;
+  body: string;
+  stats: Stat[];
+}
+
+export interface ServiceItem {
+  title: string;
+  description: string;
+  icon: string; // lucide icon name, resolved by the renderer's icon registry
+}
+
+export interface WorkItem {
+  /** Role title (profile/experience) or project title (portfolio/projects). */
+  title: string;
+  /** One-line summary of the role/project. */
+  description: string;
+  /** Company / category badge (e.g. "Acme Corp" or "SaaS"). */
+  tag?: string;
+  /** Timeframe for an experience entry, e.g. "2021 — Present". */
+  period?: string;
+  /** Technologies / tools used — rendered as chips / brand logos. */
+  tech?: string[];
+  /** Achievement bullets so an entry is more than a one-liner. */
+  highlights?: string[];
+  /** Optional link to the live project / repo (personal projects). */
+  link?: string;
+}
+
+export interface Testimonial {
+  quote: string;
+  author: string;
+  role?: string;
+  rating?: number;
+  /** True for reviews pulled from a verified source (e.g. Google Business). */
+  verified?: boolean;
+}
+
+/** A certification, license, award, or degree shown on profile/portfolio sites. */
+export interface CertificationItem {
+  name: string;
+  /** One-line context — what the credential validates or demonstrates. */
+  detail: string;
+}
+
+export interface SiteCTA {
+  heading: string;
+  subtext: string;
+  buttonLabel: string;
+  href?: string;
+}
+
+export interface SectionLabels {
+  services: string;
+  work: string;
+  testimonials: string;
+}
+
+// Hero composition. "split" pairs copy with the user's photo; "centered" is
+// the photo-free, text-forward layout. Chosen per-user so no two sites are
+// laid out identically.
+export type HeroLayout = "centered" | "split";
+
+// What kind of site we're building. Derived from the source + domain so the
+// composition never overlaps (a resume becomes a person profile, a Google
+// Business becomes a business site, a designer/photographer a portfolio).
+export type Archetype = "profile" | "business" | "portfolio";
+
+// The blocks a generated site can be composed from. The AI (or the template
+// fallback) returns an ordered list of these; the renderer maps each to a
+// component. Content for each block still lives on SiteData below.
+export type SectionType =
+  | "about"
+  | "stats"
+  | "skills" // infinite auto-scroll marquee of tech / tools mastered
+  | "services"
+  | "experience" // roles / timeline — profile sites
+  | "projects" // personal project cards in a slider — profile/portfolio
+  | "portfolio" // project cards grid — portfolio sites
+  | "gallery" // photo grid — business sites
+  | "certifications" // licenses, awards, degrees
+  | "languages" // spoken languages
+  | "interests" // hobbies / interests
+  | "testimonials"
+  | "cta";
+
+// One entry in the ordered composition. Optional copy overrides let the AI
+// rename a block (e.g. a doctor's "experience" → "Specialities") without
+// changing how it renders.
+export interface SiteSection {
+  type: SectionType;
+  /** Small eyebrow label above the heading. */
+  label?: string;
+  /** Section heading. */
+  heading?: string;
+}
+
+// ── Design system the AI drives (level 3 + 4) ─────────────────────────────────
+// The AI picks names from these closed sets; the renderer maps them to real,
+// tested components and tokens. This makes every site look different without
+// ever producing broken or off-brand UI.
+
+// Overall visual personality — fonts/weights, corner radius, shadows, spacing.
+export type StyleTheme = "minimal" | "editorial" | "bold" | "warm";
+
+// Vertical rhythm / whitespace.
+export type Density = "compact" | "comfortable" | "airy";
+
+// Per-section layout variants. Each is a different, prebuilt presentation of
+// the same content (including sliders/carousels).
+export type ServicesVariant = "bento" | "cards" | "list";
+export type WorkVariant = "grid" | "masonry";
+export type TestimonialsVariant = "cards" | "marquee";
+export type GalleryVariant = "masonry" | "carousel";
+
+export interface SectionVariants {
+  services?: ServicesVariant;
+  work?: WorkVariant;
+  testimonials?: TestimonialsVariant;
+  gallery?: GalleryVariant;
+}
+
+export interface SiteDesign {
+  styleTheme: StyleTheme;
+  density: Density;
+  variants: SectionVariants;
+}
+
+export interface SiteData {
+  identity: SiteIdentity;
+  theme: ThemeMode;
+  /** Optional brand accent (hex), derived from source images. Used sparingly
+   *  over the neutral base — CTAs, badges, glows. */
+  accent?: string;
+  /** Per-user hero composition so generated sites differ from one another. */
+  heroLayout: HeroLayout;
+  /** The kind of site this is — drives the default section ordering. */
+  archetype: Archetype;
+  /** Visual style + per-section layout variants. AI-chosen, validated. */
+  design: SiteDesign;
+  /** Ordered blocks to render after the hero. When present the renderer uses
+   *  this; otherwise it falls back to the classic fixed order. */
+  sections: SiteSection[];
+  sectionLabels: SectionLabels;
+  bio: SiteBio;
+  services: ServiceItem[];
+  work: WorkItem[];
+  /** Personal / side projects, distinct from work experience. */
+  projects: WorkItem[];
+  /** Technologies / tools mastered — shown as an infinite marquee. */
+  skills: string[];
+  /** Certifications, licenses, awards, or degrees. */
+  certifications: CertificationItem[];
+  /** Spoken languages, e.g. "English", "Hindi (native)". */
+  languages: string[];
+  /** Hobbies / interests. */
+  interests: string[];
+  testimonials: Testimonial[];
+  /** Photo URLs for the gallery block (business sites). */
+  gallery: string[];
+  cta: SiteCTA;
+}
+
+// What the input form (or future extractors) collects. Most fields optional —
+// the generator fills domain-aware defaults for anything missing.
+export interface GeneratorInput {
+  name: string;
+  domain: BusinessDomain;
+  theme: ThemeMode;
+  tagline?: string;
+  bio?: string;
+  location?: string;
+  email?: string;
+  phone?: string;
+  services?: { title: string; description?: string }[];
+  work?: {
+    title: string;
+    description?: string;
+    tag?: string;
+    period?: string;
+    tech?: string[];
+    highlights?: string[];
+  }[];
+  /** Personal / side projects, distinct from work experience. */
+  projects?: {
+    title: string;
+    description?: string;
+    tag?: string;
+    tech?: string[];
+    link?: string;
+  }[];
+  /** Technologies / tools mastered. */
+  skills?: string[];
+  /** Certifications, licenses, awards, degrees. */
+  certifications?: string[];
+  /** Spoken languages. */
+  languages?: string[];
+  /** Hobbies / interests. */
+  interests?: string[];
+  testimonials?: {
+    quote: string;
+    author: string;
+    role?: string;
+    rating?: number;
+    verified?: boolean;
+  }[];
+  /** Brand accent (hex) chosen in the analysis step. */
+  accent?: string;
+  /** Headshot / logo (data URL) uploaded in the analysis or review step. */
+  photo?: string;
+  /** Contact / social links surfaced as buttons on the generated site. */
+  socials?: SocialLinks;
+  /** The kind of site to build. Derived in analysis; defaulted from domain. */
+  archetype?: Archetype;
+  /** Photo URLs (e.g. Google Business photos) for a gallery block. */
+  gallery?: string[];
+  // When true (and a provider is configured) the AI writes the site copy;
+  // otherwise the template engine is used. Defaults to AI-on when available.
+  useAI?: boolean;
+}
+
+// ── Input sources & the analysis-reveal contract ──────────────────────────────
+
+export type SourceId = "resume" | "maps" | "competitor" | "linkedin" | "manual";
+
+export interface Capabilities {
+  ai: boolean;
+  provider: string | null;
+  providers: { id: string; label: string }[];
+  google: boolean;
+  /** Gmail/OTP configured — when false, the email gate is skipped. */
+  email: boolean;
+}
+
+export interface Category {
+  domain: BusinessDomain;
+  label: string;
+  confidence: number; // 0..1
+}
+
+// Everything the analysis step reveals before the user reaches the form.
+export interface AnalysisResult {
+  source: SourceId;
+  profile: Partial<GeneratorInput>;
+  images: string[];
+  palette: string[]; // hex colors extracted from images
+  categories: Category[];
+  certifications: string[];
+  reviews: { quote: string; author: string; role?: string }[];
+}

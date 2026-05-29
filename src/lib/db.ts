@@ -1,0 +1,80 @@
+import "server-only";
+
+import postgres from "postgres";
+
+// Single Postgres connection via DATABASE_URL. Works with local Postgres,
+// Neon, or Supabase — they're all Postgres, only the connection string differs.
+// When DATABASE_URL is unset, getSql() returns null and the app falls back to
+// in-memory stores (so dev still runs with no DB).
+
+type Sql = ReturnType<typeof postgres>;
+
+let _sql: Sql | null | undefined;
+
+function isLocal(url: string): boolean {
+  return url.includes("localhost") || url.includes("127.0.0.1") || url.includes("@/");
+}
+
+export function getSql(): Sql | null {
+  if (_sql !== undefined) return _sql;
+  const url = process.env.DATABASE_URL?.trim();
+  if (!url) {
+    _sql = null;
+    return null;
+  }
+  _sql = postgres(url, {
+    // Neon/Supabase require TLS; local Postgres usually doesn't.
+    ssl: isLocal(url) ? false : "require",
+    max: 5,
+    idle_timeout: 20,
+  });
+  return _sql;
+}
+
+export function dbEnabled(): boolean {
+  return getSql() !== null;
+}
+
+let _schemaReady: Promise<void> | null = null;
+
+// Lazily create tables on first use (idempotent). Safe to call on every request.
+export function ensureSchema(): Promise<void> {
+  const sql = getSql();
+  if (!sql) return Promise.resolve();
+  if (_schemaReady) return _schemaReady;
+  _schemaReady = (async () => {
+    await sql`
+      create table if not exists accounts (
+        email      text primary key,
+        plan       text not null default 'free',
+        created_at timestamptz not null default now()
+      )`;
+    await sql`
+      create table if not exists sites (
+        id         uuid primary key,
+        email      text not null,
+        slug       text,
+        name       text not null,
+        domain     text not null,
+        theme      text not null,
+        accent     text,
+        ip         text,
+        data       jsonb not null,
+        created_at timestamptz not null default now()
+      )`;
+    // Add slug to tables created before it existed (idempotent).
+    await sql`alter table sites add column if not exists slug text`;
+    await sql`create index if not exists sites_email_idx on sites (email)`;
+    await sql`create index if not exists sites_ip_idx on sites (ip)`;
+    await sql`create unique index if not exists sites_slug_idx on sites (slug)`;
+    await sql`
+      create table if not exists otps (
+        email     text primary key,
+        code      text not null,
+        expires   bigint not null,
+        attempts  int not null default 0,
+        last_sent bigint not null
+      )`;
+  })();
+  return _schemaReady;
+}
