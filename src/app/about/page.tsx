@@ -2,14 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { FileText, Globe, MapPin, Sparkles, Wand2 } from "lucide-react";
 
+import { PRODUCT_NAME } from "@/lib/brand";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MarketingNav } from "@/components/marketing/MarketingNav";
 import { MarketingFooter } from "@/components/marketing/MarketingFooter";
 
 export const metadata: Metadata = {
-  title: "About — BookAi",
-  description: "BookAi turns who you already are — your resume, your Google Business page, a site you like — into a polished one-page website in minutes.",
+  title: `About — ${PRODUCT_NAME}`,
+  description: `${PRODUCT_NAME} turns who you already are — your resume, your Google Business page, a site you like — into a polished one-page website in minutes.`,
 };
 
 const STEPS = [
@@ -32,19 +33,19 @@ const STEPS = [
 
 export default function AboutPage() {
   return (
-    <main className="relative min-h-screen">
+    <main className="relative flex min-h-screen flex-col">
       <MarketingNav />
 
       <section className="mx-auto max-w-3xl px-6 pb-16 pt-16 sm:pt-24">
         <Badge variant="secondary" className="mb-6 rounded-full px-3 py-1">
-          About BookAi
+          About {PRODUCT_NAME}
         </Badge>
         <h1 className="text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
           Your site, generated from who you already are
         </h1>
         <p className="mt-5 text-pretty text-lg leading-relaxed text-muted-foreground">
           Most website builders hand you a blank canvas and a hundred decisions.
-          BookAi starts from what already exists about you — your resume, your
+          {PRODUCT_NAME} starts from what already exists about you — your resume, your
           Google Business page, your LinkedIn, or a reference site — and turns it
           into a clean, modern one-page site in minutes. Built for India&apos;s
           small businesses, clinics, freelancers and creators.
@@ -85,7 +86,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <MarketingFooter />
+      <div className="mt-auto">
+        <MarketingFooter />
+      </div>
     </main>
   );
 }

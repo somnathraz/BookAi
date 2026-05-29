@@ -7,15 +7,17 @@ import { MarketingNav } from "@/components/marketing/MarketingNav";
 import { MarketingFooter } from "@/components/marketing/MarketingFooter";
 import { PricingPlans } from "@/components/marketing/PricingPlans";
 
+import { PRODUCT_NAME } from "@/lib/brand";
+
 export const metadata: Metadata = {
-  title: "Pricing — BookAi",
+  title: `Pricing — ${PRODUCT_NAME}`,
   description:
     "Start free with one AI-generated site. Monthly, annual or lifetime plans for more sites, custom domains, booking and an agency tier.",
 };
 
 export default function PricingPage() {
   return (
-    <main className="relative min-h-screen">
+    <main className="relative flex min-h-screen flex-col">
       <MarketingNav />
 
       <section className="mx-auto max-w-5xl px-6 pb-24 pt-16 sm:pt-24">
@@ -40,13 +42,15 @@ export default function PricingPage() {
         <p className="mt-10 text-center text-sm text-muted-foreground">
           Questions about a plan?{" "}
           <Link href="/about" className="text-foreground underline-offset-4 hover:underline">
-            Learn more about BookAi
+            Learn more about {PRODUCT_NAME}
           </Link>
           .
         </p>
       </section>
 
-      <MarketingFooter />
+      <div className="mt-auto">
+        <MarketingFooter />
+      </div>
     </main>
   );
 }

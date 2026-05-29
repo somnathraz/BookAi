@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { MarketingNav } from "@/components/marketing/MarketingNav";
 import { EmailGate } from "@/components/generator/EmailGate";
 import { SignOutButton } from "@/components/auth/SignOutButton";
+import { MarketingFooter } from "@/components/marketing/MarketingFooter";
 import type { ThemeMode } from "@/lib/types";
 
 interface SavedSite {
@@ -76,9 +77,9 @@ export default function DashboardPage() {
   }
 
   return (
-    <main className="min-h-screen">
+    <main className="flex min-h-screen flex-col">
       <MarketingNav />
-      <section className="mx-auto max-w-5xl px-6 pb-24 pt-12">
+      <section className="mx-auto w-full max-w-5xl flex-1 px-6 pb-24 pt-12">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <h1 className="text-3xl font-semibold tracking-tight">My sites</h1>
@@ -196,6 +197,7 @@ export default function DashboardPage() {
           </>
         )}
       </section>
+      <MarketingFooter />
     </main>
   );
 }

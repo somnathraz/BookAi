@@ -1,83 +1,56 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const EASE = [0.45, 0, 0.55, 1] as const;
 
-interface Blob {
-  className: string;
-  gradient: string;
-  x: number[];
-  y: number[];
-  scale: number[];
-  duration: number;
-}
-
-const BLOBS: Blob[] = [
-  {
-    className: "left-[-10%] top-[-15%] h-[42rem] w-[42rem]",
-    gradient:
-      "radial-gradient(circle at center, rgba(139,92,246,0.55), transparent 65%)",
-    x: [0, 60, -30, 0],
-    y: [0, 40, 80, 0],
-    scale: [1, 1.15, 0.95, 1],
-    duration: 18,
-  },
-  {
-    className: "right-[-15%] top-[-5%] h-[40rem] w-[40rem]",
-    gradient:
-      "radial-gradient(circle at center, rgba(56,189,248,0.5), transparent 65%)",
-    x: [0, -50, 40, 0],
-    y: [0, 60, 20, 0],
-    scale: [1, 0.9, 1.2, 1],
-    duration: 22,
-  },
-  {
-    className: "left-[20%] top-[25%] h-[38rem] w-[38rem]",
-    gradient:
-      "radial-gradient(circle at center, rgba(16,185,129,0.4), transparent 65%)",
-    x: [0, 70, -40, 0],
-    y: [0, -50, 30, 0],
-    scale: [1, 1.1, 0.95, 1],
-    duration: 26,
-  },
-  {
-    className: "right-[10%] top-[35%] h-[34rem] w-[34rem]",
-    gradient:
-      "radial-gradient(circle at center, rgba(236,72,153,0.38), transparent 65%)",
-    x: [0, -40, 50, 0],
-    y: [0, 40, -30, 0],
-    scale: [1, 1.2, 1, 1],
-    duration: 20,
-  },
-];
-
 export function AuroraBackground() {
+  const reduceMotion = useReducedMotion();
+
   return (
     <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden bg-background">
-      <div className="absolute inset-0 opacity-70 blur-[90px]">
-        {BLOBS.map((blob, i) => (
-          <motion.div
-            key={i}
-            className={`absolute rounded-full ${blob.className}`}
-            style={{ background: blob.gradient }}
-            animate={{ x: blob.x, y: blob.y, scale: blob.scale }}
-            transition={{
-              duration: blob.duration,
-              ease: EASE,
-              repeat: Infinity,
-              repeatType: "loop",
-            }}
-          />
-        ))}
-      </div>
+      <motion.div
+        className="absolute -inset-[35%] opacity-50 blur-[86px] dark:opacity-80"
+        style={{
+          background:
+            "conic-gradient(from 120deg at 50% 50%, rgba(66,133,244,0.34), rgba(52,168,83,0.22), rgba(251,188,5,0.18), rgba(234,67,53,0.24), rgba(66,133,244,0.34))",
+        }}
+        animate={
+          reduceMotion
+            ? undefined
+            : {
+                rotate: [0, 8, -10, 0],
+                scale: [1, 1.08, 0.98, 1],
+                x: ["-3%", "2%", "-1%", "-3%"],
+                y: ["-2%", "2%", "0%", "-2%"],
+              }
+        }
+        transition={{
+          duration: 26,
+          ease: EASE,
+          repeat: Infinity,
+          repeatType: "loop",
+        }}
+      />
+      <motion.div
+        className="absolute inset-x-[-15%] top-[18%] h-[32rem] opacity-45 blur-[72px]"
+        style={{
+          background:
+            "linear-gradient(90deg, transparent, rgba(66,133,244,0.18), rgba(52,168,83,0.16), rgba(251,188,5,0.14), rgba(234,67,53,0.16), transparent)",
+        }}
+        animate={reduceMotion ? undefined : { x: ["-8%", "6%", "-4%", "-8%"], y: [0, -24, 18, 0] }}
+        transition={{
+          duration: 20,
+          ease: EASE,
+          repeat: Infinity,
+          repeatType: "loop",
+        }}
+      />
 
-      {/* subtle grid */}
-      <div className="absolute inset-0 bg-grid-white opacity-60 [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]" />
-
-      {/* vignette so headline stays crisp and edges fade to background */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,rgba(10,10,10,0.55)_100%)]" />
-      <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-background to-transparent" />
+      <div className="absolute inset-0 bg-grid-black opacity-45 [mask-image:linear-gradient(to_bottom,black,transparent_82%)] dark:bg-grid-white dark:opacity-40" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_28%,transparent_0%,rgba(255,255,255,0.45)_48%,rgba(255,255,255,0.92)_100%)] dark:hidden" />
+      <div className="absolute inset-0 hidden bg-[radial-gradient(ellipse_at_50%_28%,transparent_0%,rgba(10,10,10,0.18)_48%,rgba(10,10,10,0.78)_100%)] dark:block" />
+      <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-background via-background/80 to-transparent" />
     </div>
   );
 }

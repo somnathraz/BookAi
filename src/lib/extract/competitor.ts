@@ -15,7 +15,7 @@ async function fetchHtml(rawUrl: string): Promise<{ html: string; url: string }>
     const res = await fetch(url, {
       headers: {
         "user-agent":
-          "Mozilla/5.0 (compatible; BookAiBot/1.0; +https://bookai.app)",
+          "Mozilla/5.0 (compatible; PaperChaiBot/1.0; +https://paperchaiapp.com)",
         accept: "text/html,application/xhtml+xml",
       },
       signal: controller.signal,

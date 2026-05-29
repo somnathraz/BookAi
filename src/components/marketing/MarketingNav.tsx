@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { LayoutGrid, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
+import { PRODUCT_NAME } from "@/lib/brand";
 import { Button } from "@/components/ui/button";
 
 const LINKS = [
@@ -17,7 +18,7 @@ export function MarketingNav() {
           <span className="flex size-7 items-center justify-center rounded-lg bg-foreground text-background">
             <Sparkles className="size-4" />
           </span>
-          BookAi
+          {PRODUCT_NAME}
         </Link>
         <nav className="hidden items-center gap-7 text-sm text-muted-foreground md:flex">
           {LINKS.map((l) => (
@@ -27,12 +28,6 @@ export function MarketingNav() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <Button variant="ghost" size="sm" asChild className="hidden sm:inline-flex">
-            <Link href="/dashboard">
-              <LayoutGrid className="size-4" />
-              My sites
-            </Link>
-          </Button>
           <Button size="sm" asChild>
             <Link href="/">Create a site</Link>
           </Button>

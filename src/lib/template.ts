@@ -1,5 +1,6 @@
 import { deriveArchetype, defaultSections, defaultDesign } from "@/lib/compose";
 import { enrichCertifications } from "@/lib/certifications";
+import { buildMapEmbedUrl } from "@/lib/hours";
 import type {
   Archetype,
   BusinessDomain,
@@ -501,6 +502,8 @@ export function generateSite(input: GeneratorInput): SiteData {
   const socials = normalizeSocials(input);
   const archetype = input.archetype ?? deriveArchetype(input.domain);
   const gallery = (input.gallery ?? []).filter(Boolean).slice(0, 20);
+  const mapEmbedUrl =
+    input.mapEmbedUrl ?? buildMapEmbedUrl({ address: input.location });
   const cta: SiteCTA = {
     ...(ARCHETYPE_CTA[archetype] ?? preset.cta),
     href: input.email ? `mailto:${input.email}` : "#contact",
@@ -540,6 +543,9 @@ export function generateSite(input: GeneratorInput): SiteData {
     interests,
     testimonials,
     gallery,
+    storeHours: input.storeHours,
+    mapEmbedUrl: archetype === "business" ? mapEmbedUrl : undefined,
+    mapsUrl: input.mapsUrl,
     cta,
   };
 

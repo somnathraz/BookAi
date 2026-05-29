@@ -63,7 +63,7 @@ const TIERS: Tier[] = [
       "Everything in Free",
       "Up to 3 sites & unlimited edits",
       "Connect your own custom domain",
-      "Remove BookAi branding",
+      "Remove PaperChai branding",
       "Email booking",
     ],
     cta: "Get Basic",

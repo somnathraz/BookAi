@@ -37,7 +37,7 @@ export function GeneratingOverlay({ useAI }: { useAI: boolean }) {
       <div>
         <h2 className="text-xl font-semibold">Building your site…</h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          {useAI ? "Our AI is writing it from your details." : "Assembling your template."}
+          {useAI ? "Writing it from your details." : "Assembling your template."}
         </p>
       </div>
       <div className="flex w-full max-w-xs flex-col gap-2.5">

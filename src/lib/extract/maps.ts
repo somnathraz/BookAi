@@ -1,6 +1,7 @@
 import "server-only";
 
 import { extractPalette } from "@/lib/extract/palette";
+import { buildMapEmbedUrl, buildStoreHours } from "@/lib/hours";
 import { analyzeCore, buildAnalysis, guessDomain } from "@/lib/extract/shared";
 import type { AnalysisResult, BusinessDomain } from "@/lib/types";
 
@@ -20,6 +21,10 @@ interface Place {
   reviews?: PlacesReview[];
   photos?: { name?: string }[];
   editorialSummary?: { text?: string };
+  regularOpeningHours?: { weekdayDescriptions?: string[] };
+  currentOpeningHours?: { openNow?: boolean; weekdayDescriptions?: string[] };
+  location?: { latitude?: number; longitude?: number };
+  googleMapsUri?: string;
 }
 
 function queryFromMapsUrl(rawUrl: string): string {
@@ -65,7 +70,7 @@ export async function extractFromGoogleMaps(rawUrl: string): Promise<AnalysisRes
       "content-type": "application/json",
       "X-Goog-Api-Key": key,
       "X-Goog-FieldMask":
-        "places.displayName,places.formattedAddress,places.nationalPhoneNumber,places.rating,places.userRatingCount,places.types,places.reviews,places.photos,places.editorialSummary",
+        "places.displayName,places.formattedAddress,places.nationalPhoneNumber,places.rating,places.userRatingCount,places.types,places.reviews,places.photos,places.editorialSummary,places.regularOpeningHours,places.currentOpeningHours,places.location,places.googleMapsUri",
     },
     body: JSON.stringify({ textQuery, maxResultCount: 1 }),
   });
@@ -130,14 +135,30 @@ export async function extractFromGoogleMaps(rawUrl: string): Promise<AnalysisRes
     "The source is real Google Business data (name, category, rating, customer reviews). Write a warm tagline and bio grounded in what the reviews actually praise, and list the services this business clearly offers. Keep the real business name."
   );
 
+  const address = place.formattedAddress ?? "";
+  const lat = place.location?.latitude;
+  const lng = place.location?.longitude;
+  const weekdayDescriptions =
+    place.regularOpeningHours?.weekdayDescriptions ??
+    place.currentOpeningHours?.weekdayDescriptions;
+  const storeHours = buildStoreHours(
+    weekdayDescriptions,
+    place.currentOpeningHours?.openNow
+  );
+  const mapEmbedUrl = buildMapEmbedUrl({ address, lat, lng });
+  const mapsUrl = place.googleMapsUri;
+
   core.profile = {
     ...core.profile,
     name: name || core.profile.name,
     domain,
-    location: place.formattedAddress ?? core.profile.location,
+    location: address || core.profile.location,
     phone: place.nationalPhoneNumber ?? core.profile.phone,
     bio: core.profile.bio ?? place.editorialSummary?.text,
     testimonials,
+    storeHours,
+    mapEmbedUrl,
+    mapsUrl,
   };
 
   return buildAnalysis("maps", core, { images, palette });

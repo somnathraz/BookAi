@@ -69,14 +69,12 @@ export function BuilderForm({
   error,
   initialValues,
   aiAvailable = false,
-  providerLabel,
 }: {
   onGenerate: (input: GeneratorInput) => void;
   generating: boolean;
   error: string | null;
   initialValues?: Partial<GeneratorInput>;
   aiAvailable?: boolean;
-  providerLabel?: string | null;
 }) {
   const iv = initialValues ?? {};
   const [useAI, setUseAI] = useState(true);
@@ -170,6 +168,9 @@ export function BuilderForm({
       },
       archetype,
       gallery: archetype === "business" ? iv.gallery : [],
+      storeHours: archetype === "business" ? iv.storeHours : undefined,
+      mapEmbedUrl: archetype === "business" ? iv.mapEmbedUrl : undefined,
+      mapsUrl: archetype === "business" ? iv.mapsUrl : undefined,
       // Pass through rich content extracted from the source that the form
       // doesn't edit yet — otherwise the experience timeline, projects, skills,
       // etc. would be silently dropped before generation.
@@ -413,23 +414,18 @@ export function BuilderForm({
         <button
           type="button"
           onClick={() => setUseAI((v) => !v)}
-          className="flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-card/50 p-4 text-left transition-colors hover:bg-card/70"
+          className="flex items-center justify-between gap-3 rounded-xl border border-border/70 bg-card/70 p-4 text-left transition-colors hover:bg-card dark:border-white/10 dark:bg-card/50 dark:hover:bg-card/70"
         >
           <span className="flex items-start gap-3">
             <Sparkles className="mt-0.5 size-5 text-foreground" />
             <span>
               <span className="block text-sm font-medium">
-                Write the copy with AI
-                {providerLabel ? (
-                  <span className="ml-1.5 font-normal text-muted-foreground">
-                    via {providerLabel}
-                  </span>
-                ) : null}
+                Write stronger copy
               </span>
               <span className="block text-xs text-muted-foreground">
                 {useAI
-                  ? "AI writes a tailored tagline, bio, services & CTA from your details."
-                  : "Off — we'll use the polished template for your profession."}
+                  ? "Tailor the tagline, bio, services and CTA from your details."
+                  : "Off - use the polished template for your profession."}
               </span>
             </span>
           </span>
@@ -462,7 +458,7 @@ export function BuilderForm({
         ) : (
           <>
             <Sparkles className="size-4" />
-            {aiAvailable && useAI ? "Generate with AI" : "Generate my site"}
+            Generate my site
           </>
         )}
       </Button>

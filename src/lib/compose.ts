@@ -64,18 +64,30 @@ const ARCHETYPE_ORDER: Record<Archetype, SectionType[]> = {
     "interests",
     "stats",
     "testimonials",
+    "faq",
     "cta",
   ],
   portfolio: [
+    "casestudy",
     "projects",
     "skills",
     "about",
     "experience",
     "certifications",
     "testimonials",
+    "faq",
     "cta",
   ],
-  business: ["about", "services", "gallery", "testimonials", "cta"],
+  business: [
+    "about",
+    "services",
+    "menu",
+    "gallery",
+    "hours",
+    "testimonials",
+    "faq",
+    "cta",
+  ],
 };
 
 // Hard segregation: which block types each archetype is even allowed to show.
@@ -93,10 +105,12 @@ const ARCHETYPE_ALLOWED: Record<Archetype, SectionType[]> = {
     "interests",
     "stats",
     "testimonials",
+    "faq",
     "cta",
   ],
   portfolio: [
     "about",
+    "casestudy",
     "projects",
     "portfolio",
     "skills",
@@ -105,9 +119,10 @@ const ARCHETYPE_ALLOWED: Record<Archetype, SectionType[]> = {
     "certifications",
     "stats",
     "testimonials",
+    "faq",
     "cta",
   ],
-  business: ["about", "services", "gallery", "testimonials", "cta"],
+  business: ["about", "services", "menu", "gallery", "hours", "testimonials", "faq", "cta"],
 };
 
 interface ComposeInput {
@@ -122,6 +137,9 @@ interface ComposeInput {
   hasStats: boolean;
   hasTestimonials: boolean;
   hasGallery: boolean;
+  hasHours: boolean;
+  hasMenu: boolean;
+  hasFaq: boolean;
 }
 
 // Decide whether a section has enough content to render. Keeps empty blocks
@@ -138,8 +156,14 @@ function sectionHasContent(type: SectionType, c: ComposeInput): boolean {
     case "experience":
     case "portfolio":
       return c.hasWork;
+    case "casestudy":
+      return c.hasWork || c.hasProjects;
     case "projects":
       return c.hasProjects;
+    case "menu":
+      return c.hasMenu;
+    case "faq":
+      return c.hasFaq;
     case "skills":
       return c.hasSkills;
     case "certifications":
@@ -150,6 +174,8 @@ function sectionHasContent(type: SectionType, c: ComposeInput): boolean {
       return c.hasInterests;
     case "gallery":
       return c.hasGallery;
+    case "hours":
+      return c.hasHours;
     case "testimonials":
       return c.hasTestimonials;
     default:
@@ -172,6 +198,10 @@ function composeInput(site: SiteData): ComposeInput {
     hasStats: site.bio.stats.length > 0,
     hasTestimonials: site.testimonials.length > 0,
     hasGallery: site.gallery.length > 0,
+    hasHours:
+      (site.storeHours?.rows?.length ?? 0) > 0 || Boolean(site.mapEmbedUrl),
+    hasMenu: (site.menu?.length ?? 0) > 0,
+    hasFaq: (site.faq?.length ?? 0) > 0,
   };
 }
 
@@ -195,13 +225,17 @@ export function sanitizeSections(
     "stats",
     "skills",
     "services",
+    "menu",
     "experience",
     "projects",
     "portfolio",
+    "casestudy",
     "gallery",
+    "hours",
     "certifications",
     "languages",
     "interests",
+    "faq",
     "testimonials",
     "cta",
   ];

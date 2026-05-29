@@ -1,6 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+  type CSSProperties,
+  type ReactNode,
+} from "react";
 import {
   motion,
   useScroll,
@@ -9,9 +16,11 @@ import {
 } from "framer-motion";
 import {
   ArrowRight,
+  ArrowUpRight,
   Award,
   BadgeCheck,
   CalendarDays,
+  ChevronDown,
   ChevronLeft,
   ChevronRight,
   Code2,
@@ -27,14 +36,19 @@ import {
   MapPin,
   MessageCircle,
   Moon,
+  Navigation,
   Phone,
   Quote,
   Star,
   Sun,
+  UtensilsCrossed,
   type LucideIcon,
 } from "lucide-react";
 
 import { normalizeCertifications } from "@/lib/certifications";
+import { buildDirectionsUrl } from "@/lib/hours";
+import { isOpenNow, toOpeningHoursSpec } from "@/lib/open-hours";
+import { GeneratedSiteFooter } from "@/components/marketing/MarketingFooter";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -43,6 +57,7 @@ import { resolveIcon } from "@/components/generated/icons";
 import { lookupTech, TechLogo } from "@/components/generated/tech-icons";
 import { siteStyle } from "@/lib/site-style";
 import type {
+  MenuItem,
   SiteData,
   SiteIdentity,
   SiteSection,
@@ -1480,6 +1495,119 @@ function TestimonialsSection({ site, section }: SectionProps) {
   );
 }
 
+// Live "Open now" badge — recomputed from the per-day hours against the
+// viewer's own clock, so a shipped site is never stale. Renders nothing until
+// mounted (avoids SSR/client mismatch) or when the hours can't be parsed.
+function OpenNowBadge({ site }: { site: SiteData }) {
+  // Client-only: null on the server / first paint, then computed against the
+  // viewer's clock — no hydration mismatch, no setState-in-effect.
+  const open = useSyncExternalStore(
+    () => () => {},
+    () => isOpenNow(site.storeHours?.days) ?? site.storeHours?.openNow ?? null,
+    () => null
+  );
+
+  if (open === null) return null;
+  return (
+    <Badge
+      variant="secondary"
+      className={cn(
+        "rounded-full px-3 py-1 text-sm font-medium",
+        open
+          ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300"
+          : "bg-rose-500/15 text-rose-700 dark:text-rose-300"
+      )}
+    >
+      {open ? "Open now" : "Closed now"}
+    </Badge>
+  );
+}
+
+// Store hours + embedded map — business sites (floater-style card from Google).
+function HoursSection({ site, section }: SectionProps) {
+  const { storeHours, mapEmbedUrl, mapsUrl, identity, accent } = site;
+  const st = siteStyle(site.design);
+  const rows = storeHours?.rows ?? [];
+  if (!rows.length && !mapEmbedUrl) return null;
+
+  const heading = section?.heading ?? (rows.length ? "Store hours" : "Find us");
+  const directionsUrl = buildDirectionsUrl({ mapsUrl, address: identity.location });
+
+  return (
+    <section id="hours" className={cn("mx-auto max-w-5xl px-6", st.pad)}>
+      <Reveal delay={0.05}>
+        <div className={cn("overflow-hidden text-card-foreground shadow-sm", st.card)}>
+          <div className="p-6 sm:p-8">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <h2 className={cn("text-3xl sm:text-4xl", st.heading)}>{heading}</h2>
+              <OpenNowBadge site={site} />
+            </div>
+
+            {rows.length ? (
+              <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                {rows.map((row) => (
+                  <div key={row.label}>
+                    <p className="font-semibold leading-snug">{row.label}</p>
+                    <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                      {row.hours}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            ) : identity.location ? (
+              <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+                <p className="flex items-start gap-2 text-sm text-muted-foreground">
+                  <MapPin
+                    className="mt-0.5 size-4 shrink-0"
+                    style={accent ? { color: accent } : undefined}
+                  />
+                  {identity.location}
+                </p>
+                {directionsUrl ? (
+                  <a
+                    href={directionsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                    style={accent ? { color: accent } : undefined}
+                  >
+                    <Navigation className="size-3.5" />
+                    Get directions
+                  </a>
+                ) : null}
+              </div>
+            ) : null}
+          </div>
+
+          {mapEmbedUrl ? (
+            <div className="relative aspect-[16/10] w-full border-t bg-muted">
+              <iframe
+                title={`Map — ${identity.name}`}
+                src={mapEmbedUrl}
+                className="absolute inset-0 size-full border-0"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+              {directionsUrl ? (
+                <a
+                  href={directionsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full border bg-background/90 px-3 py-1.5 text-xs font-medium text-muted-foreground shadow-sm backdrop-blur transition-colors hover:text-foreground"
+                >
+                  <Navigation className="size-3.5" />
+                  Get directions
+                </a>
+              ) : null}
+            </div>
+          ) : null}
+        </div>
+      </Reveal>
+    </section>
+  );
+}
+
 function CertificationsSection({ site, section }: SectionProps) {
   const items = normalizeCertifications(site.certifications, site.identity.domain);
   const st = siteStyle(site.design);
@@ -1644,12 +1772,7 @@ function CtaSection({ site }: SectionProps) {
           </div>
         </div>
       </Reveal>
-      <footer className="mt-10 flex flex-col items-center justify-between gap-2 border-t pt-8 text-sm text-muted-foreground sm:flex-row">
-        <span>
-          © {new Date().getFullYear()} {identity.name}
-        </span>
-        <span>Built with BookAi</span>
-      </footer>
+      <GeneratedSiteFooter ownerName={identity.name} />
     </section>
   );
 }
@@ -1745,6 +1868,291 @@ function SiteNav({
   );
 }
 
+// Menu / price list — grouped by category, preserving the order categories
+// first appear. The signature block for restaurants & food businesses.
+function MenuSection({ site, section }: SectionProps) {
+  const menu = site.menu ?? [];
+  const st = siteStyle(site.design);
+  const accent = site.accent;
+  if (!menu.length) return null;
+
+  const groups: { category: string; items: MenuItem[] }[] = [];
+  for (const item of menu) {
+    const category = item.category?.trim() || "Menu";
+    let group = groups.find((g) => g.category === category);
+    if (!group) {
+      group = { category, items: [] };
+      groups.push(group);
+    }
+    group.items.push(item);
+  }
+
+  return (
+    <section id="menu" className={cn("mx-auto max-w-5xl px-6", st.pad)}>
+      <Reveal>
+        <SectionLabel accent={accent} className={st.eyebrow}>
+          {section?.label ?? "Menu"}
+        </SectionLabel>
+        <h2 className={cn("mt-3 text-3xl sm:text-4xl", st.heading)}>
+          {section?.heading ?? "What we serve"}
+        </h2>
+      </Reveal>
+      <Reveal delay={0.1} className="mt-10 grid gap-8 sm:grid-cols-2">
+        {groups.map((group) => (
+          <div key={group.category} className={cn("p-6 sm:p-7", st.card)}>
+            <div className="flex items-center gap-2">
+              <UtensilsCrossed
+                className="size-4 text-muted-foreground"
+                strokeWidth={1.7}
+                style={accent ? { color: accent } : undefined}
+              />
+              <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+                {group.category}
+              </h3>
+            </div>
+            <ul className="mt-4 flex flex-col divide-y">
+              {group.items.map((item, i) => (
+                <li key={`${item.name}-${i}`} className="flex items-start justify-between gap-4 py-3">
+                  <div className="min-w-0">
+                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                      <span className="font-medium leading-snug">{item.name}</span>
+                      {item.tag ? (
+                        <Badge
+                          variant="secondary"
+                          className="rounded-full text-[11px]"
+                          style={accent ? { color: accent } : undefined}
+                        >
+                          {item.tag}
+                        </Badge>
+                      ) : null}
+                    </div>
+                    {item.description ? (
+                      <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                        {item.description}
+                      </p>
+                    ) : null}
+                  </div>
+                  {item.price ? (
+                    <span
+                      className="shrink-0 text-sm font-semibold tabular-nums"
+                      style={accent ? { color: accent } : undefined}
+                    >
+                      {item.price}
+                    </span>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </Reveal>
+    </section>
+  );
+}
+
+// Accordion FAQ — native <details> so it works without JS on a shipped site.
+function FaqSection({ site, section }: SectionProps) {
+  const faq = site.faq ?? [];
+  const st = siteStyle(site.design);
+  const accent = site.accent;
+  if (!faq.length) return null;
+
+  return (
+    <section id="faq" className={cn("mx-auto max-w-3xl px-6", st.pad)}>
+      <Reveal>
+        <SectionLabel accent={accent} className={st.eyebrow}>
+          {section?.label ?? "FAQ"}
+        </SectionLabel>
+        <h2 className={cn("mt-3 text-3xl sm:text-4xl", st.heading)}>
+          {section?.heading ?? "Questions, answered"}
+        </h2>
+      </Reveal>
+      <Reveal delay={0.1} className="mt-8 flex flex-col gap-3">
+        {faq.map((item, i) => (
+          <details
+            key={`${item.question}-${i}`}
+            className={cn(
+              "group overflow-hidden [&[open]_.faq-chev]:rotate-180",
+              st.card
+            )}
+          >
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5 font-medium [&::-webkit-details-marker]:hidden">
+              {item.question}
+              <ChevronDown
+                className="faq-chev size-5 shrink-0 text-muted-foreground transition-transform duration-200"
+              />
+            </summary>
+            <div className="px-5 pb-5 text-muted-foreground">
+              <p className="leading-relaxed">{item.answer}</p>
+            </div>
+          </details>
+        ))}
+      </Reveal>
+    </section>
+  );
+}
+
+// Featured case study — one project told in depth. Leads a portfolio with the
+// strongest piece before the full grid. Reuses the top work / project item.
+function CaseStudySection({ site, section }: SectionProps) {
+  const item = site.work?.[0] ?? site.projects?.[0];
+  const st = siteStyle(site.design);
+  const accent = site.accent;
+  if (!item) return null;
+  const tech = (item.tech ?? []).slice(0, 8);
+
+  return (
+    <section id="casestudy" className={cn("mx-auto max-w-6xl px-6", st.pad)}>
+      <Reveal>
+        <SectionLabel accent={accent} className={st.eyebrow}>
+          {section?.label ?? "Case study"}
+        </SectionLabel>
+      </Reveal>
+      <Reveal delay={0.1} className="mt-6">
+        <div className={cn("grid items-stretch gap-0 overflow-hidden lg:grid-cols-[1.1fr_1fr]", st.card)}>
+          <div className="flex flex-col justify-center p-7 sm:p-10">
+            <div className="flex flex-wrap items-center gap-2">
+              {item.tag ? (
+                <Badge
+                  variant="secondary"
+                  className="rounded-full"
+                  style={accent ? { color: accent } : undefined}
+                >
+                  {item.tag}
+                </Badge>
+              ) : null}
+              {item.period ? (
+                <span className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+                  <CalendarDays className="size-3.5" strokeWidth={1.7} />
+                  {item.period}
+                </span>
+              ) : null}
+            </div>
+            <h2 className={cn("mt-3 text-2xl sm:text-3xl", st.heading)}>
+              {section?.heading ?? item.title}
+            </h2>
+            {item.description ? (
+              <p className="mt-3 max-w-xl text-pretty leading-relaxed text-muted-foreground">
+                {item.description}
+              </p>
+            ) : null}
+            {item.highlights?.length ? (
+              <ul className="mt-5 flex flex-col gap-2">
+                {item.highlights.map((h, hi) => (
+                  <li key={hi} className="flex items-start gap-2.5 text-sm leading-relaxed">
+                    <ArrowRight
+                      className="mt-1 size-3.5 shrink-0 text-muted-foreground"
+                      strokeWidth={2}
+                      style={accent ? { color: accent } : undefined}
+                    />
+                    <span className="text-foreground/80">{h}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+            {item.link ? (
+              <a
+                href={withProtocol(item.link)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 inline-flex w-fit items-center gap-1.5 text-sm font-medium"
+                style={accent ? { color: accent } : undefined}
+              >
+                View the project
+                <ArrowUpRight className="size-4" />
+              </a>
+            ) : null}
+          </div>
+          <div className="relative min-h-[14rem] overflow-hidden border-t lg:border-l lg:border-t-0">
+            <CardAurora accent={accent} seed={1} />
+            {tech.length ? (
+              <div className="absolute inset-0 flex items-center">
+                <TechMarquee items={tech} variant="tile" duration="20s" masked className="w-full" />
+              </div>
+            ) : (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="flex size-14 items-center justify-center rounded-2xl border bg-background/70 shadow-sm backdrop-blur-md">
+                  <Layers className="size-7 text-foreground" strokeWidth={1.5} />
+                </span>
+              </div>
+            )}
+          </div>
+        </div>
+      </Reveal>
+    </section>
+  );
+}
+
+// schema.org type for the business archetype, by domain.
+function localBusinessType(domain: string): string {
+  switch (domain) {
+    case "restaurant":
+      return "Restaurant";
+    case "doctor":
+      return "MedicalBusiness";
+    case "fitness":
+      return "ExerciseGym";
+    default:
+      return "LocalBusiness";
+  }
+}
+
+// Structured data (JSON-LD) so Google can surface the business/person in rich
+// results. Conservative: only well-formed fields we actually have.
+function SiteJsonLd({ site }: { site: SiteData }) {
+  const { identity, archetype } = site;
+  const graph: Record<string, unknown>[] = [];
+
+  if (archetype === "business") {
+    const opening = toOpeningHoursSpec(site.storeHours?.days);
+    graph.push({
+      "@context": "https://schema.org",
+      "@type": localBusinessType(identity.domain),
+      name: identity.name,
+      ...(identity.intro ? { description: identity.intro } : {}),
+      ...(identity.location ? { address: identity.location } : {}),
+      ...(identity.phone ? { telephone: identity.phone } : {}),
+      ...(identity.photo ? { image: identity.photo } : {}),
+      ...(site.mapsUrl ? { hasMap: site.mapsUrl, sameAs: [site.mapsUrl] } : {}),
+      ...(opening.length ? { openingHoursSpecification: opening } : {}),
+    });
+  } else {
+    const sameAs = Object.values(identity.socials ?? {}).filter(Boolean);
+    graph.push({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: identity.name,
+      ...(identity.intro ? { description: identity.intro } : {}),
+      ...(identity.photo ? { image: identity.photo } : {}),
+      ...(sameAs.length ? { sameAs } : {}),
+    });
+  }
+
+  if (site.faq?.length) {
+    graph.push({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: site.faq.map((f) => ({
+        "@type": "Question",
+        name: f.question,
+        acceptedAnswer: { "@type": "Answer", text: f.answer },
+      })),
+    });
+  }
+
+  return (
+    <>
+      {graph.map((node, i) => (
+        <script
+          key={i}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(node) }}
+        />
+      ))}
+    </>
+  );
+}
+
 // Maps each composed section type to its renderer. "experience" and "portfolio"
 // are two presentations of the same work data; "about"/"stats" were split out
 // of the old bio block so the AI can order them independently.
@@ -1756,13 +2164,17 @@ const SECTION_REGISTRY: Record<
   stats: StatsSection,
   skills: SkillsSection,
   services: ServicesSection,
+  menu: MenuSection,
   experience: ExperienceSection,
   projects: ProjectsSection,
   portfolio: WorkSection,
+  casestudy: CaseStudySection,
   gallery: GallerySection,
+  hours: HoursSection,
   certifications: CertificationsSection,
   languages: LanguagesSection,
   interests: InterestsSection,
+  faq: FaqSection,
   testimonials: TestimonialsSection,
   cta: CtaSection,
 };
@@ -1780,7 +2192,14 @@ export function GeneratedSite({
   onThemeChange?: (theme: ThemeMode) => void;
 }) {
   const [internalTheme, setInternalTheme] = useState<ThemeMode>(theme);
-  useEffect(() => setInternalTheme(theme), [theme]);
+  // Follow the parent's theme when it changes (controlled preview) without an
+  // effect — React's "adjust state during render" pattern. Local toggling still
+  // works between parent changes (shipped, self-contained site).
+  const [prevTheme, setPrevTheme] = useState<ThemeMode>(theme);
+  if (theme !== prevTheme) {
+    setPrevTheme(theme);
+    setInternalTheme(theme);
+  }
   const activeTheme = internalTheme;
   const toggleTheme = () => {
     const next: ThemeMode = activeTheme === "dark" ? "light" : "dark";
@@ -1817,6 +2236,7 @@ export function GeneratedSite({
         "min-h-screen bg-background text-foreground"
       )}
     >
+      <SiteJsonLd site={site} />
       <SiteNav site={site} theme={activeTheme} onToggleTheme={toggleTheme} />
       <div ref={heroRef}>
         <Hero site={site} y={y} opacity={opacity} />

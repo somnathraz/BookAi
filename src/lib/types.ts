@@ -95,6 +95,42 @@ export interface SiteCTA {
   href?: string;
 }
 
+/** One row in the store-hours grid (e.g. "Monday – Wednesday"). */
+export interface HoursRow {
+  label: string;
+  hours: string;
+}
+
+/** Opening hours pulled from Google Business (business sites). */
+export interface StoreHours {
+  /** Captured at generation time — kept only as a fallback; the live site
+   *  recomputes open/closed from `days` against the viewer's clock. */
+  openNow?: boolean;
+  /** Grouped rows for display (e.g. "Mon – Wed"). */
+  rows: HoursRow[];
+  /** Ungrouped per-day hours, used to compute "open now" on the live site and
+   *  to emit opening-hours structured data. Day is the full weekday name. */
+  days?: HoursRow[];
+}
+
+/** A single menu / price-list item (restaurant & food business sites). */
+export interface MenuItem {
+  name: string;
+  description?: string;
+  /** Display price string, e.g. "₹240" — kept as text so currency is flexible. */
+  price?: string;
+  /** Optional grouping, e.g. "Starters", "Mains", "Drinks". */
+  category?: string;
+  /** Optional flag, e.g. "Chef's pick", "Bestseller". */
+  tag?: string;
+}
+
+/** A frequently-asked question and its answer. */
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
 export interface SectionLabels {
   services: string;
   work: string;
@@ -119,13 +155,17 @@ export type SectionType =
   | "stats"
   | "skills" // infinite auto-scroll marquee of tech / tools mastered
   | "services"
+  | "menu" // menu / price list — restaurant & food businesses
   | "experience" // roles / timeline — profile sites
   | "projects" // personal project cards in a slider — profile/portfolio
   | "portfolio" // project cards grid — portfolio sites
+  | "casestudy" // one featured project, told in depth — portfolio sites
   | "gallery" // photo grid — business sites
+  | "hours" // store hours + map — business sites
   | "certifications" // licenses, awards, degrees
   | "languages" // spoken languages
   | "interests" // hobbies / interests
+  | "faq" // frequently asked questions — any archetype
   | "testimonials"
   | "cta";
 
@@ -201,8 +241,18 @@ export interface SiteData {
   /** Hobbies / interests. */
   interests: string[];
   testimonials: Testimonial[];
+  /** Menu / price-list items (restaurant & food businesses). */
+  menu?: MenuItem[];
+  /** Frequently asked questions (any archetype). */
+  faq?: FaqItem[];
   /** Photo URLs for the gallery block (business sites). */
   gallery: string[];
+  /** Store hours + map embed (business sites, usually from Google). */
+  storeHours?: StoreHours;
+  /** Google Maps iframe src for the location block. */
+  mapEmbedUrl?: string;
+  /** Link out to Google Maps for directions. */
+  mapsUrl?: string;
   cta: SiteCTA;
 }
 
@@ -259,6 +309,10 @@ export interface GeneratorInput {
   archetype?: Archetype;
   /** Photo URLs (e.g. Google Business photos) for a gallery block. */
   gallery?: string[];
+  /** Store hours from Google Business. */
+  storeHours?: StoreHours;
+  mapEmbedUrl?: string;
+  mapsUrl?: string;
   // When true (and a provider is configured) the AI writes the site copy;
   // otherwise the template engine is used. Defaults to AI-on when available.
   useAI?: boolean;

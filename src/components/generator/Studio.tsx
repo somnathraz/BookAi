@@ -1,10 +1,23 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { ArrowLeft, Check, Copy, ExternalLink, Loader2, Sparkles } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import {
+  ArrowLeft,
+  ArrowRight,
+  BadgeCheck,
+  Check,
+  Copy,
+  ExternalLink,
+  FileText,
+  Globe,
+  Loader2,
+  MapPin,
+  Quote,
+  Sparkles,
+} from "lucide-react";
 
-import { cn } from "@/lib/utils";
+import { PRODUCT_NAME } from "@/lib/brand";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BuilderForm } from "@/components/generator/BuilderForm";
@@ -20,6 +33,7 @@ import { SourceInput } from "@/components/generator/SourceInput";
 import { AnalysisReveal } from "@/components/generator/AnalysisReveal";
 import { EmailGate } from "@/components/generator/EmailGate";
 import { SignOutButton } from "@/components/auth/SignOutButton";
+import { MarketingFooter } from "@/components/marketing/MarketingFooter";
 import { GeneratingOverlay } from "@/components/generator/GeneratingOverlay";
 import type {
   AnalysisResult,
@@ -35,6 +49,44 @@ const fadeUp = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } },
 };
 
+const proofSignals = [
+  {
+    icon: MapPin,
+    label: "Local proof",
+    value: "Reviews, photos, hours",
+  },
+  {
+    icon: FileText,
+    label: "Profile proof",
+    value: "Roles, skills, projects",
+  },
+  {
+    icon: Quote,
+    label: "Sharper copy",
+    value: "Claims tied to source data",
+  },
+  {
+    icon: Globe,
+    label: "Live output",
+    value: "A shareable one-page site",
+  },
+];
+
+const detailPoints = [
+  {
+    title: "Source before style",
+    body: "The page starts with what customers, resumes, and real links already say, then turns that into a clean one-page site.",
+  },
+  {
+    title: "Specific by default",
+    body: "Sections are chosen by archetype, so a clinic reads like a clinic and a resume reads like a professional profile.",
+  },
+  {
+    title: "Publishable in one flow",
+    body: "Review the extracted details, verify email, generate, and share a live path-based site from the same workspace.",
+  },
+];
+
 type Step =
   | "chooser"
   | "source"
@@ -47,6 +99,7 @@ type Step =
 type SmartSource = Exclude<SourceId, "manual">;
 
 export function Studio() {
+  const reduceMotion = useReducedMotion();
   const [step, setStep] = useState<Step>("chooser");
   const [capabilities, setCapabilities] = useState<Capabilities | null>(null);
   const [activeSource, setActiveSource] = useState<SmartSource | null>(null);
@@ -238,64 +291,168 @@ export function Studio() {
       <AuroraBackground />
       <MarketingNav />
 
-      <div className="relative mx-auto max-w-3xl px-6 pb-24 pt-20 sm:pt-28">
-        {step === "chooser" ? (
-          <motion.div
-            initial="hidden"
-            animate="show"
-            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12 } } }}
-            className="text-center"
-          >
-            <motion.div variants={fadeUp}>
-              <Badge
-                variant="outline"
-                className="mb-6 rounded-full border-border/70 bg-background/40 px-3 py-1 backdrop-blur"
+      {step === "chooser" ? (
+        <div className="relative mx-auto max-w-6xl px-5 pb-20 pt-10 sm:px-6 sm:pt-14 lg:pb-28">
+          <div className="grid min-h-[calc(100svh-8rem)] items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+            <motion.div
+              initial={reduceMotion ? "show" : "hidden"}
+              animate="show"
+              variants={{ hidden: {}, show: { transition: { staggerChildren: 0.1 } } }}
+              className="max-w-2xl"
+            >
+              <motion.div
+                variants={fadeUp}
+                className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-border/70 bg-background/60 py-1.5 pl-2 pr-3.5 text-xs font-medium text-muted-foreground backdrop-blur dark:border-white/10 dark:bg-white/[0.04]"
               >
-                <Sparkles className="mr-1.5 size-3.5" />
-                One-page sites, generated from who you are
-              </Badge>
+                <span className="flex items-center gap-0.5">
+                  <span className="size-2 rounded-full bg-[#4285f4]" />
+                  <span className="size-2 rounded-full bg-[#34a853]" />
+                  <span className="size-2 rounded-full bg-[#fbbc05]" />
+                  <span className="size-2 rounded-full bg-[#ea4335]" />
+                </span>
+                <span className="font-semibold text-foreground">{PRODUCT_NAME}</span>
+                <span className="h-3 w-px bg-border" />
+                Real-input website builder
+              </motion.div>
+              <motion.h1
+                variants={fadeUp}
+                className="text-balance bg-gradient-to-br from-foreground via-foreground to-foreground/55 bg-clip-text text-5xl font-semibold leading-[1.05] tracking-tight text-transparent sm:text-6xl lg:text-7xl"
+              >
+                Build a site from proof, not placeholders.
+              </motion.h1>
+              <motion.p
+                variants={fadeUp}
+                className="mt-6 max-w-xl text-pretty text-base leading-7 text-muted-foreground sm:text-lg"
+              >
+                Start from a simple brief, Google reviews, a resume, or a reference
+                site. {PRODUCT_NAME} turns real source material into a focused page
+                you can review, publish, and share.
+              </motion.p>
+              <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-3">
+                <Button
+                  size="lg"
+                  onClick={() => choose("manual")}
+                  className="h-12 px-6 text-base"
+                >
+                  Start building now
+                  <ArrowRight className="size-4" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  onClick={() => {
+                    document.getElementById("source-console")?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "center",
+                    });
+                  }}
+                  className="h-12 bg-background/35 px-6 text-base backdrop-blur lg:hidden"
+                >
+                  Choose a source
+                </Button>
+              </motion.div>
+              <motion.ul
+                variants={fadeUp}
+                className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground"
+              >
+                {["Free to start", "No credit card", "Live in minutes"].map((t) => (
+                  <li key={t} className="flex items-center gap-1.5">
+                    <Check className="size-4 text-foreground" strokeWidth={2.2} />
+                    {t}
+                  </li>
+                ))}
+              </motion.ul>
+              <motion.div
+                variants={fadeUp}
+                className="mt-10 grid max-w-xl grid-cols-2 gap-px overflow-hidden rounded-lg border border-border/70 bg-border/70 shadow-xl shadow-black/5 dark:border-white/10 dark:bg-white/10 dark:shadow-black/20 sm:grid-cols-4"
+              >
+                {proofSignals.map(({ icon: Icon, label, value }) => (
+                  <div key={label} className="bg-background/75 p-4 backdrop-blur dark:bg-background/45">
+                    <Icon className="mb-3 size-4 text-foreground" strokeWidth={1.7} />
+                    <p className="text-xs font-medium text-foreground">{label}</p>
+                    <p className="mt-1 text-xs leading-5 text-muted-foreground">{value}</p>
+                  </div>
+                ))}
+              </motion.div>
             </motion.div>
-            <motion.h1
-              variants={fadeUp}
-              className="text-balance text-5xl font-semibold tracking-tight sm:text-7xl"
-            >
-              <span className="text-foreground">Your site,</span>{" "}
-              <span className="bg-gradient-to-br from-white via-white to-white/50 bg-clip-text text-transparent">
-                built in minutes
-              </span>
-            </motion.h1>
-            <motion.p
-              variants={fadeUp}
-              className="mx-auto mt-6 max-w-xl text-pretty text-lg text-muted-foreground"
-            >
-              Start from your resume, your Google Business page, a site you like,
-              or just fill it in. We turn it into a polished, on-brand one-page
-              site — light or dark, booking-ready.
-            </motion.p>
-          </motion.div>
-        ) : null}
 
-        <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: step === "chooser" ? 0.4 : 0, ease: EASE }}
-          className={cn("relative", step === "chooser" ? "mt-14" : "mt-4")}
-        >
-          <div className="absolute -inset-px rounded-[1.4rem] bg-gradient-to-br from-white/15 via-transparent to-white/5 opacity-80" />
-          <div className="relative rounded-3xl border border-white/10 bg-card/70 p-6 shadow-2xl shadow-black/40 backdrop-blur-2xl sm:p-9">
-            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent" />
-
-            {step === "chooser" ? (
-              capabilities ? (
-                <SourceChooser capabilities={capabilities} onChoose={choose} />
-              ) : (
-                <div className="flex items-center justify-center gap-2 py-10 text-sm text-muted-foreground">
-                  <Loader2 className="size-4 animate-spin" />
-                  Checking what&apos;s available…
+            <motion.div
+              initial={reduceMotion ? false : { opacity: 0, y: 28, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.75, delay: 0.18, ease: EASE }}
+              className="relative"
+              id="source-console"
+            >
+              <div className="absolute -inset-px rounded-lg bg-border/80 opacity-80 dark:bg-[linear-gradient(135deg,rgba(255,255,255,0.34),rgba(255,255,255,0.04),rgba(255,255,255,0.18))]" />
+              <div className="relative overflow-hidden rounded-lg border border-border/70 bg-background/80 shadow-2xl shadow-black/10 backdrop-blur-2xl dark:border-white/10 dark:bg-background/58 dark:shadow-black/35">
+                <div className="flex items-center justify-between border-b border-border/70 px-4 py-3 dark:border-white/10">
+                  <div className="flex items-center gap-2">
+                    <span className="size-2 rounded-sm bg-[#ea4335]" />
+                    <span className="size-2 rounded-sm bg-[#fbbc05]" />
+                    <span className="size-2 rounded-sm bg-[#34a853]" />
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <BadgeCheck className="size-3.5 text-foreground" />
+                    Source console
+                  </div>
                 </div>
-              )
-            ) : null}
+                <div className="p-4 sm:p-5">
+                  <div className="mb-5 border-b border-border/70 pb-5 dark:border-white/10">
+                    <div className="flex flex-wrap items-center justify-between gap-3">
+                      <div>
+                        <p className="text-xs font-medium uppercase text-muted-foreground">
+                          Start here
+                        </p>
+                        <p className="mt-1 text-sm font-medium text-foreground">
+                          Pick one option to begin
+                        </p>
+                      </div>
+                      <Badge
+                        variant="outline"
+                        className="rounded-md border-border/70 bg-background/60 text-muted-foreground dark:border-white/15 dark:bg-white/[0.04]"
+                      >
+                        Review first
+                      </Badge>
+                    </div>
+                  </div>
 
+                  {capabilities ? (
+                    <SourceChooser capabilities={capabilities} onChoose={choose} />
+                  ) : (
+                    <div className="flex items-center justify-center gap-2 py-16 text-sm text-muted-foreground">
+                      <Loader2 className="size-4 animate-spin" />
+                      Checking available imports
+                    </div>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.65, ease: EASE }}
+            className="mt-10 grid gap-px overflow-hidden rounded-lg border border-border/70 bg-border/70 shadow-xl shadow-black/5 dark:border-white/10 dark:bg-white/10 dark:shadow-black/20 md:grid-cols-3"
+          >
+            {detailPoints.map((point) => (
+              <div key={point.title} className="bg-background/75 p-5 backdrop-blur dark:bg-background/45">
+                <p className="text-sm font-semibold text-foreground">{point.title}</p>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">{point.body}</p>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      ) : (
+        <div className="relative mx-auto flex min-h-[calc(100svh-4rem)] w-full max-w-3xl px-6 pb-24 pt-8 sm:pt-12">
+          <motion.div
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: EASE }}
+            className="relative mt-4 w-full"
+          >
+            <div className="relative w-full">
             {step === "source" && activeSource ? (
               <SourceInput
                 source={activeSource}
@@ -354,11 +511,6 @@ export function Studio() {
                   error={error}
                   initialValues={initialValues}
                   aiAvailable={Boolean(capabilities?.ai)}
-                  providerLabel={
-                    capabilities?.providers.find(
-                      (p) => p.id === capabilities.provider
-                    )?.label ?? null
-                  }
                 />
               </div>
             ) : null}
@@ -404,21 +556,11 @@ export function Studio() {
                 </div>
               </div>
             ) : null}
-          </div>
-        </motion.div>
-
-        {step === "chooser" ? (
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="mt-8 text-center text-sm text-muted-foreground"
-          >
-            Manage, edit &amp; re-theme your sites anytime — WhatsApp &amp; email
-            booking are coming next.
-          </motion.p>
-        ) : null}
-      </div>
+            </div>
+          </motion.div>
+        </div>
+      )}
+      <MarketingFooter />
     </main>
   );
 }

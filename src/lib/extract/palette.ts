@@ -26,7 +26,7 @@ async function fetchImage(url: string): Promise<Buffer | null> {
   try {
     const res = await fetch(url, {
       signal: controller.signal,
-      headers: { "user-agent": "Mozilla/5.0 (compatible; BookAiBot/1.0)" },
+      headers: { "user-agent": "Mozilla/5.0 (compatible; PaperChaiBot/1.0)" },
       redirect: "follow",
     });
     if (!res.ok) return null;

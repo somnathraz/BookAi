@@ -1,12 +1,15 @@
 import "server-only";
 
 import { completeJSON } from "@/lib/ai/provider";
+import { PRODUCT_NAME } from "@/lib/brand";
 import { generateSite } from "@/lib/template";
 import { mergeCertifications } from "@/lib/certifications";
 import { sanitizeSections, sanitizeDesign } from "@/lib/compose";
 import type {
   Archetype,
+  FaqItem,
   GeneratorInput,
+  MenuItem,
   ServiceItem,
   SiteData,
   Stat,
@@ -23,9 +26,8 @@ const ALLOWED_ICONS = new Set([
   "Trophy", "UtensilsCrossed", "Wine",
 ]);
 
-// BookAi's default brand/voice prompt — the "system prompt" that turns a profile
-// into website copy. This is the layer that makes AI *build* the site.
-const SYSTEM_PROMPT = `You are BookAi's senior brand copywriter and one-page web designer. You turn a business profile into the content for a polished, conversion-focused single-page website.
+// PaperChai's default brand/voice prompt — the "system prompt" that turns a profile
+const SYSTEM_PROMPT = `You are ${PRODUCT_NAME}'s senior brand copywriter and one-page web designer. You turn a business profile into the content for a polished, conversion-focused single-page website.
 
 Voice & rules:
 - Clean, confident, benefit-driven. Warm and human. No corporate filler, no buzzwords, no exclamation-mark hype.
@@ -45,11 +47,15 @@ You also DECIDE THE PAGE STRUCTURE. Return an ordered "sections" array choosing 
 - "experience"   — career/role timeline (best for a PERSON's profile). Each role should be substantial: company, dates, the tech/tools used, and a couple of concrete achievement bullets — not a single line.
 - "projects"     — PERSONAL / side project cards shown in a slider (distinct from employment; great for profiles & portfolios)
 - "portfolio"    — project / work cards grid (best for designers, photographers, developers)
+- "casestudy"    — ONE featured project told in depth (portfolio sites; leads with the strongest piece before the grid)
 - "gallery"      — a grid of real photos (ONLY if photos exist; best for local businesses)
+- "hours"        — store opening hours + embedded map (ONLY when hours or location data exist; business sites)
 - "services"     — what they offer
+- "menu"         — a menu / price list (ONLY for restaurants, cafés & food businesses)
 - "certifications" — licenses, awards, degrees (only names from input; expand each with a one-line detail)
 - "languages"    — spoken languages (only if present)
 - "interests"    — hobbies / interests (only if present)
+- "faq"          — 3-5 frequently asked questions with concise answers (great for converting visitors; fits any site)
 - "stats"        — headline numbers (only if meaningful, non-fabricated)
 - "testimonials" — only if real testimonials exist
 - "cta"          — closing call-to-action (always last)
@@ -65,9 +71,9 @@ const ARCHETYPE_BRIEF: Record<Archetype, string> = {
   profile:
     "This is a PERSONAL PROFILE site for an individual (built from a resume/CV/LinkedIn). Build a RICH page: lead with who they are — the 'about' block must be substantial (2-3 paragraphs, not a single line), then 'skills' (tech mastered), an 'experience' timeline, personal 'projects', and where present 'certifications', 'languages' and 'interests'. Do NOT include a 'services' block — a CV is about history, skills and projects, not offerings.",
   business:
-    "This is a LOCAL BUSINESS site (e.g. from Google Business). Lead with what they OFFER and trust signals: use 'services' prominently and a 'gallery' if photos exist. Do NOT include an 'experience' timeline, 'skills', 'projects', 'certifications', 'languages' or 'interests' — those are for people, not businesses.",
+    "This is a LOCAL BUSINESS site (e.g. from Google Business). Lead with what they OFFER and trust signals: use 'services' prominently, a 'gallery' if photos exist, and 'hours' when opening hours or a map are available. For a restaurant/café/food business, ALSO include a 'menu'. Close with a 'faq' that answers common visitor questions. Do NOT include an 'experience' timeline, 'skills', 'projects', 'certifications', 'languages' or 'interests' — those are for people, not businesses.",
   portfolio:
-    "This is a PORTFOLIO site for a maker (designer/photographer/developer/freelancer). Lead with the WORK via 'projects' (slider) and/or 'portfolio' (grid), plus 'skills'. 'experience' and 'certifications' are allowed; 'services' is secondary.",
+    "This is a PORTFOLIO site for a maker (designer/photographer/developer/freelancer). Open with a 'casestudy' featuring the single strongest project, then the WORK via 'projects' (slider) and/or 'portfolio' (grid), plus 'skills'. 'experience', 'certifications' and a closing 'faq' are allowed; 'services' is secondary.",
 };
 
 function buildPrompt(input: GeneratorInput, base: SiteData): string {
@@ -112,12 +118,14 @@ Return ONLY a JSON object with EXACTLY this shape:
   "certifications": [ { "name": string, "detail": string } ],
   "languages": [ string ],
   "interests": [ string ],
+  "menu": [ { "name": string, "description": string, "price": string, "category": string, "tag": string } ],
+  "faq": [ { "question": string, "answer": string } ],
   "testimonials": [ { "quote": string, "author": string, "role": string } ],
   "cta": { "heading": string, "subtext": string, "buttonLabel": string },
   "sections": [ { "type": one of the allowed block types, "label": short eyebrow, "heading": section heading } ],
   "design": { "styleTheme": string, "density": string, "variants": { "services": string, "work": string, "testimonials": string, "gallery": string } }
 }
-Provide 3-4 services (business only), 3-5 work items, and 0-3 testimonials (only real ones). For each work item: "tag" = company or category; "period" = dates if known (e.g. "2021 — Present"); "tech" = 3-6 technologies actually used (omit for non-technical fields); "highlights" = 2-3 short, concrete achievement bullets (<= 14 words each). "projects" = personal/side projects with the tech used (great for profiles & portfolios). "skills" = the technologies/tools mastered (for the marquee). "languages"/"interests" = copy from the input when present, else []. For "certifications": include ONLY names present in the input — never invent new credentials. For each name, write "detail" as one helpful line (12-20 words) explaining what it validates or demonstrates; you may use well-known public knowledge about major certs (AWS, PMP, CPA, etc.) but do NOT invent issuer, date, score, or ID numbers.${base.archetype === "profile" ? ' For profile sites, bio.body MUST be 2-3 paragraphs separated by blank lines (use \\n\\n), 100-150 words — expand thoughtfully from the resume bio and work history.' : ""} NEVER invent tech, dates, or metrics not supported by the input. The "cta" must fit the site type (profile/portfolio = hire/collaborate/contact). The "sections" array is the ordered page structure you choose for THIS ${base.archetype} site — pick the blocks that fit and skip the rest. Do not include any keys beyond those shown.`;
+Provide 3-4 services (business only), 3-5 work items, and 0-3 testimonials (only real ones). For each work item: "tag" = company or category; "period" = dates if known (e.g. "2021 — Present"); "tech" = 3-6 technologies actually used (omit for non-technical fields); "highlights" = 2-3 short, concrete achievement bullets (<= 14 words each). "projects" = personal/side projects with the tech used (great for profiles & portfolios). "skills" = the technologies/tools mastered (for the marquee). "languages"/"interests" = copy from the input when present, else []. For "certifications": include ONLY names present in the input — never invent new credentials. For each name, write "detail" as one helpful line (12-20 words) explaining what it validates or demonstrates; you may use well-known public knowledge about major certs (AWS, PMP, CPA, etc.) but do NOT invent issuer, date, score, or ID numbers.${base.archetype === "profile" ? ' For profile sites, bio.body MUST be 2-3 paragraphs separated by blank lines (use \\n\\n), 100-150 words — expand thoughtfully from the resume bio and work history.' : ""} NEVER invent tech, dates, or metrics not supported by the input. "menu" = ONLY for a restaurant/café/food business — 6-12 plausible items with a short "category" each (e.g. Starters, Mains, Drinks) and a "price" only if a currency/figure is supported; otherwise omit price and return [] for non-food businesses. "faq" = 3-5 short, genuinely useful question/answer pairs a real visitor would ask this business (location, booking, pricing approach, what to expect) — answers <= 35 words, never inventing specific facts. The "cta" must fit the site type (profile/portfolio = hire/collaborate/contact). The "sections" array is the ordered page structure you choose for THIS ${base.archetype} site — pick the blocks that fit and skip the rest. Do not include any keys beyond those shown.`;
 }
 
 interface AiSite {
@@ -144,6 +152,14 @@ interface AiSite {
   certifications?: unknown;
   languages?: unknown;
   interests?: unknown;
+  menu?: {
+    name?: string;
+    description?: string;
+    price?: string;
+    category?: string;
+    tag?: string;
+  }[];
+  faq?: { question?: string; answer?: string }[];
   testimonials?: { quote?: string; author?: string; role?: string }[];
   cta?: { heading?: string; subtext?: string; buttonLabel?: string };
   sections?: unknown;
@@ -240,6 +256,29 @@ function mergeSite(base: SiteData, ai: AiSite, input: GeneratorInput): SiteData 
           .map((s) => ({ label: String(s.label).slice(0, 40), value: String(s.value).slice(0, 16) }))
       : base.bio.stats;
 
+  const menu: MenuItem[] | undefined = Array.isArray(ai.menu)
+    ? ai.menu
+        .filter((m) => m && m.name)
+        .slice(0, 16)
+        .map((m) => ({
+          name: String(m.name).slice(0, 80),
+          description: m.description ? String(m.description).slice(0, 140) : undefined,
+          price: m.price ? String(m.price).slice(0, 16) : undefined,
+          category: m.category ? String(m.category).slice(0, 40) : undefined,
+          tag: m.tag ? String(m.tag).slice(0, 24) : undefined,
+        }))
+    : undefined;
+
+  const faq: FaqItem[] | undefined = Array.isArray(ai.faq)
+    ? ai.faq
+        .filter((f) => f && f.question && f.answer)
+        .slice(0, 6)
+        .map((f) => ({
+          question: String(f.question).slice(0, 160),
+          answer: String(f.answer).slice(0, 400),
+        }))
+    : undefined;
+
   const merged: SiteData = {
     identity: {
       ...base.identity,
@@ -270,7 +309,12 @@ function mergeSite(base: SiteData, ai: AiSite, input: GeneratorInput): SiteData 
     languages,
     interests,
     testimonials,
+    menu: menu?.length ? menu : base.menu,
+    faq: faq?.length ? faq : base.faq,
     gallery: base.gallery,
+    storeHours: base.storeHours,
+    mapEmbedUrl: base.mapEmbedUrl,
+    mapsUrl: base.mapsUrl,
     cta: {
       heading: str(ai.cta?.heading, base.cta.heading),
       subtext: str(ai.cta?.subtext, base.cta.subtext),
