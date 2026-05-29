@@ -682,6 +682,11 @@ function TechMarquee({
   accent,
   compact,
   masked = false,
+  // maskFade: use CSS mask-image instead of white overlay divs.
+  // Use this inside card covers — the mask fades to transparent so the aurora
+  // shows through, and hover-pause is disabled so hovering the card doesn't
+  // freeze the animation.
+  maskFade = false,
 }: {
   items: string[];
   variant?: TechMarqueeVariant;
@@ -690,10 +695,23 @@ function TechMarquee({
   accent?: string;
   compact?: boolean;
   masked?: boolean;
+  maskFade?: boolean;
 }) {
   if (!items.length) return null;
+
+  // Pad more aggressively for small sets so the loop always has enough width
+  // to scroll before wrapping — prevents the "stopped" appearance.
   const track =
-    items.length < 4 ? [...items, ...items, ...items] : items.length < 8 ? [...items, ...items] : items;
+    items.length <= 6
+      ? [...items, ...items, ...items, ...items]
+      : items.length <= 10
+        ? [...items, ...items, ...items]
+        : [...items, ...items];
+
+  // maskFade: don't pause on hover (card is already a hover target)
+  const animClass = maskFade
+    ? "flex shrink-0 animate-marquee gap-3 pr-3"
+    : "flex shrink-0 animate-marquee gap-3 pr-3 group-hover:[animation-play-state:paused]";
 
   const rows = (
     <>
@@ -701,7 +719,7 @@ function TechMarquee({
         <div
           key={dup}
           aria-hidden={dup === 1}
-          className="flex shrink-0 animate-marquee gap-3 pr-3 group-hover:[animation-play-state:paused]"
+          className={animClass}
         >
           {track.map((label, i) => (
             <TechMarqueeItem
@@ -718,6 +736,25 @@ function TechMarquee({
   );
 
   const style = { "--duration": duration } as CSSProperties;
+
+  // CSS mask-image fade: transparent alpha at edges → aurora/bg shows through.
+  // No white overlay, works on any background colour including dark mode.
+  if (maskFade) {
+    return (
+      <div
+        className={cn("relative flex overflow-hidden [--gap:0.75rem]", className)}
+        style={{
+          ...style,
+          maskImage:
+            "linear-gradient(to right, transparent 0%, black 14%, black 86%, transparent 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to right, transparent 0%, black 14%, black 86%, transparent 100%)",
+        }}
+      >
+        {rows}
+      </div>
+    );
+  }
 
   if (masked) {
     return (
@@ -1096,7 +1133,6 @@ function CardAurora({ accent, seed = 0 }: { accent?: string; seed?: number }) {
         animate={{ x: [0, -24, 0], y: [0, -16, 0], scale: [1, 1.2, 0.95, 1] }}
         transition={{ duration: 16 + seed * 2, ease: "easeInOut", repeat: Infinity }}
       />
-      <div className="absolute inset-0 bg-grid-black dark:bg-grid-white" />
     </div>
   );
 }
@@ -1142,8 +1178,8 @@ function WorkSection({ site, section }: SectionProps) {
               <TechMarquee
                 items={tech}
                 variant="tile"
-                duration="18s"
-                masked
+                duration="24s"
+                maskFade
                 className="w-full"
               />
             </div>
@@ -1321,8 +1357,8 @@ function ProjectsSection({ site, section }: SectionProps) {
                       <TechMarquee
                         items={tech}
                         variant="tile"
-                        duration="18s"
-                        masked
+                        duration="24s"
+                        maskFade
                         className="w-full"
                       />
                     </div>
@@ -2067,7 +2103,7 @@ function CaseStudySection({ site, section }: SectionProps) {
             <CardAurora accent={accent} seed={1} />
             {tech.length ? (
               <div className="absolute inset-0 flex items-center">
-                <TechMarquee items={tech} variant="tile" duration="20s" masked className="w-full" />
+                <TechMarquee items={tech} variant="tile" duration="24s" maskFade className="w-full" />
               </div>
             ) : (
               <div className="absolute inset-0 flex items-center justify-center">

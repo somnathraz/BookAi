@@ -15,6 +15,10 @@ function isLocal(url: string): boolean {
   return url.includes("localhost") || url.includes("127.0.0.1") || url.includes("@/");
 }
 
+function isLocalhostInProd(url: string): boolean {
+  return process.env.NODE_ENV === "production" && isLocal(url);
+}
+
 /** Vercel's Neon integration often prefixes vars (e.g. bookAi_DATABASE_URL). */
 function resolveDatabaseUrl(): string | undefined {
   const names = [
@@ -38,6 +42,18 @@ export function getSql(): Sql | null {
     _sql = null;
     return null;
   }
+  // Localhost DATABASE_URL in production = misconfiguration. Fail fast with a
+  // clear log and fall back to in-memory so the app still runs, rather than
+  // crashing every request with ECONNREFUSED.
+  if (isLocalhostInProd(url)) {
+    console.error(
+      "[db] DATABASE_URL points to localhost in production. " +
+        "Set it to your Neon/Supabase connection string in the Vercel dashboard. " +
+        "Falling back to in-memory store — OTP codes will NOT survive across serverless instances."
+    );
+    _sql = null;
+    return null;
+  }
   _sql = postgres(url, {
     // Neon/Supabase require TLS; local Postgres usually doesn't.
     ssl: isLocal(url) ? false : "require",
@@ -54,6 +70,9 @@ export function dbEnabled(): boolean {
 let _schemaReady: Promise<void> | null = null;
 
 // Lazily create tables on first use (idempotent). Safe to call on every request.
+// If the schema creation fails (e.g. transient network error) the cached promise
+// is cleared so the next request can retry, rather than every request failing
+// permanently with the same rejected promise.
 export function ensureSchema(): Promise<void> {
   const sql = getSql();
   if (!sql) return Promise.resolve();

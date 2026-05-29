@@ -4,11 +4,15 @@ import { useRef, useState } from "react";
 import {
   ArrowLeft,
   ArrowRight,
+  Copy,
   FileText,
   Globe,
+  Link2,
   Linkedin,
   Loader2,
   MapPin,
+  Search,
+  Share2,
   Upload,
   type LucideIcon,
 } from "lucide-react";
@@ -42,9 +46,9 @@ const CONFIG: Record<Exclude<SourceId, "manual">, SourceConfig> = {
   maps: {
     icon: MapPin,
     title: "Import from Google Business",
-    blurb: "Paste your Google Maps business link. We pull real reviews & details.",
+    blurb: "Use the Share link from Google Maps — it pins the exact branch so we always pull the right location.",
     kind: "url",
-    placeholder: "https://maps.google.com/…  or  https://maps.app.goo.gl/…",
+    placeholder: "https://maps.app.goo.gl/…",
     cta: "Fetch business",
   },
   competitor: {
@@ -64,6 +68,97 @@ const CONFIG: Record<Exclude<SourceId, "manual">, SourceConfig> = {
     cta: "Extract from profile",
   },
 };
+
+// Only maps.app.goo.gl short links reliably carry the exact place_id.
+// We still accept full maps.google.com URLs as a fallback, but the share
+// link is the only format we can guarantee is accurate.
+function isValidMapsShareUrl(url: string): boolean {
+  return (
+    url.startsWith("https://maps.app.goo.gl/") ||
+    url.startsWith("http://maps.app.goo.gl/") ||
+    url.startsWith("https://maps.google.com/") ||
+    url.startsWith("https://www.google.com/maps/") ||
+    url.startsWith("https://goo.gl/maps/")
+  );
+}
+
+const MAPS_STEPS: { icon: LucideIcon; title: string; detail: string }[] = [
+  {
+    icon: Search,
+    title: "Open Google Maps",
+    detail: "Search for your business by name",
+  },
+  {
+    icon: Share2,
+    title: "Tap Share",
+    detail: 'Tap the share icon on the business card (looks like an arrow pointing out)',
+  },
+  {
+    icon: Copy,
+    title: 'Tap "Copy link"',
+    detail: "You'll get a short maps.app.goo.gl/… link",
+  },
+  {
+    icon: Link2,
+    title: "Paste it below",
+    detail: "That's it — we extract reviews, photos, and hours automatically",
+  },
+];
+
+function MapsShareGuide({ url }: { url: string }) {
+  const hasUrl = url.length > 8;
+  const isValid = isValidMapsShareUrl(url);
+  return (
+    <div className="overflow-hidden rounded-xl border border-border/70 bg-card/60">
+      {/* Header — "only format we accept" */}
+      <div className="flex items-center justify-between gap-3 border-b border-border/60 bg-muted/50 px-4 py-2.5">
+        <p className="text-xs font-medium text-foreground">
+          We only accept Google Maps Share links
+        </p>
+        <span className="shrink-0 rounded-md border border-border/70 bg-background/80 px-2 py-0.5 font-mono text-[11px] text-muted-foreground">
+          maps.app.goo.gl/…
+        </span>
+      </div>
+
+      {/* Steps */}
+      <ol className="flex flex-col divide-y divide-border/50">
+        {MAPS_STEPS.map(({ icon: Icon, title, detail }, i) => (
+          <li
+            key={i}
+            className="flex items-start gap-3 px-4 py-3"
+          >
+            <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-foreground text-[11px] font-semibold text-background">
+              {i + 1}
+            </span>
+            <div className="flex flex-1 items-start justify-between gap-3">
+              <div className="min-w-0">
+                <p className="text-sm font-medium leading-snug">{title}</p>
+                <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">{detail}</p>
+              </div>
+              <Icon className="mt-0.5 size-4 shrink-0 text-muted-foreground" strokeWidth={1.6} />
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      {/* Status strip — shows once user starts typing */}
+      {hasUrl ? (
+        <div
+          className={
+            isValid
+              ? "flex items-center gap-2 border-t border-emerald-500/20 bg-emerald-500/8 px-4 py-2 text-xs font-medium text-emerald-700 dark:text-emerald-300"
+              : "flex items-center gap-2 border-t border-destructive/20 bg-destructive/8 px-4 py-2 text-xs font-medium text-destructive"
+          }
+        >
+          <span className={`size-1.5 rounded-full ${isValid ? "bg-emerald-500" : "bg-destructive"}`} />
+          {isValid
+            ? "Looks good — this is a valid Google Maps link"
+            : "This doesn't look like a maps.app.goo.gl Share link"}
+        </div>
+      ) : null}
+    </div>
+  );
+}
 
 export function SourceInput({
   source,
@@ -182,12 +277,27 @@ export function SourceInput({
           rows={8}
         />
       ) : (
-        <Input
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-          placeholder={cfg.placeholder}
-          inputMode="url"
-        />
+        <>
+          {source === "maps" ? (
+            <MapsShareGuide url={url} />
+          ) : null}
+          <Input
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            placeholder={cfg.placeholder}
+            inputMode="url"
+            className={
+              source === "maps" && url.length > 8 && !isValidMapsShareUrl(url)
+                ? "border-destructive focus-visible:border-destructive focus-visible:ring-destructive/20"
+                : undefined
+            }
+          />
+          {source === "maps" && url.length > 8 && !isValidMapsShareUrl(url) ? (
+            <p className="-mt-2 text-xs text-destructive">
+              Paste a <span className="font-medium">maps.app.goo.gl/…</span> Share link — regular Maps links may not work for businesses with multiple locations.
+            </p>
+          ) : null}
+        </>
       )}
 
       {error ? <p className="text-sm text-destructive">{error}</p> : null}
