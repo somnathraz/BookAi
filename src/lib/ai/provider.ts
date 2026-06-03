@@ -68,8 +68,9 @@ export function aiAvailable(): boolean {
 }
 
 export function googleAvailable(): boolean {
-  const v = process.env.GOOGLE_PLACES_API_KEY;
-  return Boolean(v && v.trim());
+  const serp = process.env.SERP_API_KEY?.trim();
+  const places = process.env.GOOGLE_PLACES_API_KEY?.trim();
+  return Boolean(serp || places);
 }
 
 // Resolve email env with forgiving aliases (people name these differently).

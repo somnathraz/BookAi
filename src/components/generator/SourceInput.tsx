@@ -259,9 +259,23 @@ export function SourceInput({
     }
   }
 
+  const MAX_FILE_MB = 5;
+
   function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
+
+    // Reject before even hitting the network — Vercel hard-kills requests > 4.5 MB.
+    if (file.size > MAX_FILE_MB * 1024 * 1024) {
+      setError(
+        `That file is ${(file.size / 1024 / 1024).toFixed(1)} MB — the limit is ${MAX_FILE_MB} MB. ` +
+          "Try pasting the text instead."
+      );
+      // Reset so the same file can be re-selected after compression.
+      e.target.value = "";
+      return;
+    }
+
     setFileName(file.name);
     const form = new FormData();
     form.append("file", file);

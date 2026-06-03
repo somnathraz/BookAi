@@ -20,6 +20,20 @@ export async function POST(request: Request) {
       if (!(file instanceof File)) {
         return NextResponse.json({ error: "No file uploaded." }, { status: 400 });
       }
+
+      // Guard against large files BEFORE reading into memory.
+      // Vercel hard-rejects payloads > 4.5 MB anyway, but this gives a clear message.
+      const MAX_BYTES = 5 * 1024 * 1024; // 5 MB
+      if (file.size > MAX_BYTES) {
+        return NextResponse.json(
+          {
+            error: `File too large (${(file.size / 1024 / 1024).toFixed(1)} MB). ` +
+              "Please upload a PDF under 5 MB, or paste the text instead.",
+          },
+          { status: 413 }
+        );
+      }
+
       const bytes = new Uint8Array(await file.arrayBuffer());
       let analysis: AnalysisResult;
       if (file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf")) {

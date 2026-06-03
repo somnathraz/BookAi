@@ -116,21 +116,24 @@ export function AnalysisReveal({
   const [archetype, setArchetype] = useState<Archetype>(
     deriveArchetype(domain, analysis.source)
   );
-  const [broken, setBroken] = useState<Record<number, boolean>>({});
+  const [broken, setBroken] = useState<Record<string, boolean>>({});
 
   const accents = useMemo(() => {
     const fromImages = analysis.palette.filter((c) => /^#?[0-9a-f]{3,8}$/i.test(c));
     return [...new Set([...fromImages, ...PRESET_ACCENTS])].slice(0, 10);
   }, [analysis.palette]);
 
-  const images = analysis.images.filter((_, i) => !broken[i]).slice(0, 4);
+  const allImages = analysis.images.filter(Boolean);
+  const images = allImages.filter((src) => !broken[src]);
+  const previewImages = images.slice(0, 12);
+  const morePhotoCount = Math.max(0, images.length - previewImages.length);
   const serviceCount = analysis.profile.services?.length ?? 0;
 
   function confirm() {
     // For business sites the found photos become the gallery; profile/portfolio
     // never get a generic gallery so the experience/work stays the focus.
     const gallery =
-      archetype === "business" ? analysis.images.filter(Boolean).slice(0, 20) : [];
+      archetype === "business" ? allImages.slice(0, 20) : [];
     onConfirm({
       ...analysis.profile,
       domain,
@@ -164,9 +167,9 @@ export function AnalysisReveal({
       {/* Images / photos */}
       <Section delay={0.08}>
         <Eyebrow>{analysis.source === "maps" ? "Photos" : "Imagery"}</Eyebrow>
-        {images.length ? (
+        {previewImages.length ? (
           <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
-            {images.map((src, i) => {
+            {previewImages.map((src, i) => {
               const active = photo === src;
               return (
                 <button
@@ -184,7 +187,7 @@ export function AnalysisReveal({
                     alt=""
                     loading="lazy"
                     referrerPolicy="no-referrer"
-                    onError={() => setBroken((b) => ({ ...b, [i]: true }))}
+                    onError={() => setBroken((b) => ({ ...b, [src]: true }))}
                     className="size-full object-cover"
                   />
                   {active ? (
@@ -196,7 +199,14 @@ export function AnalysisReveal({
               );
             })}
           </div>
-        ) : (
+        ) : null}
+        {morePhotoCount > 0 ? (
+          <p className="mt-2 text-sm text-muted-foreground">
+            +{morePhotoCount} more photo{morePhotoCount === 1 ? "" : "s"} on your
+            generated site ({images.length} total)
+          </p>
+        ) : null}
+        {!previewImages.length ? (
           <div className="mt-3 flex items-center gap-3 rounded-xl border border-dashed border-white/15 bg-card/40 px-4 py-3 text-sm text-muted-foreground">
             <ImageOff className="size-5 shrink-0" />
             <span>
@@ -204,12 +214,12 @@ export function AnalysisReveal({
               we&apos;ll feature it on your site.
             </span>
           </div>
-        )}
+        ) : null}
         <div className="mt-4">
           <PhotoUpload
             value={photo}
             onChange={setPhoto}
-            label={images.length ? "Or upload your own" : "Upload your photo"}
+            label={previewImages.length ? "Or upload your own" : "Upload your photo"}
           />
         </div>
       </Section>
