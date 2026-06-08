@@ -110,6 +110,34 @@ function rowToBusiness(row: SerpPlaceRow): Omit<SerpMapsBusiness, "testimonials"
   };
 }
 
+/** Hex CID pair from Maps URLs — SerpAPI `data_cid` / `data_id`, not the deprecated `data` param. */
+function isHexCid(id: string): boolean {
+  return /^0x[0-9a-f]+:0x[0-9a-f]+$/i.test(id);
+}
+
+async function lookupPlaceById(
+  spec: { place_id?: string; data_cid?: string },
+  label: string
+): Promise<SerpPlaceRow | null> {
+  try {
+    const data = await serpSearch({
+      engine: "google_maps",
+      type: "place",
+      ...spec,
+    });
+    const place = data.place_results as SerpPlaceRow | undefined;
+    if (place?.title) {
+      console.log(`[maps][serp] matched via ${label} →`, place.title);
+      return place;
+    }
+    console.log(`[maps][serp] ${label} miss`);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    console.warn(`[maps][serp] ${label} error:`, msg);
+  }
+  return null;
+}
+
 async function fetchPlace(params: {
   placeId?: string | null;
   dataId?: string | null;
@@ -117,34 +145,18 @@ async function fetchPlace(params: {
   lat?: number;
   lng?: number;
 }): Promise<SerpPlaceRow | null> {
-  if (params.placeId) {
+  // ChIJ place_id — exact match when present in the share URL.
+  if (params.placeId?.startsWith("ChIJ")) {
     console.log("[maps][serp] lookup: place_id", params.placeId);
-    const data = await serpSearch({
-      engine: "google_maps",
-      type: "place",
-      place_id: params.placeId,
-    });
-    const place = data.place_results as SerpPlaceRow | undefined;
-    if (place?.title) {
-      console.log("[maps][serp] matched via place_id →", place.title);
-      return place;
-    }
-    console.log("[maps][serp] place_id miss");
+    const hit = await lookupPlaceById({ place_id: params.placeId }, "place_id");
+    if (hit) return hit;
   }
 
-  if (params.dataId) {
-    console.log("[maps][serp] lookup: data_id", params.dataId);
-    const data = await serpSearch({
-      engine: "google_maps",
-      type: "place",
-      data: params.dataId,
-    });
-    const place = data.place_results as SerpPlaceRow | undefined;
-    if (place?.title) {
-      console.log("[maps][serp] matched via data_id →", place.title);
-      return place;
-    }
-    console.log("[maps][serp] data_id miss");
+  // Hex CID (0x…:0x…) — SerpAPI expects `data_cid`, not deprecated `data`.
+  if (params.dataId && isHexCid(params.dataId)) {
+    console.log("[maps][serp] lookup: data_cid", params.dataId);
+    const hit = await lookupPlaceById({ data_cid: params.dataId }, "data_cid");
+    if (hit) return hit;
   }
 
   if (params.query) {
@@ -171,11 +183,12 @@ async function fetchPlace(params: {
     if (Array.isArray(place) && place[0]?.title) {
       const hit = place[0];
       console.log("[maps][serp] matched via local_results[0] →", hit.title);
-      // Search hits are sparse — re-fetch full place for data_id, hours, and photos.
-      if (hit.place_id || hit.data_id) {
+      // Search hits are sparse — re-fetch full place for hours and photos.
+      if (hit.place_id?.startsWith("ChIJ") || hit.data_id) {
         const full = await fetchPlace({
           placeId: hit.place_id,
           dataId: hit.data_id,
+          // no query — avoid re-entering text search
         });
         if (full?.title) {
           console.log("[maps][serp] enriched local_results via place lookup");
@@ -195,8 +208,8 @@ async function fetchReviews(
   limit: number
 ): Promise<Testimonial[]> {
   const params: Record<string, string> = { engine: "google_maps_reviews", sort_by: "newestFirst" };
-  if (ids.dataId) params.data_id = ids.dataId;
-  else if (ids.placeId) params.place_id = ids.placeId;
+  if (ids.dataId && isHexCid(ids.dataId)) params.data_id = ids.dataId;
+  else if (ids.placeId?.startsWith("ChIJ")) params.place_id = ids.placeId;
   else return [];
 
   try {
@@ -231,7 +244,9 @@ async function fetchPhotos(
   ids: { dataId?: string; placeId?: string },
   limit: number
 ): Promise<string[]> {
-  if (!ids.dataId && !ids.placeId) return [];
+  const hasDataId = ids.dataId && isHexCid(ids.dataId);
+  const hasPlaceId = ids.placeId?.startsWith("ChIJ");
+  if (!hasDataId && !hasPlaceId) return [];
 
   const urls: string[] = [];
   let nextToken: string | undefined;
@@ -239,8 +254,8 @@ async function fetchPhotos(
   try {
     for (let page = 0; page < 4 && urls.length < limit; page++) {
       const params: Record<string, string> = { engine: "google_maps_photos" };
-      if (ids.dataId) params.data_id = ids.dataId;
-      else if (ids.placeId) params.place_id = ids.placeId;
+      if (hasDataId) params.data_id = ids.dataId!;
+      else if (hasPlaceId) params.place_id = ids.placeId!;
       if (nextToken) params.next_page_token = nextToken;
 
       const data = await serpSearch(params);

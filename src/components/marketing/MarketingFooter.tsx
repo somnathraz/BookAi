@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { CreateSiteLink } from "@/components/marketing/CreateSiteLink";
 import { CUSTOM_SITE_HOST, CUSTOM_SITE_URL, PRODUCT_NAME } from "@/lib/brand";
 import { cn } from "@/lib/utils";
 
@@ -28,9 +29,9 @@ export function MarketingFooter() {
           <span>© {new Date().getFullYear()} {PRODUCT_NAME}</span>
           <CustomSiteLink />
           <nav className="flex flex-wrap items-center justify-center gap-6">
-            <Link href="/" className="transition-colors hover:text-foreground">
+            <CreateSiteLink className="transition-colors hover:text-foreground">
               Create a site
-            </Link>
+            </CreateSiteLink>
             <Link href="/pricing" className="transition-colors hover:text-foreground">
               Pricing
             </Link>

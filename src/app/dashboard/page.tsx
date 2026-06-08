@@ -5,6 +5,10 @@ import { ExternalLink, Loader2, Plus, Trash2 } from "lucide-react";
 import Link from "next/link";
 
 import { cn } from "@/lib/utils";
+import {
+  getPublicSiteUrl,
+  subdomainSitesEnabled,
+} from "@/lib/site-url";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MarketingNav } from "@/components/marketing/MarketingNav";
@@ -65,6 +69,17 @@ export default function DashboardPage() {
   useEffect(() => {
     void load();
   }, [load]);
+
+  // Subdomain mode → absolute https://<slug>.<domain>; otherwise a relative path.
+  const subdomains = subdomainSitesEnabled();
+  function publicHref(slug: string): string {
+    return subdomains ? getPublicSiteUrl(slug) : `/${slug}`;
+  }
+  function publicLabel(slug: string): string {
+    return subdomains
+      ? getPublicSiteUrl(slug).replace(/^https?:\/\//, "")
+      : `/${slug}`;
+  }
 
   async function remove(id: string) {
     setDeleting(id);
@@ -152,7 +167,7 @@ export default function DashboardPage() {
                       <div className="min-w-0">
                         <h3 className="truncate font-semibold">{s.name}</h3>
                         <p className="mt-0.5 font-mono text-xs text-muted-foreground">
-                          /{s.slug}
+                          {publicLabel(s.slug)}
                         </p>
                         <p className="mt-0.5 text-sm text-muted-foreground">
                           {DOMAIN_LABEL[s.domain] ?? s.domain} ·{" "}
@@ -167,7 +182,7 @@ export default function DashboardPage() {
                     </div>
                     <div className="flex items-center gap-2">
                       <Button size="sm" asChild>
-                        <a href={`/${s.slug}`} target="_blank" rel="noopener noreferrer">
+                        <a href={publicHref(s.slug)} target="_blank" rel="noopener noreferrer">
                           <ExternalLink className="size-4" />
                           Open live site
                         </a>

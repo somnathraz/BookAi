@@ -6,9 +6,10 @@ import { getPublicSiteUrl } from "@/lib/site-url";
 import { GeneratedSite } from "@/components/generated/GeneratedSite";
 import type { ThemeMode } from "@/lib/types";
 
-// Each generated site is published at /<slug> (Phase 1 — path-based, no
-// wildcard subdomain needed). Static app routes (/pricing, /about, /dashboard)
-// take precedence over this dynamic segment.
+// Each generated site is published at /<slug>. When NEXT_PUBLIC_SITE_DOMAIN is
+// set, proxy.ts also rewrites <slug>.<domain> onto this same route, so
+// both path and wildcard-subdomain URLs render the page. Static app routes
+// (/pricing, /about, /dashboard) take precedence over this dynamic segment.
 
 export async function generateMetadata({
   params,

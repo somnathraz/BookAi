@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowLeft,
@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 
 import { PRODUCT_NAME } from "@/lib/brand";
+import { STUDIO_RESET_EVENT } from "@/lib/studio-reset";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BuilderForm } from "@/components/generator/BuilderForm";
@@ -116,6 +117,35 @@ export function Studio() {
   const [verified, setVerified] = useState(false);
   const [verifiedEmail, setVerifiedEmail] = useState<string | null>(null);
   const [pendingInput, setPendingInput] = useState<GeneratorInput | null>(null);
+
+  const resetToChooser = useCallback(() => {
+    setStep("chooser");
+    setActiveSource(null);
+    setAnalysis(null);
+    setInitialValues(undefined);
+    setSite(null);
+    setSlug(null);
+    setPublishedUrl(null);
+    setError(null);
+    setPendingInput(null);
+    setCopied(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  useEffect(() => {
+    function onReset() {
+      resetToChooser();
+    }
+    window.addEventListener(STUDIO_RESET_EVENT, onReset);
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("new")) {
+      resetToChooser();
+      window.history.replaceState(null, "", "/");
+    }
+
+    return () => window.removeEventListener(STUDIO_RESET_EVENT, onReset);
+  }, [resetToChooser]);
 
   useEffect(() => {
     fetch("/api/capabilities")

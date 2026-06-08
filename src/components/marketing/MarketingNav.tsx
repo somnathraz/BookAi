@@ -5,6 +5,7 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, Sparkles, X } from "lucide-react";
 
+import { CreateSiteLink } from "@/components/marketing/CreateSiteLink";
 import { PRODUCT_NAME } from "@/lib/brand";
 import { Button } from "@/components/ui/button";
 
@@ -51,7 +52,7 @@ export function MarketingNav() {
         <div className="flex items-center gap-2">
           {/* Desktop CTA */}
           <Button size="sm" asChild className="hidden md:inline-flex">
-            <Link href="/">Create a site</Link>
+            <CreateSiteLink>Create a site</CreateSiteLink>
           </Button>
 
           {/* Mobile hamburger */}
@@ -120,9 +121,9 @@ export function MarketingNav() {
                 className="mt-4"
               >
                 <Button asChild className="w-full" size="lg">
-                  <Link href="/" onClick={() => setOpen(false)}>
+                  <CreateSiteLink onNavigate={() => setOpen(false)}>
                     Create a site
-                  </Link>
+                  </CreateSiteLink>
                 </Button>
               </motion.div>
             </nav>
