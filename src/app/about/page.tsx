@@ -3,15 +3,18 @@ import Link from "next/link";
 import { FileText, Globe, MapPin, Sparkles, Wand2 } from "lucide-react";
 
 import { PRODUCT_NAME } from "@/lib/brand";
+import { pageMetadata } from "@/lib/seo";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MarketingNav } from "@/components/marketing/MarketingNav";
 import { MarketingFooter } from "@/components/marketing/MarketingFooter";
+import { PaperChaiJsonLd } from "@/components/marketing/PaperChaiJsonLd";
 
-export const metadata: Metadata = {
-  title: `About — ${PRODUCT_NAME}`,
-  description: `${PRODUCT_NAME} turns who you already are — your resume, your Google Business page, a site you like — into a polished one-page website in minutes.`,
-};
+export const metadata: Metadata = pageMetadata({
+  title: "About",
+  description: `${PRODUCT_NAME} turns who you already are — your resume, Google Business page, LinkedIn, or a reference site — into a polished one-page website in minutes. Built for India's small businesses, clinics, freelancers, and creators.`,
+  path: "/about",
+});
 
 const STEPS = [
   {
@@ -34,6 +37,7 @@ const STEPS = [
 export default function AboutPage() {
   return (
     <main className="relative flex min-h-screen flex-col">
+      <PaperChaiJsonLd />
       <MarketingNav />
 
       <section className="mx-auto max-w-3xl px-6 pb-16 pt-16 sm:pt-24">

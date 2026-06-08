@@ -73,16 +73,29 @@ const fadeUp = {
 
 export function SourceChooser({
   capabilities,
+  canCreate = true,
   onChoose,
 }: {
   capabilities: Capabilities;
+  /** When false (free site already used), smart imports are disabled. */
+  canCreate?: boolean;
   onChoose: (source: SourceId) => void;
 }) {
   const smartOff = !capabilities.ai && !capabilities.google;
+  const atSiteLimit = !canCreate;
 
   return (
     <div className="space-y-4">
-      {smartOff ? (
+      {atSiteLimit ? (
+        <div className="rounded-lg border border-amber-400/30 bg-amber-400/10 px-4 py-3 text-sm text-amber-900 dark:text-amber-100/90">
+          You&apos;ve used your free site. Smart imports are disabled so we don&apos;t
+          run paid APIs again — delete a site in{" "}
+          <a href="/dashboard" className="font-medium underline underline-offset-2">
+            My sites
+          </a>{" "}
+          or upgrade to create another.
+        </div>
+      ) : smartOff ? (
         <div className="rounded-lg border border-amber-400/30 bg-amber-400/10 px-4 py-3 text-sm text-amber-900 dark:text-amber-100/90">
           Smart imports are not enabled here. Start with a manual brief.
         </div>
@@ -95,7 +108,7 @@ export function SourceChooser({
         className="grid gap-3 sm:grid-cols-2"
       >
         {SOURCES.map((s) => {
-          const enabled = s.enabled(capabilities);
+          const enabled = s.id === "manual" ? true : canCreate && s.enabled(capabilities);
           const Icon = s.icon;
           return (
             <motion.button

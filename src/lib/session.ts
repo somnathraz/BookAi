@@ -3,7 +3,17 @@ import "server-only";
 import { createHmac, timingSafeEqual } from "crypto";
 
 const COOKIE_NAME = "bookai_verified";
-const MAX_AGE_S = 60 * 60 * 24 * 7; // 7 days
+const DEFAULT_SESSION_DAYS = 30;
+
+/** Verified-session lifetime in seconds (default 30 days). Override with BOOKAI_SESSION_DAYS. */
+export function sessionMaxAgeS(): number {
+  const raw = process.env.BOOKAI_SESSION_DAYS?.trim();
+  const days = raw ? Number.parseInt(raw, 10) : DEFAULT_SESSION_DAYS;
+  const n = Number.isFinite(days) && days > 0 ? days : DEFAULT_SESSION_DAYS;
+  return 60 * 60 * 24 * n;
+}
+
+export { COOKIE_NAME };
 
 function secret(): string {
   return (
@@ -17,8 +27,6 @@ function secret(): string {
 function sign(value: string): string {
   return createHmac("sha256", secret()).update(value).digest("hex");
 }
-
-export { COOKIE_NAME, MAX_AGE_S };
 
 export function makeToken(email: string): string {
   const payload = Buffer.from(email.toLowerCase()).toString("base64url");

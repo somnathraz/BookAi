@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 
 import { isValidEmail, normalizeEmail, verifyOtp } from "@/lib/otp";
+import { enforceRateLimit } from "@/lib/rate-limit";
+import { rateLimitResponse } from "@/lib/rate-limit-response";
 import { makeToken } from "@/lib/session";
 import { setSessionCookie } from "@/lib/session-cookie";
 
@@ -25,6 +27,9 @@ export async function POST(request: Request) {
   if (!isValidEmail(email) || !code?.trim()) {
     return NextResponse.json({ error: "Enter the 6-digit code." }, { status: 400 });
   }
+
+  const limited = await enforceRateLimit(request, "auth", email);
+  if (!limited.allowed) return rateLimitResponse(limited);
 
   const result = await verifyOtp(email, code);
   if (result !== "ok") {

@@ -20,6 +20,11 @@ import {
 
 import { PRODUCT_NAME } from "@/lib/brand";
 import { STUDIO_RESET_EVENT } from "@/lib/studio-reset";
+import {
+  clearStudioDraft,
+  loadStudioDraft,
+  saveStudioDraft,
+} from "@/lib/studio-draft";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BuilderForm } from "@/components/generator/BuilderForm";
@@ -85,7 +90,7 @@ const detailPoints = [
   },
   {
     title: "Publishable in one flow",
-    body: "Review the extracted details, verify email, generate, and share a live path-based site from the same workspace.",
+    body: "Import and review first, verify email when you're ready to publish, then share a live path-based site from the same workspace.",
   },
 ];
 
@@ -116,6 +121,7 @@ export function Studio() {
   const [error, setError] = useState<string | null>(null);
   const [verified, setVerified] = useState(false);
   const [verifiedEmail, setVerifiedEmail] = useState<string | null>(null);
+  const [canCreate, setCanCreate] = useState(true);
   const [pendingInput, setPendingInput] = useState<GeneratorInput | null>(null);
 
   const resetToChooser = useCallback(() => {
@@ -129,6 +135,7 @@ export function Studio() {
     setError(null);
     setPendingInput(null);
     setCopied(false);
+    clearStudioDraft();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
@@ -161,21 +168,69 @@ export function Studio() {
         })
       );
 
-    // Restore verified session from the httpOnly cookie (valid 7 days).
+    // Long-lived verified session (30 days by default) — skip OTP if still valid.
     fetch("/api/auth/session")
       .then((r) => (r.ok ? r.json() : null))
-      .then((data: { email?: string } | null) => {
-        if (data?.email) {
-          setVerified(true);
-          setVerifiedEmail(data.email);
+      .then(
+        (
+          data: {
+            email?: string;
+            canCreate?: boolean;
+            limitReason?: string;
+          } | null
+        ) => {
+          if (data?.email) {
+            setVerified(true);
+            setVerifiedEmail(data.email);
+            setCanCreate(data.canCreate !== false);
+            if (data.canCreate === false && data.limitReason) {
+              setError(data.limitReason);
+            }
+          }
         }
-      })
+      )
       .catch(() => {
         /* ignore */
       });
+
+    // Resume in-progress import/review so we don't re-call paid APIs.
+    const params = new URLSearchParams(window.location.search);
+    if (!params.has("new")) {
+      const draft = loadStudioDraft();
+      if (draft) {
+        if (draft.activeSource) setActiveSource(draft.activeSource);
+        if (draft.analysis) setAnalysis(draft.analysis);
+        if (draft.initialValues) setInitialValues(draft.initialValues);
+        setStep(draft.step);
+      }
+    }
   }, []);
 
+  // Persist import data across refresh / short absence (7 days in sessionStorage).
+  useEffect(() => {
+    if (
+      step === "chooser" ||
+      step === "verify" ||
+      step === "generating" ||
+      step === "preview" ||
+      step === "limit"
+    ) {
+      return;
+    }
+    saveStudioDraft({
+      step,
+      analysis,
+      initialValues,
+      activeSource,
+    });
+  }, [step, analysis, initialValues, activeSource]);
+
   function choose(source: SourceId) {
+    if (source !== "manual" && verified && !canCreate) {
+      setError("You've used your free site. Delete one in My sites or upgrade to Pro.");
+      setStep("limit");
+      return;
+    }
     if (source === "manual") {
       setInitialValues(undefined);
       setStep("review");
@@ -195,15 +250,20 @@ export function Studio() {
     setStep("review");
   }
 
-  // Accounts model: every generation requires a verified email session.
   function handleGenerate(input: GeneratorInput) {
     setInitialValues(input); // preserve edits when returning from preview
     setPendingInput(input);
-    if (!verified) {
-      setStep("verify");
-    } else {
-      void doGenerate(input);
+    if (verified && !canCreate) {
+      setError("You've used your free site. Delete one in My sites or upgrade to Pro.");
+      setStep("limit");
+      return;
     }
+    const emailGateOn = Boolean(capabilities?.email);
+    if (emailGateOn && !verified) {
+      setStep("verify");
+      return;
+    }
+    void doGenerate(input);
   }
 
   async function doGenerate(input: GeneratorInput) {
@@ -226,11 +286,17 @@ export function Studio() {
         setStep("limit");
         return;
       }
+      if (res.status === 429 && data?.code === "rate_limited") {
+        setError(data.error as string);
+        setStep("review");
+        return;
+      }
       if (!res.ok) throw new Error(data?.error ?? "Generation failed.");
       setSite(data.site as SiteData);
       setSlug((data.slug as string) ?? null);
       setPublishedUrl((data.url as string) ?? null);
       setPreviewTheme((data.site as SiteData).theme);
+      clearStudioDraft();
       setStep("preview");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
@@ -489,7 +555,11 @@ export function Studio() {
                   </div>
 
                   {capabilities ? (
-                    <SourceChooser capabilities={capabilities} onChoose={choose} />
+                    <SourceChooser
+                      capabilities={capabilities}
+                      canCreate={!verified || canCreate}
+                      onChoose={choose}
+                    />
                   ) : (
                     <div className="flex items-center justify-center gap-2 py-16 text-sm text-muted-foreground">
                       <Loader2 className="size-4 animate-spin" />
@@ -530,6 +600,10 @@ export function Studio() {
                 source={activeSource}
                 onBack={() => setStep("chooser")}
                 onAnalyzed={onAnalyzed}
+                onLimitReached={(msg) => {
+                  setError(msg);
+                  setStep("limit");
+                }}
               />
             ) : null}
 
@@ -589,11 +663,29 @@ export function Studio() {
 
             {step === "verify" ? (
               <EmailGate
+                intent="generate"
                 onBack={() => setStep("review")}
                 onVerified={(email) => {
                   setVerified(true);
                   setVerifiedEmail(email);
-                  if (pendingInput) void doGenerate(pendingInput);
+                  fetch("/api/auth/session")
+                    .then((r) => (r.ok ? r.json() : null))
+                    .then((data: { canCreate?: boolean; limitReason?: string } | null) => {
+                      const allowed = data?.canCreate !== false;
+                      setCanCreate(allowed);
+                      if (!allowed) {
+                        setError(
+                          data?.limitReason ??
+                            "You've used your free site. Delete one in My sites or upgrade to Pro."
+                        );
+                        setStep("limit");
+                        return;
+                      }
+                      if (pendingInput) void doGenerate(pendingInput);
+                    })
+                    .catch(() => {
+                      if (pendingInput) void doGenerate(pendingInput);
+                    });
                 }}
               />
             ) : null}

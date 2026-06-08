@@ -12,9 +12,12 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 export function EmailGate({
   onVerified,
   onBack,
+  intent = "continue",
 }: {
   onVerified: (email: string) => void;
   onBack: () => void;
+  /** "continue" = verify before import; "generate" = legacy fallback at publish time */
+  intent?: "continue" | "generate";
 }) {
   const [phase, setPhase] = useState<"email" | "code">("email");
   const [email, setEmail] = useState("");
@@ -36,6 +39,12 @@ export function EmailGate({
         body: JSON.stringify({ email }),
       });
       const data = await res.json();
+      if (res.status === 429 && data?.code === "rate_limited") {
+        throw new Error(
+          data.error ??
+            "We're handling heavy traffic right now. Please try again in a few minutes."
+        );
+      }
       if (!res.ok) throw new Error(data?.error ?? "Couldn't send the code.");
       setDelivered(Boolean(data.delivered));
       setDevCode(data.devCode ?? null);
@@ -94,11 +103,17 @@ export function EmailGate({
         </div>
         <div>
           <h2 className="text-xl font-semibold">
-            {phase === "email" ? "Where should we send your site?" : "Enter your code"}
+            {phase === "email"
+              ? intent === "continue"
+                ? "Verify your email to continue"
+                : "Where should we send your site?"
+              : "Enter your code"}
           </h2>
           <p className="mt-0.5 text-sm text-muted-foreground">
             {phase === "email"
-              ? "Verify your email to generate your site — your free plan includes one."
+              ? intent === "continue"
+                ? "One quick code before we import your data — your free plan includes one site."
+                : "Verify your email to generate your site — your free plan includes one."
               : delivered
                 ? `We sent a 6-digit code to ${email}.`
                 : "Dev mode — no email configured. Use the code below."}
@@ -159,7 +174,7 @@ export function EmailGate({
               </>
             ) : (
               <>
-                Verify & generate
+                {intent === "continue" ? "Verify & continue" : "Verify & generate"}
                 <ArrowRight className="size-4" />
               </>
             )}

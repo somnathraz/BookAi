@@ -110,6 +110,16 @@ export function ensureSchema(): Promise<void> {
         attempts  int not null default 0,
         last_sent bigint not null
       )`;
+    await sql`
+      create table if not exists api_rate_events (
+        id         bigserial primary key,
+        bucket     text not null,
+        route      text not null,
+        created_at timestamptz not null default now()
+      )`;
+    await sql`
+      create index if not exists api_rate_events_bucket_route_ts
+        on api_rate_events (bucket, route, created_at desc)`;
   })();
   return _schemaReady;
 }

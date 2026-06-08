@@ -283,6 +283,29 @@ export async function listSites(email: string): Promise<StoredSite[]> {
   return [...memAcc(email).sites].sort((a, b) => b.createdAt - a.createdAt);
 }
 
+/** All published slugs — used by sitemap.xml. */
+export async function listPublishedSlugs(): Promise<
+  { slug: string; updatedAt: Date }[]
+> {
+  const sql = getSql();
+  if (sql) {
+    await ensureSchema();
+    const rows = await sql<{ slug: string; created_at: Date }[]>`
+      select slug, created_at from sites order by created_at desc`;
+    return rows.map((r) => ({
+      slug: r.slug,
+      updatedAt: new Date(r.created_at),
+    }));
+  }
+  const out: { slug: string; updatedAt: Date }[] = [];
+  for (const a of mem.values()) {
+    for (const s of a.sites) {
+      out.push({ slug: s.slug, updatedAt: new Date(s.createdAt) });
+    }
+  }
+  return out.sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime());
+}
+
 export async function deleteSite(email: string, id: string): Promise<boolean> {
   const sql = getSql();
   if (sql) {

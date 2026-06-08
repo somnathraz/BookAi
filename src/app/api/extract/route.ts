@@ -1,15 +1,45 @@
 import { NextResponse } from "next/server";
 
+import { canGenerate, FREE_SITES_PER_IP, ipSiteCount } from "@/lib/accounts";
+import { ipFromRequest } from "@/lib/abuse";
+import { enforceRateLimit } from "@/lib/rate-limit";
+import { rateLimitResponse } from "@/lib/rate-limit-response";
 import { extractFromResumeText, extractFromPdf } from "@/lib/extract/resume";
 import { extractFromLinkedInText } from "@/lib/extract/linkedin";
 import { extractFromUrl } from "@/lib/extract/competitor";
 import { extractFromGoogleMaps } from "@/lib/extract/maps";
+import { emailFromRequest } from "@/lib/session";
 import type { AnalysisResult } from "@/lib/types";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
 
 export async function POST(request: Request) {
+  const limited = await enforceRateLimit(request, "extract");
+  if (!limited.allowed) return rateLimitResponse(limited);
+
+  // Don't burn SerpAPI / AI keys if this account (or IP) can't publish another site.
+  const email = emailFromRequest(request);
+  const ip = ipFromRequest(request);
+  if (email) {
+    const gate = await canGenerate(email, ip);
+    if (!gate.ok) {
+      return NextResponse.json(
+        { error: gate.reason, code: "limit_reached" },
+        { status: 402 }
+      );
+    }
+  } else if (ip && (await ipSiteCount(ip)) >= FREE_SITES_PER_IP) {
+    return NextResponse.json(
+      {
+        error:
+          "You've reached the free limit for this network. Verify your email or upgrade to Pro for more.",
+        code: "limit_reached",
+      },
+      { status: 402 }
+    );
+  }
+
   const contentType = request.headers.get("content-type") ?? "";
 
   try {

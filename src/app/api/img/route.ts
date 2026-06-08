@@ -1,11 +1,16 @@
 import { NextResponse } from "next/server";
 
 import { isProxiableImageUrl } from "@/lib/image-proxy";
+import { enforceRateLimit } from "@/lib/rate-limit";
+import { rateLimitResponse } from "@/lib/rate-limit-response";
 
 export const runtime = "nodejs";
 
 // Proxies external gallery images (Google / SerpAPI) so they load on generated sites.
 export async function GET(request: Request) {
+  const limited = await enforceRateLimit(request, "proxy");
+  if (!limited.allowed) return rateLimitResponse(limited);
+
   const raw = new URL(request.url).searchParams.get("url");
   if (!raw || !isProxiableImageUrl(raw)) {
     return NextResponse.json({ error: "Invalid image URL." }, { status: 400 });

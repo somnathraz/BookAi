@@ -6,6 +6,8 @@ import { aiAvailable } from "@/lib/ai/provider";
 import { emailFromRequest } from "@/lib/session";
 import { addSite, canGenerate, siteCount, FREE_SITE_LIMIT } from "@/lib/accounts";
 import { ipFromRequest } from "@/lib/abuse";
+import { enforceRateLimit } from "@/lib/rate-limit";
+import { rateLimitResponse } from "@/lib/rate-limit-response";
 import { getPublicSitePath, getPublicSiteUrl } from "@/lib/site-url";
 import type { GeneratorInput, SiteData } from "@/lib/types";
 
@@ -13,6 +15,9 @@ export const runtime = "nodejs";
 export const maxDuration = 60;
 
 export async function POST(request: Request) {
+  const limited = await enforceRateLimit(request, "generate");
+  if (!limited.allowed) return rateLimitResponse(limited);
+
   // Accounts model: generation always requires a verified email session.
   const email = emailFromRequest(request);
   if (!email) {

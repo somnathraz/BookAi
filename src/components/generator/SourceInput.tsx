@@ -216,10 +216,12 @@ export function SourceInput({
   source,
   onBack,
   onAnalyzed,
+  onLimitReached,
 }: {
   source: Exclude<SourceId, "manual">;
   onBack: () => void;
   onAnalyzed: (analysis: AnalysisResult) => void;
+  onLimitReached?: (message: string) => void;
 }) {
   const cfg = CONFIG[source];
   const Icon = cfg.icon;
@@ -240,6 +242,14 @@ export function SourceInput({
         body,
       });
       const data = await res.json();
+      if (res.status === 402 && data?.code === "limit_reached") {
+        onLimitReached?.(data.error as string);
+        return;
+      }
+      if (res.status === 429 && data?.code === "rate_limited") {
+        setError(data.error as string);
+        return;
+      }
       if (!res.ok) throw new Error(data?.error ?? "Extraction failed.");
       onAnalyzed(data.analysis as AnalysisResult);
     } catch (err) {

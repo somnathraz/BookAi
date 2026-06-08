@@ -2,19 +2,12 @@ import { NextResponse } from "next/server";
 
 import { hasEmailTransport, sendOtp } from "@/lib/email";
 import { createOtp, isValidEmail, normalizeEmail } from "@/lib/otp";
-import { allowOtpRequest, ipFromRequest } from "@/lib/abuse";
+import { enforceRateLimit } from "@/lib/rate-limit";
+import { rateLimitResponse } from "@/lib/rate-limit-response";
 
 export const runtime = "nodejs";
 
 export async function POST(request: Request) {
-  const ip = ipFromRequest(request);
-  if (!allowOtpRequest(ip)) {
-    return NextResponse.json(
-      { error: "Too many requests from this network. Try again in a few minutes." },
-      { status: 429 }
-    );
-  }
-
   let email = "";
   try {
     ({ email } = (await request.json()) as { email: string });
@@ -26,6 +19,9 @@ export async function POST(request: Request) {
   if (!isValidEmail(email)) {
     return NextResponse.json({ error: "Enter a valid email address." }, { status: 400 });
   }
+
+  const limited = await enforceRateLimit(request, "otp", email);
+  if (!limited.allowed) return rateLimitResponse(limited);
 
   const code = await createOtp(email);
   if (!code) {

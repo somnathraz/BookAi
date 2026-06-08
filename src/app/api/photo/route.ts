@@ -1,10 +1,16 @@
 import { NextResponse } from "next/server";
 
+import { enforceRateLimit } from "@/lib/rate-limit";
+import { rateLimitResponse } from "@/lib/rate-limit-response";
+
 export const runtime = "nodejs";
 
 // Proxies a Google Place Photo so the API key never reaches the browser.
 // `name` is the Places photo resource, e.g. "places/XXX/photos/YYY".
 export async function GET(request: Request) {
+  const limited = await enforceRateLimit(request, "proxy");
+  if (!limited.allowed) return rateLimitResponse(limited);
+
   const name = new URL(request.url).searchParams.get("name");
   const key = process.env.GOOGLE_PLACES_API_KEY?.trim();
 

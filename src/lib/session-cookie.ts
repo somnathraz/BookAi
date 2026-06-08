@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { COOKIE_NAME, MAX_AGE_S } from "@/lib/session";
+import { COOKIE_NAME, sessionMaxAgeS } from "@/lib/session";
 
 export const runtime = "nodejs";
 
@@ -18,5 +18,5 @@ export function clearSessionCookie(res: NextResponse): void {
 }
 
 export function setSessionCookie(res: NextResponse, token: string): void {
-  res.cookies.set(COOKIE_NAME, token, { ...sessionCookieOptions(), maxAge: MAX_AGE_S });
+  res.cookies.set(COOKIE_NAME, token, { ...sessionCookieOptions(), maxAge: sessionMaxAgeS() });
 }

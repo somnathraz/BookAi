@@ -36,7 +36,10 @@ export function MarketingNav() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden items-center gap-7 text-sm text-muted-foreground md:flex">
+        <nav
+          aria-label="Main"
+          className="hidden items-center gap-7 text-sm text-muted-foreground md:flex"
+        >
           {LINKS.map((l) => (
             <Link
               key={l.href}

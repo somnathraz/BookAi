@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { getSiteBySlug } from "@/lib/accounts";
+import { PRODUCT_NAME } from "@/lib/brand";
+import { metaDescription, resolveOgImageUrl } from "@/lib/seo";
 import { getPublicSiteUrl } from "@/lib/site-url";
 import { GeneratedSite } from "@/components/generated/GeneratedSite";
 import type { ThemeMode } from "@/lib/types";
@@ -18,22 +20,54 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const stored = await getSiteBySlug(slug);
-  if (!stored) return { title: "Site not found" };
+  if (!stored) {
+    return {
+      title: { absolute: "Site not found" },
+      robots: { index: false, follow: false },
+    };
+  }
+
   const identity = stored.site?.identity;
   const name = identity?.name ?? stored.name ?? slug;
   const tagline = identity?.tagline ?? "";
-  const intro = identity?.intro ?? tagline;
+  const intro =
+    identity?.intro ??
+    tagline ??
+    `${name} — a one-page site built with ${PRODUCT_NAME}.`;
+  const title = tagline ? `${name} — ${tagline}` : name;
+  const description = metaDescription(intro);
   const url = getPublicSiteUrl(slug);
+  const ogImage = resolveOgImageUrl(
+    identity?.photo ?? stored.site.gallery?.[0]
+  );
+
   return {
-    title: tagline ? `${name} — ${tagline}` : name,
-    description: intro,
+    title: { absolute: title },
+    description,
     alternates: { canonical: url },
     openGraph: {
       title: name,
-      description: tagline || intro,
+      description: tagline || description,
       url,
       type: "website",
+      siteName: name,
+      locale: "en_IN",
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: name,
+        },
+      ],
     },
+    twitter: {
+      card: "summary_large_image",
+      title: name,
+      description: tagline || description,
+      images: [ogImage],
+    },
+    robots: { index: true, follow: true },
   };
 }
 

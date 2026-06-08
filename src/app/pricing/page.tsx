@@ -8,16 +8,20 @@ import { MarketingFooter } from "@/components/marketing/MarketingFooter";
 import { PricingPlans } from "@/components/marketing/PricingPlans";
 
 import { PRODUCT_NAME } from "@/lib/brand";
+import { pageMetadata } from "@/lib/seo";
+import { PaperChaiJsonLd } from "@/components/marketing/PaperChaiJsonLd";
 
-export const metadata: Metadata = {
-  title: `Pricing — ${PRODUCT_NAME}`,
+export const metadata: Metadata = pageMetadata({
+  title: "Pricing",
   description:
-    "Start free with one AI-generated site. Monthly, annual or lifetime plans for more sites, custom domains, booking and an agency tier.",
-};
+    "Start free with one AI-generated site on PaperChai. Monthly, annual, or lifetime plans for more sites, custom domains, booking integrations, and agency features.",
+  path: "/pricing",
+});
 
 export default function PricingPage() {
   return (
     <main className="relative flex min-h-screen flex-col">
+      <PaperChaiJsonLd />
       <MarketingNav />
 
       <section className="mx-auto max-w-5xl px-6 pb-24 pt-16 sm:pt-24">
