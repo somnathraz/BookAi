@@ -188,6 +188,13 @@ export interface SiteSection {
 // Overall visual personality — fonts/weights, corner radius, shadows, spacing.
 export type StyleTheme = "minimal" | "editorial" | "bold" | "warm";
 
+// The component "look" / UI-kit the site is rendered in. This is the
+// user-facing axis (Clean = shadcn, Material = Material-inspired, etc.). It is
+// the authoritative source for surfaces, headings and button treatment; the
+// renderer maps each kit to real, tested Tailwind tokens so no combination can
+// ever produce broken or off-brand UI.
+export type VisualKit = "clean" | "material" | "editorial" | "soft" | "bold";
+
 // Vertical rhythm / whitespace.
 export type Density = "compact" | "comfortable" | "airy";
 
@@ -207,6 +214,9 @@ export interface SectionVariants {
 
 export interface SiteDesign {
   styleTheme: StyleTheme;
+  /** The UI-kit look the site renders in. Optional for backwards-compat with
+   *  older stored sites — the renderer derives one from styleTheme when absent. */
+  visualKit?: VisualKit;
   density: Density;
   variants: SectionVariants;
 }
@@ -301,6 +311,9 @@ export interface GeneratorInput {
   }[];
   /** Brand accent (hex) chosen in the analysis step. */
   accent?: string;
+  /** The UI-kit look the user explicitly picked. When set, it is forced and
+   *  wins over the AI's choice; when omitted the AI / template decides. */
+  visualKit?: VisualKit;
   /** Headshot / logo (data URL) uploaded in the analysis or review step. */
   photo?: string;
   /** Contact / social links surfaced as buttons on the generated site. */

@@ -62,7 +62,8 @@ You also DECIDE THE PAGE STRUCTURE. Return an ordered "sections" array choosing 
 Pick the blocks that FIT this business and SKIP the rest. Do not include a block when its content is empty. Never repeat a block type. A sparse profile should still feel full: use skills, experience, projects, certifications, languages and interests to give it substance.
 
 You ALSO choose the visual design from these closed sets (pick names only):
-- "styleTheme": one of "minimal" (clean, restrained), "editorial" (serif headings, sharp edges, magazine feel), "bold" (heavy weights, big radius, strong shadows), "warm" (soft rounded, friendly) — match it to the business's personality.
+- "visualKit": the overall UI-kit look — one of "clean" (modern shadcn-style: subtle borders, restrained), "material" (Material-inspired: borderless elevated cards, lifted buttons), "editorial" (serif headings, sharp edges, magazine feel), "soft" (friendly, rounded, gentle shadows), "bold" (heavy weights, big radius, strong shadows). Match it to the business's personality; vary it so different businesses feel different.
+- "styleTheme": one of "minimal" (clean, restrained), "editorial" (serif headings, sharp edges, magazine feel), "bold" (heavy weights, big radius, strong shadows), "warm" (soft rounded, friendly) — keep it consistent with the visualKit.
 - "density": "compact" | "comfortable" | "airy".
 - "variants": layout per block — "services": "bento" | "cards" | "list"; "work": "grid" | "masonry"; "testimonials": "cards" | "marquee" (a moving slider); "gallery": "masonry" | "carousel" (a slider).
 Choose a combination that suits THIS business; vary it so different businesses feel different.`;
@@ -123,7 +124,7 @@ Return ONLY a JSON object with EXACTLY this shape:
   "testimonials": [ { "quote": string, "author": string, "role": string } ],
   "cta": { "heading": string, "subtext": string, "buttonLabel": string },
   "sections": [ { "type": one of the allowed block types, "label": short eyebrow, "heading": section heading } ],
-  "design": { "styleTheme": string, "density": string, "variants": { "services": string, "work": string, "testimonials": string, "gallery": string } }
+  "design": { "visualKit": string, "styleTheme": string, "density": string, "variants": { "services": string, "work": string, "testimonials": string, "gallery": string } }
 }
 Provide 3-4 services (business only), 3-5 work items, and 0-3 testimonials (only real ones). For each work item: "tag" = company or category; "period" = dates if known (e.g. "2021 — Present"); "tech" = 3-6 technologies actually used (omit for non-technical fields); "highlights" = 2-3 short, concrete achievement bullets (<= 14 words each). "projects" = personal/side projects with the tech used (great for profiles & portfolios). "skills" = the technologies/tools mastered (for the marquee). "languages"/"interests" = copy from the input when present, else []. For "certifications": include ONLY names present in the input — never invent new credentials. For each name, write "detail" as one helpful line (12-20 words) explaining what it validates or demonstrates; you may use well-known public knowledge about major certs (AWS, PMP, CPA, etc.) but do NOT invent issuer, date, score, or ID numbers.${base.archetype === "profile" ? ' For profile sites, bio.body MUST be 2-3 paragraphs separated by blank lines (use \\n\\n), 100-150 words — expand thoughtfully from the resume bio and work history.' : ""} NEVER invent tech, dates, or metrics not supported by the input. "menu" = ONLY for a restaurant/café/food business — 6-12 plausible items with a short "category" each (e.g. Starters, Mains, Drinks) and a "price" only if a currency/figure is supported; otherwise omit price and return [] for non-food businesses. "faq" = 3-5 short, genuinely useful question/answer pairs a real visitor would ask this business (location, booking, pricing approach, what to expect) — answers <= 35 words, never inventing specific facts. The "cta" must fit the site type (profile/portfolio = hire/collaborate/contact). The "sections" array is the ordered page structure you choose for THIS ${base.archetype} site — pick the blocks that fit and skip the rest. Do not include any keys beyond those shown.`;
 }
@@ -289,7 +290,7 @@ function mergeSite(base: SiteData, ai: AiSite, input: GeneratorInput): SiteData 
     accent: input.accent ?? base.accent, // analysis choice, else domain default
     heroLayout: base.heroLayout, // derived from whether a photo was added
     archetype: base.archetype,
-    design: sanitizeDesign(ai.design, base.archetype), // AI-chosen, validated
+    design: sanitizeDesign(ai.design, base.archetype, input.visualKit), // AI-chosen, validated; user kit forced
     sections: [], // set below once content is merged
     sectionLabels: {
       services: str(ai.sectionLabels?.services, base.sectionLabels.services),

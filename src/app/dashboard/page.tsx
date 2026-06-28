@@ -5,10 +5,7 @@ import { ExternalLink, Loader2, Plus, Trash2 } from "lucide-react";
 import Link from "next/link";
 
 import { cn } from "@/lib/utils";
-import {
-  getPublicSiteUrl,
-  subdomainSitesEnabled,
-} from "@/lib/site-url";
+import { getPublicSiteHref, getPublicSiteUrl } from "@/lib/site-url";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MarketingNav } from "@/components/marketing/MarketingNav";
@@ -70,15 +67,15 @@ export default function DashboardPage() {
     void load();
   }, [load]);
 
-  // Subdomain mode → absolute https://<slug>.<domain>; otherwise a relative path.
-  const subdomains = subdomainSitesEnabled();
   function publicHref(slug: string): string {
-    return subdomains ? getPublicSiteUrl(slug) : `/${slug}`;
+    const host =
+      typeof window !== "undefined" ? window.location.host : undefined;
+    return getPublicSiteHref(slug, { host });
   }
   function publicLabel(slug: string): string {
-    return subdomains
-      ? getPublicSiteUrl(slug).replace(/^https?:\/\//, "")
-      : `/${slug}`;
+    const host =
+      typeof window !== "undefined" ? window.location.host : undefined;
+    return getPublicSiteUrl(slug, { host }).replace(/^https?:\/\//, "");
   }
 
   async function remove(id: string) {

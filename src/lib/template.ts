@@ -526,7 +526,7 @@ export function generateSite(input: GeneratorInput): SiteData {
     // A photo unlocks the split hero; otherwise stay text-forward and centered.
     heroLayout: input.photo ? "split" : "centered",
     archetype,
-    design: defaultDesign(archetype),
+    design: defaultDesign(archetype, input.visualKit),
     sections: [], // filled by defaultSections once content is in place
     sectionLabels: preset.sectionLabels,
     bio: {

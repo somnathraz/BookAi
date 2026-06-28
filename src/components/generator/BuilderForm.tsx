@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { PhotoUpload } from "@/components/generator/PhotoUpload";
+import { VisualKitPicker } from "@/components/generator/VisualKitPicker";
 import { DOMAIN_PRESETS } from "@/lib/template";
 import { deriveArchetype } from "@/lib/compose";
 import type {
@@ -15,6 +16,7 @@ import type {
   BusinessDomain,
   GeneratorInput,
   ThemeMode,
+  VisualKit,
 } from "@/lib/types";
 
 const DOMAIN_OPTIONS = (
@@ -84,6 +86,7 @@ export function BuilderForm({
     iv.archetype ?? deriveArchetype(iv.domain ?? "developer")
   );
   const [theme, setTheme] = useState<ThemeMode>(iv.theme ?? "light");
+  const [visualKit, setVisualKit] = useState<VisualKit | undefined>(iv.visualKit);
   const [tagline, setTagline] = useState(iv.tagline ?? "");
   const [bio, setBio] = useState(iv.bio ?? "");
   const [location, setLocation] = useState(iv.location ?? "");
@@ -158,6 +161,7 @@ export function BuilderForm({
           };
         }),
       accent: iv.accent,
+      visualKit,
       photo: photo ?? undefined,
       socials: {
         whatsapp: whatsapp.trim() || undefined,
@@ -257,6 +261,13 @@ export function BuilderForm({
             label="Dark"
           />
         </div>
+      </Field>
+
+      <Field
+        label="Visual style"
+        hint="the UI kit your site is built in — pick one or let AI choose"
+      >
+        <VisualKitPicker value={visualKit} onChange={setVisualKit} accent={iv.accent} />
       </Field>
 
       <Field label="Tagline" hint="optional — we'll write one if you skip it">

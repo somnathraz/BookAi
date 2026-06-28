@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
-import { PRODUCT_NAME } from "@/lib/brand";
+import { LOGO_PATH, PRODUCT_NAME } from "@/lib/brand";
 import {
   DEFAULT_DESCRIPTION,
   DEFAULT_TITLE,
@@ -65,8 +65,8 @@ export const metadata: Metadata = {
     images: ["/opengraph-image.png"],
   },
   icons: {
-    icon: "/favicon.png",
-    apple: "/apple-touch-icon.png",
+    icon: LOGO_PATH,
+    apple: LOGO_PATH,
   },
   robots: { index: true, follow: true },
 };

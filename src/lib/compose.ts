@@ -17,6 +17,7 @@ import type {
   SourceId,
   StyleTheme,
   TestimonialsVariant,
+  VisualKit,
   WorkVariant,
 } from "@/lib/types";
 
@@ -269,33 +270,56 @@ export function sanitizeSections(
 // ── Design (style theme + per-section variants) ───────────────────────────────
 
 const STYLE_THEMES: StyleTheme[] = ["minimal", "editorial", "bold", "warm"];
+export const VISUAL_KITS: VisualKit[] = ["clean", "material", "editorial", "soft", "bold"];
 const DENSITIES: Density[] = ["compact", "comfortable", "airy"];
+
+// Each kit carries a matching styleTheme so older code paths and the heading
+// font stay consistent with the kit's look.
+const KIT_TO_STYLE_THEME: Record<VisualKit, StyleTheme> = {
+  clean: "minimal",
+  material: "minimal",
+  editorial: "editorial",
+  soft: "warm",
+  bold: "bold",
+};
 const SERVICES_VARIANTS: ServicesVariant[] = ["bento", "cards", "list"];
 const WORK_VARIANTS: WorkVariant[] = ["grid", "masonry"];
 const TESTIMONIALS_VARIANTS: TestimonialsVariant[] = ["cards", "marquee"];
 const GALLERY_VARIANTS: GalleryVariant[] = ["masonry", "carousel"];
 
 // A sensible, on-brand default design per archetype — the template fallback.
+// `visualKit` is the authoritative look and stays in sync with `styleTheme`.
 const ARCHETYPE_DESIGN: Record<Archetype, SiteDesign> = {
   profile: {
     styleTheme: "minimal",
+    visualKit: "clean",
     density: "comfortable",
     variants: { services: "cards", work: "grid", testimonials: "cards", gallery: "masonry" },
   },
   business: {
     styleTheme: "warm",
+    visualKit: "soft",
     density: "compact",
     variants: { services: "cards", work: "grid", testimonials: "marquee", gallery: "masonry" },
   },
   portfolio: {
     styleTheme: "editorial",
+    visualKit: "editorial",
     density: "airy",
     variants: { services: "list", work: "masonry", testimonials: "cards", gallery: "masonry" },
   },
 };
 
-export function defaultDesign(archetype: Archetype): SiteDesign {
-  return ARCHETYPE_DESIGN[archetype] ?? ARCHETYPE_DESIGN.profile;
+// When the user (or AI) picks a kit explicitly, apply it and keep styleTheme in
+// step. Otherwise fall back to the archetype's default look.
+function applyKit(base: SiteDesign, kit?: VisualKit): SiteDesign {
+  if (!kit || !VISUAL_KITS.includes(kit)) return base;
+  return { ...base, visualKit: kit, styleTheme: KIT_TO_STYLE_THEME[kit] };
+}
+
+export function defaultDesign(archetype: Archetype, visualKit?: VisualKit): SiteDesign {
+  const base = ARCHETYPE_DESIGN[archetype] ?? ARCHETYPE_DESIGN.profile;
+  return applyKit(base, visualKit);
 }
 
 function pick<T>(value: unknown, allowed: T[], fallback: T): T {
@@ -303,11 +327,17 @@ function pick<T>(value: unknown, allowed: T[], fallback: T): T {
 }
 
 // Validate an AI-proposed design against the closed sets, falling back to the
-// archetype default for anything missing or invalid.
-export function sanitizeDesign(raw: unknown, archetype: Archetype): SiteDesign {
+// archetype default for anything missing or invalid. When `userKit` is set the
+// user picked a kit explicitly, so it is forced and overrides the AI's choice.
+export function sanitizeDesign(
+  raw: unknown,
+  archetype: Archetype,
+  userKit?: VisualKit
+): SiteDesign {
   const base = defaultDesign(archetype);
   const r = (raw ?? {}) as {
     styleTheme?: unknown;
+    visualKit?: unknown;
     density?: unknown;
     variants?: {
       services?: unknown;
@@ -317,7 +347,14 @@ export function sanitizeDesign(raw: unknown, archetype: Archetype): SiteDesign {
     };
   };
   const v = r.variants ?? {};
-  return {
+
+  // Kit precedence: forced user choice → AI's valid choice → archetype default.
+  const aiKit = VISUAL_KITS.includes(r.visualKit as VisualKit)
+    ? (r.visualKit as VisualKit)
+    : undefined;
+  const kit = userKit ?? aiKit ?? base.visualKit;
+
+  const design: SiteDesign = {
     styleTheme: pick(r.styleTheme, STYLE_THEMES, base.styleTheme),
     density: pick(r.density, DENSITIES, base.density),
     variants: {
@@ -327,4 +364,7 @@ export function sanitizeDesign(raw: unknown, archetype: Archetype): SiteDesign {
       gallery: pick(v.gallery, GALLERY_VARIANTS, base.variants.gallery!),
     },
   };
+
+  // Applying the kit keeps styleTheme consistent with the chosen look.
+  return applyKit(design, kit);
 }

@@ -7,12 +7,37 @@
 // (e.g. "paperchaiapp.com"). proxy.ts then rewrites <slug>.<domain> to
 // the /[slug] route, so both URL styles keep working.
 
+import { APP_DOMAIN } from "@/lib/brand";
+
+function normalizeHost(raw: string | undefined): string | null {
+  if (!raw?.trim()) return null;
+  return raw
+    .trim()
+    .replace(/^https?:\/\//, "")
+    .replace(/\/.*$/, "")
+    .replace(/:\d+$/, "")
+    .toLowerCase();
+}
+
+/** Apex domain for the app — env override, then canonical default. */
+export function getCanonicalAppDomain(): string {
+  return (
+    normalizeHost(process.env.NEXT_PUBLIC_SITE_DOMAIN) ??
+    normalizeHost(process.env.NEXT_PUBLIC_APP_URL) ??
+    APP_DOMAIN
+  );
+}
+
 /** App origin for absolute links (emails, OG tags, copy-to-clipboard). */
 export function getAppBaseUrl(): string {
   const configured = process.env.NEXT_PUBLIC_APP_URL?.trim();
   if (configured) return configured.replace(/\/$/, "");
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-  return "http://localhost:3000";
+  if (process.env.VERCEL_URL && process.env.NODE_ENV !== "production") {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+  const domain = getCanonicalAppDomain();
+  const protocol = domain.includes("localhost") ? "http" : "https";
+  return `${protocol}://${domain}`;
 }
 
 /**
@@ -22,11 +47,7 @@ export function getAppBaseUrl(): string {
 export function getSiteRootDomain(): string | null {
   const raw = process.env.NEXT_PUBLIC_SITE_DOMAIN?.trim();
   if (!raw) return null;
-  return raw
-    .replace(/^https?:\/\//, "")
-    .replace(/\/.*$/, "")
-    .replace(/:\d+$/, "")
-    .toLowerCase();
+  return normalizeHost(raw) ?? APP_DOMAIN;
 }
 
 export function subdomainSitesEnabled(): boolean {
@@ -69,16 +90,60 @@ function isUsableSub(sub: string): boolean {
   return !RESERVED_SUBDOMAINS.has(first);
 }
 
+function isLocalDevHost(hostname: string): boolean {
+  return hostname === "localhost" || hostname === "127.0.0.1";
+}
+
+function localDevSiteUrl(slug: string, host: string): string {
+  const port = host.includes(":") ? host.split(":")[1] : "3000";
+  return `http://${slug}.localhost:${port}`;
+}
+
 /** Path-only URL — works on the current host in the browser too. */
 export function getPublicSitePath(slug: string): string {
   return `/${slug}`;
 }
 
-export function getPublicSiteUrl(slug: string): string {
+/**
+ * Canonical absolute URL for a published site.
+ * Pass `host` from the incoming request (server) or `window.location.host`
+ * (client) so local dev gets `<slug>.localhost:3000` instead of production.
+ */
+export function getPublicSiteUrl(
+  slug: string,
+  opts?: { host?: string | null }
+): string {
   const root = getSiteRootDomain();
+  const host = opts?.host?.toLowerCase() ?? "";
+  const hostname = host.split(":")[0];
+
   if (root) {
+    if (host && isLocalDevHost(hostname)) {
+      return localDevSiteUrl(slug, host);
+    }
     const protocol = root.includes("localhost") ? "http" : "https";
     return `${protocol}://${slug}.${root}`;
   }
+
+  // Path mode — use the current host when we're already on the app.
+  if (host && isLocalDevHost(hostname)) {
+    const port = host.includes(":") ? `:${host.split(":")[1]}` : ":3000";
+    return `http://${hostname}${port}${getPublicSitePath(slug)}`;
+  }
+  if (host && (hostname === getCanonicalAppDomain() || hostname === `www.${getCanonicalAppDomain()}`)) {
+    return `https://${host}${getPublicSitePath(slug)}`;
+  }
+
   return `${getAppBaseUrl()}${getPublicSitePath(slug)}`;
+}
+
+/** Href for navigation — full URL in subdomain mode, path on same origin otherwise. */
+export function getPublicSiteHref(
+  slug: string,
+  opts?: { host?: string | null }
+): string {
+  if (subdomainSitesEnabled()) {
+    return getPublicSiteUrl(slug, opts);
+  }
+  return getPublicSitePath(slug);
 }

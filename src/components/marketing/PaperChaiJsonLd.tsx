@@ -1,4 +1,4 @@
-import { PRODUCT_NAME } from "@/lib/brand";
+import { LOGO_PATH, PRODUCT_NAME } from "@/lib/brand";
 import { DEFAULT_DESCRIPTION } from "@/lib/seo";
 import { getAppBaseUrl } from "@/lib/site-url";
 
@@ -10,7 +10,7 @@ export function PaperChaiJsonLd() {
       "@type": "Organization",
       name: PRODUCT_NAME,
       url,
-      logo: `${url}/logo.png`,
+      logo: `${url}${LOGO_PATH}`,
       description: DEFAULT_DESCRIPTION,
     },
     {

@@ -3,10 +3,10 @@
 import { useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, Sparkles, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 import { CreateSiteLink } from "@/components/marketing/CreateSiteLink";
-import { PRODUCT_NAME } from "@/lib/brand";
+import { Logo } from "@/components/marketing/Logo";
 import { Button } from "@/components/ui/button";
 
 const LINKS = [
@@ -23,17 +23,7 @@ export function MarketingNav() {
   return (
     <header className="sticky top-0 z-50 border-b border-border/50 bg-background/70 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-6">
-        {/* Logo */}
-        <Link
-          href="/"
-          className="flex items-center gap-2 font-semibold"
-          onClick={() => setOpen(false)}
-        >
-          <span className="flex size-7 items-center justify-center rounded-lg bg-foreground text-background">
-            <Sparkles className="size-4" />
-          </span>
-          {PRODUCT_NAME}
-        </Link>
+        <Logo href="/" size={28} priority onClick={() => setOpen(false)} />
 
         {/* Desktop nav */}
         <nav

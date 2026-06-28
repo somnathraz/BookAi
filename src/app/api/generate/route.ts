@@ -77,13 +77,14 @@ export async function POST(request: Request) {
   }
 
   const stored = await addSite(email, ip, site);
+  const host = request.headers.get("host");
   return NextResponse.json({
     site,
     engine,
     siteId: stored.id,
     slug: stored.slug,
     path: getPublicSitePath(stored.slug),
-    url: getPublicSiteUrl(stored.slug),
+    url: getPublicSiteUrl(stored.slug, { host }),
     usage: { used: await siteCount(email), limit: FREE_SITE_LIMIT },
   });
 }

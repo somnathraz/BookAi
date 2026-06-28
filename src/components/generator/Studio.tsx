@@ -15,10 +15,14 @@ import {
   Loader2,
   MapPin,
   Quote,
-  Sparkles,
 } from "lucide-react";
 
 import { PRODUCT_NAME } from "@/lib/brand";
+import {
+  getPublicSiteHref,
+  getPublicSitePath,
+  getPublicSiteUrl,
+} from "@/lib/site-url";
 import { STUDIO_RESET_EVENT } from "@/lib/studio-reset";
 import {
   clearStudioDraft,
@@ -29,6 +33,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BuilderForm } from "@/components/generator/BuilderForm";
 import { AuroraBackground } from "@/components/generator/AuroraBackground";
+import { LogoMark } from "@/components/marketing/Logo";
 import { MarketingNav } from "@/components/marketing/MarketingNav";
 import { GeneratedSite } from "@/components/generated/GeneratedSite";
 import {
@@ -115,7 +120,6 @@ export function Studio() {
 
   const [site, setSite] = useState<SiteData | null>(null);
   const [slug, setSlug] = useState<string | null>(null);
-  const [publishedUrl, setPublishedUrl] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const [previewTheme, setPreviewTheme] = useState<ThemeMode>("light");
   const [error, setError] = useState<string | null>(null);
@@ -131,7 +135,6 @@ export function Studio() {
     setInitialValues(undefined);
     setSite(null);
     setSlug(null);
-    setPublishedUrl(null);
     setError(null);
     setPendingInput(null);
     setCopied(false);
@@ -292,12 +295,11 @@ export function Studio() {
         return;
       }
       if (!res.ok) throw new Error(data?.error ?? "Generation failed.");
-      setSite(data.site as SiteData);
-      setSlug((data.slug as string) ?? null);
-      setPublishedUrl((data.url as string) ?? null);
-      setPreviewTheme((data.site as SiteData).theme);
+      const publishedSlug = data.slug as string;
       clearStudioDraft();
-      setStep("preview");
+      const liveUrl = getPublicSiteUrl(publishedSlug, { host: window.location.host });
+      window.location.assign(liveUrl);
+      return;
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
       setStep("review");
@@ -305,11 +307,19 @@ export function Studio() {
   }
 
   function shareUrl(): string | null {
-    if (publishedUrl) return publishedUrl;
-    if (slug && typeof window !== "undefined") {
-      return `${window.location.origin}/${slug}`;
+    if (!slug) return null;
+    if (typeof window !== "undefined") {
+      return getPublicSiteUrl(slug, { host: window.location.host });
     }
-    return slug ? `/${slug}` : null;
+    return getPublicSitePath(slug);
+  }
+
+  function liveHref(): string | null {
+    if (!slug) return null;
+    if (typeof window !== "undefined") {
+      return getPublicSiteHref(slug, { host: window.location.host });
+    }
+    return getPublicSiteHref(slug);
   }
 
   async function copyShareUrl() {
@@ -326,7 +336,7 @@ export function Studio() {
 
   // ---- Preview ----
   if (step === "preview" && site) {
-    const liveHref = slug ? `/${slug}` : null;
+    const href = liveHref();
     const displayUrl = shareUrl();
 
     return (
@@ -374,9 +384,9 @@ export function Studio() {
 
             {/* Shareable link + copy */}
             <div className="flex min-w-0 flex-1 items-center">
-              {liveHref ? (
+              {href ? (
                 <a
-                  href={liveHref}
+                  href={href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex min-w-0 flex-1 items-center gap-1.5 px-4 py-3.5 transition-colors hover:bg-accent"
@@ -442,12 +452,7 @@ export function Studio() {
                 variants={fadeUp}
                 className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-border/70 bg-background/60 py-1.5 pl-2 pr-3.5 text-xs font-medium text-muted-foreground backdrop-blur dark:border-white/10 dark:bg-white/[0.04]"
               >
-                <span className="flex items-center gap-0.5">
-                  <span className="size-2 rounded-full bg-[#4285f4]" />
-                  <span className="size-2 rounded-full bg-[#34a853]" />
-                  <span className="size-2 rounded-full bg-[#fbbc05]" />
-                  <span className="size-2 rounded-full bg-[#ea4335]" />
-                </span>
+                <LogoMark size={20} priority />
                 <span className="font-semibold text-foreground">{PRODUCT_NAME}</span>
                 <span className="h-3 w-px bg-border" />
                 Real-input website builder
@@ -698,8 +703,8 @@ export function Studio() {
 
             {step === "limit" ? (
               <div className="flex flex-col items-center gap-5 py-8 text-center">
-                <div className="flex size-14 items-center justify-center rounded-2xl border bg-card">
-                  <Sparkles className="size-6 text-foreground" />
+                <div className="flex size-14 items-center justify-center rounded-2xl border bg-card p-2">
+                  <LogoMark size={40} />
                 </div>
                 <div>
                   <h2 className="text-xl font-semibold">You&apos;ve used your free site</h2>
@@ -709,8 +714,14 @@ export function Studio() {
                   </p>
                 </div>
                 <div className="flex flex-wrap items-center justify-center gap-3">
-                  {site ? (
-                    <Button onClick={() => setStep("preview")}>
+                  {slug ? (
+                    <Button
+                      onClick={() =>
+                        window.location.assign(
+                          getPublicSiteUrl(slug, { host: window.location.host })
+                        )
+                      }
+                    >
                       View my site
                     </Button>
                   ) : null}
