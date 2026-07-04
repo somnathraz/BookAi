@@ -20,7 +20,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Enter a valid email address." }, { status: 400 });
   }
 
-  const limited = await enforceRateLimit(request, "otp", email);
+  const limited = await enforceRateLimit(request, "otp", { emailOverride: email });
   if (!limited.allowed) return rateLimitResponse(limited);
 
   const code = await createOtp(email);

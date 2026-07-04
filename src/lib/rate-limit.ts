@@ -5,7 +5,7 @@ import { ipFromRequest } from "@/lib/abuse";
 import { emailFromRequest } from "@/lib/session";
 
 /** Paid / costly API groups tracked in Postgres (falls back to in-memory locally). */
-export type RateLimitRoute = "extract" | "generate" | "otp" | "proxy" | "auth";
+export type RateLimitRoute = "extract" | "generate" | "otp" | "proxy" | "auth" | "booking";
 
 interface LimitConfig {
   windowMs: number;
@@ -34,6 +34,8 @@ function limitsFor(route: RateLimitRoute): LimitConfig {
       return { windowMs: HOUR_MS, max: envInt("RATE_LIMIT_PROXY_HOUR", 120) };
     case "auth":
       return { windowMs: HOUR_MS, max: envInt("RATE_LIMIT_AUTH_HOUR", 30) };
+    case "booking":
+      return { windowMs: HOUR_MS, max: envInt("RATE_LIMIT_BOOKING_HOUR", 10) };
   }
 }
 
@@ -110,10 +112,13 @@ function bucketsFor(request: Request, emailOverride?: string | null): string[] {
 export async function enforceRateLimit(
   request: Request,
   route: RateLimitRoute,
-  emailOverride?: string | null
+  opts?: { emailOverride?: string | null; extraBuckets?: string[] }
 ): Promise<RateLimitResult> {
   const { windowMs, max } = limitsFor(route);
-  const buckets = bucketsFor(request, emailOverride);
+  const buckets = [
+    ...bucketsFor(request, opts?.emailOverride),
+    ...(opts?.extraBuckets ?? []),
+  ];
 
   // No identifiable client — allow (local dev) but still can't attribute abuse.
   if (!buckets.length) return { allowed: true };

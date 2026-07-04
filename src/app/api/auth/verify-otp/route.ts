@@ -28,7 +28,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Enter the 6-digit code." }, { status: 400 });
   }
 
-  const limited = await enforceRateLimit(request, "auth", email);
+  const limited = await enforceRateLimit(request, "auth", { emailOverride: email });
   if (!limited.allowed) return rateLimitResponse(limited);
 
   const result = await verifyOtp(email, code);

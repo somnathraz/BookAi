@@ -33,7 +33,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         error:
-          "You've reached the free limit for this network. Verify your email or upgrade to Pro for more.",
+          "You've reached the free limit for this network. Verify your email or upgrade to Basic for more.",
         code: "limit_reached",
       },
       { status: 402 }

@@ -2,7 +2,12 @@
 
 > **Goal:** Let a verified owner re-open a published site, tweak copy/sections, and republish — **same slug, same URL**, no extra site slot consumed.
 
-Status: **Not started** · Target: **v2**
+Status: **Shipped (Phases 1–3)** · Target: **v2**
+
+### Related docs
+
+- [Booking system](./TODO-booking.md) — depends on edit/config for owner setup
+- [v2 roadmap](./v2-ROADMAP.md)
 
 ### Done before edit mode
 
@@ -130,30 +135,29 @@ Use `updated_at` in sitemap (`listPublishedSlugs`).
 
 ### Phase 1 — Backend (unblocks everything)
 
-- [ ] `getSiteById(email, id): Promise<StoredSite | null>` in `src/lib/accounts.ts`
-- [ ] `updateSite(email, id, site: SiteData): Promise<StoredSite | null>` — same row, same slug, refresh `name`/`domain`/`theme`/`accent` columns from `site`
-- [ ] `updated_at` column + backfill in `ensureSchema()`
-- [ ] `GET /api/sites/[id]/route.ts` — return full site for owner
-- [ ] `POST /api/generate` — accept `siteId`; branch to `updateSite`; skip `canGenerate` when updating owned site
-- [ ] `siteToGeneratorInput()` in `src/lib/site-to-input.ts`
-- [ ] `mergeSiteOnUpdate(existing: SiteData, generated: SiteData): SiteData` — preserve non-form fields
+- [x] `getSiteById(email, id): Promise<StoredSite | null>` in `src/lib/accounts.ts`
+- [x] `updateSite(email, id, site: SiteData): Promise<StoredSite | null>` — same row, same slug, refresh `name`/`domain`/`theme`/`accent` columns from `site`
+- [x] `updated_at` column + backfill in `ensureSchema()`
+- [x] `GET /api/sites/[id]/route.ts` — return full site for owner
+- [x] `POST /api/generate` — accept `siteId`; branch to `updateSite`; skip `canGenerate` when updating owned site
+- [x] `siteToGeneratorInput()` in `src/lib/site-to-input.ts`
+- [x] `mergeSiteOnUpdate(existing: SiteData, generated: SiteData): SiteData` — preserve non-form fields
 - [ ] Tests / manual checklist (see below)
 
 ### Phase 2 — Studio edit mode
 
-- [ ] `Studio` state: `editingSiteId: string | null`
-- [ ] Load edit context: `/?edit=<id>` query param **or** dedicated `/edit/[id]/page.tsx` wrapping `Studio`
-- [ ] On mount with `edit` param: fetch site → `siteToGeneratorInput` → `setInitialValues` → `setEditingSiteId` → `setStep("review")`
-- [ ] `doGenerate`: include `siteId: editingSiteId` in body when set
-- [ ] UI: heading “Edit your site” vs “Build your site”; CTA “Save & publish”
-- [ ] Preview bar: republish uses same `siteId` (don’t clear on back-to-review)
-- [ ] `resetToChooser` clears `editingSiteId`; `?new` still starts fresh
+- [x] `Studio` state: `editingSiteId: string | null`
+- [x] Load edit context: `/edit/[id]/page.tsx` wrapping `Studio`
+- [x] On mount with `edit` param: fetch site → `siteToGeneratorInput` → `setInitialValues` → `setEditingSiteId` → `setStep("review")`
+- [x] `doGenerate`: include `siteId: editingSiteId` in body when set
+- [x] UI: heading “Edit your site” vs “Build your site”; CTA “Save & publish”
+- [x] `resetToChooser` clears `editingSiteId`; `?new` still starts fresh
 
 ### Phase 3 — Dashboard + discoverability
 
-- [ ] **Edit** button on each site card → `/edit/[id]` or `/?edit=[id]`
-- [ ] Show `updated_at` on card when different from `created_at`
-- [ ] Empty-state copy: “You can edit and republish anytime”
+- [x] **Edit** button on each site card → `/edit/[id]`
+- [x] Show `updated_at` on card when different from `created_at`
+- [x] Copy: “Edit and republish anytime”
 
 ### Phase 4 — Richer editing (post-MVP)
 
@@ -187,8 +191,8 @@ Use `updated_at` in sitemap (`listPublishedSlugs`).
 
 ## Edge cases
 
-- [ ] User deletes site while edit tab open → 404 on save, toast + redirect dashboard
-- [ ] Session expired mid-edit → 401 on save → EmailGate, restore draft after verify
+- [x] User deletes site while edit tab open → 404 on save, clear message + link to dashboard
+- [x] Session expired mid-edit → 401 on save → EmailGate, pending input preserved for retry
 - [ ] `useAI: false` on edit → template regen, still merge preserved sections
 - [ ] Large `photo` data URL in jsonb → already stored; no change
 - [ ] In-memory fallback (no `DATABASE_URL`) → same update logic in `mem` map
@@ -226,10 +230,10 @@ Use `updated_at` in sitemap (`listPublishedSlugs`).
 
 ## Success criteria
 
-- [ ] Owner can edit and republish without consuming an extra site slot
-- [ ] Published URL (slug) stable across edits
-- [ ] Dashboard + preview both reach edit flow
-- [ ] Free-user with 1 site can edit that site indefinitely
+- [x] Owner can edit and republish without consuming an extra site slot
+- [x] Published URL (slug) stable across edits
+- [x] Dashboard + preview both reach edit flow
+- [x] Free-user with 1 site can edit that site indefinitely
 - [ ] No regression on create flow
 
 ---

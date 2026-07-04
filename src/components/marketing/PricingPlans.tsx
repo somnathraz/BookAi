@@ -2,18 +2,18 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Check, Users } from "lucide-react";
+import { Check } from "lucide-react";
 
+import { BasicCheckoutButton } from "@/components/billing/BasicCheckoutButton";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
-type Period = "monthly" | "annual" | "lifetime";
+type Period = "monthly" | "annual";
 
 const PERIODS: { id: Period; label: string; note?: string }[] = [
   { id: "monthly", label: "Monthly" },
   { id: "annual", label: "Annual", note: "Save 37%" },
-  { id: "lifetime", label: "Lifetime", note: "Launch only" },
 ];
 
 interface PriceCell {
@@ -30,7 +30,6 @@ interface Tier {
   features: string[];
   cta: string;
   href?: string;
-  soon?: boolean;
 }
 
 const TIERS: Tier[] = [
@@ -40,7 +39,6 @@ const TIERS: Tier[] = [
     price: {
       monthly: { amount: "₹0", suffix: "forever" },
       annual: { amount: "₹0", suffix: "forever" },
-      lifetime: { amount: "₹0", suffix: "forever" },
     },
     features: [
       "1 AI-generated one-page site",
@@ -53,40 +51,21 @@ const TIERS: Tier[] = [
   },
   {
     name: "Basic",
-    tagline: "For one professional going pro.",
+    tagline: "Everything you need to run your business online.",
+    popular: true,
     price: {
       monthly: { amount: "₹199", suffix: "/mo" },
       annual: { amount: "₹1,499", suffix: "/yr", sub: "Save ₹889 vs monthly" },
-      lifetime: { amount: "₹3,999", suffix: "once", sub: "Pay once, yours forever" },
     },
     features: [
       "Everything in Free",
-      "Up to 3 sites & unlimited edits",
+      "Up to 5 sites & unlimited edits",
       "Connect your own custom domain",
       "Remove PaperChai branding",
-      "Email booking",
+      "Email + WhatsApp booking",
+      "Built-in scheduling & Calendly embed",
     ],
     cta: "Get Basic",
-    soon: true,
-  },
-  {
-    name: "Pro",
-    tagline: "For creators who want it all.",
-    popular: true,
-    price: {
-      monthly: { amount: "₹349", suffix: "/mo" },
-      annual: { amount: "₹2,999", suffix: "/yr", sub: "Save ₹1,189 vs monthly" },
-      lifetime: { amount: "₹5,999", suffix: "once", sub: "Pay once, yours forever" },
-    },
-    features: [
-      "Everything in Basic",
-      "Unlimited sites",
-      "WhatsApp + email booking",
-      "Priority AI generation",
-      "Advanced visit analytics",
-    ],
-    cta: "Get Pro",
-    soon: true,
   },
 ];
 
@@ -95,7 +74,6 @@ export function PricingPlans() {
 
   return (
     <div>
-      {/* Period toggle */}
       <div className="flex justify-center">
         <div className="inline-flex items-center gap-1 rounded-full border bg-card/60 p-1">
           {PERIODS.map((p) => {
@@ -129,14 +107,7 @@ export function PricingPlans() {
         </div>
       </div>
 
-      {period === "lifetime" ? (
-        <p className="mt-5 text-center text-sm text-amber-300/80">
-          Lifetime pricing is a launch offer — available for the first 3 months only.
-        </p>
-      ) : null}
-
-      {/* Tiers */}
-      <div className="mt-10 grid items-stretch gap-6 md:grid-cols-3">
+      <div className="mx-auto mt-10 grid max-w-3xl items-stretch gap-6 md:grid-cols-2">
         {TIERS.map((tier) => {
           const cell = tier.price[period];
           return (
@@ -170,10 +141,14 @@ export function PricingPlans() {
                 ))}
               </ul>
               <div className="mt-8">
-                {tier.soon ? (
-                  <Button size="lg" className="w-full" variant={tier.popular ? "default" : "outline"} disabled>
-                    {tier.cta} — soon
-                  </Button>
+                {tier.name === "Basic" ? (
+                  <BasicCheckoutButton
+                    period={period}
+                    size="lg"
+                    variant={tier.popular ? "default" : "outline"}
+                    className="w-full"
+                    label={tier.cta}
+                  />
                 ) : (
                   <Button size="lg" className="w-full" asChild>
                     <Link href={tier.href ?? "/"}>{tier.cta}</Link>
@@ -185,36 +160,17 @@ export function PricingPlans() {
         })}
       </div>
 
-      {/* Agency tier — the hidden gem */}
-      <div className="mt-6 overflow-hidden rounded-3xl border border-foreground/20 bg-card/60">
-        <div className="flex flex-col items-start justify-between gap-6 p-8 sm:flex-row sm:items-center">
-          <div className="max-w-xl">
-            <div className="flex items-center gap-2">
-              <Users className="size-5" />
-              <h2 className="text-lg font-semibold">Agency</h2>
-              <Badge variant="secondary" className="rounded-full">Best value</Badge>
-            </div>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Everything in Pro, white-labelled — manage up to{" "}
-              <span className="font-medium text-foreground">10 client sites</span>{" "}
-              from one dashboard, with client handoff and priority support. Built
-              for studios &amp; freelancers running sites for local businesses.
-            </p>
-          </div>
-          <div className="flex shrink-0 flex-col items-start gap-3 sm:items-end">
-            <div className="flex items-baseline gap-1.5">
-              <span className="text-3xl font-semibold tracking-tight">₹799</span>
-              <span className="text-sm text-muted-foreground">/mo</span>
-            </div>
-            <Button size="lg" disabled>
-              Talk to us — soon
-            </Button>
-          </div>
-        </div>
-      </div>
-
       <p className="mt-8 text-center text-xs text-muted-foreground">
-        Secure payments via Razorpay · cancel anytime · GST invoices included.
+        Secure payments via Razorpay · cancel anytime · GST invoices included. By subscribing, you
+        agree to our{" "}
+        <Link href="/terms" className="underline underline-offset-4 hover:text-foreground">
+          Terms
+        </Link>{" "}
+        and{" "}
+        <Link href="/refunds" className="underline underline-offset-4 hover:text-foreground">
+          Refund Policy
+        </Link>
+        .
       </p>
     </div>
   );

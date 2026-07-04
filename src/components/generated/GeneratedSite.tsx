@@ -1,6 +1,8 @@
 "use client";
 
 import {
+  createContext,
+  useContext,
   useEffect,
   useRef,
   useState,
@@ -49,6 +51,7 @@ import { normalizeCertifications } from "@/lib/certifications";
 import { buildDirectionsUrl } from "@/lib/hours";
 import { isOpenNow, toOpeningHoursSpec } from "@/lib/open-hours";
 import { GeneratedSiteFooter } from "@/components/marketing/MarketingFooter";
+import { BookingSection } from "@/components/generated/BookingSection";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -67,6 +70,8 @@ import type {
 } from "@/lib/types";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
+
+const PublishedSiteChrome = createContext({ showBranding: true });
 
 interface ContactLink {
   icon: LucideIcon;
@@ -1766,6 +1771,7 @@ function InterestsSection({ site, section }: SectionProps) {
 }
 
 function CtaSection({ site }: SectionProps) {
+  const { showBranding } = useContext(PublishedSiteChrome);
   const { cta, identity, accent } = site;
   const st = siteStyle(site.design);
   const contactLinks = buildContactLinks(identity);
@@ -1808,7 +1814,7 @@ function CtaSection({ site }: SectionProps) {
           </div>
         </div>
       </Reveal>
-      <GeneratedSiteFooter ownerName={identity.name} />
+      <GeneratedSiteFooter ownerName={identity.name} showBranding={showBranding} />
     </section>
   );
 }
@@ -2192,9 +2198,8 @@ function SiteJsonLd({ site }: { site: SiteData }) {
 // Maps each composed section type to its renderer. "experience" and "portfolio"
 // are two presentations of the same work data; "about"/"stats" were split out
 // of the old bio block so the AI can order them independently.
-const SECTION_REGISTRY: Record<
-  SiteSection["type"],
-  (props: SectionProps) => ReactNode
+const SECTION_REGISTRY: Partial<
+  Record<SiteSection["type"], (props: SectionProps) => ReactNode>
 > = {
   about: AboutSection,
   stats: StatsSection,
@@ -2217,10 +2222,18 @@ const SECTION_REGISTRY: Record<
 
 export function GeneratedSite({
   site,
+  slug,
+  showBookingWhatsApp = false,
+  showBranding = true,
   theme,
   onThemeChange,
 }: {
   site: SiteData;
+  /** Public slug — required for the booking form API. */
+  slug?: string;
+  showBookingWhatsApp?: boolean;
+  /** Hide PaperChai footer badge on published sites (Basic+). */
+  showBranding?: boolean;
   theme: ThemeMode;
   /** When provided the theme is controlled by the parent (e.g. the Studio
    *  preview); otherwise the header toggle manages it locally so the site is
@@ -2266,6 +2279,7 @@ export function GeneratedSite({
         ];
 
   return (
+    <PublishedSiteChrome.Provider value={{ showBranding }}>
     <div
       className={cn(
         activeTheme === "dark" ? "theme-dark dark" : "theme-light",
@@ -2278,10 +2292,23 @@ export function GeneratedSite({
         <Hero site={site} y={y} opacity={opacity} />
       </div>
       {sections.map((section, i) => {
+        if (section.type === "booking") {
+          if (!slug) return null;
+          return (
+            <BookingSection
+              key={`booking-${i}`}
+              site={site}
+              section={section}
+              slug={slug}
+              showWhatsApp={showBookingWhatsApp}
+            />
+          );
+        }
         const Renderer = SECTION_REGISTRY[section.type];
         if (!Renderer) return null;
         return <Renderer key={`${section.type}-${i}`} site={site} section={section} />;
       })}
     </div>
+    </PublishedSiteChrome.Provider>
   );
 }

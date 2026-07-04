@@ -95,6 +95,44 @@ export interface SiteCTA {
   href?: string;
 }
 
+/** Booking / inquiry settings on a published business site. */
+export interface BookingConfig {
+  enabled: boolean;
+  /** Email that receives form submissions. Defaults to the site owner's account email. */
+  notifyEmail?: string;
+  /** Optional services shown in the form dropdown. */
+  services?: string[];
+  /** WhatsApp number (digits) for wa.me prefill — Basic tier. */
+  whatsappNumber?: string;
+  /** External scheduler URL (Calendly, Cal.com) — Phase 3. */
+  calendarUrl?: string;
+  /** Custom primary button label, e.g. "Request appointment". */
+  buttonLabel?: string;
+  /** PaperChai-native slot scheduling (Phase 4). */
+  native?: NativeSchedulingConfig;
+}
+
+/** Weekly availability for native slot booking. */
+export interface DaySlotConfig {
+  /** 0 = Sunday … 6 = Saturday */
+  day: number;
+  /** 24h time, e.g. "09:00" */
+  start: string;
+  /** 24h time, e.g. "17:30" */
+  end: string;
+}
+
+export interface NativeSchedulingConfig {
+  enabled: boolean;
+  /** Slot length in minutes. Default 30. */
+  slotMinutes?: number;
+  weekly: DaySlotConfig[];
+  /** ISO dates (YYYY-MM-DD) with no availability. */
+  blackoutDates?: string[];
+}
+
+export type BookingStatus = "pending" | "contacted" | "cancelled" | "done";
+
 /** One row in the store-hours grid (e.g. "Monday – Wednesday"). */
 export interface HoursRow {
   label: string;
@@ -166,6 +204,7 @@ export type SectionType =
   | "languages" // spoken languages
   | "interests" // hobbies / interests
   | "faq" // frequently asked questions — any archetype
+  | "booking" // inquiry form — business sites with booking enabled
   | "testimonials"
   | "cta";
 
@@ -264,6 +303,8 @@ export interface SiteData {
   /** Link out to Google Maps for directions. */
   mapsUrl?: string;
   cta: SiteCTA;
+  /** Online booking / inquiry form (business sites). */
+  booking?: BookingConfig;
 }
 
 // What the input form (or future extractors) collects. Most fields optional —

@@ -87,6 +87,7 @@ const ARCHETYPE_ORDER: Record<Archetype, SectionType[]> = {
     "hours",
     "testimonials",
     "faq",
+    "booking",
     "cta",
   ],
 };
@@ -123,7 +124,7 @@ const ARCHETYPE_ALLOWED: Record<Archetype, SectionType[]> = {
     "faq",
     "cta",
   ],
-  business: ["about", "services", "menu", "gallery", "hours", "testimonials", "faq", "cta"],
+  business: ["about", "services", "menu", "gallery", "hours", "testimonials", "faq", "booking", "cta"],
 };
 
 interface ComposeInput {
@@ -141,6 +142,7 @@ interface ComposeInput {
   hasHours: boolean;
   hasMenu: boolean;
   hasFaq: boolean;
+  hasBooking: boolean;
 }
 
 // Decide whether a section has enough content to render. Keeps empty blocks
@@ -179,6 +181,8 @@ function sectionHasContent(type: SectionType, c: ComposeInput): boolean {
       return c.hasHours;
     case "testimonials":
       return c.hasTestimonials;
+    case "booking":
+      return c.hasBooking;
     default:
       return false;
   }
@@ -203,6 +207,7 @@ function composeInput(site: SiteData): ComposeInput {
       (site.storeHours?.rows?.length ?? 0) > 0 || Boolean(site.mapEmbedUrl),
     hasMenu: (site.menu?.length ?? 0) > 0,
     hasFaq: (site.faq?.length ?? 0) > 0,
+    hasBooking: Boolean(site.booking?.enabled),
   };
 }
 
@@ -237,6 +242,7 @@ export function sanitizeSections(
     "languages",
     "interests",
     "faq",
+    "booking",
     "testimonials",
     "cta",
   ];

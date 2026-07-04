@@ -84,6 +84,23 @@ export function ensureSchema(): Promise<void> {
         plan       text not null default 'free',
         created_at timestamptz not null default now()
       )`;
+    await sql`alter table accounts add column if not exists razorpay_subscription_id text`;
+    await sql`alter table accounts add column if not exists billing_period text`;
+    await sql`alter table accounts add column if not exists billing_status text`;
+    await sql`alter table accounts add column if not exists billing_updated_at timestamptz`;
+    await sql`alter table accounts add column if not exists billing_started_at timestamptz`;
+    await sql`alter table accounts add column if not exists billing_current_start timestamptz`;
+    await sql`alter table accounts add column if not exists billing_current_end timestamptz`;
+    await sql`alter table accounts add column if not exists billing_charge_at timestamptz`;
+    await sql`alter table accounts add column if not exists billing_cancel_at_cycle_end boolean default false`;
+    await sql`alter table accounts add column if not exists billing_cancelled_at timestamptz`;
+    await sql`alter table accounts add column if not exists billing_last_reminder_at timestamptz`;
+    await sql`
+      create index if not exists accounts_subscription_idx
+        on accounts (razorpay_subscription_id)`;
+    await sql`
+      create index if not exists accounts_billing_charge_idx
+        on accounts (billing_charge_at desc)`;
     await sql`
       create table if not exists sites (
         id         uuid primary key,
@@ -102,6 +119,9 @@ export function ensureSchema(): Promise<void> {
     await sql`create index if not exists sites_email_idx on sites (email)`;
     await sql`create index if not exists sites_ip_idx on sites (ip)`;
     await sql`create unique index if not exists sites_slug_idx on sites (slug)`;
+    await sql`alter table sites add column if not exists updated_at timestamptz`;
+    await sql`
+      update sites set updated_at = created_at where updated_at is null`;
     await sql`
       create table if not exists otps (
         email     text primary key,
@@ -120,6 +140,38 @@ export function ensureSchema(): Promise<void> {
     await sql`
       create index if not exists api_rate_events_bucket_route_ts
         on api_rate_events (bucket, route, created_at desc)`;
+    await sql`
+      create table if not exists bookings (
+        id            uuid primary key,
+        site_id       uuid not null,
+        slug          text not null,
+        status        text not null default 'pending',
+        visitor_name  text not null,
+        visitor_phone text not null,
+        visitor_email text,
+        preferred_date date,
+        preferred_time text,
+        service       text,
+        notes         text,
+        source        text not null default 'form',
+        ip            text,
+        created_at    timestamptz not null default now()
+      )`;
+    await sql`
+      create index if not exists bookings_site_id_idx
+        on bookings (site_id, created_at desc)`;
+    await sql`alter table bookings add column if not exists slot_start timestamptz`;
+    await sql`
+      create unique index if not exists bookings_site_slot_unique
+        on bookings (site_id, slot_start)
+        where slot_start is not null and status not in ('cancelled')`;
+    await sql`alter table sites add column if not exists custom_domain text`;
+    await sql`alter table sites add column if not exists custom_domain_verified boolean default false`;
+    await sql`alter table sites add column if not exists custom_domain_verify_token text`;
+    await sql`
+      create unique index if not exists sites_custom_domain_idx
+        on sites (custom_domain)
+        where custom_domain is not null`;
   })();
   return _schemaReady;
 }

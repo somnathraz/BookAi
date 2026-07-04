@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { getSiteBySlug } from "@/lib/accounts";
+import { getSiteBySlug, getSiteOwnerEmail, getPlan } from "@/lib/accounts";
+import { bookingWhatsAppAllowed } from "@/lib/booking-plan";
 import { PRODUCT_NAME } from "@/lib/brand";
+import { brandingRemovalAllowed } from "@/lib/plan-features";
 import { metaDescription, resolveOgImageUrl } from "@/lib/seo";
 import { getPublicSiteUrl } from "@/lib/site-url";
 import { GeneratedSite } from "@/components/generated/GeneratedSite";
@@ -36,7 +38,9 @@ export async function generateMetadata({
     `${name} — a one-page site built with ${PRODUCT_NAME}.`;
   const title = tagline ? `${name} — ${tagline}` : name;
   const description = metaDescription(intro);
-  const url = getPublicSiteUrl(slug);
+  const customDomain =
+    stored.customDomainVerified && stored.customDomain ? stored.customDomain : undefined;
+  const url = getPublicSiteUrl(slug, { customDomain });
   const ogImage = resolveOgImageUrl(
     identity?.photo ?? stored.site.gallery?.[0]
   );
@@ -80,7 +84,20 @@ export default async function PublishedSitePage({
   const stored = await getSiteBySlug(slug);
   if (!stored) notFound();
 
+  const ownerEmail = (await getSiteOwnerEmail(stored.id)) ?? "";
+  const plan = ownerEmail ? await getPlan(ownerEmail) : "free";
+  const showBookingWhatsApp =
+    bookingWhatsAppAllowed(plan) &&
+    Boolean(stored.site.booking?.whatsappNumber?.replace(/\D/g, "").length);
+  const showBranding = !brandingRemovalAllowed(plan);
+
   return (
-    <GeneratedSite site={stored.site} theme={stored.site.theme as ThemeMode} />
+    <GeneratedSite
+      site={stored.site}
+      slug={slug}
+      theme={stored.site.theme as ThemeMode}
+      showBookingWhatsApp={showBookingWhatsApp}
+      showBranding={showBranding}
+    />
   );
 }

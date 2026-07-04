@@ -26,24 +26,40 @@ export function MarketingFooter() {
   return (
     <footer className="border-t border-border/50">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-6 py-8 sm:items-stretch">
-        <div className="flex flex-col items-center justify-between gap-3 text-sm text-muted-foreground sm:flex-row">
-          <span className="flex items-center gap-2">
-            <LogoMark size={22} />
-            © {new Date().getFullYear()} {PRODUCT_NAME}
-          </span>
-          <CustomSiteLink />
-          <nav className="flex flex-wrap items-center justify-center gap-6">
-            <CreateSiteLink className="transition-colors hover:text-foreground">
-              Create a site
-            </CreateSiteLink>
-            <Link href="/pricing" className="transition-colors hover:text-foreground">
-              Pricing
+        <div className="flex flex-col gap-4 text-sm text-muted-foreground">
+          <div className="flex flex-col items-center justify-between gap-3 sm:flex-row">
+            <span className="flex items-center gap-2">
+              <LogoMark size={22} />
+              © {new Date().getFullYear()} {PRODUCT_NAME}
+            </span>
+            <CustomSiteLink />
+            <nav className="flex flex-wrap items-center justify-center gap-6">
+              <CreateSiteLink className="transition-colors hover:text-foreground">
+                Create a site
+              </CreateSiteLink>
+              <Link href="/pricing" className="transition-colors hover:text-foreground">
+                Pricing
+              </Link>
+              <Link href="/about" className="transition-colors hover:text-foreground">
+                About
+              </Link>
+              <Link href="/dashboard" className="transition-colors hover:text-foreground">
+                My sites
+              </Link>
+            </nav>
+          </div>
+          <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs">
+            <Link href="/terms" className="transition-colors hover:text-foreground">
+              Terms
             </Link>
-            <Link href="/about" className="transition-colors hover:text-foreground">
-              About
+            <Link href="/privacy" className="transition-colors hover:text-foreground">
+              Privacy
             </Link>
-            <Link href="/dashboard" className="transition-colors hover:text-foreground">
-              My sites
+            <Link href="/refunds" className="transition-colors hover:text-foreground">
+              Refunds
+            </Link>
+            <Link href="/cookies" className="transition-colors hover:text-foreground">
+              Cookies
             </Link>
           </nav>
         </div>
@@ -54,9 +70,12 @@ export function MarketingFooter() {
 
 export function GeneratedSiteFooter({
   ownerName,
+  showBranding = true,
   className,
 }: {
   ownerName: string;
+  /** When false, hide the PaperChai badge (Basic+). */
+  showBranding?: boolean;
   className?: string;
 }) {
   return (
@@ -67,13 +86,15 @@ export function GeneratedSiteFooter({
       )}
     >
       <span>© {new Date().getFullYear()} {ownerName}</span>
-      <div className="flex flex-col items-center gap-1.5 sm:items-end">
-        <span className="flex items-center gap-1.5 text-xs">
-          <LogoMark size={16} />
-          Built with {PRODUCT_NAME}
-        </span>
-        <CustomSiteLink />
-      </div>
+      {showBranding ? (
+        <div className="flex flex-col items-center gap-1.5 sm:items-end">
+          <span className="flex items-center gap-1.5 text-xs">
+            <LogoMark size={16} />
+            Built with {PRODUCT_NAME}
+          </span>
+          <CustomSiteLink />
+        </div>
+      ) : null}
     </footer>
   );
 }

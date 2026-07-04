@@ -1,11 +1,12 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { ExternalLink, Loader2, Plus, Trash2 } from "lucide-react";
+import { ExternalLink, Loader2, Pencil, Plus, Trash2 } from "lucide-react";
 import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 import { getPublicSiteHref, getPublicSiteUrl } from "@/lib/site-url";
+import { BasicCheckoutButton } from "@/components/billing/BasicCheckoutButton";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MarketingNav } from "@/components/marketing/MarketingNav";
@@ -21,7 +22,22 @@ interface SavedSite {
   domain: string;
   theme: ThemeMode;
   accent?: string;
+  customDomain?: string;
   createdAt: number;
+  updatedAt: number;
+}
+
+interface BillingSummary {
+  plan: "free" | "basic";
+  billing: {
+    billingPeriod?: "monthly" | "annual";
+    billingStatus?: "created" | "authenticated" | "active" | "cancelled" | "halted" | "failed";
+    billingChargeAt?: number;
+    billingCurrentEnd?: number;
+    billingCancelAtCycleEnd?: boolean;
+  };
+  dashboardNoticeActive: boolean;
+  dashboardNoticeDays: number;
 }
 
 const DOMAIN_LABEL: Record<string, string> = {
@@ -41,6 +57,8 @@ export default function DashboardPage() {
   const [email, setEmail] = useState<string | null>(null);
   const [sites, setSites] = useState<SavedSite[]>([]);
   const [limit, setLimit] = useState(1);
+  const [plan, setPlan] = useState("free");
+  const [billing, setBilling] = useState<BillingSummary | null>(null);
   const [deleting, setDeleting] = useState<string | null>(null);
 
   const load = useCallback(async () => {
@@ -56,6 +74,15 @@ export default function DashboardPage() {
       setEmail(data.email);
       setSites(data.sites ?? []);
       setLimit(data.limit ?? 1);
+      setPlan((data.plan as string) ?? "free");
+
+      const billingRes = await fetch("/api/billing");
+      if (billingRes.ok) {
+        const billingData = (await billingRes.json()) as BillingSummary;
+        setBilling(billingData);
+      } else {
+        setBilling(null);
+      }
     } catch {
       /* ignore */
     } finally {
@@ -67,15 +94,21 @@ export default function DashboardPage() {
     void load();
   }, [load]);
 
-  function publicHref(slug: string): string {
+  function publicHref(site: SavedSite): string {
     const host =
       typeof window !== "undefined" ? window.location.host : undefined;
-    return getPublicSiteHref(slug, { host });
+    return getPublicSiteHref(site.slug, {
+      host,
+      customDomain: site.customDomain,
+    });
   }
-  function publicLabel(slug: string): string {
+  function publicLabel(site: SavedSite): string {
     const host =
       typeof window !== "undefined" ? window.location.host : undefined;
-    return getPublicSiteUrl(slug, { host }).replace(/^https?:\/\//, "");
+    return getPublicSiteUrl(site.slug, { host, customDomain: site.customDomain }).replace(
+      /^https?:\/\//,
+      ""
+    );
   }
 
   async function remove(id: string) {
@@ -86,6 +119,17 @@ export default function DashboardPage() {
     } finally {
       setDeleting(null);
     }
+  }
+
+  function formatDateTime(value?: number): string {
+    if (!value) return "—";
+    return new Date(value).toLocaleString(undefined, {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+    });
   }
 
   return (
@@ -133,15 +177,49 @@ export default function DashboardPage() {
           <>
             <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-2xl border bg-card/60 p-5">
               <div className="flex items-center gap-3">
-                <Badge variant="secondary" className="rounded-full">Free plan</Badge>
+                <Badge variant="secondary" className="rounded-full capitalize">
+                  {plan} plan
+                </Badge>
                 <span className="text-sm text-muted-foreground">
                   {sites.length} / {limit} site{limit === 1 ? "" : "s"} used
                 </span>
               </div>
-              <Button variant="outline" size="sm" disabled title="Coming soon">
-                Upgrade to Pro — coming soon
-              </Button>
+              <div className="flex flex-wrap items-center gap-2">
+                <Button variant="outline" size="sm" asChild>
+                  <Link href="/dashboard/billing">Billing</Link>
+                </Button>
+                {plan === "basic" ? (
+                  <Button variant="outline" size="sm" disabled>
+                    Basic active
+                  </Button>
+                ) : (
+                  <BasicCheckoutButton
+                    period="annual"
+                    size="sm"
+                    variant="outline"
+                    label="Upgrade to Basic"
+                    onSuccess={() => {
+                      void load();
+                    }}
+                  />
+                )}
+              </div>
             </div>
+
+            {billing?.plan === "basic" &&
+            !billing.billing.billingCancelAtCycleEnd &&
+            billing.dashboardNoticeActive ? (
+              <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-amber-500/30 bg-amber-500/10 p-4">
+                <p className="text-sm text-foreground">
+                  Your Basic plan renews on{" "}
+                  <strong>{formatDateTime(billing.billing.billingChargeAt)}</strong>. We&apos;ll
+                  remind you {billing.dashboardNoticeDays} days before the due date.
+                </p>
+                <Button size="sm" variant="outline" asChild>
+                  <Link href="/dashboard/billing">Open billing</Link>
+                </Button>
+              </div>
+            ) : null}
 
             {sites.length === 0 ? (
               <div className="mt-6 rounded-2xl border border-dashed bg-card/30 p-12 text-center">
@@ -154,7 +232,11 @@ export default function DashboardPage() {
                 </Button>
               </div>
             ) : (
-              <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              <>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  Edit and republish anytime — your URL stays the same.
+                </p>
+                <div className="mt-6 grid gap-4 sm:grid-cols-2">
                 {sites.map((s) => (
                   <div
                     key={s.id}
@@ -164,11 +246,13 @@ export default function DashboardPage() {
                       <div className="min-w-0">
                         <h3 className="truncate font-semibold">{s.name}</h3>
                         <p className="mt-0.5 font-mono text-xs text-muted-foreground">
-                          {publicLabel(s.slug)}
+                          {publicLabel(s)}
                         </p>
                         <p className="mt-0.5 text-sm text-muted-foreground">
                           {DOMAIN_LABEL[s.domain] ?? s.domain} ·{" "}
-                          {new Date(s.createdAt).toLocaleDateString()}
+                          {s.updatedAt > s.createdAt
+                            ? `Updated ${new Date(s.updatedAt).toLocaleDateString()}`
+                            : `Created ${new Date(s.createdAt).toLocaleDateString()}`}
                         </p>
                       </div>
                       <span
@@ -177,11 +261,20 @@ export default function DashboardPage() {
                         title="Accent"
                       />
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex flex-wrap items-center gap-2">
                       <Button size="sm" asChild>
-                        <a href={publicHref(s.slug)} target="_blank" rel="noopener noreferrer">
+                        <Link href={`/edit/${s.id}`}>
+                          <Pencil className="size-4" />
+                          Edit
+                        </Link>
+                      </Button>
+                      <Button size="sm" variant="secondary" asChild>
+                        <Link href={`/dashboard/${s.id}`}>Settings</Link>
+                      </Button>
+                      <Button size="sm" variant="outline" asChild>
+                        <a href={publicHref(s)} target="_blank" rel="noopener noreferrer">
                           <ExternalLink className="size-4" />
-                          Open live site
+                          Open
                         </a>
                       </Button>
                       <Button
@@ -205,6 +298,7 @@ export default function DashboardPage() {
                   </div>
                 ))}
               </div>
+              </>
             )}
           </>
         )}

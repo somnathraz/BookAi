@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowLeft,
@@ -47,6 +48,7 @@ import { EmailGate } from "@/components/generator/EmailGate";
 import { SignOutButton } from "@/components/auth/SignOutButton";
 import { MarketingFooter } from "@/components/marketing/MarketingFooter";
 import { GeneratingOverlay } from "@/components/generator/GeneratingOverlay";
+import { siteToGeneratorInput } from "@/lib/site-to-input";
 import type {
   AnalysisResult,
   GeneratorInput,
@@ -110,9 +112,9 @@ type Step =
   | "preview";
 type SmartSource = Exclude<SourceId, "manual">;
 
-export function Studio() {
+export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
   const reduceMotion = useReducedMotion();
-  const [step, setStep] = useState<Step>("chooser");
+  const [step, setStep] = useState<Step>(editSiteId ? "review" : "chooser");
   const [capabilities, setCapabilities] = useState<Capabilities | null>(null);
   const [activeSource, setActiveSource] = useState<SmartSource | null>(null);
   const [analysis, setAnalysis] = useState<AnalysisResult | null>(null);
@@ -127,6 +129,9 @@ export function Studio() {
   const [verifiedEmail, setVerifiedEmail] = useState<string | null>(null);
   const [canCreate, setCanCreate] = useState(true);
   const [pendingInput, setPendingInput] = useState<GeneratorInput | null>(null);
+  const [editingSiteId, setEditingSiteId] = useState<string | null>(editSiteId ?? null);
+  const [editLoading, setEditLoading] = useState(Boolean(editSiteId));
+  const [editLoadError, setEditLoadError] = useState<string | null>(null);
 
   const resetToChooser = useCallback(() => {
     setStep("chooser");
@@ -138,6 +143,8 @@ export function Studio() {
     setError(null);
     setPendingInput(null);
     setCopied(false);
+    setEditingSiteId(null);
+    setEditLoadError(null);
     clearStudioDraft();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
@@ -198,7 +205,7 @@ export function Studio() {
 
     // Resume in-progress import/review so we don't re-call paid APIs.
     const params = new URLSearchParams(window.location.search);
-    if (!params.has("new")) {
+    if (!params.has("new") && !editSiteId) {
       const draft = loadStudioDraft();
       if (draft) {
         if (draft.activeSource) setActiveSource(draft.activeSource);
@@ -207,7 +214,56 @@ export function Studio() {
         setStep(draft.step);
       }
     }
-  }, []);
+  }, [editSiteId]);
+
+  useEffect(() => {
+    if (!editSiteId) return;
+
+    let cancelled = false;
+    setEditLoading(true);
+    setEditLoadError(null);
+
+    fetch(`/api/sites/${encodeURIComponent(editSiteId)}`)
+      .then(async (res) => {
+        const data = await res.json().catch(() => ({}));
+        if (cancelled) return;
+
+        if (res.status === 401) {
+          setEditingSiteId(editSiteId);
+          setStep("verify");
+          setEditLoading(false);
+          return;
+        }
+        if (!res.ok) {
+          const msg =
+            res.status === 404
+              ? "This site was deleted or is no longer available."
+              : ((data.error as string) ?? "This site could not be loaded.");
+          setEditLoadError(msg);
+          setEditLoading(false);
+          return;
+        }
+
+        const loadedSite = data.site as SiteData;
+        setEditingSiteId(data.id as string);
+        setSlug(data.slug as string);
+        setSite(loadedSite);
+        setPreviewTheme((data.theme as ThemeMode) ?? loadedSite.theme);
+        setInitialValues(siteToGeneratorInput(loadedSite));
+        setStep("review");
+        setEditLoading(false);
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setEditLoadError("Could not load this site. Try again from My sites.");
+          setEditLoading(false);
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [editSiteId]);
 
   // Persist import data across refresh / short absence (7 days in sessionStorage).
   useEffect(() => {
@@ -230,7 +286,7 @@ export function Studio() {
 
   function choose(source: SourceId) {
     if (source !== "manual" && verified && !canCreate) {
-      setError("You've used your free site. Delete one in My sites or upgrade to Pro.");
+      setError("You've used your free site. Delete one in My sites or upgrade to Basic.");
       setStep("limit");
       return;
     }
@@ -254,10 +310,10 @@ export function Studio() {
   }
 
   function handleGenerate(input: GeneratorInput) {
-    setInitialValues(input); // preserve edits when returning from preview
+    setInitialValues(input);
     setPendingInput(input);
-    if (verified && !canCreate) {
-      setError("You've used your free site. Delete one in My sites or upgrade to Pro.");
+    if (verified && !canCreate && !editingSiteId) {
+      setError("You've used your free site. Delete one in My sites or upgrade to Basic.");
       setStep("limit");
       return;
     }
@@ -276,12 +332,23 @@ export function Studio() {
       const res = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(input),
+        body: JSON.stringify({
+          ...input,
+          ...(editingSiteId ? { siteId: editingSiteId } : {}),
+        }),
       });
       const data = await res.json();
       if (res.status === 401 && data?.code === "verify_required") {
         setVerified(false);
         setStep("verify");
+        return;
+      }
+      if (res.status === 404) {
+        setError(
+          "This site was deleted or is no longer available. Head back to My sites."
+        );
+        setStep("review");
+        setEditingSiteId(null);
         return;
       }
       if (res.status === 402 && data?.code === "limit_reached") {
@@ -434,6 +501,33 @@ export function Studio() {
   }
 
   // ---- Builder (chooser / source / review) ----
+  if (editLoading) {
+    return (
+      <main className="relative flex min-h-screen items-center justify-center">
+        <AuroraBackground />
+        <div className="relative flex items-center gap-2 text-sm text-muted-foreground">
+          <Loader2 className="size-4 animate-spin" />
+          Loading your site…
+        </div>
+      </main>
+    );
+  }
+
+  if (editLoadError) {
+    return (
+      <main className="relative flex min-h-screen flex-col">
+        <MarketingNav />
+        <div className="mx-auto flex max-w-md flex-1 flex-col items-center justify-center gap-4 px-6 text-center">
+          <p className="text-muted-foreground">{editLoadError}</p>
+          <Button asChild>
+            <Link href="/dashboard">Back to My sites</Link>
+          </Button>
+        </div>
+        <MarketingFooter />
+      </main>
+    );
+  }
+
   return (
     <main className="relative min-h-screen overflow-hidden">
       <AuroraBackground />
@@ -592,7 +686,7 @@ export function Studio() {
           </motion.div>
         </div>
       ) : (
-        <div className="relative mx-auto flex min-h-[calc(100svh-4rem)] w-full max-w-3xl px-6 pb-24 pt-8 sm:pt-12">
+        <div className="relative mx-auto flex min-h-[calc(100svh-4rem)] w-full max-w-5xl px-6 pb-24 pt-8 sm:pt-12">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
@@ -624,12 +718,24 @@ export function Studio() {
               <div className="flex flex-col gap-5">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h2 className="text-xl font-semibold">Review &amp; edit</h2>
+                    <h2 className="text-xl font-semibold">
+                      {editingSiteId ? "Edit your site" : "Build your site"}
+                    </h2>
                     <p className="text-sm text-muted-foreground">
-                      {initialValues
-                        ? "We pre-filled this from your import. Tweak anything, then generate."
-                        : "Fill in what you can — we'll write the rest from your profession."}
+                      {editingSiteId
+                        ? "Update your details and republish — your live URL stays the same."
+                        : initialValues
+                          ? "We pre-filled from your import. Pick your layout and style in 3 quick steps."
+                          : "Choose your site type, look, and details — see what you'll get as you go."}
                     </p>
+                    {editingSiteId && slug ? (
+                      <p className="mt-1 font-mono text-xs text-muted-foreground">
+                        {getPublicSiteUrl(slug, { host: window.location.host }).replace(
+                          /^https?:\/\//,
+                          ""
+                        )}
+                      </p>
+                    ) : null}
                     {verifiedEmail ? (
                       <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1">
                         <p className="text-xs text-muted-foreground/80">
@@ -646,22 +752,33 @@ export function Studio() {
                       </div>
                     ) : null}
                   </div>
-                  <button
-                    type="button"
-                    onClick={() => setStep("chooser")}
-                    className="flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    <ArrowLeft className="size-4" />
-                    Start over
-                  </button>
+                  {editingSiteId ? (
+                    <Link
+                      href="/dashboard"
+                      className="flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      <ArrowLeft className="size-4" />
+                      My sites
+                    </Link>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => setStep("chooser")}
+                      className="flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      <ArrowLeft className="size-4" />
+                      Start over
+                    </button>
+                  )}
                 </div>
                 <BuilderForm
-                  key={JSON.stringify(initialValues ?? {})}
+                  key={`${editingSiteId ?? "new"}-${JSON.stringify(initialValues ?? {})}`}
                   onGenerate={handleGenerate}
                   generating={false}
                   error={error}
                   initialValues={initialValues}
                   aiAvailable={Boolean(capabilities?.ai)}
+                  editMode={Boolean(editingSiteId)}
                 />
               </div>
             ) : null}
@@ -678,18 +795,44 @@ export function Studio() {
                     .then((data: { canCreate?: boolean; limitReason?: string } | null) => {
                       const allowed = data?.canCreate !== false;
                       setCanCreate(allowed);
-                      if (!allowed) {
+                      if (!allowed && !editingSiteId) {
                         setError(
                           data?.limitReason ??
-                            "You've used your free site. Delete one in My sites or upgrade to Pro."
+                            "You've used your free site. Delete one in My sites or upgrade to Basic."
                         );
                         setStep("limit");
                         return;
                       }
-                      if (pendingInput) void doGenerate(pendingInput);
+                      if (pendingInput) {
+                        void doGenerate(pendingInput);
+                        return;
+                      }
+                      if (editSiteId) {
+                        setEditLoading(true);
+                        fetch(`/api/sites/${encodeURIComponent(editSiteId)}`)
+                          .then(async (res) => {
+                            const data = await res.json().catch(() => ({}));
+                            if (!res.ok) {
+                              setEditLoadError(
+                                (data.error as string) ?? "This site could not be loaded."
+                              );
+                              return;
+                            }
+                            const loadedSite = data.site as SiteData;
+                            setEditingSiteId(data.id as string);
+                            setSlug(data.slug as string);
+                            setSite(loadedSite);
+                            setInitialValues(siteToGeneratorInput(loadedSite));
+                            setStep("review");
+                          })
+                          .finally(() => setEditLoading(false));
+                        return;
+                      }
+                      setStep("review");
                     })
                     .catch(() => {
                       if (pendingInput) void doGenerate(pendingInput);
+                      else setStep("review");
                     });
                 }}
               />
@@ -698,6 +841,7 @@ export function Studio() {
             {step === "generating" ? (
               <GeneratingOverlay
                 useAI={Boolean(capabilities?.ai && pendingInput?.useAI !== false)}
+                editMode={Boolean(editingSiteId)}
               />
             ) : null}
 

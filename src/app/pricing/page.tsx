@@ -14,7 +14,7 @@ import { PaperChaiJsonLd } from "@/components/marketing/PaperChaiJsonLd";
 export const metadata: Metadata = pageMetadata({
   title: "Pricing",
   description:
-    "Start free with one AI-generated site on PaperChai. Monthly, annual, or lifetime plans for more sites, custom domains, booking integrations, and agency features.",
+    "Start free with one AI-generated site on PaperChai. Upgrade to Basic for more sites, custom domains, and booking.",
   path: "/pricing",
 });
 
@@ -34,8 +34,7 @@ export default function PricingPage() {
             Simple, honest pricing
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-pretty text-lg text-muted-foreground">
-            Your first site is free, forever. Pick monthly to try, annual to save,
-            or grab a lifetime deal while it lasts.
+            Your first site is free, forever. Pick monthly to try or annual to save.
           </p>
         </div>
 

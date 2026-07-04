@@ -14,7 +14,13 @@ const STEPS = [
   "Applying your theme",
 ];
 
-export function GeneratingOverlay({ useAI }: { useAI: boolean }) {
+export function GeneratingOverlay({
+  useAI,
+  editMode = false,
+}: {
+  useAI: boolean;
+  editMode?: boolean;
+}) {
   const [active, setActive] = useState(0);
 
   useEffect(() => {
@@ -35,9 +41,15 @@ export function GeneratingOverlay({ useAI }: { useAI: boolean }) {
         <Loader2 className="size-8 animate-spin text-foreground" />
       </div>
       <div>
-        <h2 className="text-xl font-semibold">Building your site…</h2>
+        <h2 className="text-xl font-semibold">
+          {editMode ? "Updating your site…" : "Building your site…"}
+        </h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          {useAI ? "Writing it from your details." : "Assembling your template."}
+          {editMode
+            ? "Republishing to your live URL."
+            : useAI
+              ? "Writing it from your details."
+              : "Assembling your template."}
         </p>
       </div>
       <div className="flex w-full max-w-xs flex-col gap-2.5">

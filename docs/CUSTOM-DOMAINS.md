@@ -140,5 +140,33 @@ src/proxy.ts
 - Vercel **Hobby is non-commercial**. For a paid product, move to **Pro** (~$20/mo)
   for terms compliance and higher limits.
 - This sets up subdomains on **your** domain. Letting customers point **their own**
-  domain (`www.theirbiz.com`) is a separate feature (DB `custom_domain` column +
-  Vercel Domains API) — not covered here.
+  domain (`www.theirbiz.com`) is built — see below.
+
+---
+
+## 5. Owner custom domains (`www.theirbiz.com`)
+
+Dashboard → **Settings** → **Custom domain** (Basic or Pro).
+
+### Flow
+
+1. Owner enters `theirbiz.com` and saves.
+2. PaperChai shows two DNS records:
+   - **TXT** `_paperchai-verification.theirbiz.com` = verification token (proves ownership)
+   - **CNAME** `www` → `{slug}.paperchaiapp.com`
+3. Owner clicks **Check DNS** — we look up the TXT record.
+4. Owner adds `www.theirbiz.com` in **Vercel → Project → Domains** (required for TLS).
+5. `proxy.ts` routes `www.theirbiz.com` to the site slug.
+
+### Dev / staging without Razorpay
+
+Set `CUSTOM_DOMAIN_ALLOW_FREE=true` in `.env`, or set `accounts.plan` to `basic` / `pro` in Postgres.
+
+### Code
+
+| Piece | Path |
+|-------|------|
+| DNS verify + DB | `src/lib/custom-domain.ts` |
+| API | `GET/PATCH/POST /api/sites/[id]/domain` |
+| Proxy routing | `src/proxy.ts` |
+| Dashboard UI | `src/components/dashboard/CustomDomainPanel.tsx` |

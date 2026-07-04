@@ -104,15 +104,30 @@ export function getPublicSitePath(slug: string): string {
   return `/${slug}`;
 }
 
-/**
- * Canonical absolute URL for a published site.
- * Pass `host` from the incoming request (server) or `window.location.host`
- * (client) so local dev gets `<slug>.localhost:3000` instead of production.
- */
+/** Href for navigation — full URL in subdomain mode, path on same origin otherwise. */
+export function getPublicSiteHref(
+  slug: string,
+  opts?: { host?: string | null; customDomain?: string | null }
+): string {
+  if (opts?.customDomain) {
+    return `https://www.${opts.customDomain.replace(/^www\./, "")}`;
+  }
+  if (subdomainSitesEnabled()) {
+    return getPublicSiteUrl(slug, opts);
+  }
+  return getPublicSitePath(slug);
+}
+
+/** Canonical URL when a verified custom domain is connected. */
 export function getPublicSiteUrl(
   slug: string,
-  opts?: { host?: string | null }
+  opts?: { host?: string | null; customDomain?: string | null }
 ): string {
+  if (opts?.customDomain) {
+    const domain = opts.customDomain.replace(/^www\./, "");
+    return `https://www.${domain}`;
+  }
+
   const root = getSiteRootDomain();
   const host = opts?.host?.toLowerCase() ?? "";
   const hostname = host.split(":")[0];
@@ -135,15 +150,4 @@ export function getPublicSiteUrl(
   }
 
   return `${getAppBaseUrl()}${getPublicSitePath(slug)}`;
-}
-
-/** Href for navigation — full URL in subdomain mode, path on same origin otherwise. */
-export function getPublicSiteHref(
-  slug: string,
-  opts?: { host?: string | null }
-): string {
-  if (subdomainSitesEnabled()) {
-    return getPublicSiteUrl(slug, opts);
-  }
-  return getPublicSitePath(slug);
 }

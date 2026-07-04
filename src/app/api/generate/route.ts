@@ -3,22 +3,32 @@ import { NextResponse } from "next/server";
 import { generateSite } from "@/lib/template";
 import { aiGenerateSite } from "@/lib/ai/generate";
 import { aiAvailable } from "@/lib/ai/provider";
-import { emailFromRequest } from "@/lib/session";
-import { addSite, canGenerate, siteCount, FREE_SITE_LIMIT } from "@/lib/accounts";
+import {
+  addSite,
+  canGenerate,
+  getSiteById,
+  siteCount,
+  updateSite,
+  FREE_SITE_LIMIT,
+} from "@/lib/accounts";
+import { mergeSiteOnUpdate } from "@/lib/merge-site-update";
+import { applyDefaultBooking } from "@/lib/booking-defaults";
 import { ipFromRequest } from "@/lib/abuse";
 import { enforceRateLimit } from "@/lib/rate-limit";
 import { rateLimitResponse } from "@/lib/rate-limit-response";
+import { emailFromRequest } from "@/lib/session";
 import { getPublicSitePath, getPublicSiteUrl } from "@/lib/site-url";
 import type { GeneratorInput, SiteData } from "@/lib/types";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
 
+type GenerateBody = GeneratorInput & { siteId?: string };
+
 export async function POST(request: Request) {
   const limited = await enforceRateLimit(request, "generate");
   if (!limited.allowed) return rateLimitResponse(limited);
 
-  // Accounts model: generation always requires a verified email session.
   const email = emailFromRequest(request);
   if (!email) {
     return NextResponse.json(
@@ -29,58 +39,88 @@ export async function POST(request: Request) {
 
   const ip = ipFromRequest(request);
 
-  // Free plan: one site per email, with a soft per-IP cap to resist abuse.
-  const gate = await canGenerate(email, ip);
-  if (!gate.ok) {
-    return NextResponse.json(
-      { error: gate.reason, code: "limit_reached" },
-      { status: 402 }
-    );
-  }
-
-  let input: GeneratorInput;
+  let body: GenerateBody;
   try {
-    input = (await request.json()) as GeneratorInput;
+    body = (await request.json()) as GenerateBody;
   } catch {
     return NextResponse.json({ error: "Invalid JSON body." }, { status: 400 });
   }
 
-  if (!input?.name?.trim()) {
+  const siteId = body.siteId?.trim() || undefined;
+  const isUpdate = Boolean(siteId);
+
+  if (!isUpdate) {
+    const gate = await canGenerate(email, ip);
+    if (!gate.ok) {
+      return NextResponse.json(
+        { error: gate.reason, code: "limit_reached" },
+        { status: 402 }
+      );
+    }
+  }
+
+  if (!body?.name?.trim()) {
     return NextResponse.json(
       { error: "A name or business name is required." },
       { status: 400 }
     );
   }
 
+  const { siteId: _omit, ...input } = body;
   const normalized: GeneratorInput = {
     ...input,
     domain: input.domain ?? "other",
     theme: input.theme ?? "light",
   };
 
-  // Template-first: AI writes the copy when a provider is configured AND the
-  // user hasn't opted out. Falls back to the template engine on any failure so
-  // generation never breaks.
   const wantAI = normalized.useAI !== false && aiAvailable();
-  let site: SiteData;
+  let generated: SiteData;
   let engine: "ai" | "template" = "template";
 
   if (wantAI) {
     try {
-      site = await aiGenerateSite(normalized);
+      generated = await aiGenerateSite(normalized);
       engine = "ai";
     } catch {
-      site = generateSite(normalized);
+      generated = generateSite(normalized);
     }
   } else {
-    site = generateSite(normalized);
+    generated = generateSite(normalized);
   }
 
-  const stored = await addSite(email, ip, site);
+  if (!isUpdate) {
+    generated = applyDefaultBooking(generated, email);
+  }
+
   const host = request.headers.get("host");
+
+  if (isUpdate && siteId) {
+    const existing = await getSiteById(email, siteId);
+    if (!existing) {
+      return NextResponse.json({ error: "Site not found." }, { status: 404 });
+    }
+    const site = mergeSiteOnUpdate(existing.site, generated, normalized);
+    const stored = await updateSite(email, siteId, site);
+    if (!stored) {
+      return NextResponse.json({ error: "Site not found." }, { status: 404 });
+    }
+    return NextResponse.json({
+      site,
+      engine,
+      updated: true,
+      siteId: stored.id,
+      slug: stored.slug,
+      path: getPublicSitePath(stored.slug),
+      url: getPublicSiteUrl(stored.slug, { host }),
+      usage: { used: await siteCount(email), limit: FREE_SITE_LIMIT },
+    });
+  }
+
+  const stored = await addSite(email, ip, generated);
   return NextResponse.json({
-    site,
+    site: generated,
     engine,
+    updated: false,
     siteId: stored.id,
     slug: stored.slug,
     path: getPublicSitePath(stored.slug),
