@@ -165,6 +165,21 @@ export function ensureSchema(): Promise<void> {
       create unique index if not exists bookings_site_slot_unique
         on bookings (site_id, slot_start)
         where slot_start is not null and status not in ('cancelled')`;
+    await sql`
+      create table if not exists notify_requests (
+        id         bigserial primary key,
+        source     text not null,
+        email      text,
+        ip         text,
+        created_at timestamptz not null default now()
+      )`;
+    await sql`
+      create index if not exists notify_requests_source_idx
+        on notify_requests (source, created_at desc)`;
+    await sql`
+      create unique index if not exists notify_requests_source_email_idx
+        on notify_requests (source, email)
+        where email is not null`;
     await sql`alter table sites add column if not exists custom_domain text`;
     await sql`alter table sites add column if not exists custom_domain_verified boolean default false`;
     await sql`alter table sites add column if not exists custom_domain_verify_token text`;

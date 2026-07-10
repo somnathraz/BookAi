@@ -1,21 +1,26 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import {
   ArrowLeft,
   ArrowRight,
   BadgeCheck,
+  CalendarCheck,
   Check,
   Copy,
   ExternalLink,
-  FileText,
-  Globe,
   LayoutGrid,
+  Link2,
   Loader2,
   MapPin,
-  Quote,
+  MessageCircle,
 } from "lucide-react";
 
 import { PRODUCT_NAME } from "@/lib/brand";
@@ -34,6 +39,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BuilderForm } from "@/components/generator/BuilderForm";
 import { AuroraBackground } from "@/components/generator/AuroraBackground";
+import { ComingSoonNotify } from "@/components/marketing/ComingSoonNotify";
+import { Hero3D } from "@/components/marketing/Hero3D";
 import { LogoMark } from "@/components/marketing/Logo";
 import { MarketingNav } from "@/components/marketing/MarketingNav";
 import { GeneratedSite } from "@/components/generated/GeneratedSite";
@@ -66,38 +73,38 @@ const fadeUp = {
 const proofSignals = [
   {
     icon: MapPin,
-    label: "Local proof",
+    label: "Import",
     value: "Reviews, photos, hours",
   },
   {
-    icon: FileText,
-    label: "Profile proof",
-    value: "Roles, skills, projects",
+    icon: CalendarCheck,
+    label: "Bookings",
+    value: "Services, slots, confirmations",
   },
   {
-    icon: Quote,
-    label: "Sharper copy",
-    value: "Claims tied to source data",
+    icon: MessageCircle,
+    label: "WhatsApp",
+    value: "Enquiries land in your chat",
   },
   {
-    icon: Globe,
-    label: "Live output",
-    value: "A shareable one-page site",
+    icon: Link2,
+    label: "Your link",
+    value: "yourname.paperchaiapp.com",
   },
 ];
 
 const detailPoints = [
   {
-    title: "Source before style",
-    body: "The page starts with what customers, resumes, and real links already say, then turns that into a clean one-page site.",
+    title: "Built from real proof",
+    body: "Your reviews, photos, opening hours, and rating come straight from Google — no placeholder copy, no stock claims.",
   },
   {
-    title: "Specific by default",
-    body: "Sections are chosen by archetype, so a clinic reads like a clinic and a resume reads like a professional profile.",
+    title: "Bookings, not just visits",
+    body: "Add services and working hours; customers pick a slot and you confirm from a simple dashboard. Every enquiry lands in email or WhatsApp.",
   },
   {
-    title: "Publishable in one flow",
-    body: "Import and review first, verify email when you're ready to publish, then share a live path-based site from the same workspace.",
+    title: "You stay in control",
+    body: "Review everything before it goes live, edit any time, and republish to the same link. Nothing is published without your say.",
   },
 ];
 
@@ -114,6 +121,14 @@ type SmartSource = Exclude<SourceId, "manual">;
 
 export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
   const reduceMotion = useReducedMotion();
+  const heroRef = useRef<HTMLDivElement | null>(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const heroSceneY = useTransform(scrollYProgress, [0, 1], [0, 90]);
+  const heroTextY = useTransform(scrollYProgress, [0, 1], [0, 24]);
+  const heroTextOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0.15]);
   const [step, setStep] = useState<Step>(editSiteId ? "review" : "chooser");
   const [capabilities, setCapabilities] = useState<Capabilities | null>(null);
   const [activeSource, setActiveSource] = useState<SmartSource | null>(null);
@@ -534,94 +549,131 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
       <MarketingNav />
 
       {step === "chooser" ? (
-        <div className="relative mx-auto max-w-6xl px-5 pb-20 pt-10 sm:px-6 sm:pt-14 lg:pb-28">
-          <div className="grid min-h-[calc(100svh-8rem)] items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="relative pb-24">
+          {/* ── Hero: promise + 3D scene ─────────────────────────────── */}
+          <div ref={heroRef} className="relative mx-auto max-w-6xl px-5 sm:px-6">
+            <div className="grid min-h-[calc(100svh-4rem)] items-center gap-12 py-12 lg:grid-cols-[1.02fr_0.98fr] lg:gap-8 lg:py-0">
+              <motion.div
+                style={reduceMotion ? undefined : { y: heroTextY, opacity: heroTextOpacity }}
+                initial={reduceMotion ? "show" : "hidden"}
+                animate="show"
+                variants={{ hidden: {}, show: { transition: { staggerChildren: 0.1 } } }}
+                className="max-w-2xl"
+              >
+                <motion.div
+                  variants={fadeUp}
+                  className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-border/70 bg-background/60 py-1.5 pl-2 pr-3.5 text-xs font-medium text-muted-foreground backdrop-blur dark:border-white/10 dark:bg-white/[0.04]"
+                >
+                  <LogoMark size={20} priority />
+                  <span className="font-semibold text-foreground">{PRODUCT_NAME}</span>
+                  <span className="h-3 w-px bg-border" />
+                  Google Business → website
+                </motion.div>
+                <motion.h1
+                  variants={fadeUp}
+                  className="text-balance bg-gradient-to-br from-foreground via-foreground to-foreground/55 bg-clip-text text-5xl font-semibold leading-[1.04] tracking-tight text-transparent sm:text-6xl lg:text-[4.25rem]"
+                >
+                  Your Google profile, now a booking‑ready website.
+                </motion.h1>
+                <motion.p
+                  variants={fadeUp}
+                  className="mt-6 max-w-xl text-pretty text-base leading-7 text-muted-foreground sm:text-lg"
+                >
+                  Paste your Google Maps link. {PRODUCT_NAME} imports your
+                  reviews, photos, and hours, adds booking and WhatsApp, and
+                  puts it live on your own link — in minutes.
+                </motion.p>
+                <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-3">
+                  <Button
+                    size="lg"
+                    onClick={() =>
+                      capabilities?.google ? choose("maps") : choose("manual")
+                    }
+                    className="h-12 px-6 text-base"
+                  >
+                    Paste your Google Maps link
+                    <ArrowRight className="size-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    onClick={() => choose("manual")}
+                    className="h-12 bg-background/35 px-6 text-base backdrop-blur"
+                  >
+                    Start from scratch
+                  </Button>
+                </motion.div>
+                <motion.ul
+                  variants={fadeUp}
+                  className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground"
+                >
+                  {["Free to start", "No credit card", "Live in minutes"].map((t) => (
+                    <li key={t} className="flex items-center gap-1.5">
+                      <Check className="size-4 text-foreground" strokeWidth={2.2} />
+                      {t}
+                    </li>
+                  ))}
+                </motion.ul>
+              </motion.div>
+
+              <motion.div
+                style={reduceMotion ? undefined : { y: heroSceneY }}
+                className="relative"
+              >
+                <Hero3D />
+              </motion.div>
+            </div>
+          </div>
+
+          {/* ── Proof strip ──────────────────────────────────────────── */}
+          <motion.div
+            initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.65, ease: EASE }}
+            className="mx-auto max-w-6xl px-5 sm:px-6"
+          >
+            <div className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border/70 bg-border/70 shadow-xl shadow-black/5 dark:border-white/10 dark:bg-white/10 dark:shadow-black/20 lg:grid-cols-4">
+              {proofSignals.map(({ icon: Icon, label, value }) => (
+                <div key={label} className="bg-background/75 p-4 backdrop-blur dark:bg-background/45 sm:p-5">
+                  <Icon className="mb-3 size-4 text-foreground" strokeWidth={1.7} />
+                  <p className="text-xs font-medium text-foreground">{label}</p>
+                  <p className="mt-1 text-xs leading-5 text-muted-foreground">{value}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* ── Source console ───────────────────────────────────────── */}
+          <div id="source-console" className="mx-auto mt-24 max-w-6xl px-5 sm:px-6">
             <motion.div
-              initial={reduceMotion ? "show" : "hidden"}
-              animate="show"
-              variants={{ hidden: {}, show: { transition: { staggerChildren: 0.1 } } }}
-              className="max-w-2xl"
+              initial={reduceMotion ? false : { opacity: 0, y: 32 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.75, ease: EASE }}
+              className="mx-auto max-w-3xl text-center"
             >
-              <motion.div
-                variants={fadeUp}
-                className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-border/70 bg-background/60 py-1.5 pl-2 pr-3.5 text-xs font-medium text-muted-foreground backdrop-blur dark:border-white/10 dark:bg-white/[0.04]"
-              >
-                <LogoMark size={20} priority />
-                <span className="font-semibold text-foreground">{PRODUCT_NAME}</span>
-                <span className="h-3 w-px bg-border" />
-                Real-input website builder
-              </motion.div>
-              <motion.h1
-                variants={fadeUp}
-                className="text-balance bg-gradient-to-br from-foreground via-foreground to-foreground/55 bg-clip-text text-5xl font-semibold leading-[1.05] tracking-tight text-transparent sm:text-6xl lg:text-7xl"
-              >
-                Build a site from proof, not placeholders.
-              </motion.h1>
-              <motion.p
-                variants={fadeUp}
-                className="mt-6 max-w-xl text-pretty text-base leading-7 text-muted-foreground sm:text-lg"
-              >
-                Start from a simple brief, Google reviews, a resume, or a reference
-                site. {PRODUCT_NAME} turns real source material into a focused page
-                you can review, publish, and share.
-              </motion.p>
-              <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-3">
-                <Button
-                  size="lg"
-                  onClick={() => choose("manual")}
-                  className="h-12 px-6 text-base"
-                >
-                  Start building now
-                  <ArrowRight className="size-4" />
-                </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  onClick={() => {
-                    document.getElementById("source-console")?.scrollIntoView({
-                      behavior: "smooth",
-                      block: "center",
-                    });
-                  }}
-                  className="h-12 bg-background/35 px-6 text-base backdrop-blur lg:hidden"
-                >
-                  Choose a source
-                </Button>
-              </motion.div>
-              <motion.ul
-                variants={fadeUp}
-                className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground"
-              >
-                {["Free to start", "No credit card", "Live in minutes"].map((t) => (
-                  <li key={t} className="flex items-center gap-1.5">
-                    <Check className="size-4 text-foreground" strokeWidth={2.2} />
-                    {t}
-                  </li>
-                ))}
-              </motion.ul>
-              <motion.div
-                variants={fadeUp}
-                className="mt-10 grid max-w-xl grid-cols-2 gap-px overflow-hidden rounded-lg border border-border/70 bg-border/70 shadow-xl shadow-black/5 dark:border-white/10 dark:bg-white/10 dark:shadow-black/20 sm:grid-cols-4"
-              >
-                {proofSignals.map(({ icon: Icon, label, value }) => (
-                  <div key={label} className="bg-background/75 p-4 backdrop-blur dark:bg-background/45">
-                    <Icon className="mb-3 size-4 text-foreground" strokeWidth={1.7} />
-                    <p className="text-xs font-medium text-foreground">{label}</p>
-                    <p className="mt-1 text-xs leading-5 text-muted-foreground">{value}</p>
-                  </div>
-                ))}
-              </motion.div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                Start here
+              </p>
+              <h2 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
+                Pick where your site starts from
+              </h2>
+              <p className="mx-auto mt-2 max-w-lg text-sm leading-6 text-muted-foreground">
+                Everything is imported for review first — nothing goes live
+                until you publish it.
+              </p>
             </motion.div>
 
             <motion.div
-              initial={reduceMotion ? false : { opacity: 0, y: 28, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.75, delay: 0.18, ease: EASE }}
-              className="relative"
-              id="source-console"
+              initial={reduceMotion ? false : { opacity: 0, y: 36, scale: 0.985 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.75, ease: EASE }}
+              className="relative mx-auto mt-8 max-w-3xl"
             >
-              <div className="absolute -inset-px rounded-lg bg-border/80 opacity-80 dark:bg-[linear-gradient(135deg,rgba(255,255,255,0.34),rgba(255,255,255,0.04),rgba(255,255,255,0.18))]" />
-              <div className="relative overflow-hidden rounded-lg border border-border/70 bg-background/80 shadow-2xl shadow-black/10 backdrop-blur-2xl dark:border-white/10 dark:bg-background/58 dark:shadow-black/35">
+              <div className="absolute -inset-px rounded-xl bg-border/80 opacity-80 dark:bg-[linear-gradient(135deg,rgba(255,255,255,0.34),rgba(255,255,255,0.04),rgba(255,255,255,0.18))]" />
+              <div className="relative overflow-hidden rounded-xl border border-border/70 bg-background/80 shadow-2xl shadow-black/10 backdrop-blur-2xl dark:border-white/10 dark:bg-background/58 dark:shadow-black/35">
                 <div className="flex items-center justify-between border-b border-border/70 px-4 py-3 dark:border-white/10">
                   <div className="flex items-center gap-2">
                     <span className="size-2 rounded-sm bg-[#ea4335]" />
@@ -634,25 +686,6 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
                   </div>
                 </div>
                 <div className="p-4 sm:p-5">
-                  <div className="mb-5 border-b border-border/70 pb-5 dark:border-white/10">
-                    <div className="flex flex-wrap items-center justify-between gap-3">
-                      <div>
-                        <p className="text-xs font-medium uppercase text-muted-foreground">
-                          Start here
-                        </p>
-                        <p className="mt-1 text-sm font-medium text-foreground">
-                          Pick one option to begin
-                        </p>
-                      </div>
-                      <Badge
-                        variant="outline"
-                        className="rounded-md border-border/70 bg-background/60 text-muted-foreground dark:border-white/15 dark:bg-white/[0.04]"
-                      >
-                        Review first
-                      </Badge>
-                    </div>
-                  </div>
-
                   {capabilities ? (
                     <SourceChooser
                       capabilities={capabilities}
@@ -670,20 +703,26 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
             </motion.div>
           </div>
 
+          {/* ── Detail points ────────────────────────────────────────── */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.65, ease: EASE }}
-            className="mt-10 grid gap-px overflow-hidden rounded-lg border border-border/70 bg-border/70 shadow-xl shadow-black/5 dark:border-white/10 dark:bg-white/10 dark:shadow-black/20 md:grid-cols-3"
+            className="mx-auto mt-24 max-w-6xl px-5 sm:px-6"
           >
-            {detailPoints.map((point) => (
-              <div key={point.title} className="bg-background/75 p-5 backdrop-blur dark:bg-background/45">
-                <p className="text-sm font-semibold text-foreground">{point.title}</p>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">{point.body}</p>
-              </div>
-            ))}
+            <div className="grid gap-px overflow-hidden rounded-xl border border-border/70 bg-border/70 shadow-xl shadow-black/5 dark:border-white/10 dark:bg-white/10 dark:shadow-black/20 md:grid-cols-3">
+              {detailPoints.map((point) => (
+                <div key={point.title} className="bg-background/75 p-6 backdrop-blur dark:bg-background/45">
+                  <p className="text-sm font-semibold text-foreground">{point.title}</p>
+                  <p className="mt-2 text-sm leading-6 text-muted-foreground">{point.body}</p>
+                </div>
+              ))}
+            </div>
           </motion.div>
+
+          {/* ── Coming soon + notify votes ───────────────────────────── */}
+          <ComingSoonNotify />
         </div>
       ) : (
         <div className="relative mx-auto flex min-h-[calc(100svh-4rem)] w-full max-w-5xl px-6 pb-24 pt-8 sm:pt-12">

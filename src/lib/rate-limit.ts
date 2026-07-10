@@ -5,7 +5,14 @@ import { ipFromRequest } from "@/lib/abuse";
 import { emailFromRequest } from "@/lib/session";
 
 /** Paid / costly API groups tracked in Postgres (falls back to in-memory locally). */
-export type RateLimitRoute = "extract" | "generate" | "otp" | "proxy" | "auth" | "booking";
+export type RateLimitRoute =
+  | "extract"
+  | "generate"
+  | "otp"
+  | "proxy"
+  | "auth"
+  | "booking"
+  | "notify";
 
 interface LimitConfig {
   windowMs: number;
@@ -36,6 +43,8 @@ function limitsFor(route: RateLimitRoute): LimitConfig {
       return { windowMs: HOUR_MS, max: envInt("RATE_LIMIT_AUTH_HOUR", 30) };
     case "booking":
       return { windowMs: HOUR_MS, max: envInt("RATE_LIMIT_BOOKING_HOUR", 10) };
+    case "notify":
+      return { windowMs: HOUR_MS, max: envInt("RATE_LIMIT_NOTIFY_HOUR", 20) };
   }
 }
 

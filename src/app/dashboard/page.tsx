@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ExternalLink, Loader2, Pencil, Plus, Trash2 } from "lucide-react";
 import Link from "next/link";
 
@@ -10,6 +11,9 @@ import { BasicCheckoutButton } from "@/components/billing/BasicCheckoutButton";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MarketingNav } from "@/components/marketing/MarketingNav";
+import { MarketingBackdrop } from "@/components/marketing/MarketingBackdrop";
+import { DashboardEmpty3D } from "@/components/marketing/DashboardEmpty3D";
+import { Tilt3D } from "@/components/marketing/motion-primitives";
 import { EmailGate } from "@/components/generator/EmailGate";
 import { SignOutButton } from "@/components/auth/SignOutButton";
 import { MarketingFooter } from "@/components/marketing/MarketingFooter";
@@ -51,7 +55,10 @@ const DOMAIN_LABEL: Record<string, string> = {
   other: "Business",
 };
 
+const EASE = [0.22, 1, 0.36, 1] as const;
+
 export default function DashboardPage() {
+  const reduceMotion = useReducedMotion();
   const [loading, setLoading] = useState(true);
   const [needsVerify, setNeedsVerify] = useState(false);
   const [email, setEmail] = useState<string | null>(null);
@@ -133,10 +140,16 @@ export default function DashboardPage() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col">
+    <main className="relative flex min-h-screen flex-col overflow-hidden">
+      <MarketingBackdrop intensity="soft" />
       <MarketingNav />
-      <section className="mx-auto w-full max-w-5xl flex-1 px-6 pb-24 pt-12">
-        <div className="flex flex-wrap items-end justify-between gap-4">
+      <section className="relative mx-auto w-full max-w-5xl flex-1 px-6 pb-24 pt-12">
+        <motion.div
+          initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, ease: EASE }}
+          className="flex flex-wrap items-end justify-between gap-4"
+        >
           <div>
             <h1 className="text-3xl font-semibold tracking-tight">My sites</h1>
             {email ? (
@@ -162,7 +175,7 @@ export default function DashboardPage() {
               New site
             </Link>
           </Button>
-        </div>
+        </motion.div>
 
         {loading ? (
           <div className="mt-16 flex items-center justify-center gap-2 text-sm text-muted-foreground">
@@ -222,26 +235,55 @@ export default function DashboardPage() {
             ) : null}
 
             {sites.length === 0 ? (
-              <div className="mt-6 rounded-2xl border border-dashed bg-card/30 p-12 text-center">
-                <p className="text-muted-foreground">You haven&apos;t built a site yet.</p>
-                <Button asChild className="mt-5">
+              <motion.div
+                initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: EASE }}
+                className="mt-6 overflow-hidden rounded-2xl border border-dashed bg-card/40 p-8 text-center sm:p-12"
+              >
+                <DashboardEmpty3D />
+                <p className="mt-6 text-muted-foreground">You haven&apos;t built a site yet.</p>
+                <p className="mx-auto mt-2 max-w-sm text-sm text-muted-foreground">
+                  Paste your Google Maps link on the home page and publish your
+                  first booking-ready site in minutes.
+                </p>
+                <Button asChild className="mt-6">
                   <Link href="/">
                     <Plus className="size-4" />
                     Create your first site
                   </Link>
                 </Button>
-              </div>
+              </motion.div>
             ) : (
               <>
                 <p className="mt-2 text-sm text-muted-foreground">
                   Edit and republish anytime — your URL stays the same.
                 </p>
-                <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                <motion.div
+                  initial={reduceMotion ? "show" : "hidden"}
+                  animate="show"
+                  variants={{
+                    hidden: {},
+                    show: { transition: { staggerChildren: 0.08 } },
+                  }}
+                  className="mt-6 grid gap-4 sm:grid-cols-2"
+                >
                 {sites.map((s) => (
-                  <div
+                  <motion.div
                     key={s.id}
-                    className="flex flex-col gap-4 rounded-2xl border bg-card/60 p-5"
+                    variants={{
+                      hidden: { opacity: 0, y: 24, rotateX: 8 },
+                      show: {
+                        opacity: 1,
+                        y: 0,
+                        rotateX: 0,
+                        transition: { duration: 0.65, ease: EASE },
+                      },
+                    }}
+                    style={{ transformStyle: "preserve-3d" }}
                   >
+                  <Tilt3D maxTilt={5} lift className="h-full">
+                  <div className="flex h-full flex-col gap-4 rounded-2xl border bg-card/70 p-5 backdrop-blur">
                     <div className="flex items-start justify-between gap-3">
                       <div className="min-w-0">
                         <h3 className="truncate font-semibold">{s.name}</h3>
@@ -296,8 +338,10 @@ export default function DashboardPage() {
                       </Button>
                     </div>
                   </div>
+                  </Tilt3D>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
               </>
             )}
           </>
