@@ -60,7 +60,9 @@ export function isOpenNow(days: HoursRow[] | undefined, now: Date = new Date()):
     .toLowerCase();
 
   const find = (name: string) =>
-    days.find((d) => d.label.trim().toLowerCase().startsWith(name));
+    days.find((d) =>
+      typeof d.label === "string" && d.label.trim().toLowerCase().startsWith(name)
+    );
 
   const today = find(todayName);
   if (!today) return null;

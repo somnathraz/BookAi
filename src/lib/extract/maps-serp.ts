@@ -33,7 +33,7 @@ interface SerpPlaceRow {
   description?: string;
   website?: string;
   open_state?: string;
-  hours?: string;
+  hours?: string | Record<string, string> | { [day: string]: string }[];
   operating_hours?: Record<string, string>;
   gps_coordinates?: { latitude?: number; longitude?: number };
   place_id?: string;
@@ -68,14 +68,41 @@ function parseOpenNow(openState?: string): boolean | undefined {
   return undefined;
 }
 
-function operatingHoursToWeekdays(oh: Record<string, string>): string[] {
+function operatingHoursToWeekdays(oh: Record<string, unknown>): string[] {
   return WEEKDAYS.map((day) => {
     const entry = Object.entries(oh).find(([k]) =>
       k.toLowerCase().startsWith(day.slice(0, 3).toLowerCase())
     );
-    const hours = entry?.[1]?.trim();
+    const raw = entry?.[1];
+    const hours = typeof raw === "string" ? raw.trim() : "";
     return `${day}: ${hours || "Closed"}`;
   });
+}
+
+/** Normalize SerpAPI `hours` which may be a string, object map, or day objects. */
+function hoursFieldToWeekdays(hours: unknown): string[] {
+  if (typeof hours === "string" && hours.trim()) return [hours.trim()];
+  if (Array.isArray(hours)) {
+    const lines: string[] = [];
+    for (const item of hours) {
+      if (typeof item === "string" && item.trim()) {
+        lines.push(item.trim());
+        continue;
+      }
+      if (item && typeof item === "object") {
+        for (const [day, value] of Object.entries(item as Record<string, unknown>)) {
+          if (typeof value === "string" && value.trim()) {
+            lines.push(`${day}: ${value.trim()}`);
+          }
+        }
+      }
+    }
+    return lines;
+  }
+  if (hours && typeof hours === "object") {
+    return operatingHoursToWeekdays(hours as Record<string, unknown>);
+  }
+  return [];
 }
 
 function normalizeTypes(row: SerpPlaceRow): string[] {
@@ -88,9 +115,7 @@ function rowToBusiness(row: SerpPlaceRow): Omit<SerpMapsBusiness, "testimonials"
   const lng = row.gps_coordinates?.longitude;
   const weekdayDescriptions = row.operating_hours
     ? operatingHoursToWeekdays(row.operating_hours)
-    : row.hours
-      ? [row.hours]
-      : [];
+    : hoursFieldToWeekdays(row.hours);
 
   return {
     name: row.title ?? "",

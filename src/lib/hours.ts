@@ -1,10 +1,36 @@
 import type { HoursRow, StoreHours } from "@/lib/types";
 
+/** Coerce Google / SerpAPI weekday lines into plain "Day: hours" strings. */
+function asHourLine(line: unknown): string | null {
+  if (typeof line === "string") {
+    const t = line.trim();
+    return t || null;
+  }
+  if (line && typeof line === "object" && !Array.isArray(line)) {
+    // SerpAPI sometimes returns [{ monday: "9 AM–5 PM" }, …]
+    const entries = Object.entries(line as Record<string, unknown>);
+    if (entries.length === 1) {
+      const [day, hours] = entries[0];
+      if (typeof hours === "string") {
+        const h = hours.trim();
+        return h ? `${day}: ${h}` : null;
+      }
+    }
+  }
+  return null;
+}
+
+function normalizeDescriptions(descriptions: unknown[] | undefined): string[] {
+  if (!Array.isArray(descriptions)) return [];
+  return descriptions.map(asHourLine).filter((l): l is string => Boolean(l));
+}
+
 /** Turn Google weekdayDescriptions into grouped rows (Mon–Wed, Thu–Fri, …). */
 export function parseWeekdayDescriptions(descriptions: string[]): HoursRow[] {
-  if (!descriptions.length) return [];
+  const lines = normalizeDescriptions(descriptions);
+  if (!lines.length) return [];
 
-  const parsed = descriptions.map((line) => {
+  const parsed = lines.map((line) => {
     const idx = line.indexOf(": ");
     if (idx === -1) return { day: line.trim(), hours: "Closed" };
     return {
@@ -31,7 +57,7 @@ export function parseWeekdayDescriptions(descriptions: string[]): HoursRow[] {
 /** Ungrouped per-day rows (one per weekday) — used for live open/closed
  *  computation and structured data. */
 function parsePerDay(descriptions: string[]): HoursRow[] {
-  return descriptions.map((line) => {
+  return normalizeDescriptions(descriptions).map((line) => {
     const idx = line.indexOf(": ");
     if (idx === -1) return { label: line.trim(), hours: "Closed" };
     return {
@@ -45,7 +71,7 @@ export function buildStoreHours(
   weekdayDescriptions: string[] | undefined,
   openNow?: boolean
 ): StoreHours | undefined {
-  const descriptions = weekdayDescriptions ?? [];
+  const descriptions = normalizeDescriptions(weekdayDescriptions);
   const rows = parseWeekdayDescriptions(descriptions);
   if (!rows.length) return undefined;
   return {
