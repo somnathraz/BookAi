@@ -574,25 +574,57 @@ export async function listSites(email: string): Promise<StoredSite[]> {
   return [...memAcc(email).sites].sort((a, b) => b.createdAt - a.createdAt);
 }
 
-/** All published slugs — used by sitemap.xml. */
+/** All published sites — used by sitemap.xml (subdomain + verified custom domains). */
 export async function listPublishedSlugs(): Promise<
-  { slug: string; updatedAt: Date }[]
+  {
+    slug: string;
+    updatedAt: Date;
+    customDomain?: string;
+    customDomainVerified?: boolean;
+  }[]
 > {
   const sql = getSql();
   if (sql) {
     await ensureSchema();
-    const rows = await sql<{ slug: string; updated_at: Date | null; created_at: Date }[]>`
-      select slug, coalesce(updated_at, created_at) as updated_at, created_at
-        from sites order by coalesce(updated_at, created_at) desc`;
+    const rows = await sql<
+      {
+        slug: string;
+        updated_at: Date | null;
+        created_at: Date;
+        custom_domain: string | null;
+        custom_domain_verified: boolean | null;
+      }[]
+    >`
+      select slug,
+             coalesce(updated_at, created_at) as updated_at,
+             created_at,
+             custom_domain,
+             custom_domain_verified
+        from sites
+       where slug is not null and slug <> ''
+       order by coalesce(updated_at, created_at) desc`;
     return rows.map((r) => ({
       slug: r.slug,
       updatedAt: new Date(r.updated_at ?? r.created_at),
+      customDomain: r.custom_domain ?? undefined,
+      customDomainVerified: r.custom_domain_verified ?? false,
     }));
   }
-  const out: { slug: string; updatedAt: Date }[] = [];
+  const out: {
+    slug: string;
+    updatedAt: Date;
+    customDomain?: string;
+    customDomainVerified?: boolean;
+  }[] = [];
   for (const a of mem.values()) {
     for (const s of a.sites) {
-      out.push({ slug: s.slug, updatedAt: new Date(s.updatedAt) });
+      if (!s.slug) continue;
+      out.push({
+        slug: s.slug,
+        updatedAt: new Date(s.updatedAt),
+        customDomain: s.customDomain,
+        customDomainVerified: s.customDomainVerified,
+      });
     }
   }
   return out.sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime());
