@@ -377,18 +377,18 @@ export function SiteBuilderWizard({
   const canGenerate = step === 3 && name.trim().length > 0;
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-border/70 bg-card/80 shadow-xl shadow-black/5 backdrop-blur dark:border-white/10 dark:bg-card/50">
+    <div className="w-full min-w-0 overflow-x-hidden rounded-2xl border border-border/70 bg-card/80 shadow-xl shadow-black/5 backdrop-blur dark:border-white/10 dark:bg-card/50">
       {/* Wizard header */}
-      <div className="border-b border-border/70 px-4 py-4 sm:px-6 dark:border-white/10">
+      <div className="border-b border-border/70 px-3 py-3 sm:px-6 sm:py-4 dark:border-white/10">
         <StepIndicator step={step} />
         <p className="mt-3 text-sm text-muted-foreground">
           {WIZARD_STEPS[step - 1]?.subtitle}
         </p>
       </div>
 
-      <div className="grid gap-6 p-4 sm:p-6 lg:grid-cols-[1fr_280px]">
+      <div className="grid gap-6 p-3 sm:p-6 lg:grid-cols-[minmax(0,1fr)_280px]">
         {/* Main step content */}
-        <div className="min-w-0">
+        <div className="min-w-0 overflow-x-hidden">
           <AnimatePresence mode="wait">
             {step === 1 ? (
               <motion.div
@@ -468,7 +468,7 @@ export function SiteBuilderWizard({
                           type="button"
                           onClick={() => pickDomain(d.value)}
                           className={cn(
-                            "flex flex-col items-center gap-2 rounded-xl border p-3 text-center transition-all hover:scale-[1.02]",
+                            "flex min-w-0 flex-col items-center gap-2 rounded-xl border p-2.5 text-center transition-all hover:scale-[1.02] sm:p-3",
                             active
                               ? "border-foreground bg-accent ring-2 ring-foreground/20"
                               : "border-input hover:border-foreground/30 hover:bg-accent/40"
@@ -476,14 +476,14 @@ export function SiteBuilderWizard({
                         >
                           <span
                             className={cn(
-                              "flex size-10 items-center justify-center rounded-full",
+                              "flex size-9 shrink-0 items-center justify-center rounded-full sm:size-10",
                               active ? "bg-foreground text-background" : "bg-muted"
                             )}
                           >
-                            <Icon className="size-5" />
+                            <Icon className="size-4 sm:size-5" />
                           </span>
-                          <span className="text-xs font-semibold">{d.label}</span>
-                          <span className="text-[10px] leading-tight text-muted-foreground">
+                          <span className="w-full truncate text-xs font-semibold">{d.label}</span>
+                          <span className="line-clamp-2 text-[10px] leading-tight text-muted-foreground">
                             {d.hint}
                           </span>
                         </button>
@@ -789,8 +789,8 @@ export function SiteBuilderWizard({
           {error ? <p className="mt-4 text-sm text-destructive">{error}</p> : null}
         </div>
 
-        {/* Live preview — sticky on desktop */}
-        <div className="lg:sticky lg:top-4 lg:self-start">
+        {/* Live preview — sticky on desktop, compact on mobile */}
+        <div className="min-w-0 lg:sticky lg:top-4 lg:self-start">
           <LivePreviewPanel
             archetype={archetype}
             domain={domain}
@@ -804,10 +804,12 @@ export function SiteBuilderWizard({
       </div>
 
       {/* Footer nav */}
-      <div className="flex items-center justify-between gap-3 border-t border-border/70 px-4 py-4 sm:px-6 dark:border-white/10">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-border/70 px-3 py-3 sm:gap-3 sm:px-6 sm:py-4 dark:border-white/10">
         <Button
           type="button"
           variant="outline"
+          size="sm"
+          className="sm:h-9 sm:px-4 sm:text-sm"
           disabled={step === 1}
           onClick={() => setStep((s) => Math.max(1, s - 1))}
         >
@@ -816,32 +818,43 @@ export function SiteBuilderWizard({
         </Button>
 
         {step < 3 ? (
-          <Button type="button" disabled={!canNext} onClick={() => setStep((s) => s + 1)}>
+          <Button
+            type="button"
+            size="sm"
+            className="sm:h-9 sm:px-4 sm:text-sm"
+            disabled={!canNext}
+            onClick={() => setStep((s) => s + 1)}
+          >
             Continue
             <ArrowRight className="size-4" />
           </Button>
         ) : (
           <Button
             type="button"
-            size="lg"
+            size="sm"
+            className="max-w-full sm:h-10 sm:px-6 sm:text-sm"
             disabled={!canGenerate || generating}
             onClick={handleGenerate}
           >
             {generating ? (
               <>
-                <Loader2 className="size-4 animate-spin" />
-                {editMode
-                  ? aiAvailable && useAI
-                    ? "Updating your site…"
-                    : "Saving…"
-                  : aiAvailable && useAI
-                    ? "Writing your site…"
-                    : "Generating…"}
+                <Loader2 className="size-4 shrink-0 animate-spin" />
+                <span className="truncate">
+                  {editMode
+                    ? aiAvailable && useAI
+                      ? "Updating…"
+                      : "Saving…"
+                    : aiAvailable && useAI
+                      ? "Writing…"
+                      : "Generating…"}
+                </span>
               </>
             ) : (
               <>
-                <Sparkles className="size-4" />
-                {editMode ? "Save & publish" : "Generate my site"}
+                <Sparkles className="size-4 shrink-0" />
+                <span className="truncate">
+                  {editMode ? "Save & publish" : "Generate my site"}
+                </span>
               </>
             )}
           </Button>

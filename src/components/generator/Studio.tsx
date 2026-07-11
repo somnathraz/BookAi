@@ -544,7 +544,7 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
   }
 
   return (
-    <main className="relative min-h-screen overflow-hidden">
+    <main className="relative min-h-screen overflow-x-hidden">
       <AuroraBackground />
       <MarketingNav />
 
@@ -725,14 +725,14 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
           <ComingSoonNotify />
         </div>
       ) : (
-        <div className="relative mx-auto flex min-h-[calc(100svh-4rem)] w-full max-w-5xl px-6 pb-24 pt-8 sm:pt-12">
+        <div className="relative mx-auto w-full max-w-5xl min-w-0 px-4 pb-28 pt-6 sm:px-6 sm:pb-24 sm:pt-12">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: EASE }}
-            className="relative mt-4 w-full"
+            className="relative mt-2 w-full min-w-0 sm:mt-4"
           >
-            <div className="relative w-full">
+            <div className="relative w-full min-w-0">
             {step === "source" && activeSource ? (
               <SourceInput
                 source={activeSource}
@@ -754,13 +754,13 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
             ) : null}
 
             {step === "review" ? (
-              <div className="flex flex-col gap-5">
-                <div className="flex items-center justify-between">
-                  <div>
+              <div className="flex w-full min-w-0 flex-col gap-5">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                  <div className="min-w-0">
                     <h2 className="text-xl font-semibold">
                       {editingSiteId ? "Edit your site" : "Build your site"}
                     </h2>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="mt-1 text-sm text-muted-foreground">
                       {editingSiteId
                         ? "Update your details and republish — your live URL stays the same."
                         : initialValues
@@ -768,7 +768,7 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
                           : "Choose your site type, look, and details — see what you'll get as you go."}
                     </p>
                     {editingSiteId && slug ? (
-                      <p className="mt-1 font-mono text-xs text-muted-foreground">
+                      <p className="mt-1 break-all font-mono text-xs text-muted-foreground">
                         {getPublicSiteUrl(slug, { host: window.location.host }).replace(
                           /^https?:\/\//,
                           ""
@@ -777,7 +777,7 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
                     ) : null}
                     {verifiedEmail ? (
                       <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1">
-                        <p className="text-xs text-muted-foreground/80">
+                        <p className="break-all text-xs text-muted-foreground/80">
                           Signed in as {verifiedEmail}
                         </p>
                         <SignOutButton
@@ -794,7 +794,7 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
                   {editingSiteId ? (
                     <Link
                       href="/dashboard"
-                      className="flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                      className="flex shrink-0 items-center gap-1.5 self-start text-sm text-muted-foreground transition-colors hover:text-foreground"
                     >
                       <ArrowLeft className="size-4" />
                       My sites
@@ -803,7 +803,7 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
                     <button
                       type="button"
                       onClick={() => setStep("chooser")}
-                      className="flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                      className="flex shrink-0 items-center gap-1.5 self-start text-sm text-muted-foreground transition-colors hover:text-foreground"
                     >
                       <ArrowLeft className="size-4" />
                       Start over

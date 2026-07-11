@@ -82,7 +82,7 @@ export function EmailGate({
       initial={{ opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: EASE }}
-      className="flex flex-col gap-5"
+      className="flex w-full min-w-0 flex-col gap-5"
     >
       <button
         type="button"
@@ -93,7 +93,7 @@ export function EmailGate({
         Back to editor
       </button>
 
-      <div className="flex items-start gap-3">
+      <div className="flex min-w-0 items-start gap-3">
         <div className="flex size-11 shrink-0 items-center justify-center rounded-xl border bg-card">
           {phase === "email" ? (
             <Mail className="size-5" />
@@ -101,15 +101,15 @@ export function EmailGate({
             <ShieldCheck className="size-5" />
           )}
         </div>
-        <div>
-          <h2 className="text-xl font-semibold">
+        <div className="min-w-0">
+          <h2 className="text-balance text-lg font-semibold sm:text-xl">
             {phase === "email"
               ? intent === "continue"
                 ? "Verify your email to continue"
                 : "Where should we send your site?"
               : "Enter your code"}
           </h2>
-          <p className="mt-0.5 text-sm text-muted-foreground">
+          <p className="mt-0.5 break-words text-sm text-muted-foreground">
             {phase === "email"
               ? intent === "continue"
                 ? "One quick code before we import your data — your free plan includes one site."

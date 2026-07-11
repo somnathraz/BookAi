@@ -40,7 +40,7 @@ export function PhotoUpload({
   }
 
   return (
-    <div className={cn("flex items-center gap-4", className)}>
+    <div className={cn("flex min-w-0 items-center gap-3 sm:gap-4", className)}>
       <div className="relative size-16 shrink-0 overflow-hidden rounded-full border bg-card">
         {value ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -62,21 +62,21 @@ export function PhotoUpload({
         ) : null}
       </div>
 
-      <div className="flex flex-col gap-1">
+      <div className="flex min-w-0 flex-col gap-1">
         <button
           type="button"
           onClick={() => inputRef.current?.click()}
           disabled={loading}
-          className="flex w-fit items-center gap-2 rounded-md border border-input bg-transparent px-3 py-1.5 text-sm font-medium transition-colors hover:bg-accent disabled:opacity-60"
+          className="flex w-fit max-w-full items-center gap-2 rounded-md border border-input bg-transparent px-3 py-1.5 text-sm font-medium transition-colors hover:bg-accent disabled:opacity-60"
         >
           {loading ? (
-            <Loader2 className="size-4 animate-spin" />
+            <Loader2 className="size-4 shrink-0 animate-spin" />
           ) : (
-            <ImagePlus className="size-4" />
+            <ImagePlus className="size-4 shrink-0" />
           )}
-          {value ? "Replace photo" : label}
+          <span className="truncate">{value ? "Replace photo" : label}</span>
         </button>
-        <span className="text-xs text-muted-foreground">
+        <span className="break-words text-xs text-muted-foreground">
           {error ? <span className="text-destructive">{error}</span> : hint}
         </span>
       </div>

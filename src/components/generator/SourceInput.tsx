@@ -141,11 +141,11 @@ function MapsShareGuide({ url }: { url: string }) {
   return (
     <div className="overflow-hidden rounded-xl border border-border/70 bg-card/60">
       {/* Header */}
-      <div className="flex items-center justify-between gap-3 border-b border-border/60 bg-muted/50 px-4 py-2.5">
+      <div className="flex flex-col gap-2 border-b border-border/60 bg-muted/50 px-3 py-2.5 sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:px-4">
         <p className="text-xs font-medium text-foreground">
           Only accepts Google Maps Share links
         </p>
-        <span className="shrink-0 rounded-md border border-border/70 bg-background/80 px-2 py-0.5 font-mono text-[11px] text-muted-foreground">
+        <span className="w-fit shrink-0 rounded-md border border-border/70 bg-background/80 px-2 py-0.5 font-mono text-[11px] text-muted-foreground">
           maps.app.goo.gl/…
         </span>
       </div>
@@ -296,7 +296,7 @@ export function SourceInput({
     cfg.kind === "url" ? url.trim().length > 3 : text.trim().length > 10;
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+    <form onSubmit={handleSubmit} className="flex w-full min-w-0 flex-col gap-5">
       <button
         type="button"
         onClick={onBack}
@@ -306,12 +306,12 @@ export function SourceInput({
         Choose a different source
       </button>
 
-      <div className="flex items-start gap-3">
+      <div className="flex min-w-0 items-start gap-3">
         <div className="flex size-11 shrink-0 items-center justify-center rounded-xl border bg-card">
           <Icon className="size-5" strokeWidth={1.6} />
         </div>
-        <div>
-          <h2 className="text-xl font-semibold">{cfg.title}</h2>
+        <div className="min-w-0">
+          <h2 className="text-lg font-semibold sm:text-xl">{cfg.title}</h2>
           <p className="mt-0.5 text-sm text-muted-foreground">{cfg.blurb}</p>
         </div>
       </div>

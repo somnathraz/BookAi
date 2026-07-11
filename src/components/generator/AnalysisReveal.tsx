@@ -146,7 +146,7 @@ export function AnalysisReveal({
   }
 
   return (
-    <div className="flex flex-col gap-7">
+    <div className="flex w-full min-w-0 flex-col gap-7">
       <Section>
         <button
           type="button"
@@ -156,20 +156,20 @@ export function AnalysisReveal({
           <ArrowLeft className="size-4" />
           Choose a different source
         </button>
-        <div className="mt-3 flex items-center gap-2">
-          <Sparkles className="size-4 text-foreground" />
-          <h2 className="text-xl font-semibold">
+        <div className="mt-3 flex min-w-0 items-start gap-2">
+          <Sparkles className="mt-1 size-4 shrink-0 text-foreground" />
+          <h2 className="text-balance text-lg font-semibold sm:text-xl">
             Here&apos;s what we found in {SOURCE_LABEL[analysis.source]}
           </h2>
         </div>
       </Section>
 
       {/* Images / photos */}
-      <Section delay={0.08}>
+      <Section delay={0.08} className="min-w-0">
         <Eyebrow>{analysis.source === "maps" ? "Photos" : "Imagery"}</Eyebrow>
         {previewImages.length ? (
-          <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
-            {previewImages.map((src, i) => {
+          <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-3">
+            {previewImages.map((src) => {
               const active = photo === src;
               return (
                 <button
@@ -177,7 +177,7 @@ export function AnalysisReveal({
                   type="button"
                   onClick={() => setPhoto(active ? null : src)}
                   className={cn(
-                    "group relative aspect-square overflow-hidden rounded-xl border-2 transition-all",
+                    "group relative aspect-square min-w-0 overflow-hidden rounded-xl border-2 transition-all",
                     active ? "border-foreground" : "border-white/10 hover:border-white/30"
                   )}
                 >
@@ -225,7 +225,7 @@ export function AnalysisReveal({
       </Section>
 
       {/* Category */}
-      <Section delay={0.16}>
+      <Section delay={0.16} className="min-w-0">
         <Eyebrow>We think you&apos;re a…</Eyebrow>
         <div className="mt-3 flex flex-wrap gap-2">
           {analysis.categories.map((c) => {
@@ -236,17 +236,17 @@ export function AnalysisReveal({
                 type="button"
                 onClick={() => setDomain(c.domain)}
                 className={cn(
-                  "flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors",
+                  "flex max-w-full items-center gap-2 rounded-full border px-3 py-2 text-sm font-medium transition-colors sm:px-4",
                   active
                     ? "border-foreground bg-foreground text-background"
                     : "border-input hover:bg-accent"
                 )}
               >
-                {active && <Check className="size-3.5" />}
-                {c.label}
+                {active && <Check className="size-3.5 shrink-0" />}
+                <span className="truncate">{c.label}</span>
                 <span
                   className={cn(
-                    "text-xs",
+                    "shrink-0 text-xs",
                     active ? "text-background/60" : "text-muted-foreground"
                   )}
                 >
@@ -361,9 +361,9 @@ export function AnalysisReveal({
               </div>
             ) : null}
             {analysis.reviews.length ? (
-              <div className="flex items-start gap-2 rounded-lg border bg-card/40 p-3 text-sm">
+              <div className="flex min-w-0 items-start gap-2 rounded-lg border bg-card/40 p-3 text-sm">
                 <Quote className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
-                <span className="text-muted-foreground">
+                <span className="min-w-0 break-words text-muted-foreground">
                   <span className="font-medium text-foreground">
                     {analysis.reviews.length} review
                     {analysis.reviews.length > 1 ? "s" : ""}
