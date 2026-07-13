@@ -9,6 +9,7 @@ import {
   getMetadataBase,
 } from "@/lib/seo";
 import { getAppBaseUrl } from "@/lib/site-url";
+import { MicrosoftClarity } from "@/components/microsoft-clarity";
 import { ThemeProvider } from "@/components/theme-provider";
 
 import "./globals.css";
@@ -81,7 +82,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
       >
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <MicrosoftClarity />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
