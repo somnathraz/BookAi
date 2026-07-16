@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { trackPurchase } from "@/lib/analytics";
+import { trackPurchase, waitForBeacon } from "@/lib/analytics";
 
 type BillingPeriod = "monthly" | "annual";
 type ButtonVariant = "default" | "outline" | "secondary" | "ghost" | "link" | "destructive";
@@ -55,6 +56,7 @@ export function BasicCheckoutButton({
   size = "lg",
   className,
   onSuccess,
+  successHref = "/dashboard/billing/success",
 }: {
   period: BillingPeriod;
   label?: string;
@@ -62,7 +64,10 @@ export function BasicCheckoutButton({
   size?: ButtonSize;
   className?: string;
   onSuccess?: () => void;
+  /** Redirect here after verify succeeds. Pass `null` to stay on the page. */
+  successHref?: string | null;
 }) {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -108,13 +113,25 @@ export function BasicCheckoutButton({
             setLoading(false);
             return;
           }
-          trackPurchase({
-            period,
-            transaction_id: response.razorpay_payment_id,
+          await waitForBeacon((done) => {
+            trackPurchase(
+              {
+                period,
+                transaction_id: response.razorpay_payment_id,
+              },
+              { event_callback: done }
+            );
           });
           setMessage("Basic plan activated.");
           setLoading(false);
           onSuccess?.();
+          if (successHref) {
+            const params = new URLSearchParams({
+              period,
+              payment_id: response.razorpay_payment_id,
+            });
+            router.push(`${successHref}?${params.toString()}`);
+          }
         },
         modal: {
           ondismiss: () => {

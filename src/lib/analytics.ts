@@ -76,24 +76,31 @@ export function trackSitePublished(
 }
 
 /** Razorpay verify succeeded — purchase + plan upgrade. */
-export function trackPurchase(params: {
-  period: "monthly" | "annual";
-  transaction_id?: string;
-}): void {
+export function trackPurchase(
+  params: {
+    period: "monthly" | "annual";
+    transaction_id?: string;
+  },
+  options?: { event_callback?: () => void }
+): void {
   const value = BASIC_PLAN_VALUE_INR[params.period];
-  trackEvent("purchase", {
-    currency: "INR",
-    value,
-    plan: "basic",
-    billing_period: params.period,
-    transaction_id: params.transaction_id,
-  });
   trackEvent("plan_upgraded", {
     plan: "basic",
     billing_period: params.period,
     value,
     currency: "INR",
   });
+  trackEvent(
+    "purchase",
+    {
+      currency: "INR",
+      value,
+      plan: "basic",
+      billing_period: params.period,
+      transaction_id: params.transaction_id,
+    },
+    options
+  );
 }
 
 /**
