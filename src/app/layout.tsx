@@ -9,6 +9,7 @@ import {
   getMetadataBase,
 } from "@/lib/seo";
 import { getAppBaseUrl } from "@/lib/site-url";
+import { GoogleAnalytics } from "@/components/google-analytics";
 import { MicrosoftClarity } from "@/components/microsoft-clarity";
 import { ThemeProvider } from "@/components/theme-provider";
 
@@ -83,6 +84,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
       >
         <ThemeProvider>
+          <GoogleAnalytics />
           <MicrosoftClarity />
           {children}
         </ThemeProvider>

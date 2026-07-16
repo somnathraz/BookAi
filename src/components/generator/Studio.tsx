@@ -23,6 +23,7 @@ import {
   MessageCircle,
 } from "lucide-react";
 
+import { trackSitePublished, waitForBeacon } from "@/lib/analytics";
 import { PRODUCT_NAME } from "@/lib/brand";
 import {
   getPublicSiteHref,
@@ -378,8 +379,21 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
       }
       if (!res.ok) throw new Error(data?.error ?? "Generation failed.");
       const publishedSlug = data.slug as string;
+      const isUpdate = Boolean(data.updated);
+      const engine = data.engine === "ai" ? "ai" : "template";
       clearStudioDraft();
       const liveUrl = getPublicSiteUrl(publishedSlug, { host: window.location.host });
+      await waitForBeacon((done) => {
+        trackSitePublished(
+          {
+            site_id: String(data.siteId ?? ""),
+            slug: publishedSlug,
+            is_update: isUpdate,
+            engine,
+          },
+          { event_callback: done }
+        );
+      });
       window.location.assign(liveUrl);
       return;
     } catch (err) {

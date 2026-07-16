@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Loader2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { trackPurchase } from "@/lib/analytics";
 
 type BillingPeriod = "monthly" | "annual";
 type ButtonVariant = "default" | "outline" | "secondary" | "ghost" | "link" | "destructive";
@@ -107,6 +108,10 @@ export function BasicCheckoutButton({
             setLoading(false);
             return;
           }
+          trackPurchase({
+            period,
+            transaction_id: response.razorpay_payment_id,
+          });
           setMessage("Basic plan activated.");
           setLoading(false);
           onSuccess?.();

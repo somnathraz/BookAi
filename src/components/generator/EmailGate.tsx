@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowRight, Loader2, Mail, ShieldCheck } from "lucide-react"
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { trackSignUp } from "@/lib/analytics";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -69,6 +70,7 @@ export function EmailGate({
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data?.error ?? "Verification failed.");
+      trackSignUp({ intent });
       onVerified(email);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
