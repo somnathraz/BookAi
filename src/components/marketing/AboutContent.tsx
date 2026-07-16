@@ -12,11 +12,10 @@ import {
 } from "lucide-react";
 
 import { PRODUCT_NAME } from "@/lib/brand";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { AboutFlow3D } from "@/components/marketing/AboutFlow3D";
 import { MarketingBackdrop } from "@/components/marketing/MarketingBackdrop";
-import { Reveal, Tilt3D } from "@/components/marketing/motion-primitives";
+import { Reveal } from "@/components/marketing/motion-primitives";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -29,8 +28,8 @@ const STEPS = [
   {
     icon: MapPin,
     step: "01",
-    title: "Paste your Google Maps link",
-    body: "Your reviews, photos, opening hours, and rating come straight from your Google Business profile. No blank page, no typing it all again.",
+    title: "Find your business",
+    body: "Search by business name and city. PaperChai can also use a Google Maps Share link, resume, existing website, or short guided brief.",
   },
   {
     icon: Sparkles,
@@ -41,7 +40,7 @@ const STEPS = [
   {
     icon: Wand2,
     step: "03",
-    title: "Go live with booking built in",
+    title: "Publish when it feels right",
     body: "A polished one-page site on your own link, with slot booking, WhatsApp, and calls — ready to share in minutes.",
   },
 ];
@@ -73,24 +72,25 @@ export function AboutContent() {
             className="max-w-2xl"
           >
             <motion.div variants={fadeUp}>
-              <Badge variant="secondary" className="mb-6 rounded-full px-3 py-1">
+              <p className="mb-6 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#214f43] dark:text-[#9cc2b3]">
+                <span className="size-1.5 rounded-full bg-[#214f43] dark:bg-[#9cc2b3]" />
                 About {PRODUCT_NAME}
-              </Badge>
+              </p>
             </motion.div>
             <motion.h1
               variants={fadeUp}
-              className="text-balance text-4xl font-semibold tracking-tight sm:text-5xl lg:text-[3.25rem]"
+              className="text-balance text-5xl font-medium leading-[0.98] tracking-[-0.05em] text-[#11130f] dark:text-stone-50 sm:text-6xl"
             >
               Your business already has a story. We turn it into a website.
             </motion.h1>
             <motion.p
               variants={fadeUp}
-              className="mt-5 text-pretty text-lg leading-relaxed text-muted-foreground"
+              className="mt-6 text-pretty text-lg leading-8 text-stone-600 dark:text-stone-300"
             >
               Most website builders hand you a blank canvas. {PRODUCT_NAME}{" "}
-              starts from your Google Business profile — reviews, photos, and
-              hours — and turns it into a booking-ready site in minutes. Built
-              for India&apos;s salons, clinics, consultants, and freelancers.
+              starts from information you already have and turns it into a
+              website you can review, edit, and publish. Built for local
+              businesses, professionals, creators, and freelancers.
             </motion.p>
           </motion.div>
 
@@ -121,7 +121,7 @@ export function AboutContent() {
           viewport={{ once: true, margin: "-100px" }}
           variants={{ hidden: {}, show: { transition: { staggerChildren: 0.18 } } }}
           style={{ perspective: 1200 }}
-          className="relative grid gap-4 sm:grid-cols-3"
+          className="relative grid border-t border-[#11130f]/15 dark:border-white/15 sm:grid-cols-3"
         >
           {STEPS.map(({ icon: Icon, step, title, body }, i) => (
             <motion.li
@@ -130,11 +130,10 @@ export function AboutContent() {
               style={{ transformStyle: "preserve-3d" }}
               className="relative"
             >
-              <Tilt3D maxTilt={6} lift className="h-full">
-                <div className="relative flex h-full flex-col overflow-hidden rounded-2xl border bg-card/70 p-6 backdrop-blur">
+                <div className={`relative flex h-full flex-col py-7 sm:px-7 ${i > 0 ? "border-t border-[#11130f]/10 dark:border-white/10 sm:border-l sm:border-t-0" : ""}`}>
                   <div className="flex items-center justify-between">
-                    <span className="flex size-11 items-center justify-center rounded-xl border border-border/70 bg-background/70 dark:border-white/10 dark:bg-white/[0.04]">
-                      <Icon className="size-5 text-foreground" strokeWidth={1.6} />
+                    <span className="flex size-11 items-center justify-center rounded-xl bg-[#dce8e2] text-[#214f43] dark:bg-[#214f43]/20 dark:text-[#9cc2b3]">
+                      <Icon className="size-5" strokeWidth={1.6} />
                     </span>
                     <span className="font-mono text-xs font-medium text-muted-foreground/70">
                       {step}
@@ -143,7 +142,6 @@ export function AboutContent() {
                   <h3 className="mt-5 font-semibold">{title}</h3>
                   <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{body}</p>
                 </div>
-              </Tilt3D>
               {i < STEPS.length - 1 ? (
                 <div className="flex justify-center py-2 sm:hidden">
                   <ArrowDown className="size-4 text-muted-foreground/60" />
@@ -168,9 +166,8 @@ export function AboutContent() {
       {/* Final CTA */}
       <section className="relative mx-auto w-full max-w-3xl px-5 pb-24 sm:px-6">
         <Reveal>
-          <Tilt3D maxTilt={4}>
-            <div className="overflow-hidden rounded-3xl border bg-card/70 p-8 text-center backdrop-blur sm:p-12">
-              <div className="flex justify-center gap-3 text-muted-foreground">
+            <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#111311] p-8 text-center text-stone-50 shadow-[0_35px_90px_-50px_rgba(17,19,15,0.65)] sm:p-12">
+              <div className="flex justify-center gap-3 text-[#9cc2b3]">
                 <MapPin className="size-5" />
                 <CalendarCheck className="size-5" />
                 <Globe className="size-5" />
@@ -178,15 +175,14 @@ export function AboutContent() {
               <h2 className="mt-5 text-2xl font-semibold tracking-tight">
                 Ready in minutes, free to start
               </h2>
-              <p className="mx-auto mt-3 max-w-md text-muted-foreground">
-                Your first site is on us. Paste your Google Maps link and see it
-                — no templates to wrestle, no blank page.
+              <p className="mx-auto mt-3 max-w-md text-stone-400">
+                Your first site is on us. Find your business or start from what
+                you already have. No blank page and nothing publishes without you.
               </p>
-              <Button size="lg" asChild className="mt-7">
+              <Button size="lg" asChild className="mt-7 bg-[#9cc2b3] text-[#0d0f0d] hover:bg-[#b9d5ca]">
                 <Link href="/">Create your site</Link>
               </Button>
             </div>
-          </Tilt3D>
         </Reveal>
       </section>
     </>

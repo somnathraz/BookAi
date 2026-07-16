@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowLeft,
@@ -13,12 +13,16 @@ import {
   Dumbbell,
   LayoutGrid,
   Loader2,
+  Maximize2,
+  Monitor,
   Moon,
   Palette,
   Sparkles,
   Stethoscope,
+  Smartphone,
   Sun,
   UtensilsCrossed,
+  X,
   type LucideIcon,
 } from "lucide-react";
 
@@ -28,7 +32,9 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { PhotoUpload } from "@/components/generator/PhotoUpload";
 import { VisualKitPicker } from "@/components/generator/VisualKitPicker";
+import { GeneratedSite } from "@/components/generated/GeneratedSite";
 import { deriveArchetype } from "@/lib/compose";
+import { generateSite } from "@/lib/template";
 import { DOMAIN_ACCENT } from "@/lib/template";
 import {
   ARCHETYPE_META,
@@ -83,7 +89,7 @@ function StepIndicator({ step }: { step: number }) {
               <span
                 className={cn(
                   "hidden h-px flex-1 sm:block",
-                  done || active ? "bg-foreground/40" : "bg-border"
+                  done || active ? "bg-[#214f43]/45 dark:bg-[#9cc2b3]/45" : "bg-[#11130f]/10 dark:bg-white/10"
                 )}
               />
             ) : null}
@@ -91,10 +97,10 @@ function StepIndicator({ step }: { step: number }) {
               className={cn(
                 "flex min-w-0 items-center gap-1.5 rounded-full border px-2 py-1 text-xs font-medium transition-colors sm:px-3 sm:py-1.5 sm:text-sm",
                 active
-                  ? "border-foreground bg-foreground text-background"
+                  ? "border-[#214f43] bg-[#214f43] text-white dark:border-[#9cc2b3] dark:bg-[#9cc2b3] dark:text-[#0d0f0d]"
                   : done
-                    ? "border-foreground/30 bg-accent text-foreground"
-                    : "border-input text-muted-foreground"
+                    ? "border-[#214f43]/20 bg-[#dce8e2] text-[#214f43] dark:border-[#9cc2b3]/20 dark:bg-[#214f43]/20 dark:text-[#9cc2b3]"
+                    : "border-[#11130f]/10 text-stone-500 dark:border-white/10 dark:text-stone-400"
               )}
             >
               <span className="flex size-5 shrink-0 items-center justify-center rounded-full text-[10px] sm:text-xs">
@@ -117,6 +123,7 @@ function LivePreviewPanel({
   visualKit,
   accent,
   name,
+  onOpenPreview,
 }: {
   archetype: Archetype;
   domain: BusinessDomain;
@@ -125,6 +132,7 @@ function LivePreviewPanel({
   visualKit: VisualKit | undefined;
   accent?: string;
   name: string;
+  onOpenPreview: () => void;
 }) {
   const sections = ARCHETYPE_PREVIEW_SECTIONS[archetype];
   const kit = visualKit ?? styleThemeToKit("minimal");
@@ -139,11 +147,10 @@ function LivePreviewPanel({
   return (
     <div
       className={cn(
-        "flex flex-col gap-4 rounded-xl border p-4",
-        theme === "dark" ? "bg-zinc-950 text-zinc-50" : "bg-muted/30"
+        "flex flex-col gap-4 rounded-2xl border border-white/10 bg-[#111311] p-4 text-stone-50 shadow-[0_26px_60px_-35px_rgba(17,19,15,0.75)]"
       )}
     >
-      <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+      <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#9cc2b3]">
         <LayoutGrid className="size-3.5" />
         Your site preview
       </div>
@@ -151,14 +158,14 @@ function LivePreviewPanel({
       <div
         className={cn(
           "overflow-hidden rounded-lg border shadow-sm",
-          theme === "dark" ? "border-white/10 bg-zinc-900" : "border-border bg-background"
+          theme === "dark" ? "border-white/10 bg-zinc-900" : "border-white/10 bg-[#f7f7f3] text-zinc-900"
         )}
       >
         {/* Mini browser chrome */}
         <div className="flex items-center gap-1.5 border-b px-3 py-2">
-          <span className="size-2 rounded-full bg-red-400/80" />
-          <span className="size-2 rounded-full bg-amber-400/80" />
-          <span className="size-2 rounded-full bg-emerald-400/80" />
+          <span className="size-2 rounded-full bg-current opacity-20" />
+          <span className="size-2 rounded-full bg-current opacity-20" />
+          <span className="size-2 rounded-full bg-current opacity-20" />
           <span className="ml-2 truncate text-[10px] text-muted-foreground">
             {name.trim() || "your-name"}.paperchai.com
           </span>
@@ -205,14 +212,22 @@ function LivePreviewPanel({
 
       <div className="space-y-1 text-xs text-muted-foreground">
         <p>
-          <span className="font-medium text-foreground">{archetypeMeta?.label}</span>
+          <span className="font-medium text-stone-100">{archetypeMeta?.label}</span>
           {" · "}
           {domainLabel}
         </p>
         <p>
-          {visualKit ? `${visualKit} style` : "AI picks style"} · {theme} mode
+          {visualKit ? `${visualKit} style` : "Best-fit style"} · {theme} mode
         </p>
       </div>
+      <button
+        type="button"
+        onClick={onOpenPreview}
+        className="flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.06] px-3 py-2.5 text-sm font-medium text-stone-100 transition hover:bg-white/[0.1]"
+      >
+        <Maximize2 className="size-4 text-[#9cc2b3]" />
+        Open full preview
+      </button>
     </div>
   );
 }
@@ -224,6 +239,7 @@ export function SiteBuilderWizard({
   initialValues,
   aiAvailable = false,
   editMode = false,
+  initialStep = 1,
 }: {
   onGenerate: (input: GeneratorInput) => void;
   generating: boolean;
@@ -231,9 +247,12 @@ export function SiteBuilderWizard({
   initialValues?: Partial<GeneratorInput>;
   aiAvailable?: boolean;
   editMode?: boolean;
+  initialStep?: 1 | 2 | 3;
 }) {
   const iv = initialValues ?? {};
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState<number>(initialStep);
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const [previewDevice, setPreviewDevice] = useState<"desktop" | "mobile">("desktop");
   const [archetypeTouched, setArchetypeTouched] = useState(Boolean(iv.archetype));
 
   const [useAI, setUseAI] = useState(true);
@@ -318,6 +337,7 @@ export function SiteBuilderWizard({
 
   function buildInput(): GeneratorInput {
     return {
+      source: iv.source,
       name: name.trim(),
       domain,
       theme,
@@ -375,18 +395,79 @@ export function SiteBuilderWizard({
 
   const canNext = step === 1 || step === 2;
   const canGenerate = step === 3 && name.trim().length > 0;
+  const previewSite = previewOpen
+    ? generateSite({ ...buildInput(), name: name.trim() || "Your business" })
+    : null;
+
+  useEffect(() => {
+    const current = window.history.state ?? {};
+    window.history.replaceState(
+      { ...current, paperchaiBuilder: true, builderStep: initialStep },
+      ""
+    );
+
+    function onPopState(event: PopStateEvent) {
+      const historyStep = Number(event.state?.builderStep);
+      if (event.state?.paperchaiBuilder && historyStep >= 1 && historyStep <= 3) {
+        setStep(historyStep);
+      }
+    }
+
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, [initialStep]);
+
+  useEffect(() => {
+    if (!previewOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [previewOpen]);
+
+  function moveToStep(nextStep: number) {
+    const boundedStep = Math.max(1, Math.min(3, nextStep));
+    const current = window.history.state ?? {};
+    window.history.pushState(
+      { ...current, paperchaiBuilder: true, builderStep: boundedStep },
+      ""
+    );
+    setStep(boundedStep);
+  }
+
+  function moveBack() {
+    if (step <= 1) return;
+    if (initialStep > 1 && step <= initialStep) {
+      const previousStep = step - 1;
+      const current = window.history.state ?? {};
+      window.history.replaceState(
+        { ...current, paperchaiBuilder: true, builderStep: previousStep },
+        ""
+      );
+      setStep(previousStep);
+      return;
+    }
+    const current = window.history.state;
+    if (current?.paperchaiBuilder) {
+      window.history.back();
+      return;
+    }
+    setStep((currentStep) => Math.max(1, currentStep - 1));
+  }
 
   return (
-    <div className="w-full min-w-0 overflow-x-hidden rounded-2xl border border-border/70 bg-card/80 shadow-xl shadow-black/5 backdrop-blur dark:border-white/10 dark:bg-card/50">
+    <>
+    <div className="w-full min-w-0 overflow-x-hidden rounded-[1.5rem] border border-[#11130f]/10 bg-white/80 shadow-[0_30px_80px_-55px_rgba(17,19,15,0.5)] backdrop-blur dark:border-white/10 dark:bg-[#151815]/90">
       {/* Wizard header */}
-      <div className="border-b border-border/70 px-3 py-3 sm:px-6 sm:py-4 dark:border-white/10">
+      <div className="border-b border-[#11130f]/10 px-4 py-4 sm:px-7 sm:py-5 dark:border-white/10">
         <StepIndicator step={step} />
         <p className="mt-3 text-sm text-muted-foreground">
           {WIZARD_STEPS[step - 1]?.subtitle}
         </p>
       </div>
 
-      <div className="grid gap-6 p-3 sm:p-6 lg:grid-cols-[minmax(0,1fr)_280px]">
+      <div className="grid gap-7 p-4 sm:p-7 lg:grid-cols-[minmax(0,1fr)_300px]">
         {/* Main step content */}
         <div className="min-w-0 overflow-x-hidden">
           <AnimatePresence mode="wait">
@@ -416,8 +497,8 @@ export function SiteBuilderWizard({
                           className={cn(
                             "flex flex-col gap-3 rounded-xl border p-3 text-left transition-all hover:scale-[1.01]",
                             active
-                              ? "border-foreground bg-accent ring-2 ring-foreground/20"
-                              : "border-input hover:border-foreground/30 hover:bg-accent/40"
+                              ? "border-[#214f43] bg-[#dce8e2] ring-2 ring-[#214f43]/10 dark:border-[#9cc2b3] dark:bg-[#214f43]/20"
+                              : "border-[#11130f]/10 hover:border-[#214f43]/35 hover:bg-[#f3f3ef] dark:border-white/10 dark:hover:border-[#9cc2b3]/35 dark:hover:bg-white/[0.04]"
                           )}
                         >
                           <div className="space-y-1">
@@ -470,14 +551,14 @@ export function SiteBuilderWizard({
                           className={cn(
                             "flex min-w-0 flex-col items-center gap-2 rounded-xl border p-2.5 text-center transition-all hover:scale-[1.02] sm:p-3",
                             active
-                              ? "border-foreground bg-accent ring-2 ring-foreground/20"
-                              : "border-input hover:border-foreground/30 hover:bg-accent/40"
+                              ? "border-[#214f43] bg-[#dce8e2] ring-2 ring-[#214f43]/10 dark:border-[#9cc2b3] dark:bg-[#214f43]/20"
+                              : "border-[#11130f]/10 hover:border-[#214f43]/35 hover:bg-[#f3f3ef] dark:border-white/10 dark:hover:border-[#9cc2b3]/35 dark:hover:bg-white/[0.04]"
                           )}
                         >
                           <span
                             className={cn(
                               "flex size-9 shrink-0 items-center justify-center rounded-full sm:size-10",
-                              active ? "bg-foreground text-background" : "bg-muted"
+                              active ? "bg-[#214f43] text-white dark:bg-[#9cc2b3] dark:text-[#0d0f0d]" : "bg-[#ecece7] dark:bg-white/[0.06]"
                             )}
                           >
                             <Icon className="size-4 sm:size-5" />
@@ -516,8 +597,8 @@ export function SiteBuilderWizard({
                           className={cn(
                             "flex flex-col gap-2 rounded-xl border p-3 transition-all",
                             active
-                              ? "border-foreground bg-accent ring-2 ring-foreground/20"
-                              : "border-input hover:bg-accent/40"
+                              ? "border-[#214f43] bg-[#dce8e2] ring-2 ring-[#214f43]/10 dark:border-[#9cc2b3] dark:bg-[#214f43]/20"
+                              : "border-[#11130f]/10 hover:border-[#214f43]/35 hover:bg-[#f3f3ef] dark:border-white/10 dark:hover:border-[#9cc2b3]/35 dark:hover:bg-white/[0.04]"
                           )}
                         >
                           <div
@@ -799,19 +880,20 @@ export function SiteBuilderWizard({
             visualKit={visualKit}
             accent={accent ?? undefined}
             name={name}
+            onOpenPreview={() => setPreviewOpen(true)}
           />
         </div>
       </div>
 
       {/* Footer nav */}
-      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-border/70 px-3 py-3 sm:gap-3 sm:px-6 sm:py-4 dark:border-white/10">
+      <div className="sticky bottom-0 z-10 flex flex-wrap items-center justify-between gap-2 border-t border-[#11130f]/10 bg-white/95 px-4 py-4 backdrop-blur sm:gap-3 sm:px-7 dark:border-white/10 dark:bg-[#151815]/95">
         <Button
           type="button"
           variant="outline"
           size="sm"
           className="sm:h-9 sm:px-4 sm:text-sm"
           disabled={step === 1}
-          onClick={() => setStep((s) => Math.max(1, s - 1))}
+          onClick={moveBack}
         >
           <ArrowLeft className="size-4" />
           Back
@@ -821,9 +903,9 @@ export function SiteBuilderWizard({
           <Button
             type="button"
             size="sm"
-            className="sm:h-9 sm:px-4 sm:text-sm"
+            className="bg-[#214f43] text-white hover:bg-[#173b32] sm:h-9 sm:px-4 sm:text-sm dark:bg-[#9cc2b3] dark:text-[#0d0f0d] dark:hover:bg-[#b9d5ca]"
             disabled={!canNext}
-            onClick={() => setStep((s) => s + 1)}
+            onClick={() => moveToStep(step + 1)}
           >
             Continue
             <ArrowRight className="size-4" />
@@ -832,7 +914,7 @@ export function SiteBuilderWizard({
           <Button
             type="button"
             size="sm"
-            className="max-w-full sm:h-10 sm:px-6 sm:text-sm"
+            className="max-w-full bg-[#214f43] text-white hover:bg-[#173b32] sm:h-10 sm:px-6 sm:text-sm dark:bg-[#9cc2b3] dark:text-[#0d0f0d] dark:hover:bg-[#b9d5ca]"
             disabled={!canGenerate || generating}
             onClick={handleGenerate}
           >
@@ -853,7 +935,7 @@ export function SiteBuilderWizard({
               <>
                 <Sparkles className="size-4 shrink-0" />
                 <span className="truncate">
-                  {editMode ? "Save & publish" : "Generate my site"}
+                  {editMode ? "Save & publish" : "Update preview"}
                 </span>
               </>
             )}
@@ -861,5 +943,83 @@ export function SiteBuilderWizard({
         )}
       </div>
     </div>
+      <AnimatePresence>
+        {previewOpen && previewSite ? (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex min-w-0 flex-col bg-[#0d0f0d]"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Full website preview"
+          >
+            <div className="flex h-16 shrink-0 items-center justify-between gap-3 border-b border-white/10 px-4 text-stone-100 sm:px-6">
+              <div className="min-w-0">
+                <p className="truncate text-sm font-semibold">Website preview</p>
+                <p className="hidden text-xs text-stone-400 sm:block">
+                  Layout and typography are exact. AI may refine the copy after generation.
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="flex rounded-xl border border-white/10 bg-white/[0.05] p-1">
+                  <button
+                    type="button"
+                    onClick={() => setPreviewDevice("desktop")}
+                    aria-label="Desktop preview"
+                    className={cn(
+                      "flex size-8 items-center justify-center rounded-lg transition",
+                      previewDevice === "desktop"
+                        ? "bg-[#9cc2b3] text-[#0d0f0d]"
+                        : "text-stone-400 hover:text-white"
+                    )}
+                  >
+                    <Monitor className="size-4" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setPreviewDevice("mobile")}
+                    aria-label="Mobile preview"
+                    className={cn(
+                      "flex size-8 items-center justify-center rounded-lg transition",
+                      previewDevice === "mobile"
+                        ? "bg-[#9cc2b3] text-[#0d0f0d]"
+                        : "text-stone-400 hover:text-white"
+                    )}
+                  >
+                    <Smartphone className="size-4" />
+                  </button>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setPreviewOpen(false)}
+                  className="flex size-10 items-center justify-center rounded-xl border border-white/10 text-stone-300 transition hover:bg-white/[0.08] hover:text-white"
+                  aria-label="Close preview"
+                >
+                  <X className="size-5" />
+                </button>
+              </div>
+            </div>
+            <div className="min-h-0 flex-1 overflow-y-auto bg-[#e8e8e3] p-0 sm:p-5">
+              <div
+                className={cn(
+                  "mx-auto min-h-full overflow-hidden bg-background shadow-[0_35px_100px_-45px_rgba(0,0,0,0.75)] transition-[max-width,border-radius] duration-300",
+                  previewDevice === "mobile"
+                    ? "max-w-[390px] sm:rounded-[1.5rem]"
+                    : "max-w-7xl sm:rounded-[1.5rem]"
+                )}
+              >
+                <GeneratedSite
+                  site={previewSite}
+                  theme={theme}
+                  onThemeChange={setTheme}
+                  showBranding={false}
+                />
+              </div>
+            </div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+    </>
   );
 }

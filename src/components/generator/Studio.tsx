@@ -1,66 +1,63 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import {
   motion,
   useReducedMotion,
-  useScroll,
-  useTransform,
 } from "framer-motion";
 import {
   ArrowLeft,
   ArrowRight,
-  BadgeCheck,
   CalendarCheck,
   Check,
-  Copy,
-  ExternalLink,
-  LayoutGrid,
+  FileText,
+  Globe,
   Link2,
   Loader2,
   MapPin,
   MessageCircle,
+  Monitor,
+  PenLine,
+  Smartphone,
+  Sparkles,
 } from "lucide-react";
 
 import { trackSitePublished, waitForBeacon } from "@/lib/analytics";
-import { PRODUCT_NAME } from "@/lib/brand";
 import {
-  getPublicSiteHref,
-  getPublicSitePath,
   getPublicSiteUrl,
 } from "@/lib/site-url";
 import { STUDIO_RESET_EVENT } from "@/lib/studio-reset";
 import {
   clearStudioDraft,
   loadStudioDraft,
+  saveDraftSitePreview,
   saveStudioDraft,
 } from "@/lib/studio-draft";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BuilderForm } from "@/components/generator/BuilderForm";
+import { BusinessStart } from "@/components/generator/BusinessStart";
 import { AuroraBackground } from "@/components/generator/AuroraBackground";
-import { ComingSoonNotify } from "@/components/marketing/ComingSoonNotify";
 import { Hero3D } from "@/components/marketing/Hero3D";
+import { ComingSoonNotify } from "@/components/marketing/ComingSoonNotify";
 import { LogoMark } from "@/components/marketing/Logo";
 import { MarketingNav } from "@/components/marketing/MarketingNav";
 import { GeneratedSite } from "@/components/generated/GeneratedSite";
-import {
-  SourceChooser,
-  type Capabilities,
-  type SourceId,
-} from "@/components/generator/SourceChooser";
 import { SourceInput } from "@/components/generator/SourceInput";
-import { AnalysisReveal } from "@/components/generator/AnalysisReveal";
 import { EmailGate } from "@/components/generator/EmailGate";
 import { SignOutButton } from "@/components/auth/SignOutButton";
 import { MarketingFooter } from "@/components/marketing/MarketingFooter";
 import { GeneratingOverlay } from "@/components/generator/GeneratingOverlay";
 import { siteToGeneratorInput } from "@/lib/site-to-input";
+import { deriveArchetype } from "@/lib/compose";
+import { generateSite } from "@/lib/template";
+import { cn } from "@/lib/utils";
 import type {
   AnalysisResult,
+  Capabilities,
   GeneratorInput,
   SiteData,
+  SourceId,
   ThemeMode,
 } from "@/lib/types";
 
@@ -74,38 +71,41 @@ const fadeUp = {
 const proofSignals = [
   {
     icon: MapPin,
-    label: "Import",
-    value: "Reviews, photos, hours",
+    label: "Google details",
+    value: "Photos, reviews, hours",
   },
   {
     icon: CalendarCheck,
-    label: "Bookings",
-    value: "Services, slots, confirmations",
+    label: "Ready for customers",
+    value: "Booking, calls, directions",
   },
   {
     icon: MessageCircle,
-    label: "WhatsApp",
-    value: "Enquiries land in your chat",
+    label: "Easy enquiries",
+    value: "WhatsApp built in",
   },
   {
     icon: Link2,
-    label: "Your link",
-    value: "yourname.paperchaiapp.com",
+    label: "Your own link",
+    value: "Free PaperChai address",
   },
 ];
 
 const detailPoints = [
   {
-    title: "Built from real proof",
-    body: "Your reviews, photos, opening hours, and rating come straight from Google — no placeholder copy, no stock claims.",
+    number: "01",
+    title: "Find your business",
+    body: "Search by name and city, or paste the Share link from Google Maps.",
   },
   {
-    title: "Bookings, not just visits",
-    body: "Add services and working hours; customers pick a slot and you confirm from a simple dashboard. Every enquiry lands in email or WhatsApp.",
+    number: "02",
+    title: "Review your website",
+    body: "Check the imported details, choose a style, and make quick changes.",
   },
   {
-    title: "You stay in control",
-    body: "Review everything before it goes live, edit any time, and republish to the same link. Nothing is published without your say.",
+    number: "03",
+    title: "Publish and share",
+    body: "Go live on a free PaperChai link. Nothing publishes without your approval.",
   },
 ];
 
@@ -120,16 +120,33 @@ type Step =
   | "preview";
 type SmartSource = Exclude<SourceId, "manual">;
 
+function previewInputFromAnalysis(result: AnalysisResult): GeneratorInput | null {
+  const name = result.profile.name?.trim();
+  if (!name) return null;
+
+  const domain =
+    result.categories[0]?.domain ?? result.profile.domain ?? "other";
+  const archetype = deriveArchetype(domain, result.source);
+  const images = result.images.filter(Boolean).slice(0, 20);
+
+  return {
+    ...result.profile,
+    source: result.source,
+    name,
+    domain,
+    theme: result.profile.theme ?? "light",
+    accent: result.profile.accent ?? result.palette[0],
+    photo: result.profile.photo ?? images[0],
+    archetype,
+    gallery: archetype === "business" ? images : [],
+    // Analysis already wrote source-grounded copy. Keeping template generation
+    // deterministic makes the published site match the approved preview.
+    useAI: false,
+  };
+}
+
 export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
   const reduceMotion = useReducedMotion();
-  const heroRef = useRef<HTMLDivElement | null>(null);
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-  const heroSceneY = useTransform(scrollYProgress, [0, 1], [0, 90]);
-  const heroTextY = useTransform(scrollYProgress, [0, 1], [0, 24]);
-  const heroTextOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0.15]);
   const [step, setStep] = useState<Step>(editSiteId ? "review" : "chooser");
   const [capabilities, setCapabilities] = useState<Capabilities | null>(null);
   const [activeSource, setActiveSource] = useState<SmartSource | null>(null);
@@ -138,8 +155,8 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
 
   const [site, setSite] = useState<SiteData | null>(null);
   const [slug, setSlug] = useState<string | null>(null);
-  const [copied, setCopied] = useState(false);
   const [previewTheme, setPreviewTheme] = useState<ThemeMode>("light");
+  const [previewDevice, setPreviewDevice] = useState<"desktop" | "mobile">("desktop");
   const [error, setError] = useState<string | null>(null);
   const [verified, setVerified] = useState(false);
   const [verifiedEmail, setVerifiedEmail] = useState<string | null>(null);
@@ -158,7 +175,6 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
     setSlug(null);
     setError(null);
     setPendingInput(null);
-    setCopied(false);
     setEditingSiteId(null);
     setEditLoadError(null);
     clearStudioDraft();
@@ -181,6 +197,24 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
   }, [resetToChooser]);
 
   useEffect(() => {
+    function onStudioHistory(event: PopStateEvent) {
+      const historyStep = event.state?.paperchaiStudioStep as Step | undefined;
+      if (historyStep === "preview" && site) {
+        setStep("preview");
+      } else if (historyStep === "review") {
+        setStep("review");
+      } else if (historyStep === "source" && activeSource) {
+        setStep("source");
+      } else if (historyStep === "chooser") {
+        setStep("chooser");
+      }
+    }
+
+    window.addEventListener("popstate", onStudioHistory);
+    return () => window.removeEventListener("popstate", onStudioHistory);
+  }, [activeSource, site]);
+
+  useEffect(() => {
     fetch("/api/capabilities")
       .then((r) => r.json())
       .then((c: Capabilities) => setCapabilities(c))
@@ -190,6 +224,7 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
           provider: null,
           providers: [],
           google: false,
+          businessSearch: false,
           email: false,
         })
       );
@@ -227,7 +262,31 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
         if (draft.activeSource) setActiveSource(draft.activeSource);
         if (draft.analysis) setAnalysis(draft.analysis);
         if (draft.initialValues) setInitialValues(draft.initialValues);
-        setStep(draft.step);
+        if (draft.step === "analysis" && draft.analysis) {
+          const input = previewInputFromAnalysis(draft.analysis);
+          if (input) {
+            setInitialValues(input);
+            setPendingInput(input);
+            setSite(generateSite(input));
+            setPreviewTheme(input.theme);
+            setStep("preview");
+          } else {
+            setStep("review");
+          }
+        } else if (
+          draft.step === "preview" &&
+          draft.initialValues?.name &&
+          draft.initialValues.domain &&
+          draft.initialValues.theme
+        ) {
+          const input = draft.initialValues as GeneratorInput;
+          setPendingInput(input);
+          setSite(generateSite(input));
+          setPreviewTheme(input.theme);
+          setStep("preview");
+        } else {
+          setStep(draft.step === "analysis" ? "review" : draft.step);
+        }
       }
     }
   }, [editSiteId]);
@@ -287,7 +346,6 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
       step === "chooser" ||
       step === "verify" ||
       step === "generating" ||
-      step === "preview" ||
       step === "limit"
     ) {
       return;
@@ -316,16 +374,23 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
   }
 
   function onAnalyzed(result: AnalysisResult) {
+    if (result.source !== "manual") setActiveSource(result.source);
     setAnalysis(result);
-    setStep("analysis");
-  }
-
-  function onAnalysisConfirmed(values: Partial<GeneratorInput>) {
-    setInitialValues({ ...values, theme: values.theme ?? "light" });
-    setStep("review");
+    const input = previewInputFromAnalysis(result);
+    if (!input) {
+      setInitialValues({ ...result.profile, source: result.source });
+      setStep("review");
+      return;
+    }
+    openDraftPreview(input);
   }
 
   function handleGenerate(input: GeneratorInput) {
+    if (!editingSiteId) {
+      openDraftPreview({ ...input, useAI: false });
+      return;
+    }
+
     setInitialValues(input);
     setPendingInput(input);
     if (verified && !canCreate && !editingSiteId) {
@@ -340,6 +405,86 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
     }
     void doGenerate(input);
   }
+
+  function openDraftPreview(input: GeneratorInput) {
+    const exactInput = { ...input, useAI: false };
+    const generatedDraft = generateSite(exactInput);
+    const currentHistory = window.history.state ?? {};
+    const returnStep: Step =
+      step === "review" ? "review" : activeSource ? "source" : "chooser";
+    window.history.replaceState(
+      { ...currentHistory, paperchaiStudioStep: returnStep },
+      ""
+    );
+    window.history.pushState(
+      { ...currentHistory, paperchaiStudioStep: "preview" },
+      ""
+    );
+    setInitialValues(exactInput);
+    setPendingInput(exactInput);
+    setSite(generatedDraft);
+    saveDraftSitePreview(generatedDraft, exactInput.theme);
+    setSlug(null);
+    setPreviewTheme(exactInput.theme);
+    setPreviewDevice("desktop");
+    setError(null);
+    setStep("preview");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function openEditor() {
+    const currentHistory = window.history.state ?? {};
+    window.history.pushState(
+      { ...currentHistory, paperchaiStudioStep: "review" },
+      ""
+    );
+    setStep("review");
+  }
+
+  function handlePublish() {
+    if (!pendingInput) return;
+    if (verified && !canCreate && !editingSiteId) {
+      setError("You've used your free site. Delete one in My sites or upgrade to Basic.");
+      setStep("limit");
+      return;
+    }
+    if (!verified) {
+      setStep("verify");
+      return;
+    }
+    void doGenerate(pendingInput);
+  }
+
+  function changePreviewTheme(nextTheme: ThemeMode) {
+    setPreviewTheme(nextTheme);
+    setPendingInput((current) =>
+      current ? { ...current, theme: nextTheme } : current
+    );
+    setInitialValues((current) =>
+      current ? { ...current, theme: nextTheme } : current
+    );
+    setSite((current) => {
+      if (!current) return current;
+      const nextSite = { ...current, theme: nextTheme };
+      saveDraftSitePreview(nextSite, nextTheme);
+      return nextSite;
+    });
+  }
+
+  useEffect(() => {
+    function onPreviewMessage(event: MessageEvent) {
+      if (event.origin !== window.location.origin) return;
+      if (
+        event.data?.type === "paperchai-preview-theme" &&
+        (event.data.theme === "light" || event.data.theme === "dark")
+      ) {
+        changePreviewTheme(event.data.theme);
+      }
+    }
+
+    window.addEventListener("message", onPreviewMessage);
+    return () => window.removeEventListener("message", onPreviewMessage);
+  });
 
   async function doGenerate(input: GeneratorInput) {
     setStep("generating");
@@ -374,7 +519,7 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
       }
       if (res.status === 429 && data?.code === "rate_limited") {
         setError(data.error as string);
-        setStep("review");
+        setStep(site && !editingSiteId ? "preview" : "review");
         return;
       }
       if (!res.ok) throw new Error(data?.error ?? "Generation failed.");
@@ -398,131 +543,140 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
       return;
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
-      setStep("review");
-    }
-  }
-
-  function shareUrl(): string | null {
-    if (!slug) return null;
-    if (typeof window !== "undefined") {
-      return getPublicSiteUrl(slug, { host: window.location.host });
-    }
-    return getPublicSitePath(slug);
-  }
-
-  function liveHref(): string | null {
-    if (!slug) return null;
-    if (typeof window !== "undefined") {
-      return getPublicSiteHref(slug, { host: window.location.host });
-    }
-    return getPublicSiteHref(slug);
-  }
-
-  async function copyShareUrl() {
-    const url = shareUrl();
-    if (!url) return;
-    try {
-      await navigator.clipboard.writeText(url);
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 2000);
-    } catch {
-      /* ignore */
+      setStep(site && !editingSiteId ? "preview" : "review");
     }
   }
 
   // ---- Preview ----
   if (step === "preview" && site) {
-    const href = liveHref();
-    const displayUrl = shareUrl();
-
     return (
-      <div className="min-h-screen pb-28">
-        {/* Generated site fills full viewport */}
-        <GeneratedSite
-          site={site}
-          theme={previewTheme}
-          onThemeChange={setPreviewTheme}
-        />
+      <div className="min-h-screen bg-[#dfe0da] pb-24 text-[#11130f] sm:pb-8">
+        <header className="sticky top-0 z-[60] border-b border-white/10 bg-[#111311]/95 text-stone-100 shadow-[0_16px_45px_-30px_rgba(0,0,0,0.8)] backdrop-blur-xl">
+          <div className="mx-auto flex h-16 max-w-[1600px] items-center justify-between gap-3 px-4 sm:px-6">
+            <div className="min-w-0">
+              <p className="flex items-center gap-2 text-sm font-semibold">
+                <span className="size-2 rounded-full bg-[#9cc2b3] shadow-[0_0_0_5px_rgba(156,194,179,0.12)]" />
+                Website preview
+              </p>
+              <p className="mt-0.5 hidden text-xs text-stone-400 sm:block">
+                Not published yet. Review it, edit only if needed, then go live.
+              </p>
+            </div>
 
-        {/* Floating bottom bar */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2, ease: EASE }}
-          className="fixed bottom-5 left-1/2 z-50 w-[calc(100%-2rem)] max-w-2xl -translate-x-1/2"
-        >
-          <div className="flex items-stretch overflow-hidden rounded-2xl border border-border/70 bg-background/92 shadow-2xl shadow-black/12 backdrop-blur-xl dark:bg-background/88">
-
-            {/* Back to editor */}
-            <button
-              type="button"
-              onClick={() => setStep("review")}
-              className="flex items-center gap-2 px-4 py-3.5 text-sm font-medium transition-colors hover:bg-accent"
-            >
-              <ArrowLeft className="size-4 shrink-0" />
-              <span className="hidden sm:inline">Edit</span>
-            </button>
-
-            <div className="my-2.5 w-px bg-border/70" />
-
-            {/* Verified email */}
-            {verifiedEmail ? (
-              <>
-                <div className="flex min-w-0 items-center gap-2 px-4 py-3.5">
-                  <BadgeCheck className="size-4 shrink-0 text-emerald-500" strokeWidth={2} />
-                  <span className="max-w-[10rem] truncate text-xs text-muted-foreground sm:max-w-[14rem]">
-                    {verifiedEmail}
-                  </span>
-                </div>
-                <div className="my-2.5 w-px bg-border/70" />
-              </>
-            ) : null}
-
-            {/* Shareable link + copy */}
-            <div className="flex min-w-0 flex-1 items-center">
-              {href ? (
-                <a
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex min-w-0 flex-1 items-center gap-1.5 px-4 py-3.5 transition-colors hover:bg-accent"
-                  title={displayUrl ?? undefined}
-                >
-                  <ExternalLink className="size-3.5 shrink-0 text-muted-foreground" />
-                  <span className="truncate font-mono text-xs text-muted-foreground">
-                    {displayUrl?.replace(/^https?:\/\//, "") ?? `/${slug}`}
-                  </span>
-                </a>
-              ) : (
-                <span className="flex-1 px-4 py-3.5 text-xs text-muted-foreground">
-                  Live preview
-                </span>
-              )}
+            <div className="hidden items-center rounded-xl border border-white/10 bg-white/[0.05] p-1 sm:flex">
               <button
                 type="button"
-                onClick={() => void copyShareUrl()}
-                className="flex items-center gap-1.5 border-l border-border/70 px-4 py-3.5 text-sm font-medium transition-colors hover:bg-accent"
-              >
-                {copied ? (
-                  <Check className="size-4 shrink-0 text-emerald-500" />
-                ) : (
-                  <Copy className="size-4 shrink-0" />
+                onClick={() => setPreviewDevice("desktop")}
+                aria-label="Desktop preview"
+                className={cn(
+                  "flex h-8 items-center gap-2 rounded-lg px-3 text-xs font-medium transition",
+                  previewDevice === "desktop"
+                    ? "bg-[#9cc2b3] text-[#0d0f0d]"
+                    : "text-stone-400 hover:text-white"
                 )}
-                <span className="hidden sm:inline">{copied ? "Copied!" : "Copy"}</span>
+              >
+                <Monitor className="size-4" />
+                Desktop
+              </button>
+              <button
+                type="button"
+                onClick={() => setPreviewDevice("mobile")}
+                aria-label="Mobile preview"
+                className={cn(
+                  "flex h-8 items-center gap-2 rounded-lg px-3 text-xs font-medium transition",
+                  previewDevice === "mobile"
+                    ? "bg-[#9cc2b3] text-[#0d0f0d]"
+                    : "text-stone-400 hover:text-white"
+                )}
+              >
+                <Smartphone className="size-4" />
+                Mobile
               </button>
             </div>
 
-            <div className="my-2.5 w-px bg-border/70" />
+            <div className="hidden items-center gap-2 sm:flex">
+              <button
+                type="button"
+                onClick={openEditor}
+                className="flex h-10 items-center gap-2 rounded-xl border border-white/15 px-4 text-sm font-medium text-stone-200 transition hover:bg-white/[0.08] hover:text-white"
+              >
+                <PenLine className="size-4" />
+                Edit
+              </button>
+              <button
+                type="button"
+                onClick={handlePublish}
+                className="flex h-10 items-center gap-2 rounded-xl bg-[#9cc2b3] px-5 text-sm font-semibold text-[#0d0f0d] transition hover:bg-[#b9d5ca]"
+              >
+                Publish website
+                <ArrowRight className="size-4" />
+              </button>
+            </div>
+          </div>
+        </header>
 
-            {/* My sites */}
-            <a
-              href="/dashboard"
-              className="flex items-center gap-2 px-4 py-3.5 text-sm font-medium transition-colors hover:bg-accent"
+        {error ? (
+          <div className="sticky top-16 z-[55] border-b border-red-950/15 bg-[#fff1ee] px-4 py-3 text-center text-sm font-medium text-[#8b2e20] shadow-sm">
+            {error}
+          </div>
+        ) : null}
+
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, ease: EASE }}
+          className="mx-auto px-0 py-0 sm:px-5 sm:py-6"
+        >
+          {previewDevice === "mobile" ? (
+            <div className="mx-auto hidden h-[780px] w-[390px] max-w-full overflow-hidden rounded-[2rem] border-[8px] border-[#111311] bg-white shadow-[0_35px_110px_-48px_rgba(17,19,15,0.65)] sm:block">
+              <iframe
+                key={`${site.identity.name}-${site.identity.tagline}-${previewTheme}`}
+                src="/preview/draft"
+                title="Mobile website preview"
+                className="size-full border-0 bg-white"
+              />
+            </div>
+          ) : (
+            <div className="mx-auto hidden min-h-screen overflow-hidden bg-background shadow-[0_35px_110px_-48px_rgba(17,19,15,0.65)] transition-[max-width,border-radius] duration-300 sm:block sm:min-h-[calc(100vh-7rem)] sm:max-w-[1440px] sm:rounded-[1.75rem]">
+              <GeneratedSite
+                site={site}
+                theme={previewTheme}
+                onThemeChange={changePreviewTheme}
+              />
+            </div>
+          )}
+          <div className="sm:hidden">
+            <GeneratedSite
+              site={site}
+              theme={previewTheme}
+              onThemeChange={changePreviewTheme}
+            />
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, delay: 0.12, ease: EASE }}
+          className="fixed inset-x-3 bottom-3 z-[70] sm:hidden"
+        >
+          <div className="grid grid-cols-[0.8fr_1.2fr] overflow-hidden rounded-2xl border border-white/10 bg-[#111311]/96 p-1.5 shadow-[0_24px_65px_-24px_rgba(0,0,0,0.7)] backdrop-blur-xl">
+            <button
+              type="button"
+              onClick={openEditor}
+              className="flex h-12 items-center justify-center gap-2 rounded-xl text-sm font-medium text-stone-200 transition hover:bg-white/[0.08]"
             >
-              <LayoutGrid className="size-4 shrink-0" />
-              <span className="hidden sm:inline">My sites</span>
-            </a>
-
+              <PenLine className="size-4" />
+              Edit
+            </button>
+            <button
+              type="button"
+              onClick={handlePublish}
+              className="flex h-12 items-center justify-center gap-2 rounded-xl bg-[#9cc2b3] px-3 text-sm font-semibold text-[#0d0f0d] transition active:scale-[0.99]"
+            >
+              Publish website
+              <ArrowRight className="size-4" />
+            </button>
           </div>
         </motion.div>
       </div>
@@ -558,188 +712,289 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
   }
 
   return (
-    <main className="relative min-h-screen overflow-x-hidden">
-      <AuroraBackground />
+    <main className="relative min-h-screen overflow-x-hidden bg-[#f3f3ef] dark:bg-[#0d0f0d]">
+      {step === "chooser" ? null : <AuroraBackground />}
       <MarketingNav />
 
       {step === "chooser" ? (
         <div className="relative pb-24">
-          {/* ── Hero: promise + 3D scene ─────────────────────────────── */}
-          <div ref={heroRef} className="relative mx-auto max-w-6xl px-5 sm:px-6">
-            <div className="grid min-h-[calc(100svh-4rem)] items-center gap-12 py-12 lg:grid-cols-[1.02fr_0.98fr] lg:gap-8 lg:py-0">
+          <section className="relative min-h-[calc(100svh-4rem)] overflow-hidden border-b border-[#11130f]/10 bg-[#f3f3ef] dark:border-white/10 dark:bg-[#0d0f0d]">
+            <div className="absolute inset-0 opacity-50 [background-image:linear-gradient(to_right,rgba(17,19,15,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(17,19,15,0.035)_1px,transparent_1px)] [background-size:72px_72px] [mask-image:linear-gradient(to_bottom,black,transparent_75%)] dark:opacity-20" />
+            <div className="relative mx-auto grid min-h-[calc(100svh-4rem)] max-w-7xl items-center gap-10 px-5 py-10 sm:px-6 lg:grid-cols-[1.08fr_0.92fr] lg:px-8 lg:py-12">
               <motion.div
-                style={reduceMotion ? undefined : { y: heroTextY, opacity: heroTextOpacity }}
                 initial={reduceMotion ? "show" : "hidden"}
                 animate="show"
-                variants={{ hidden: {}, show: { transition: { staggerChildren: 0.1 } } }}
-                className="max-w-2xl"
+                variants={{ hidden: {}, show: { transition: { staggerChildren: 0.09 } } }}
+                className="relative z-10 max-w-3xl"
               >
-                <motion.div
+                <motion.p
                   variants={fadeUp}
-                  className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-border/70 bg-background/60 py-1.5 pl-2 pr-3.5 text-xs font-medium text-muted-foreground backdrop-blur dark:border-white/10 dark:bg-white/[0.04]"
+                  className="mb-5 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-[#214f43] dark:text-[#9cc2b3]"
                 >
-                  <LogoMark size={20} priority />
-                  <span className="font-semibold text-foreground">{PRODUCT_NAME}</span>
-                  <span className="h-3 w-px bg-border" />
-                  Google Business → website
-                </motion.div>
+                  <span className="size-1.5 rounded-full bg-[#214f43] dark:bg-[#9cc2b3]" />
+                  PaperChai
+                </motion.p>
                 <motion.h1
                   variants={fadeUp}
-                  className="text-balance bg-gradient-to-br from-foreground via-foreground to-foreground/55 bg-clip-text text-5xl font-semibold leading-[1.04] tracking-tight text-transparent sm:text-6xl lg:text-[4.25rem]"
+                  className="max-w-3xl text-balance text-5xl font-medium leading-[0.98] tracking-[-0.052em] text-[#11130f] dark:text-[#f3f3ef] sm:text-6xl lg:text-[4.5rem]"
                 >
-                  Your Google profile, now a booking‑ready website.
+                  Your business, ready for the web.
                 </motion.h1>
                 <motion.p
                   variants={fadeUp}
-                  className="mt-6 max-w-xl text-pretty text-base leading-7 text-muted-foreground sm:text-lg"
+                  className="mt-6 max-w-xl text-pretty text-base leading-7 text-[#5c615b] dark:text-[#aeb4ad] sm:text-lg"
                 >
-                  Paste your Google Maps link. {PRODUCT_NAME} imports your
-                  reviews, photos, and hours, adds booking and WhatsApp, and
-                  puts it live on your own link — in minutes.
+                  Find your business and PaperChai turns its real photos, reviews,
+                  hours, and details into a website you control.
                 </motion.p>
-                <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-3">
-                  <Button
-                    size="lg"
-                    onClick={() =>
-                      capabilities?.google ? choose("maps") : choose("manual")
-                    }
-                    className="h-12 px-6 text-base"
-                  >
-                    Paste your Google Maps link
-                    <ArrowRight className="size-4" />
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    onClick={() => choose("manual")}
-                    className="h-12 bg-background/35 px-6 text-base backdrop-blur"
-                  >
-                    Start from scratch
-                  </Button>
+                <motion.div id="create" variants={fadeUp} className="mt-8 max-w-2xl">
+                  {capabilities ? (
+                    <BusinessStart
+                      capabilities={capabilities}
+                      canCreate={!verified || canCreate}
+                      onManual={() => choose("manual")}
+                      onAnalyzed={onAnalyzed}
+                      onLimitReached={(message) => {
+                        setError(message);
+                        setStep("limit");
+                      }}
+                    />
+                  ) : (
+                    <div className="flex h-16 items-center justify-center gap-2 rounded-2xl border border-[#11130f]/10 bg-white text-sm text-[#747a73] shadow-[0_12px_40px_-24px_rgba(17,19,15,0.35)] dark:border-white/10 dark:bg-[#151815]">
+                      <Loader2 className="size-4 animate-spin" />
+                      Preparing the website builder
+                    </div>
+                  )}
                 </motion.div>
                 <motion.ul
                   variants={fadeUp}
-                  className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground"
+                  className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-[#626860] dark:text-[#9ba19a]"
                 >
-                  {["Free to start", "No credit card", "Live in minutes"].map((t) => (
-                    <li key={t} className="flex items-center gap-1.5">
-                      <Check className="size-4 text-foreground" strokeWidth={2.2} />
-                      {t}
-                    </li>
-                  ))}
+                  {["First website free", "No credit card", "You approve before publish"].map(
+                    (item) => (
+                      <li key={item} className="flex items-center gap-1.5">
+                        <Check className="size-4 text-[#214f43] dark:text-[#9cc2b3]" />
+                        {item}
+                      </li>
+                    )
+                  )}
                 </motion.ul>
               </motion.div>
 
               <motion.div
-                style={reduceMotion ? undefined : { y: heroSceneY }}
-                className="relative"
+                initial={reduceMotion ? false : { opacity: 0, x: 28 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.9, delay: 0.18, ease: EASE }}
+                className="relative mx-auto w-full max-w-xl lg:max-w-none"
               >
                 <Hero3D />
               </motion.div>
             </div>
-          </div>
+          </section>
 
-          {/* ── Proof strip ──────────────────────────────────────────── */}
-          <motion.div
-            initial={reduceMotion ? false : { opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.65, ease: EASE }}
-            className="mx-auto max-w-6xl px-5 sm:px-6"
-          >
-            <div className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border/70 bg-border/70 shadow-xl shadow-black/5 dark:border-white/10 dark:bg-white/10 dark:shadow-black/20 lg:grid-cols-4">
-              {proofSignals.map(({ icon: Icon, label, value }) => (
-                <div key={label} className="bg-background/75 p-4 backdrop-blur dark:bg-background/45 sm:p-5">
-                  <Icon className="mb-3 size-4 text-foreground" strokeWidth={1.7} />
-                  <p className="text-xs font-medium text-foreground">{label}</p>
-                  <p className="mt-1 text-xs leading-5 text-muted-foreground">{value}</p>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* ── Source console ───────────────────────────────────────── */}
-          <div id="source-console" className="mx-auto mt-24 max-w-6xl px-5 sm:px-6">
-            <motion.div
-              initial={reduceMotion ? false : { opacity: 0, y: 32 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.75, ease: EASE }}
-              className="mx-auto max-w-3xl text-center"
-            >
-              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                Start here
-              </p>
-              <h2 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
-                Pick where your site starts from
-              </h2>
-              <p className="mx-auto mt-2 max-w-lg text-sm leading-6 text-muted-foreground">
-                Everything is imported for review first — nothing goes live
-                until you publish it.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={reduceMotion ? false : { opacity: 0, y: 36, scale: 0.985 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.75, ease: EASE }}
-              className="relative mx-auto mt-8 max-w-3xl"
-            >
-              <div className="absolute -inset-px rounded-xl bg-border/80 opacity-80 dark:bg-[linear-gradient(135deg,rgba(255,255,255,0.34),rgba(255,255,255,0.04),rgba(255,255,255,0.18))]" />
-              <div className="relative overflow-hidden rounded-xl border border-border/70 bg-background/80 shadow-2xl shadow-black/10 backdrop-blur-2xl dark:border-white/10 dark:bg-background/58 dark:shadow-black/35">
-                <div className="flex items-center justify-between border-b border-border/70 px-4 py-3 dark:border-white/10">
-                  <div className="flex items-center gap-2">
-                    <span className="size-2 rounded-sm bg-[#ea4335]" />
-                    <span className="size-2 rounded-sm bg-[#fbbc05]" />
-                    <span className="size-2 rounded-sm bg-[#34a853]" />
-                  </div>
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                    <BadgeCheck className="size-3.5 text-foreground" />
-                    Source console
-                  </div>
-                </div>
-                <div className="p-4 sm:p-5">
-                  {capabilities ? (
-                    <SourceChooser
-                      capabilities={capabilities}
-                      canCreate={!verified || canCreate}
-                      onChoose={choose}
-                    />
-                  ) : (
-                    <div className="flex items-center justify-center gap-2 py-16 text-sm text-muted-foreground">
-                      <Loader2 className="size-4 animate-spin" />
-                      Checking available imports
-                    </div>
-                  )}
-                </div>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* ── Detail points ────────────────────────────────────────── */}
-          <motion.div
+          <motion.section
             initial={reduceMotion ? false : { opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.65, ease: EASE }}
-            className="mx-auto mt-24 max-w-6xl px-5 sm:px-6"
+            className="mx-auto max-w-6xl px-5 sm:px-6"
           >
-            <div className="grid gap-px overflow-hidden rounded-xl border border-border/70 bg-border/70 shadow-xl shadow-black/5 dark:border-white/10 dark:bg-white/10 dark:shadow-black/20 md:grid-cols-3">
-              {detailPoints.map((point) => (
-                <div key={point.title} className="bg-background/75 p-6 backdrop-blur dark:bg-background/45">
-                  <p className="text-sm font-semibold text-foreground">{point.title}</p>
-                  <p className="mt-2 text-sm leading-6 text-muted-foreground">{point.body}</p>
+            <div className="grid border-y border-stone-900/10 dark:border-white/10 sm:grid-cols-2 lg:grid-cols-4">
+              {proofSignals.map(({ icon: Icon, label, value }, index) => (
+                <div
+                  key={label}
+                  className={`flex gap-3 py-5 sm:px-5 ${
+                    index > 0 ? "border-t border-stone-900/10 dark:border-white/10 sm:border-t-0 sm:border-l" : ""
+                  }`}
+                >
+                  <Icon className="mt-0.5 size-4 shrink-0 text-[#214f43] dark:text-[#9cc2b3]" />
+                  <div>
+                    <p className="text-sm font-semibold text-stone-950 dark:text-stone-50">{label}</p>
+                    <p className="mt-0.5 text-xs leading-5 text-stone-500 dark:text-stone-400">{value}</p>
+                  </div>
                 </div>
               ))}
             </div>
-          </motion.div>
+          </motion.section>
 
-          {/* ── Coming soon + notify votes ───────────────────────────── */}
+          <section className="mx-auto mt-28 max-w-6xl px-5 sm:px-6">
+            <motion.div
+              initial={reduceMotion ? false : { opacity: 0, y: 26 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.7, ease: EASE }}
+              className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-end"
+            >
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#214f43] dark:text-[#9cc2b3]">
+                  From listing to website
+                </p>
+                <h2 className="mt-4 text-balance text-4xl font-semibold tracking-[-0.04em] text-stone-950 dark:text-stone-50 sm:text-5xl">
+                  Your business is already telling a story.
+                </h2>
+              </div>
+              <p className="max-w-xl text-lg leading-8 text-stone-600 dark:text-stone-300">
+                PaperChai turns the proof customers already trust on Google into a
+                focused mobile website with calls, directions, WhatsApp, and booking.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={reduceMotion ? false : { opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.7, delay: 0.08, ease: EASE }}
+              className="mt-12 grid overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#111311] text-stone-50 shadow-[0_35px_90px_-50px_rgba(17,19,15,0.65)] md:grid-cols-[1fr_auto_1fr]"
+            >
+              <div className="p-7 sm:p-10">
+                <div className="flex items-center gap-2 text-sm font-semibold text-stone-300">
+                  <MapPin className="size-4 text-[#9cc2b3]" />
+                  What you already have
+                </div>
+                <p className="mt-8 text-3xl font-semibold tracking-tight">Google Business</p>
+                <p className="mt-3 max-w-sm leading-7 text-stone-400">
+                  Business details, real photos, customer reviews, opening hours, and location.
+                </p>
+              </div>
+              <div className="flex items-center justify-center border-y border-white/10 px-6 py-4 md:border-x md:border-y-0">
+                <motion.span
+                  animate={reduceMotion ? undefined : { x: [0, 7, 0] }}
+                  transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+                  className="flex size-12 items-center justify-center rounded-full bg-[#dce8e2] text-[#214f43]"
+                >
+                  <ArrowRight className="size-5" />
+                </motion.span>
+              </div>
+              <div className="bg-[#214f43] p-7 text-white sm:p-10">
+                <div className="flex items-center gap-2 text-sm font-semibold">
+                  <Sparkles className="size-4" />
+                  What PaperChai creates
+                </div>
+                <p className="mt-8 text-3xl font-semibold tracking-tight">Your business website</p>
+                <p className="mt-3 max-w-sm leading-7 text-white/65">
+                  A polished site with customer actions, your own link, and an editor you can control.
+                </p>
+              </div>
+            </motion.div>
+          </section>
+
+          <section className="mx-auto mt-28 max-w-6xl px-5 sm:px-6">
+            <motion.div
+              initial={reduceMotion ? false : { opacity: 0, y: 22 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.65, ease: EASE }}
+            >
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#214f43] dark:text-[#9cc2b3]">
+                How it works
+              </p>
+              <h2 className="mt-4 text-4xl font-semibold tracking-[-0.04em] text-stone-950 dark:text-stone-50 sm:text-5xl">
+                Three clear steps. No blank canvas.
+              </h2>
+            </motion.div>
+            <div className="mt-12 grid border-t border-stone-900/15 dark:border-white/15 md:grid-cols-3">
+              {detailPoints.map((point, index) => (
+                <motion.div
+                  key={point.title}
+                  initial={reduceMotion ? false : { opacity: 0, y: 22 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.55, delay: index * 0.08, ease: EASE }}
+                  className={`py-7 md:px-7 ${
+                    index > 0 ? "border-t border-stone-900/10 dark:border-white/10 md:border-l md:border-t-0" : ""
+                  }`}
+                >
+                  <p className="font-mono text-xs text-[#214f43] dark:text-[#9cc2b3]">{point.number}</p>
+                  <h3 className="mt-8 text-xl font-semibold text-stone-950 dark:text-stone-50">{point.title}</h3>
+                  <p className="mt-3 max-w-xs text-sm leading-6 text-stone-500 dark:text-stone-400">{point.body}</p>
+                </motion.div>
+              ))}
+            </div>
+          </section>
+
+          <motion.section
+            initial={reduceMotion ? false : { opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.7, ease: EASE }}
+            className="mx-auto mt-28 max-w-6xl px-5 sm:px-6"
+          >
+            <div className="rounded-[1.5rem] border border-[#11130f]/10 bg-white/65 p-6 dark:border-white/10 dark:bg-[#151815] sm:p-10">
+              <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#214f43] dark:text-[#9cc2b3]">
+                    More ways to begin
+                  </p>
+                  <h2 className="mt-4 text-3xl font-semibold tracking-[-0.035em] text-stone-950 dark:text-stone-50 sm:text-4xl">
+                    Build from whatever you already have.
+                  </h2>
+                  <p className="mt-4 max-w-lg leading-7 text-stone-600 dark:text-stone-300">
+                    Google is the fastest path for local businesses, but it is not
+                    the only path. Professionals can start from a resume, an existing
+                    site, or a short guided brief.
+                  </p>
+                </div>
+                <div className="divide-y divide-stone-900/10 border-y border-stone-900/10 dark:divide-white/10 dark:border-white/10">
+                  <button
+                    type="button"
+                    disabled={!capabilities?.ai}
+                    onClick={() => choose("resume")}
+                    className="group flex w-full items-center gap-4 py-4 text-left transition enabled:hover:pl-2 disabled:opacity-50"
+                  >
+                    <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-white text-stone-800 shadow-sm dark:bg-stone-950 dark:text-stone-200">
+                      <FileText className="size-5" />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block font-semibold text-stone-950 dark:text-stone-50">Resume or CV</span>
+                      <span className="mt-0.5 block text-sm text-stone-500 dark:text-stone-400">For developers, designers, freelancers, and professionals</span>
+                    </span>
+                    <span className="rounded-full bg-emerald-100 px-2.5 py-1 text-[11px] font-semibold text-emerald-700 dark:bg-emerald-400/10 dark:text-emerald-300">
+                      {capabilities?.ai ? "Live" : "Unavailable"}
+                    </span>
+                    <ArrowRight className="size-4 text-stone-400 transition group-hover:translate-x-1" />
+                  </button>
+                  <button
+                    type="button"
+                    disabled={!capabilities?.ai}
+                    onClick={() => choose("competitor")}
+                    className="group flex w-full items-center gap-4 py-4 text-left transition enabled:hover:pl-2 disabled:opacity-50"
+                  >
+                    <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-white text-stone-800 shadow-sm dark:bg-stone-950 dark:text-stone-200">
+                      <Globe className="size-5" />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block font-semibold text-stone-950 dark:text-stone-50">Existing website</span>
+                      <span className="mt-0.5 block text-sm text-stone-500 dark:text-stone-400">Use the structure of a site you already have</span>
+                    </span>
+                    <span className="rounded-full bg-emerald-100 px-2.5 py-1 text-[11px] font-semibold text-emerald-700 dark:bg-emerald-400/10 dark:text-emerald-300">
+                      {capabilities?.ai ? "Live" : "Unavailable"}
+                    </span>
+                    <ArrowRight className="size-4 text-stone-400 transition group-hover:translate-x-1" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => choose("manual")}
+                    className="group flex w-full items-center gap-4 py-4 text-left transition hover:pl-2"
+                  >
+                    <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-white text-stone-800 shadow-sm dark:bg-stone-950 dark:text-stone-200">
+                      <PenLine className="size-5" />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block font-semibold text-stone-950 dark:text-stone-50">Answer a few questions</span>
+                      <span className="mt-0.5 block text-sm text-stone-500 dark:text-stone-400">No profile, document, or existing website needed</span>
+                    </span>
+                    <span className="rounded-full bg-emerald-100 px-2.5 py-1 text-[11px] font-semibold text-emerald-700 dark:bg-emerald-400/10 dark:text-emerald-300">Live</span>
+                    <ArrowRight className="size-4 text-stone-400 transition group-hover:translate-x-1" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </motion.section>
+
           <ComingSoonNotify />
         </div>
       ) : (
-        <div className="relative mx-auto w-full max-w-5xl min-w-0 px-4 pb-28 pt-6 sm:px-6 sm:pb-24 sm:pt-12">
+        <div className="relative mx-auto w-full max-w-6xl min-w-0 px-4 pb-28 pt-6 sm:px-6 sm:pb-24 sm:pt-12">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
@@ -759,26 +1014,19 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
               />
             ) : null}
 
-            {step === "analysis" && analysis ? (
-              <AnalysisReveal
-                analysis={analysis}
-                onBack={() => setStep(activeSource ? "source" : "chooser")}
-                onConfirm={onAnalysisConfirmed}
-              />
-            ) : null}
-
             {step === "review" ? (
               <div className="flex w-full min-w-0 flex-col gap-5">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                   <div className="min-w-0">
-                    <h2 className="text-xl font-semibold">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#214f43] dark:text-[#9cc2b3]">PaperChai studio</p>
+                    <h2 className="mt-1 text-2xl font-semibold tracking-[-0.025em] text-[#11130f] dark:text-stone-50">
                       {editingSiteId ? "Edit your site" : "Build your site"}
                     </h2>
                     <p className="mt-1 text-sm text-muted-foreground">
                       {editingSiteId
                         ? "Update your details and republish — your live URL stays the same."
                         : initialValues
-                          ? "We pre-filled from your import. Pick your layout and style in 3 quick steps."
+                          ? "Change only what you need, then update the preview."
                           : "Choose your site type, look, and details — see what you'll get as you go."}
                     </p>
                     {editingSiteId && slug ? (
@@ -808,7 +1056,7 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
                   {editingSiteId ? (
                     <Link
                       href="/dashboard"
-                      className="flex shrink-0 items-center gap-1.5 self-start text-sm text-muted-foreground transition-colors hover:text-foreground"
+                      className="flex shrink-0 items-center gap-1.5 self-start text-sm text-stone-500 transition-colors hover:text-[#11130f] dark:text-stone-400 dark:hover:text-white"
                     >
                       <ArrowLeft className="size-4" />
                       My sites
@@ -817,7 +1065,7 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
                     <button
                       type="button"
                       onClick={() => setStep("chooser")}
-                      className="flex shrink-0 items-center gap-1.5 self-start text-sm text-muted-foreground transition-colors hover:text-foreground"
+                      className="flex shrink-0 items-center gap-1.5 self-start text-sm text-stone-500 transition-colors hover:text-[#11130f] dark:text-stone-400 dark:hover:text-white"
                     >
                       <ArrowLeft className="size-4" />
                       Start over
@@ -830,8 +1078,9 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
                   generating={false}
                   error={error}
                   initialValues={initialValues}
-                  aiAvailable={Boolean(capabilities?.ai)}
+                  aiAvailable={Boolean(capabilities?.ai && editingSiteId)}
                   editMode={Boolean(editingSiteId)}
+                  initialStep={initialValues ? 3 : 1}
                 />
               </div>
             ) : null}
@@ -839,7 +1088,7 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
             {step === "verify" ? (
               <EmailGate
                 intent="generate"
-                onBack={() => setStep("review")}
+                onBack={() => setStep(site && !editingSiteId ? "preview" : "review")}
                 onVerified={(email) => {
                   setVerified(true);
                   setVerifiedEmail(email);
@@ -899,12 +1148,13 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
             ) : null}
 
             {step === "limit" ? (
-              <div className="flex flex-col items-center gap-5 py-8 text-center">
-                <div className="flex size-14 items-center justify-center rounded-2xl border bg-card p-2">
+              <div className="mx-auto flex w-full max-w-lg flex-col items-center gap-6 rounded-[1.5rem] border border-[#11130f]/10 bg-white/80 px-6 py-10 text-center shadow-[0_30px_80px_-55px_rgba(17,19,15,0.5)] dark:border-white/10 dark:bg-[#151815]/90">
+                <div className="flex size-14 items-center justify-center rounded-2xl bg-[#dce8e2] p-2 dark:bg-[#214f43]/20">
                   <LogoMark size={40} />
                 </div>
                 <div>
-                  <h2 className="text-xl font-semibold">You&apos;ve used your free site</h2>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#214f43] dark:text-[#9cc2b3]">Free plan</p>
+                  <h2 className="mt-2 text-2xl font-semibold tracking-[-0.025em] text-[#11130f] dark:text-stone-50">You&apos;ve used your free site</h2>
                   <p className="mx-auto mt-2 max-w-sm text-sm text-muted-foreground">
                     {error ??
                       "Your free plan includes one generated site. Paid plans with more sites are coming soon."}

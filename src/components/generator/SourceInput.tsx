@@ -139,19 +139,19 @@ function MapsShareGuide({ url }: { url: string }) {
   const steps = tab === "mobile" ? MOBILE_STEPS : DESKTOP_STEPS;
 
   return (
-    <div className="overflow-hidden rounded-xl border border-border/70 bg-card/60">
+    <div className="overflow-hidden rounded-2xl border border-[#11130f]/10 bg-white/70 dark:border-white/10 dark:bg-[#151815]">
       {/* Header */}
-      <div className="flex flex-col gap-2 border-b border-border/60 bg-muted/50 px-3 py-2.5 sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:px-4">
-        <p className="text-xs font-medium text-foreground">
+      <div className="flex flex-col gap-2 border-b border-[#11130f]/10 bg-[#ecece7] px-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:px-4 dark:border-white/10 dark:bg-white/[0.04]">
+        <p className="text-xs font-semibold text-[#11130f] dark:text-stone-100">
           Only accepts Google Maps Share links
         </p>
-        <span className="w-fit shrink-0 rounded-md border border-border/70 bg-background/80 px-2 py-0.5 font-mono text-[11px] text-muted-foreground">
+        <span className="w-fit shrink-0 rounded-md border border-[#11130f]/10 bg-white px-2 py-0.5 font-mono text-[11px] text-stone-500 dark:border-white/10 dark:bg-[#0d0f0d] dark:text-stone-400">
           maps.app.goo.gl/…
         </span>
       </div>
 
       {/* Mobile / Desktop tab toggle */}
-      <div className="flex border-b border-border/60">
+      <div className="flex border-b border-[#11130f]/10 dark:border-white/10">
         {(["mobile", "desktop"] as const).map((t) => (
           <button
             key={t}
@@ -159,8 +159,8 @@ function MapsShareGuide({ url }: { url: string }) {
             onClick={() => setTab(t)}
             className={`flex flex-1 items-center justify-center gap-1.5 py-2 text-xs font-medium transition-colors ${
               tab === t
-                ? "border-b-2 border-foreground text-foreground"
-                : "text-muted-foreground hover:text-foreground"
+                ? "border-b-2 border-[#214f43] text-[#214f43] dark:border-[#9cc2b3] dark:text-[#9cc2b3]"
+                : "text-stone-500 hover:text-stone-950 dark:text-stone-400 dark:hover:text-white"
             }`}
           >
             {t === "mobile" ? (
@@ -174,18 +174,18 @@ function MapsShareGuide({ url }: { url: string }) {
       </div>
 
       {/* Steps */}
-      <ol className="flex flex-col divide-y divide-border/50">
+      <ol className="flex flex-col divide-y divide-[#11130f]/10 dark:divide-white/10">
         {steps.map(({ icon: Icon, title, detail }, i) => (
           <li key={i} className="flex items-start gap-3 px-4 py-3">
-            <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-foreground text-[11px] font-semibold text-background">
+            <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-[#214f43] text-[11px] font-semibold text-white dark:bg-[#9cc2b3] dark:text-[#0d0f0d]">
               {i + 1}
             </span>
             <div className="flex flex-1 items-start justify-between gap-3">
               <div className="min-w-0">
-                <p className="text-sm font-medium leading-snug">{title}</p>
-                <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">{detail}</p>
+                <p className="text-sm font-semibold leading-snug text-[#11130f] dark:text-stone-100">{title}</p>
+                <p className="mt-0.5 text-xs leading-relaxed text-stone-500 dark:text-stone-400">{detail}</p>
               </div>
-              <Icon className="mt-0.5 size-4 shrink-0 text-muted-foreground" strokeWidth={1.6} />
+              <Icon className="mt-0.5 size-4 shrink-0 text-[#214f43] dark:text-[#9cc2b3]" strokeWidth={1.6} />
             </div>
           </li>
         ))}
@@ -196,12 +196,12 @@ function MapsShareGuide({ url }: { url: string }) {
         <div
           className={
             isValid
-              ? "flex items-center gap-2 border-t border-emerald-500/20 bg-emerald-500/10 px-4 py-2 text-xs font-medium text-emerald-700 dark:text-emerald-300"
+              ? "flex items-center gap-2 border-t border-[#214f43]/20 bg-[#dce8e2] px-4 py-2 text-xs font-medium text-[#173b32] dark:bg-[#214f43]/20 dark:text-[#b9d5ca]"
               : "flex items-center gap-2 border-t border-destructive/20 bg-destructive/10 px-4 py-2 text-xs font-medium text-destructive"
           }
         >
           <span
-            className={`size-1.5 rounded-full ${isValid ? "bg-emerald-500" : "bg-destructive"}`}
+            className={`size-1.5 rounded-full ${isValid ? "bg-[#214f43] dark:bg-[#9cc2b3]" : "bg-destructive"}`}
           />
           {isValid
             ? "Looks good — this is a valid Google Maps link"
@@ -296,23 +296,24 @@ export function SourceInput({
     cfg.kind === "url" ? url.trim().length > 3 : text.trim().length > 10;
 
   return (
-    <form onSubmit={handleSubmit} className="flex w-full min-w-0 flex-col gap-5">
+    <form onSubmit={handleSubmit} className="mx-auto flex w-full max-w-3xl min-w-0 flex-col gap-6">
       <button
         type="button"
         onClick={onBack}
-        className="flex w-fit items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+        className="flex w-fit items-center gap-1.5 text-sm text-stone-500 transition-colors hover:text-[#11130f] dark:text-stone-400 dark:hover:text-white"
       >
         <ArrowLeft className="size-4" />
         Choose a different source
       </button>
 
-      <div className="flex min-w-0 items-start gap-3">
-        <div className="flex size-11 shrink-0 items-center justify-center rounded-xl border bg-card">
-          <Icon className="size-5" strokeWidth={1.6} />
+      <div className="flex min-w-0 items-start gap-4 border-b border-[#11130f]/10 pb-6 dark:border-white/10">
+        <div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[#dce8e2] text-[#214f43] dark:bg-[#214f43]/25 dark:text-[#9cc2b3]">
+          <Icon className="size-5" strokeWidth={1.8} />
         </div>
         <div className="min-w-0">
-          <h2 className="text-lg font-semibold sm:text-xl">{cfg.title}</h2>
-          <p className="mt-0.5 text-sm text-muted-foreground">{cfg.blurb}</p>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#214f43] dark:text-[#9cc2b3]">Choose your starting point</p>
+          <h2 className="mt-1 text-2xl font-semibold tracking-[-0.025em] text-[#11130f] dark:text-stone-50 sm:text-3xl">{cfg.title}</h2>
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-stone-500 dark:text-stone-400">{cfg.blurb}</p>
         </div>
       </div>
 
@@ -321,9 +322,9 @@ export function SourceInput({
           <button
             type="button"
             onClick={() => fileRef.current?.click()}
-            className="flex flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-white/15 bg-card/40 px-6 py-8 text-center transition-colors hover:border-white/30 hover:bg-card/60"
+            className="flex flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-[#11130f]/20 bg-white/60 px-6 py-10 text-center transition-colors hover:border-[#214f43]/45 hover:bg-white dark:border-white/15 dark:bg-white/[0.03] dark:hover:border-[#9cc2b3]/50"
           >
-            <Upload className="size-6 text-muted-foreground" />
+            <Upload className="size-6 text-[#214f43] dark:text-[#9cc2b3]" />
             <span className="text-sm font-medium">
               {fileName ?? "Upload a PDF (resume, CV or LinkedIn export)"}
             </span>
@@ -378,7 +379,7 @@ export function SourceInput({
 
       {error ? <p className="text-sm text-destructive">{error}</p> : null}
 
-      <Button type="submit" size="lg" disabled={loading || !canSubmit}>
+      <Button type="submit" size="lg" disabled={loading || !canSubmit} className="h-12 bg-[#214f43] text-white hover:bg-[#173b32] dark:bg-[#9cc2b3] dark:text-[#0d0f0d] dark:hover:bg-[#b9d5ca]">
         {loading ? (
           <>
             <Loader2 className="size-4 animate-spin" />

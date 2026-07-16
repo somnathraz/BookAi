@@ -332,9 +332,10 @@ function pick<T>(value: unknown, allowed: T[], fallback: T): T {
   return allowed.includes(value as T) ? (value as T) : fallback;
 }
 
-// Validate an AI-proposed design against the closed sets, falling back to the
-// archetype default for anything missing or invalid. When `userKit` is set the
-// user picked a kit explicitly, so it is forced and overrides the AI's choice.
+// Validate an AI-proposed design against the closed sets. The overall visual
+// kit is deterministic: an explicit user choice wins, otherwise the archetype
+// default shown in preview wins. AI can vary density and section layouts but
+// cannot swap the visual personality after the user has previewed it.
 export function sanitizeDesign(
   raw: unknown,
   archetype: Archetype,
@@ -354,11 +355,7 @@ export function sanitizeDesign(
   };
   const v = r.variants ?? {};
 
-  // Kit precedence: forced user choice → AI's valid choice → archetype default.
-  const aiKit = VISUAL_KITS.includes(r.visualKit as VisualKit)
-    ? (r.visualKit as VisualKit)
-    : undefined;
-  const kit = userKit ?? aiKit ?? base.visualKit;
+  const kit = userKit ?? base.visualKit;
 
   const design: SiteDesign = {
     styleTheme: pick(r.styleTheme, STYLE_THEMES, base.styleTheme),

@@ -9,7 +9,6 @@ import { BasicCheckoutButton } from "@/components/billing/BasicCheckoutButton";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Tilt3D } from "@/components/marketing/motion-primitives";
 
 type Period = "monthly" | "annual";
 
@@ -80,7 +79,7 @@ export function PricingPlans() {
   return (
     <div>
       <div className="flex justify-center">
-        <div className="inline-flex items-center gap-1 rounded-full border bg-card/60 p-1">
+        <div className="inline-flex items-center gap-1 rounded-full border border-[#11130f]/10 bg-white/70 p-1 dark:border-white/10 dark:bg-[#151815]">
           {PERIODS.map((p) => {
             const active = period === p.id;
             return (
@@ -90,14 +89,14 @@ export function PricingPlans() {
                 onClick={() => setPeriod(p.id)}
                 className={cn(
                   "relative flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium transition-colors",
-                  active ? "text-background" : "text-muted-foreground hover:text-foreground"
+                  active ? "text-white dark:text-[#0d0f0d]" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 {active ? (
                   <motion.span
                     layoutId="period-pill"
                     transition={{ type: "spring", stiffness: 400, damping: 32 }}
-                    className="absolute inset-0 rounded-full bg-foreground"
+                    className="absolute inset-0 rounded-full bg-[#214f43] dark:bg-[#9cc2b3]"
                   />
                 ) : null}
                 <span className="relative">{p.label}</span>
@@ -105,7 +104,7 @@ export function PricingPlans() {
                   <span
                     className={cn(
                       "relative rounded-full px-1.5 py-0.5 text-[10px] font-semibold",
-                      active ? "bg-background/20 text-background" : "bg-foreground/10 text-foreground"
+                      active ? "bg-white/20 text-white dark:bg-black/10 dark:text-[#0d0f0d]" : "bg-foreground/10 text-foreground"
                     )}
                   >
                     {p.note}
@@ -139,13 +138,12 @@ export function PricingPlans() {
               }}
               style={{ transformStyle: "preserve-3d" }}
             >
-              <Tilt3D maxTilt={5} lift className="h-full">
                 <div
                   className={cn(
-                    "relative flex h-full flex-col overflow-hidden rounded-3xl border p-8",
+                    "relative flex h-full flex-col overflow-hidden rounded-[1.5rem] border bg-white/75 p-8 dark:bg-[#151815]/90",
                     tier.popular
-                      ? "border-foreground/30 bg-card shadow-2xl shadow-black/30"
-                      : "border-border bg-card/60"
+                      ? "border-[#214f43] shadow-[0_30px_80px_-50px_rgba(33,79,67,0.55)] dark:border-[#9cc2b3]"
+                      : "border-[#11130f]/10 dark:border-white/10"
                   )}
                 >
                   {tier.popular ? (
@@ -184,7 +182,7 @@ export function PricingPlans() {
                   <ul className="mt-6 flex flex-1 flex-col gap-3">
                     {tier.features.map((f) => (
                       <li key={f} className="flex items-start gap-2.5 text-sm">
-                        <Check className="mt-0.5 size-4 shrink-0 text-foreground" />
+                        <Check className="mt-0.5 size-4 shrink-0 text-[#214f43] dark:text-[#9cc2b3]" />
                         <span className="text-muted-foreground">{f}</span>
                       </li>
                     ))}
@@ -195,17 +193,16 @@ export function PricingPlans() {
                         period={period}
                         size="lg"
                         variant={tier.popular ? "default" : "outline"}
-                        className="w-full"
+                        className="w-full bg-[#214f43] text-white hover:bg-[#173b32] dark:bg-[#9cc2b3] dark:text-[#0d0f0d] dark:hover:bg-[#b9d5ca]"
                         label={tier.cta}
                       />
                     ) : (
-                      <Button size="lg" className="w-full" asChild>
+                      <Button size="lg" className="w-full bg-[#214f43] text-white hover:bg-[#173b32] dark:bg-[#9cc2b3] dark:text-[#0d0f0d] dark:hover:bg-[#b9d5ca]" asChild>
                         <Link href={tier.href ?? "/"}>{tier.cta}</Link>
                       </Button>
                     )}
                   </div>
                 </div>
-              </Tilt3D>
             </motion.div>
           );
         })}

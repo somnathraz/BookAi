@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Newsreader } from "next/font/google";
 
 import { LOGO_PATH, PRODUCT_NAME } from "@/lib/brand";
 import {
@@ -24,6 +24,13 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-mono",
+  subsets: ["latin"],
+  display: "swap",
+  preload: false,
+});
+
+const newsreader = Newsreader({
+  variable: "--font-editorial",
   subsets: ["latin"],
   display: "swap",
   preload: false,
@@ -81,7 +88,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
+        className={`${geistSans.variable} ${geistMono.variable} ${newsreader.variable} antialiased bg-background text-foreground`}
       >
         <ThemeProvider>
           <GoogleAnalytics />

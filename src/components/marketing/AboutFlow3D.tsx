@@ -20,8 +20,6 @@ import {
 
 import { cn } from "@/lib/utils";
 
-const EASE = [0.22, 1, 0.36, 1] as const;
-
 const STEPS = [
   {
     id: "import",
@@ -153,7 +151,7 @@ export function AboutFlow3D() {
                   <span className="rounded-md bg-foreground px-3 py-1.5 text-[10px] font-medium text-background">
                     Import business
                   </span>
-                  <Sparkles className="size-3.5 text-amber-500" />
+                  <Sparkles className="size-3.5 text-[#214f43] dark:text-[#9cc2b3]" />
                 </div>
                 <p className="mt-3 text-[10px] text-muted-foreground">
                   Reviews · photos · hours · rating
@@ -187,15 +185,15 @@ export function AboutFlow3D() {
                   {["Business name & tagline", "Services & photos", "Contact & hours"].map(
                     (item) => (
                       <li key={item} className="flex items-center gap-2 text-[11px]">
-                        <span className="flex size-4 items-center justify-center rounded-full bg-emerald-500/15">
-                          <Check className="size-2.5 text-emerald-600 dark:text-emerald-400" />
+                        <span className="flex size-4 items-center justify-center rounded-full bg-[#214f43]/15 dark:bg-[#9cc2b3]/15">
+                          <Check className="size-2.5 text-[#214f43] dark:text-[#9cc2b3]" />
                         </span>
                         <span className="text-foreground">{item}</span>
                       </li>
                     )
                   )}
                 </ul>
-                <p className="mt-3 rounded-md border border-amber-400/30 bg-amber-400/10 px-2 py-1.5 text-[10px] text-amber-900 dark:text-amber-100/90">
+                <p className="mt-3 rounded-md border border-[#214f43]/20 bg-[#dce8e2] px-2 py-1.5 text-[10px] text-[#173b32] dark:bg-[#214f43]/20 dark:text-[#b9d5ca]">
                   Nothing goes live until you publish
                 </p>
               </div>
@@ -224,11 +222,11 @@ export function AboutFlow3D() {
                   <span className="font-mono text-[10px] text-foreground">
                     glowgrace.paperchaiapp.com
                   </span>
-                  <span className="ml-auto text-[9px] font-semibold text-emerald-600 dark:text-emerald-400">
+                  <span className="ml-auto text-[9px] font-semibold text-[#214f43] dark:text-[#9cc2b3]">
                     Live
                   </span>
                 </div>
-                <div className="h-14 bg-gradient-to-br from-rose-300 to-orange-300 dark:from-rose-500/50 dark:to-orange-400/40" />
+                <div className="h-14 bg-gradient-to-br from-[#dce8e2] to-[#9cc2b3] dark:from-[#214f43]/70 dark:to-[#9cc2b3]/45" />
                 <div className="p-3">
                   <p className="text-[10px] font-semibold">Book an appointment</p>
                   <div className="mt-2 grid grid-cols-3 gap-1">

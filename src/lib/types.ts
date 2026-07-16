@@ -310,6 +310,9 @@ export interface SiteData {
 // What the input form (or future extractors) collects. Most fields optional —
 // the generator fills domain-aware defaults for anything missing.
 export interface GeneratorInput {
+  /** How the factual content entered the builder. Imported sources never receive
+   *  demo content when a field is missing. */
+  source?: SourceId;
   name: string;
   domain: BusinessDomain;
   theme: ThemeMode;
@@ -381,6 +384,8 @@ export interface Capabilities {
   provider: string | null;
   providers: { id: string; label: string }[];
   google: boolean;
+  /** Server-side business name search is configured. */
+  businessSearch?: boolean;
   /** Gmail/OTP configured — when false, the email gate is skipped. */
   email: boolean;
 }

@@ -440,6 +440,7 @@ const ARCHETYPE_CTA: Record<Archetype, SiteCTA | null> = {
 export function generateSite(input: GeneratorInput): SiteData {
   const preset = DOMAIN_PRESETS[input.domain] ?? DOMAIN_PRESETS.other;
   const icons = preset.serviceIcons;
+  const imported = Boolean(input.source && input.source !== "manual");
 
   const services: ServiceItem[] =
     input.services && input.services.length > 0
@@ -448,7 +449,9 @@ export function generateSite(input: GeneratorInput): SiteData {
           description: fallback(s.description, "A service I'm proud to offer."),
           icon: icons[i % icons.length],
         }))
-      : preset.services;
+      : imported
+        ? []
+        : preset.services;
 
   const work: WorkItem[] =
     input.work && input.work.length > 0
@@ -460,7 +463,9 @@ export function generateSite(input: GeneratorInput): SiteData {
           tech: w.tech?.length ? w.tech : undefined,
           highlights: w.highlights?.length ? w.highlights : undefined,
         }))
-      : preset.work;
+      : imported
+        ? []
+        : preset.work;
 
   const testimonials: Testimonial[] =
     input.testimonials && input.testimonials.length > 0
@@ -471,7 +476,7 @@ export function generateSite(input: GeneratorInput): SiteData {
           rating: t.rating ?? 5,
           verified: t.verified,
         }))
-      : preset.testimonials;
+      : [];
 
   const projects: WorkItem[] = (input.projects ?? [])
     .filter((p) => p.title?.trim())
@@ -532,7 +537,7 @@ export function generateSite(input: GeneratorInput): SiteData {
     bio: {
       heading: preset.bioHeading,
       body: fallback(input.bio, preset.bioBody),
-      stats: preset.stats,
+      stats: [],
     },
     services,
     work,

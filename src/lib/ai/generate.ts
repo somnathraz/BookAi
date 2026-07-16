@@ -126,7 +126,7 @@ Return ONLY a JSON object with EXACTLY this shape:
   "sections": [ { "type": one of the allowed block types, "label": short eyebrow, "heading": section heading } ],
   "design": { "visualKit": string, "styleTheme": string, "density": string, "variants": { "services": string, "work": string, "testimonials": string, "gallery": string } }
 }
-Provide 3-4 services (business only), 3-5 work items, and 0-3 testimonials (only real ones). For each work item: "tag" = company or category; "period" = dates if known (e.g. "2021 — Present"); "tech" = 3-6 technologies actually used (omit for non-technical fields); "highlights" = 2-3 short, concrete achievement bullets (<= 14 words each). "projects" = personal/side projects with the tech used (great for profiles & portfolios). "skills" = the technologies/tools mastered (for the marquee). "languages"/"interests" = copy from the input when present, else []. For "certifications": include ONLY names present in the input — never invent new credentials. For each name, write "detail" as one helpful line (12-20 words) explaining what it validates or demonstrates; you may use well-known public knowledge about major certs (AWS, PMP, CPA, etc.) but do NOT invent issuer, date, score, or ID numbers.${base.archetype === "profile" ? ' For profile sites, bio.body MUST be 2-3 paragraphs separated by blank lines (use \\n\\n), 100-150 words — expand thoughtfully from the resume bio and work history.' : ""} NEVER invent tech, dates, or metrics not supported by the input. "menu" = ONLY for a restaurant/café/food business — 6-12 plausible items with a short "category" each (e.g. Starters, Mains, Drinks) and a "price" only if a currency/figure is supported; otherwise omit price and return [] for non-food businesses. "faq" = 3-5 short, genuinely useful question/answer pairs a real visitor would ask this business (location, booking, pricing approach, what to expect) — answers <= 35 words, never inventing specific facts. The "cta" must fit the site type (profile/portfolio = hire/collaborate/contact). The "sections" array is the ordered page structure you choose for THIS ${base.archetype} site — pick the blocks that fit and skip the rest. Do not include any keys beyond those shown.`;
+Return only services, work, projects, testimonials, statistics, and menu items that are directly supported by the supplied profile. Empty is better than invented content; do not fill quotas. For each factual work item: "tag" = company or category; "period" = dates if known (e.g. "2021 — Present"); "tech" = technologies actually supplied; "highlights" = short achievements grounded in the input. "skills" = supplied technologies/tools only. "languages"/"interests" = copy from the input when present, else []. For "certifications": include ONLY names present in the input — never invent new credentials. For each name, write "detail" as one helpful line (12-20 words) explaining what it validates or demonstrates; you may use well-known public knowledge about major certs (AWS, PMP, CPA, etc.) but do NOT invent issuer, date, score, or ID numbers.${base.archetype === "profile" ? ' For profile sites, bio.body MUST be 2-3 paragraphs separated by blank lines (use \\n\\n), 100-150 words — expand thoughtfully from the resume bio and work history.' : ""} NEVER invent tech, dates, services, menu items, client names, testimonials, statistics, or metrics. "menu" must be [] unless menu items are explicitly present in the input. "faq" = 3-5 short, genuinely useful question/answer pairs a real visitor would ask this business (location, booking, pricing approach, what to expect) — answers <= 35 words and must not invent specific facts. The "cta" must fit the site type (profile/portfolio = hire/collaborate/contact). The "sections" array is the ordered page structure you choose for THIS ${base.archetype} site — pick the blocks that fit and skip the rest. Do not include any keys beyond those shown.`;
 }
 
 interface AiSite {
@@ -187,8 +187,13 @@ function strArray(v: unknown, max: number, len: number): string[] | undefined {
 // fully-populated SiteData; AI improves the copy. Identity/theme/contact are
 // forced from the user's input so AI can't drift on facts.
 function mergeSite(base: SiteData, ai: AiSite, input: GeneratorInput): SiteData {
-  const services: ServiceItem[] =
-    Array.isArray(ai.services) && ai.services.length
+  const manualSource = !input.source || input.source === "manual";
+  const services: ServiceItem[] = input.services?.length
+    ? base.services.map((service, i) => ({
+        ...service,
+        description: str(ai.services?.[i]?.description, service.description),
+      }))
+    : manualSource && Array.isArray(ai.services) && ai.services.length
       ? ai.services.slice(0, 4).map((s, i) => ({
           title: str(s.title, base.services[i]?.title ?? "Service"),
           description: str(s.description, base.services[i]?.description ?? ""),
@@ -199,8 +204,12 @@ function mergeSite(base: SiteData, ai: AiSite, input: GeneratorInput): SiteData 
         }))
       : base.services;
 
-  const work: WorkItem[] =
-    Array.isArray(ai.work) && ai.work.length
+  const work: WorkItem[] = input.work?.length
+    ? base.work.map((item, i) => ({
+        ...item,
+        description: str(ai.work?.[i]?.description, item.description),
+      }))
+    : manualSource && Array.isArray(ai.work) && ai.work.length
       ? ai.work.slice(0, 5).map((w, i) => ({
           title: str(w.title, base.work[i]?.title ?? "Highlight"),
           description: str(w.description, base.work[i]?.description ?? ""),
@@ -211,8 +220,12 @@ function mergeSite(base: SiteData, ai: AiSite, input: GeneratorInput): SiteData 
         }))
       : base.work;
 
-  const projects: WorkItem[] =
-    Array.isArray(ai.projects) && ai.projects.length
+  const projects: WorkItem[] = input.projects?.length
+    ? base.projects.map((item, i) => ({
+        ...item,
+        description: str(ai.projects?.[i]?.description, item.description),
+      }))
+    : manualSource && Array.isArray(ai.projects) && ai.projects.length
       ? ai.projects.slice(0, 6).map((p, i) => ({
           title: str(p.title, base.projects[i]?.title ?? "Project"),
           description: str(p.description, base.projects[i]?.description ?? ""),
@@ -229,46 +242,13 @@ function mergeSite(base: SiteData, ai: AiSite, input: GeneratorInput): SiteData 
   const languages = strArray(ai.languages, 8, 40) ?? base.languages;
   const interests = strArray(ai.interests, 10, 40) ?? base.interests;
 
-  // Prefer real testimonials from the user's input; then AI's (only if it
-  // returned any); never fabricate beyond what's provided.
-  const aiTestimonials: Testimonial[] = Array.isArray(ai.testimonials)
-    ? ai.testimonials
-        .filter((t) => t && t.quote && t.author)
-        .slice(0, 4)
-        .map((t) => ({
-          quote: t.quote!.trim(),
-          author: t.author!.trim(),
-          role: t.role?.trim(),
-          rating: 5,
-        }))
-    : [];
-  const testimonials: Testimonial[] =
-    input.testimonials && input.testimonials.length
-      ? base.testimonials
-      : aiTestimonials.length
-        ? aiTestimonials
-        : base.testimonials;
+  // Testimonials are factual source data. AI may rewrite surrounding copy but
+  // cannot create or replace customer quotes.
+  const testimonials: Testimonial[] = base.testimonials;
 
-  const stats: Stat[] =
-    Array.isArray(ai.bio?.stats) && ai.bio!.stats!.length
-      ? ai.bio!.stats!
-          .filter((s) => s && s.label && s.value)
-          .slice(0, 3)
-          .map((s) => ({ label: String(s.label).slice(0, 40), value: String(s.value).slice(0, 16) }))
-      : base.bio.stats;
+  const stats: Stat[] = base.bio.stats;
 
-  const menu: MenuItem[] | undefined = Array.isArray(ai.menu)
-    ? ai.menu
-        .filter((m) => m && m.name)
-        .slice(0, 16)
-        .map((m) => ({
-          name: String(m.name).slice(0, 80),
-          description: m.description ? String(m.description).slice(0, 140) : undefined,
-          price: m.price ? String(m.price).slice(0, 16) : undefined,
-          category: m.category ? String(m.category).slice(0, 40) : undefined,
-          tag: m.tag ? String(m.tag).slice(0, 24) : undefined,
-        }))
-    : undefined;
+  const menu: MenuItem[] | undefined = base.menu;
 
   const faq: FaqItem[] | undefined = Array.isArray(ai.faq)
     ? ai.faq

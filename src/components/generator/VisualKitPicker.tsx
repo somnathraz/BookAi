@@ -41,7 +41,7 @@ function demoDesign(kit: VisualKit): SiteDesign {
 function KitPreview({ kit, accent }: { kit: VisualKit; accent?: string }) {
   const st = siteStyle(demoDesign(kit));
   return (
-    <div className="flex flex-col gap-2 rounded-md bg-muted/40 p-3">
+    <div className="flex flex-col gap-2 rounded-lg bg-[#f3f3ef] p-3 dark:bg-white/[0.04]">
       <span className={cn("text-[8px] text-muted-foreground", st.eyebrow)}>
         STUDIO
       </span>
@@ -77,21 +77,21 @@ export function VisualKitPicker({
 }) {
   return (
     <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
-      {/* Auto — let generation choose the best-fitting kit. */}
+      {/* Auto — use the stable best-fitting kit for the selected site type. */}
       <button
         type="button"
         onClick={() => onChange(undefined)}
         className={cn(
           "flex flex-col gap-2 rounded-xl border p-3 text-left transition-colors",
           value === undefined
-            ? "border-foreground bg-accent"
-            : "border-input hover:bg-accent/50"
+            ? "border-[#214f43] bg-[#dce8e2] dark:border-[#9cc2b3] dark:bg-[#214f43]/20"
+            : "border-[#11130f]/10 hover:border-[#214f43]/35 hover:bg-[#f3f3ef] dark:border-white/10 dark:hover:border-[#9cc2b3]/35 dark:hover:bg-white/[0.04]"
         )}
       >
-        <div className="flex min-h-[104px] flex-col items-center justify-center gap-2 rounded-md bg-muted/40 p-3 text-center">
-          <Sparkles className="size-5 text-foreground" />
+        <div className="flex min-h-[104px] flex-col items-center justify-center gap-2 rounded-lg bg-[#f3f3ef] p-3 text-center dark:bg-white/[0.04]">
+          <Sparkles className="size-5 text-[#214f43] dark:text-[#9cc2b3]" />
           <span className="text-[10px] leading-snug text-muted-foreground">
-            Smart pick from your profile
+            Best fit for this site type
           </span>
         </div>
         <span className="flex items-center gap-1.5 text-sm font-semibold">
@@ -99,7 +99,7 @@ export function VisualKitPicker({
           Auto
         </span>
         <span className="text-xs leading-snug text-muted-foreground">
-          Let PaperChai choose the look.
+          A stable, preview-safe default.
         </span>
       </button>
 
@@ -112,7 +112,9 @@ export function VisualKitPicker({
             onClick={() => onChange(kit.id)}
             className={cn(
               "flex flex-col gap-2 rounded-xl border p-3 text-left transition-colors",
-              active ? "border-foreground bg-accent" : "border-input hover:bg-accent/50"
+              active
+                ? "border-[#214f43] bg-[#dce8e2] dark:border-[#9cc2b3] dark:bg-[#214f43]/20"
+                : "border-[#11130f]/10 hover:border-[#214f43]/35 hover:bg-[#f3f3ef] dark:border-white/10 dark:hover:border-[#9cc2b3]/35 dark:hover:bg-white/[0.04]"
             )}
           >
             <KitPreview kit={kit.id} accent={accent} />

@@ -42,6 +42,12 @@ export async function resolveMapsUrl(rawUrl: string): Promise<string> {
 }
 
 export function extractPlaceId(url: string): string | null {
+  try {
+    const placeId = new URL(url).searchParams.get("query_place_id");
+    if (placeId) return placeId;
+  } catch {
+    /* Continue with path-based formats. */
+  }
   const chij = url.match(/[!&]1s(ChIJ[A-Za-z0-9_\-]+)/);
   if (chij) return chij[1];
   const gid = url.match(/[!&]16s(?:%2Fg%2F|\/g\/)([A-Za-z0-9_\-]+)/i);

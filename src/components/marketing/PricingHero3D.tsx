@@ -131,7 +131,7 @@ export function PricingHero3D() {
                   Basic
                 </span>
               </div>
-              <div className="h-16 bg-gradient-to-br from-rose-300 via-rose-400 to-orange-300 dark:from-rose-500/60 dark:to-orange-400/50" />
+              <div className="h-16 bg-gradient-to-br from-[#dce8e2] via-[#9cc2b3] to-[#6f9e8d] dark:from-[#214f43]/70 dark:to-[#9cc2b3]/50" />
               <div className="p-3">
                 <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
                   Book a slot
@@ -171,7 +171,7 @@ export function PricingHero3D() {
               transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
               className="flex items-center gap-2 rounded-full border border-border/70 bg-background/95 px-3 py-2 shadow-xl backdrop-blur dark:border-white/12"
             >
-              <Sparkles className="size-3.5 text-amber-500" />
+              <Sparkles className="size-3.5 text-[#214f43] dark:text-[#9cc2b3]" />
               <span className="text-[11px] font-medium">5 sites included</span>
             </motion.div>
           </motion.div>

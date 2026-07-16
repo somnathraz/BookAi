@@ -1,10 +1,16 @@
-import type { AnalysisResult, GeneratorInput } from "@/lib/types";
+import type {
+  AnalysisResult,
+  GeneratorInput,
+  SiteData,
+  ThemeMode,
+} from "@/lib/types";
 import type { SourceId } from "@/lib/types";
 
 const STORAGE_KEY = "paperchai_studio_draft";
+export const DRAFT_PREVIEW_STORAGE_KEY = "paperchai_draft_preview";
 const MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000; // keep import data for a week
 
-export type DraftStep = "source" | "analysis" | "review";
+export type DraftStep = "source" | "analysis" | "review" | "preview";
 
 export interface StudioDraft {
   step: DraftStep;
@@ -44,7 +50,33 @@ export function clearStudioDraft(): void {
   if (typeof window === "undefined") return;
   try {
     sessionStorage.removeItem(STORAGE_KEY);
+    sessionStorage.removeItem(DRAFT_PREVIEW_STORAGE_KEY);
   } catch {
     /* ignore */
+  }
+}
+
+export function saveDraftSitePreview(site: SiteData, theme: ThemeMode): void {
+  if (typeof window === "undefined") return;
+  try {
+    sessionStorage.setItem(
+      DRAFT_PREVIEW_STORAGE_KEY,
+      JSON.stringify({ site, theme })
+    );
+  } catch {
+    /* quota / private mode */
+  }
+}
+
+export function loadDraftSitePreview(): {
+  site: SiteData;
+  theme: ThemeMode;
+} | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = sessionStorage.getItem(DRAFT_PREVIEW_STORAGE_KEY);
+    return raw ? (JSON.parse(raw) as { site: SiteData; theme: ThemeMode }) : null;
+  } catch {
+    return null;
   }
 }

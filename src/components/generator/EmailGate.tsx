@@ -84,19 +84,19 @@ export function EmailGate({
       initial={{ opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: EASE }}
-      className="flex w-full min-w-0 flex-col gap-5"
+      className="mx-auto flex w-full max-w-lg min-w-0 flex-col gap-6 rounded-[1.5rem] border border-[#11130f]/10 bg-white/80 p-5 shadow-[0_30px_80px_-55px_rgba(17,19,15,0.5)] dark:border-white/10 dark:bg-[#151815]/90 sm:p-7"
     >
       <button
         type="button"
         onClick={onBack}
-        className="flex w-fit items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+        className="flex w-fit items-center gap-1.5 text-sm text-stone-500 transition-colors hover:text-[#11130f] dark:text-stone-400 dark:hover:text-white"
       >
         <ArrowLeft className="size-4" />
-        Back to editor
+        {intent === "generate" ? "Back to preview" : "Back to editor"}
       </button>
 
       <div className="flex min-w-0 items-start gap-3">
-        <div className="flex size-11 shrink-0 items-center justify-center rounded-xl border bg-card">
+        <div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[#dce8e2] text-[#214f43] dark:bg-[#214f43]/25 dark:text-[#9cc2b3]">
           {phase === "email" ? (
             <Mail className="size-5" />
           ) : (
@@ -104,18 +104,19 @@ export function EmailGate({
           )}
         </div>
         <div className="min-w-0">
-          <h2 className="text-balance text-lg font-semibold sm:text-xl">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#214f43] dark:text-[#9cc2b3]">Secure your website</p>
+          <h2 className="mt-1 text-balance text-2xl font-semibold tracking-[-0.025em] text-[#11130f] dark:text-stone-50">
             {phase === "email"
               ? intent === "continue"
                 ? "Verify your email to continue"
                 : "Where should we send your site?"
               : "Enter your code"}
           </h2>
-          <p className="mt-0.5 break-words text-sm text-muted-foreground">
+          <p className="mt-2 break-words text-sm leading-6 text-stone-500 dark:text-stone-400">
             {phase === "email"
               ? intent === "continue"
                 ? "One quick code before we import your data — your free plan includes one site."
-                : "Verify your email to generate your site — your free plan includes one."
+                : "Verify your email to publish this preview and receive your private edit link."
               : delivered
                 ? `We sent a 6-digit code to ${email}.`
                 : "Dev mode — no email configured. Use the code below."}
@@ -134,7 +135,7 @@ export function EmailGate({
             required
           />
           {error ? <p className="text-sm text-destructive">{error}</p> : null}
-          <Button type="submit" size="lg" disabled={loading || !email.trim()}>
+          <Button type="submit" size="lg" disabled={loading || !email.trim()} className="h-12 bg-[#214f43] text-white hover:bg-[#173b32] dark:bg-[#9cc2b3] dark:text-[#0d0f0d] dark:hover:bg-[#b9d5ca]">
             {loading ? (
               <>
                 <Loader2 className="size-4 animate-spin" />
@@ -154,7 +155,7 @@ export function EmailGate({
             <button
               type="button"
               onClick={() => setCode(devCode)}
-              className="rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-center text-sm text-amber-200/90 transition-colors hover:bg-amber-500/15"
+              className="rounded-xl border border-[#214f43]/20 bg-[#dce8e2] px-3 py-2 text-center text-sm text-[#173b32] transition-colors hover:bg-[#cbded6] dark:bg-[#214f43]/20 dark:text-[#b9d5ca]"
             >
               Dev code: <span className="font-mono font-semibold">{devCode}</span> — tap to fill
             </button>
@@ -168,7 +169,7 @@ export function EmailGate({
             className="text-center text-2xl tracking-[0.5em]"
           />
           {error ? <p className="text-sm text-destructive">{error}</p> : null}
-          <Button type="submit" size="lg" disabled={loading || code.length < 6}>
+          <Button type="submit" size="lg" disabled={loading || code.length < 6} className="h-12 bg-[#214f43] text-white hover:bg-[#173b32] dark:bg-[#9cc2b3] dark:text-[#0d0f0d] dark:hover:bg-[#b9d5ca]">
             {loading ? (
               <>
                 <Loader2 className="size-4 animate-spin" />
@@ -176,7 +177,7 @@ export function EmailGate({
               </>
             ) : (
               <>
-                {intent === "continue" ? "Verify & continue" : "Verify & generate"}
+                {intent === "continue" ? "Verify & continue" : "Verify & publish"}
                 <ArrowRight className="size-4" />
               </>
             )}

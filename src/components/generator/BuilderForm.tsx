@@ -11,6 +11,7 @@ export function BuilderForm({
   initialValues,
   aiAvailable = false,
   editMode = false,
+  initialStep = 1,
 }: {
   onGenerate: (input: GeneratorInput) => void;
   generating: boolean;
@@ -18,6 +19,7 @@ export function BuilderForm({
   initialValues?: Partial<GeneratorInput>;
   aiAvailable?: boolean;
   editMode?: boolean;
+  initialStep?: 1 | 2 | 3;
 }) {
   return (
     <SiteBuilderWizard
@@ -27,6 +29,7 @@ export function BuilderForm({
       initialValues={initialValues}
       aiAvailable={aiAvailable}
       editMode={editMode}
+      initialStep={initialStep}
     />
   );
 }

@@ -4,7 +4,6 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
 import { MarketingBackdrop } from "@/components/marketing/MarketingBackdrop";
 import { PricingHero3D } from "@/components/marketing/PricingHero3D";
 import { PricingPlans } from "@/components/marketing/PricingPlans";
@@ -40,20 +39,20 @@ export function PricingPageContent() {
             className="text-center lg:text-left"
           >
             <motion.div variants={fadeUp}>
-              <Badge variant="secondary" className="mb-6 rounded-full px-3 py-1">
-                <Sparkles className="mr-1.5 size-3.5" />
+              <p className="mb-6 flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#214f43] dark:text-[#9cc2b3] lg:justify-start">
+                <Sparkles className="size-3.5" />
                 Start free — pay only when you grow
-              </Badge>
+              </p>
             </motion.div>
             <motion.h1
               variants={fadeUp}
-              className="text-balance text-4xl font-semibold tracking-tight sm:text-5xl lg:text-[3.25rem]"
+              className="text-balance text-5xl font-medium leading-[0.98] tracking-[-0.05em] text-[#11130f] dark:text-stone-50 sm:text-6xl"
             >
               Simple, honest pricing
             </motion.h1>
             <motion.p
               variants={fadeUp}
-              className="mx-auto mt-4 max-w-xl text-pretty text-lg text-muted-foreground lg:mx-0"
+              className="mx-auto mt-6 max-w-xl text-pretty text-lg leading-8 text-stone-600 dark:text-stone-300 lg:mx-0"
             >
               Your first site is free, forever. Upgrade to Basic when you need
               booking, a custom domain, and more sites.
@@ -83,11 +82,11 @@ export function PricingPageContent() {
         transition={{ duration: 0.65, ease: EASE }}
         className="relative mx-auto max-w-5xl px-6 pb-16"
       >
-        <div className="grid gap-px overflow-hidden rounded-xl border border-border/70 bg-border/70 dark:border-white/10 dark:bg-white/10 md:grid-cols-3">
+        <div className="grid border-y border-[#11130f]/10 dark:border-white/10 md:grid-cols-3">
           {VALUE_PROPS.map((v) => (
             <div
               key={v.title}
-              className="bg-background/80 p-5 backdrop-blur dark:bg-background/50"
+              className="border-b border-[#11130f]/10 p-5 last:border-b-0 dark:border-white/10 md:border-b-0 md:border-l md:first:border-l-0"
             >
               <p className="text-sm font-semibold">{v.title}</p>
               <p className="mt-1.5 text-sm text-muted-foreground">{v.body}</p>

@@ -4,10 +4,10 @@ import { PRODUCT_NAME } from "@/lib/brand";
 import { isProxiableImageUrl, proxyGalleryUrl } from "@/lib/image-proxy";
 import { getAppBaseUrl } from "@/lib/site-url";
 
-export const DEFAULT_TITLE = `${PRODUCT_NAME} — Your site, generated from who you are`;
+export const DEFAULT_TITLE = `${PRODUCT_NAME} — Turn your business into a website`;
 
 export const DEFAULT_DESCRIPTION =
-  "Turn a resume, a Google Maps link, or a few details into a polished one-page site. Built on real data, designed to convert, ready in minutes.";
+  "Find your business or start from a resume, an existing site, or a short guided brief. PaperChai creates a polished website you can review before publishing.";
 
 export const SITE_KEYWORDS = [
   "AI website builder",

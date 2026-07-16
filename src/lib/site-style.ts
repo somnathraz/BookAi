@@ -25,7 +25,7 @@ export interface StyleClasses {
 // these class fragments — so no kit can render broken UI.
 const KITS: Record<VisualKit, Omit<StyleClasses, "pad">> = {
   clean: {
-    heading: "font-semibold tracking-tight",
+    heading: "font-medium tracking-[-0.035em]",
     eyebrow: "uppercase tracking-[0.2em]",
     card: "rounded-xl border bg-card shadow-sm",
     ctaRadius: "rounded-md",
@@ -33,25 +33,25 @@ const KITS: Record<VisualKit, Omit<StyleClasses, "pad">> = {
   material: {
     // Material-inspired: medium-weight headings, borderless elevated surfaces
     // and lifted buttons that gain shadow on hover.
-    heading: "font-medium tracking-tight",
+    heading: "font-medium tracking-[-0.025em]",
     eyebrow: "uppercase tracking-[0.12em] text-xs",
     card: "rounded-lg border-0 bg-card shadow-md ring-1 ring-black/[0.04] dark:ring-white/[0.06]",
     ctaRadius: "rounded-md shadow-md hover:shadow-lg transition-shadow",
   },
   editorial: {
-    heading: "font-serif font-medium tracking-tight",
+    heading: "font-editorial font-medium tracking-[-0.025em]",
     eyebrow: "uppercase tracking-[0.25em]",
     card: "rounded-none border bg-card",
     ctaRadius: "rounded-none",
   },
   soft: {
-    heading: "font-semibold tracking-tight",
+    heading: "font-medium tracking-[-0.03em]",
     eyebrow: "tracking-wide",
     card: "rounded-3xl border bg-card shadow-md",
     ctaRadius: "rounded-full",
   },
   bold: {
-    heading: "font-bold tracking-tight",
+    heading: "font-bold tracking-[-0.045em]",
     eyebrow: "font-semibold uppercase tracking-[0.15em]",
     card: "rounded-2xl border-2 bg-card shadow-lg",
     ctaRadius: "rounded-full font-semibold",
@@ -72,9 +72,9 @@ export function styleThemeToKit(theme: StyleTheme): VisualKit {
 }
 
 const DENSITY_PAD: Record<Density, string> = {
-  compact: "py-12",
-  comfortable: "py-20",
-  airy: "py-28",
+  compact: "py-12 sm:py-16",
+  comfortable: "py-14 sm:py-20",
+  airy: "py-16 sm:py-24 lg:py-28",
 };
 
 export function resolveKit(design: Pick<SiteDesign, "styleTheme" | "visualKit">): VisualKit {

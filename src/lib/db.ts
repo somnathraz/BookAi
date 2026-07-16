@@ -59,6 +59,11 @@ export function getSql(): Sql | null {
     ssl: isLocal(url) ? false : "require",
     max: 5,
     idle_timeout: 20,
+    onnotice: (notice) => {
+      // Idempotent schema setup emits these on every fresh server process.
+      if (notice.code === "42P07" || notice.code === "42701") return;
+      console.warn("[db]", notice);
+    },
   });
   return _sql;
 }

@@ -163,6 +163,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.font-editorial {
+  font-family: var(--font-editorial), Georgia, serif;
+}
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);

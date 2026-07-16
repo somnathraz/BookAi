@@ -90,7 +90,7 @@ function Section({
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
-    <span className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+    <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#214f43] dark:text-[#9cc2b3]">
       {children}
     </span>
   );
@@ -136,6 +136,7 @@ export function AnalysisReveal({
       archetype === "business" ? allImages.slice(0, 20) : [];
     onConfirm({
       ...analysis.profile,
+      source: analysis.source,
       domain,
       theme,
       accent: accent ?? undefined,
@@ -146,26 +147,32 @@ export function AnalysisReveal({
   }
 
   return (
-    <div className="flex w-full min-w-0 flex-col gap-7">
+    <div className="mx-auto flex w-full max-w-4xl min-w-0 flex-col gap-0 overflow-hidden rounded-[1.5rem] border border-[#11130f]/10 bg-white/75 shadow-[0_30px_80px_-55px_rgba(17,19,15,0.5)] dark:border-white/10 dark:bg-[#151815]/90">
       <Section>
-        <button
-          type="button"
-          onClick={onBack}
-          className="flex w-fit items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
-        >
-          <ArrowLeft className="size-4" />
-          Choose a different source
-        </button>
-        <div className="mt-3 flex min-w-0 items-start gap-2">
-          <Sparkles className="mt-1 size-4 shrink-0 text-foreground" />
-          <h2 className="text-balance text-lg font-semibold sm:text-xl">
-            Here&apos;s what we found in {SOURCE_LABEL[analysis.source]}
-          </h2>
+        <div className="flex items-start justify-between gap-4 border-b border-[#11130f]/10 p-5 dark:border-white/10 sm:p-7">
+          <div className="min-w-0">
+            <Eyebrow>Review your import</Eyebrow>
+            <div className="mt-2 flex min-w-0 items-start gap-2">
+              <Sparkles className="mt-1 size-4 shrink-0 text-[#214f43] dark:text-[#9cc2b3]" />
+              <h2 className="text-balance text-2xl font-semibold tracking-[-0.025em] text-[#11130f] dark:text-stone-50 sm:text-3xl">
+                We found this in {SOURCE_LABEL[analysis.source]}
+              </h2>
+            </div>
+            <p className="mt-2 max-w-xl text-sm leading-6 text-stone-500 dark:text-stone-400">Choose what to keep. Nothing is published until you approve the finished website.</p>
+          </div>
+          <button
+            type="button"
+            onClick={onBack}
+            className="flex shrink-0 items-center gap-1.5 text-sm text-stone-500 transition-colors hover:text-[#11130f] dark:text-stone-400 dark:hover:text-white"
+          >
+            <ArrowLeft className="size-4" />
+            <span className="hidden sm:inline">Change source</span>
+          </button>
         </div>
       </Section>
 
       {/* Images / photos */}
-      <Section delay={0.08} className="min-w-0">
+      <Section delay={0.08} className="min-w-0 border-b border-[#11130f]/10 p-5 dark:border-white/10 sm:p-7">
         <Eyebrow>{analysis.source === "maps" ? "Photos" : "Imagery"}</Eyebrow>
         {previewImages.length ? (
           <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-3">
@@ -178,7 +185,7 @@ export function AnalysisReveal({
                   onClick={() => setPhoto(active ? null : src)}
                   className={cn(
                     "group relative aspect-square min-w-0 overflow-hidden rounded-xl border-2 transition-all",
-                    active ? "border-foreground" : "border-white/10 hover:border-white/30"
+                    active ? "border-[#214f43] dark:border-[#9cc2b3]" : "border-[#11130f]/10 hover:border-[#214f43]/40 dark:border-white/10 dark:hover:border-[#9cc2b3]/40"
                   )}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -191,7 +198,7 @@ export function AnalysisReveal({
                     className="size-full object-cover"
                   />
                   {active ? (
-                    <span className="absolute right-1.5 top-1.5 flex size-5 items-center justify-center rounded-full bg-foreground text-background">
+                    <span className="absolute right-1.5 top-1.5 flex size-5 items-center justify-center rounded-full bg-[#214f43] text-white dark:bg-[#9cc2b3] dark:text-[#0d0f0d]">
                       <Check className="size-3" />
                     </span>
                   ) : null}
@@ -207,7 +214,7 @@ export function AnalysisReveal({
           </p>
         ) : null}
         {!previewImages.length ? (
-          <div className="mt-3 flex items-center gap-3 rounded-xl border border-dashed border-white/15 bg-card/40 px-4 py-3 text-sm text-muted-foreground">
+          <div className="mt-3 flex items-center gap-3 rounded-xl border border-dashed border-[#11130f]/15 bg-[#f3f3ef] px-4 py-3 text-sm text-stone-500 dark:border-white/15 dark:bg-white/[0.03] dark:text-stone-400">
             <ImageOff className="size-5 shrink-0" />
             <span>
               Resumes &amp; LinkedIn don&apos;t expose a photo — add yours below and
@@ -225,7 +232,7 @@ export function AnalysisReveal({
       </Section>
 
       {/* Category */}
-      <Section delay={0.16} className="min-w-0">
+      <Section delay={0.16} className="min-w-0 border-b border-[#11130f]/10 p-5 dark:border-white/10 sm:p-7">
         <Eyebrow>We think you&apos;re a…</Eyebrow>
         <div className="mt-3 flex flex-wrap gap-2">
           {analysis.categories.map((c) => {
@@ -238,8 +245,8 @@ export function AnalysisReveal({
                 className={cn(
                   "flex max-w-full items-center gap-2 rounded-full border px-3 py-2 text-sm font-medium transition-colors sm:px-4",
                   active
-                    ? "border-foreground bg-foreground text-background"
-                    : "border-input hover:bg-accent"
+                    ? "border-[#214f43] bg-[#214f43] text-white dark:border-[#9cc2b3] dark:bg-[#9cc2b3] dark:text-[#0d0f0d]"
+                    : "border-[#11130f]/15 hover:border-[#214f43]/40 hover:bg-[#dce8e2]/60 dark:border-white/15 dark:hover:border-[#9cc2b3]/40 dark:hover:bg-[#214f43]/15"
                 )}
               >
                 {active && <Check className="size-3.5 shrink-0" />}
@@ -259,7 +266,7 @@ export function AnalysisReveal({
       </Section>
 
       {/* Site type (archetype) — the user decides the shape */}
-      <Section delay={0.2}>
+      <Section delay={0.2} className="border-b border-[#11130f]/10 p-5 dark:border-white/10 sm:p-7">
         <Eyebrow>What kind of site?</Eyebrow>
         <div className="mt-3 grid gap-2 sm:grid-cols-3">
           {ARCHETYPE_OPTIONS.map((opt) => {
@@ -272,8 +279,8 @@ export function AnalysisReveal({
                 className={cn(
                   "flex flex-col gap-1 rounded-xl border p-3 text-left transition-colors",
                   active
-                    ? "border-foreground bg-accent"
-                    : "border-input hover:bg-accent/50"
+                    ? "border-[#214f43] bg-[#dce8e2] dark:border-[#9cc2b3] dark:bg-[#214f43]/20"
+                    : "border-[#11130f]/15 hover:border-[#214f43]/40 hover:bg-[#f3f3ef] dark:border-white/15 dark:hover:border-[#9cc2b3]/40 dark:hover:bg-white/[0.04]"
                 )}
               >
                 <span className="flex items-center gap-1.5 text-sm font-semibold">
@@ -290,7 +297,7 @@ export function AnalysisReveal({
       </Section>
 
       {/* Accent + theme */}
-      <Section delay={0.24}>
+      <Section delay={0.24} className="border-b border-[#11130f]/10 p-5 dark:border-white/10 sm:p-7">
         <Eyebrow>Theme</Eyebrow>
         <div className="mt-3 flex flex-wrap items-center gap-2">
           {accents.map((c) => {
@@ -316,8 +323,8 @@ export function AnalysisReveal({
             className={cn(
               "flex h-8 items-center rounded-full border px-3 text-xs font-medium transition-colors",
               accent === null
-                ? "border-foreground bg-foreground text-background"
-                : "border-input hover:bg-accent"
+                ? "border-[#214f43] bg-[#214f43] text-white dark:border-[#9cc2b3] dark:bg-[#9cc2b3] dark:text-[#0d0f0d]"
+                : "border-[#11130f]/15 hover:bg-[#f3f3ef] dark:border-white/15 dark:hover:bg-white/[0.04]"
             )}
           >
             Neutral
@@ -332,8 +339,8 @@ export function AnalysisReveal({
               className={cn(
                 "flex flex-1 items-center justify-center gap-2 rounded-md border px-4 py-2 text-sm font-medium capitalize transition-colors",
                 theme === t
-                  ? "border-foreground bg-foreground text-background"
-                  : "border-input hover:bg-accent"
+                  ? "border-[#214f43] bg-[#214f43] text-white dark:border-[#9cc2b3] dark:bg-[#9cc2b3] dark:text-[#0d0f0d]"
+                  : "border-[#11130f]/15 hover:bg-[#f3f3ef] dark:border-white/15 dark:hover:bg-white/[0.04]"
               )}
             >
               {t === "light" ? <Sun className="size-4" /> : <Moon className="size-4" />}
@@ -347,7 +354,7 @@ export function AnalysisReveal({
       {(analysis.certifications.length ||
         analysis.reviews.length ||
         serviceCount) ? (
-        <Section delay={0.32}>
+        <Section delay={0.32} className="border-b border-[#11130f]/10 p-5 dark:border-white/10 sm:p-7">
           <Eyebrow>Signals found</Eyebrow>
           <div className="mt-3 flex flex-col gap-3">
             {analysis.certifications.length ? (
@@ -361,7 +368,7 @@ export function AnalysisReveal({
               </div>
             ) : null}
             {analysis.reviews.length ? (
-              <div className="flex min-w-0 items-start gap-2 rounded-lg border bg-card/40 p-3 text-sm">
+              <div className="flex min-w-0 items-start gap-2 rounded-xl border border-[#11130f]/10 bg-[#f3f3ef] p-4 text-sm dark:border-white/10 dark:bg-white/[0.03]">
                 <Quote className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
                 <span className="min-w-0 break-words text-muted-foreground">
                   <span className="font-medium text-foreground">
@@ -383,8 +390,8 @@ export function AnalysisReveal({
         </Section>
       ) : null}
 
-      <Section delay={0.4}>
-        <Button size="lg" className="w-full" onClick={confirm}>
+      <Section delay={0.4} className="p-5 sm:p-7">
+        <Button size="lg" className="h-12 w-full bg-[#214f43] text-white hover:bg-[#173b32] dark:bg-[#9cc2b3] dark:text-[#0d0f0d] dark:hover:bg-[#b9d5ca]" onClick={confirm}>
           Looks right — review details
           <ArrowRight className="size-4" />
         </Button>

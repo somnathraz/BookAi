@@ -316,7 +316,7 @@ function Hero({ site, y, opacity }: { site: SiteData; y: MotionValue<number>; op
       initial={{ opacity: 0, y: 22 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.05, ease: EASE }}
-      className={cn("text-balance text-4xl sm:text-6xl", st.heading)}
+      className={cn("text-balance text-5xl leading-[0.98] sm:text-7xl lg:text-[5rem]", st.heading)}
     >
       {identity.tagline}
     </motion.h1>
@@ -328,7 +328,7 @@ function Hero({ site, y, opacity }: { site: SiteData; y: MotionValue<number>; op
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.15, ease: EASE }}
       className={cn(
-        "mt-6 max-w-2xl text-pretty text-lg text-muted-foreground",
+        "mt-6 max-w-2xl text-pretty text-lg leading-8 text-muted-foreground",
         split ? "" : "mx-auto"
       )}
     >
@@ -531,7 +531,7 @@ function AboutSection({ site, section }: SectionProps) {
           </>
         ) : (
           <>
-            <h2 className={cn("mt-3 max-w-3xl text-3xl sm:text-4xl", st.heading)}>
+            <h2 className={cn("mt-3 max-w-3xl text-4xl leading-[1.02] sm:text-5xl", st.heading)}>
               {section?.heading ?? bio.heading}
             </h2>
             <div

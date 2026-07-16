@@ -34,14 +34,15 @@ export function GeneratingOverlay({
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="flex flex-col items-center gap-6 py-8 text-center"
+      className="mx-auto flex w-full max-w-lg flex-col items-center gap-7 rounded-[1.5rem] border border-[#11130f]/10 bg-white/80 px-6 py-10 text-center shadow-[0_30px_80px_-55px_rgba(17,19,15,0.5)] dark:border-white/10 dark:bg-[#151815]/90"
     >
       <div className="relative flex size-16 items-center justify-center">
-        <span className="absolute inset-0 animate-ping rounded-full bg-foreground/10" />
-        <Loader2 className="size-8 animate-spin text-foreground" />
+        <span className="absolute inset-0 animate-ping rounded-full bg-[#214f43]/10 dark:bg-[#9cc2b3]/10" />
+        <Loader2 className="size-8 animate-spin text-[#214f43] dark:text-[#9cc2b3]" />
       </div>
       <div>
-        <h2 className="text-xl font-semibold">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#214f43] dark:text-[#9cc2b3]">PaperChai studio</p>
+        <h2 className="mt-2 text-2xl font-semibold tracking-[-0.025em] text-[#11130f] dark:text-stone-50">
           {editMode ? "Updating your site…" : "Building your site…"}
         </h2>
         <p className="mt-1 text-sm text-muted-foreground">
@@ -68,9 +69,9 @@ export function GeneratingOverlay({
                 className={cn(
                   "flex size-5 shrink-0 items-center justify-center rounded-full border",
                   done
-                    ? "border-foreground bg-foreground text-background"
+                    ? "border-[#214f43] bg-[#214f43] text-white dark:border-[#9cc2b3] dark:bg-[#9cc2b3] dark:text-[#0d0f0d]"
                     : current
-                      ? "border-foreground"
+                      ? "border-[#214f43] text-[#214f43] dark:border-[#9cc2b3] dark:text-[#9cc2b3]"
                       : "border-muted-foreground/30"
                 )}
               >
