@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { listPublishedSlugs } from "@/lib/accounts";
 import { absoluteUrl } from "@/lib/seo";
-import { getPublicSiteUrl } from "@/lib/site-url";
+import { getPublicSiteUrl, subdomainSitesEnabled } from "@/lib/site-url";
 
 /** Marketing + legal pages on the apex domain. */
 const STATIC_PAGES: {
@@ -20,30 +20,28 @@ const STATIC_PAGES: {
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const now = new Date();
-
   const staticPages: MetadataRoute.Sitemap = STATIC_PAGES.map((page) => ({
     url: absoluteUrl(page.path),
-    lastModified: now,
     changeFrequency: page.changeFrequency,
     priority: page.priority,
   }));
 
+  // A sitemap may only contain URLs belonging to its own host. Wildcard
+  // subdomains and verified customer domains expose their own sitemap instead.
+  if (subdomainSitesEnabled()) return staticPages;
+
   try {
     const published = await listPublishedSlugs();
-    const siteEntries: MetadataRoute.Sitemap = published.map(
-      ({ slug, updatedAt, customDomain, customDomainVerified }) => ({
-        // Prefer verified custom domain (matches page canonical); otherwise
-        // subdomain URL when NEXT_PUBLIC_SITE_DOMAIN is set, else path URL.
-        url: getPublicSiteUrl(slug, {
-          customDomain:
-            customDomainVerified && customDomain ? customDomain : undefined,
-        }),
+    const siteEntries: MetadataRoute.Sitemap = published
+      .filter(({ customDomain, customDomainVerified }) =>
+        !(customDomainVerified && customDomain)
+      )
+      .map(({ slug, updatedAt }) => ({
+        url: getPublicSiteUrl(slug),
         lastModified: updatedAt,
         changeFrequency: "weekly",
         priority: 0.6,
-      })
-    );
+      }));
     return [...staticPages, ...siteEntries];
   } catch {
     return staticPages;

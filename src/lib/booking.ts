@@ -6,6 +6,7 @@ import { ensureSchema, getSql } from "@/lib/db";
 import { getSiteBySlug, getSiteById, getSiteOwnerEmail, updateSite, type StoredSite } from "@/lib/accounts";
 import type { BookingConfig, BookingStatus, SiteData } from "@/lib/types";
 import { syncBookingSection } from "@/lib/booking-defaults";
+import { memoryBookings } from "@/lib/memory-bookings";
 import {
   generateSlotsForDate,
   isValidDateIso,
@@ -76,7 +77,7 @@ function rowToBooking(r: BookingRow): BookingRecord {
   };
 }
 
-const memBookings: BookingRecord[] = [];
+const memBookings = memoryBookings<BookingRecord>();
 
 export async function getPublishedSiteContext(
   slug: string

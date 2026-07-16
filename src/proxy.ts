@@ -36,5 +36,9 @@ export async function proxy(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!api/|_next/|.*\\..*).*)"],
+  matcher: [
+    "/robots.txt",
+    "/sitemap.xml",
+    "/((?!api/|_next/|.*\\..*).*)",
+  ],
 };

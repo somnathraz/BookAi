@@ -8,16 +8,16 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        allow: "/",
+        // Public image proxies used by generated sites must remain crawlable.
+        // The longer allow rules take precedence over the /api/ disallow.
+        allow: ["/", "/api/img", "/api/photo"],
         disallow: [
           // Owner-only / private app surfaces
           "/dashboard",
-          "/dashboard/",
           "/edit",
-          "/edit/",
-          // APIs and framework internals
+          "/preview",
+          // Non-public APIs. Do not block /_next/: crawlers need CSS and JS.
           "/api/",
-          "/_next/",
         ],
       },
     ],

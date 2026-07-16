@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 import { emailFromRequest } from "@/lib/session";
 import { deleteSite, getPlan, listSites, planLimit } from "@/lib/accounts";
+import { unregisterMemCustomDomain } from "@/lib/custom-domain";
 
 export const runtime = "nodejs";
 
@@ -34,6 +35,15 @@ export async function DELETE(request: Request) {
   if (!id) {
     return NextResponse.json({ error: "Missing site id." }, { status: 400 });
   }
-  const ok = await deleteSite(email, id);
-  return NextResponse.json({ ok });
+  const deleted = await deleteSite(email, id);
+  if (!deleted) {
+    return NextResponse.json(
+      { error: "Site not found or already deleted.", code: "not_found" },
+      { status: 404 }
+    );
+  }
+  if (deleted.customDomain) {
+    unregisterMemCustomDomain(deleted.customDomain);
+  }
+  return NextResponse.json({ ok: true, deleted });
 }

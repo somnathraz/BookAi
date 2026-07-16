@@ -1,8 +1,9 @@
 import "server-only";
 
-import { randomUUID } from "crypto";
+import { createHash, randomUUID } from "crypto";
 
 import { ensureSchema, getSql } from "@/lib/db";
+import { deleteMemoryBookingsForSite } from "@/lib/memory-bookings";
 import type { BillingPeriod, BillingStatus } from "@/lib/razorpay";
 import type { SiteData } from "@/lib/types";
 
@@ -204,6 +205,8 @@ interface MemAccount {
 }
 const mem = new Map<string, MemAccount>();
 const memSitesByIp = new Map<string, number>();
+const memIpBySiteId = new Map<string, string>();
+const memDeletedSlugHashes = new Set<string>();
 
 function key(email: string): string {
   return email.trim().toLowerCase();
@@ -220,14 +223,23 @@ function memAcc(email: string): MemAccount {
 
 // ──────────────────────────────────────────────────────────────────────────────
 
+function slugHash(slug: string): string {
+  return createHash("sha256").update(slug).digest("hex");
+}
+
 async function slugTaken(slug: string): Promise<boolean> {
   if (RESERVED_SLUGS.has(slug)) return true;
+  const hash = slugHash(slug);
   const sql = getSql();
   if (sql) {
     await ensureSchema();
-    const r = await sql`select 1 from sites where slug = ${slug} limit 1`;
-    return r.length > 0;
+    const active = await sql`select 1 from sites where slug = ${slug} limit 1`;
+    if (active.length > 0) return true;
+    const deleted = await sql`
+      select 1 from deleted_site_slugs where slug_hash = ${hash} limit 1`;
+    return deleted.length > 0;
   }
+  if (memDeletedSlugHashes.has(hash)) return true;
   for (const a of mem.values()) {
     if (a.sites.some((s) => s.slug === slug)) return true;
   }
@@ -556,7 +568,10 @@ export async function addSite(
   const a = memAcc(email);
   if (ip && !a.ips.includes(ip)) a.ips.push(ip);
   a.sites.push(stored);
-  if (ip) memSitesByIp.set(ip, (memSitesByIp.get(ip) ?? 0) + 1);
+  if (ip) {
+    memSitesByIp.set(ip, (memSitesByIp.get(ip) ?? 0) + 1);
+    memIpBySiteId.set(stored.id, ip);
+  }
   return stored;
 }
 
@@ -763,17 +778,66 @@ export async function isCustomDomainTaken(
   return false;
 }
 
-export async function deleteSite(email: string, id: string): Promise<boolean> {
+export interface DeletedSite {
+  id: string;
+  slug: string;
+  customDomain?: string;
+  bookingsDeleted: number;
+}
+
+export async function deleteSite(
+  email: string,
+  id: string
+): Promise<DeletedSite | null> {
   const sql = getSql();
   if (sql) {
     await ensureSchema();
-    const res = await sql`delete from sites where email = ${key(email)} and id = ${id}`;
-    return res.count > 0;
+    return sql.begin(async (transaction) => {
+      const rows = await transaction<{
+        id: string;
+        slug: string;
+        custom_domain: string | null;
+      }[]>`
+        select id, slug, custom_domain
+          from sites
+         where email = ${key(email)} and id = ${id}
+         for update`;
+      const stored = rows[0];
+      if (!stored) return null;
+
+      const bookingRows = await transaction<{ n: number }[]>`
+        select count(*)::int as n from bookings where site_id = ${id}`;
+      await transaction`
+        insert into deleted_site_slugs (slug_hash)
+        values (${slugHash(stored.slug)})
+        on conflict (slug_hash) do nothing`;
+      await transaction`delete from sites where email = ${key(email)} and id = ${id}`;
+
+      return {
+        id: stored.id,
+        slug: stored.slug,
+        customDomain: stored.custom_domain ?? undefined,
+        bookingsDeleted: Number(bookingRows[0]?.n ?? 0),
+      };
+    });
   }
   const a = mem.get(key(email));
-  if (!a) return false;
+  if (!a) return null;
   const i = a.sites.findIndex((s) => s.id === id);
-  if (i === -1) return false;
-  a.sites.splice(i, 1);
-  return true;
+  if (i === -1) return null;
+  const [stored] = a.sites.splice(i, 1);
+  const siteIp = memIpBySiteId.get(id);
+  if (siteIp) {
+    const nextCount = Math.max(0, (memSitesByIp.get(siteIp) ?? 0) - 1);
+    if (nextCount > 0) memSitesByIp.set(siteIp, nextCount);
+    else memSitesByIp.delete(siteIp);
+    memIpBySiteId.delete(id);
+  }
+  memDeletedSlugHashes.add(slugHash(stored.slug));
+  return {
+    id: stored.id,
+    slug: stored.slug,
+    customDomain: stored.customDomain,
+    bookingsDeleted: deleteMemoryBookingsForSite(id),
+  };
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ExternalLink, Loader2, Pencil, Plus, Trash2 } from "lucide-react";
 import Link from "next/link";
 
@@ -67,6 +67,7 @@ export default function DashboardPage() {
   const [plan, setPlan] = useState("free");
   const [billing, setBilling] = useState<BillingSummary | null>(null);
   const [deleting, setDeleting] = useState<string | null>(null);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -98,7 +99,8 @@ export default function DashboardPage() {
   }, []);
 
   useEffect(() => {
-    void load();
+    const timeoutId = window.setTimeout(() => void load(), 0);
+    return () => window.clearTimeout(timeoutId);
   }, [load]);
 
   function publicHref(site: SavedSite): string {
@@ -119,10 +121,31 @@ export default function DashboardPage() {
   }
 
   async function remove(id: string) {
+    const site = sites.find((candidate) => candidate.id === id);
+    if (!site) return;
+    const domainWarning = site.customDomain
+      ? `\n\nYour DNS records for ${site.customDomain} are managed by your registrar and must be removed there separately.`
+      : "";
+    const confirmed = window.confirm(
+      `Permanently delete ${site.name}?\n\nThis removes the website and all booking or enquiry submissions. Its PaperChai address will never be assigned to another site.${domainWarning}`
+    );
+    if (!confirmed) return;
+
     setDeleting(id);
+    setDeleteError(null);
     try {
-      await fetch(`/api/sites?id=${encodeURIComponent(id)}`, { method: "DELETE" });
+      const response = await fetch(`/api/sites?id=${encodeURIComponent(id)}`, {
+        method: "DELETE",
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || data.ok !== true) {
+        throw new Error(data.error ?? "The site could not be deleted.");
+      }
       setSites((s) => s.filter((x) => x.id !== id));
+    } catch (error) {
+      setDeleteError(
+        error instanceof Error ? error.message : "The site could not be deleted."
+      );
     } finally {
       setDeleting(null);
     }
@@ -188,6 +211,14 @@ export default function DashboardPage() {
           </div>
         ) : (
           <>
+            {deleteError ? (
+              <div
+                role="alert"
+                className="mt-6 rounded-xl border border-red-900/15 bg-[#fff1ee] px-4 py-3 text-sm font-medium text-[#8b2e20]"
+              >
+                {deleteError} Refresh the page before trying again.
+              </div>
+            ) : null}
             <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-2xl border bg-card/60 p-5">
               <div className="flex items-center gap-3">
                 <Badge variant="secondary" className="rounded-full capitalize">

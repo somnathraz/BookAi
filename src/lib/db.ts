@@ -170,6 +170,32 @@ export function ensureSchema(): Promise<void> {
       create unique index if not exists bookings_site_slot_unique
         on bookings (site_id, slot_start)
         where slot_start is not null and status not in ('cancelled')`;
+    // Older installs created bookings without a foreign key. Remove any
+    // already-orphaned rows before adding the cascade so deleting a site also
+    // permanently removes its customer submissions in the same transaction.
+    await sql`
+      delete from bookings b
+       where not exists (select 1 from sites s where s.id = b.site_id)`;
+    await sql`
+      do $$
+      begin
+        if not exists (
+          select 1
+            from pg_constraint
+           where conname = 'bookings_site_id_fk'
+             and conrelid = 'bookings'::regclass
+        ) then
+          alter table bookings
+            add constraint bookings_site_id_fk
+            foreign key (site_id) references sites(id) on delete cascade;
+        end if;
+      end
+      $$`;
+    await sql`
+      create table if not exists deleted_site_slugs (
+        slug_hash  text primary key,
+        deleted_at timestamptz not null default now()
+      )`;
     await sql`
       create table if not exists notify_requests (
         id         bigserial primary key,
