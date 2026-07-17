@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import type { BookingConfig, SiteData } from "@/lib/types";
+import { apiClient } from "@/platform/api/api-client";
 
 interface Slot {
   start: string;
@@ -56,11 +57,9 @@ export function NativeSlotPicker({
     setSlotError(null);
     setSelected(null);
     try {
-      const res = await fetch(
+      const data = await apiClient.get<{ slots?: Slot[] }>(
         `/api/booking/slots?slug=${encodeURIComponent(slug)}&date=${encodeURIComponent(date)}`
       );
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error((data.error as string) ?? "Could not load times.");
       setSlots((data.slots as Slot[]) ?? []);
     } catch (err) {
       setSlots([]);
@@ -80,10 +79,8 @@ export function NativeSlotPicker({
     setSubmitting(true);
     setError(null);
     try {
-      const res = await fetch("/api/booking", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      await apiClient.post("/api/booking", {
+        body: {
           slug,
           name,
           phone,
@@ -92,10 +89,8 @@ export function NativeSlotPicker({
           service: service || undefined,
           notes: notes || undefined,
           website: honeypot,
-        }),
+        },
       });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error((data.error as string) ?? "Could not book.");
       setSuccess(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");

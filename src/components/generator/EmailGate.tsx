@@ -7,6 +7,8 @@ import { ArrowLeft, ArrowRight, Loader2, Mail, ShieldCheck } from "lucide-react"
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { trackSignUp } from "@/lib/analytics";
+import { apiClient } from "@/platform/api/api-client";
+import { clearAuthenticatedClientData } from "@/features/authentication/presentation/session-query";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -34,19 +36,10 @@ export function EmailGate({
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("/api/auth/request-otp", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-      const data = await res.json();
-      if (res.status === 429 && data?.code === "rate_limited") {
-        throw new Error(
-          data.error ??
-            "We're handling heavy traffic right now. Please try again in a few minutes."
-        );
-      }
-      if (!res.ok) throw new Error(data?.error ?? "Couldn't send the code.");
+      const data = await apiClient.post<{ delivered?: boolean; devCode?: string }>(
+        "/api/auth/request-otp",
+        { body: { email } }
+      );
       setDelivered(Boolean(data.delivered));
       setDevCode(data.devCode ?? null);
       setPhase("code");
@@ -63,13 +56,8 @@ export function EmailGate({
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("/api/auth/verify-otp", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, code }),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data?.error ?? "Verification failed.");
+      await apiClient.post("/api/auth/verify-otp", { body: { email, code } });
+      clearAuthenticatedClientData();
       trackSignUp({ intent });
       onVerified(email);
     } catch (err) {

@@ -1,49 +1,22 @@
 import { NextResponse } from "next/server";
 
-import { emailFromRequest } from "@/lib/session";
-import { deleteSite, getPlan, listSites, planLimit } from "@/lib/accounts";
-import { unregisterMemCustomDomain } from "@/lib/custom-domain";
+import {
+  deleteOwnedSite,
+  listOwnedSites,
+} from "@/features/site-management/application/manage-sites";
+import { apiErrors } from "@/platform/http/api-error";
+import { createApiRoute } from "@/platform/http/create-api-route";
 
 export const runtime = "nodejs";
 
-export async function GET(request: Request) {
-  const email = emailFromRequest(request);
-  if (!email) {
-    return NextResponse.json({ error: "Not verified.", code: "verify_required" }, { status: 401 });
-  }
-  const plan = await getPlan(email);
-  const sites = (await listSites(email)).map((s) => ({
-    id: s.id,
-    slug: s.slug,
-    name: s.name,
-    domain: s.domain,
-    theme: s.theme,
-    accent: s.accent,
-    customDomain: s.customDomainVerified ? s.customDomain : undefined,
-    createdAt: s.createdAt,
-    updatedAt: s.updatedAt,
-  }));
-  return NextResponse.json({ email, sites, plan, limit: planLimit(plan) });
-}
+export const GET = createApiRoute("site.list", async (_request, context) => {
+  const result = await listOwnedSites(context.email!);
+  return NextResponse.json({ email: context.email, ...result });
+});
 
-export async function DELETE(request: Request) {
-  const email = emailFromRequest(request);
-  if (!email) {
-    return NextResponse.json({ error: "Not verified.", code: "verify_required" }, { status: 401 });
-  }
+export const DELETE = createApiRoute("site.delete", async (request, context) => {
   const id = new URL(request.url).searchParams.get("id");
-  if (!id) {
-    return NextResponse.json({ error: "Missing site id." }, { status: 400 });
-  }
-  const deleted = await deleteSite(email, id);
-  if (!deleted) {
-    return NextResponse.json(
-      { error: "Site not found or already deleted.", code: "not_found" },
-      { status: 404 }
-    );
-  }
-  if (deleted.customDomain) {
-    unregisterMemCustomDomain(deleted.customDomain);
-  }
+  if (!id) throw apiErrors.badRequest("Missing site id.");
+  const deleted = await deleteOwnedSite(context.email!, id);
   return NextResponse.json({ ok: true, deleted });
-}
+});

@@ -6,6 +6,9 @@ import { Loader2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { trackPurchase, waitForBeacon } from "@/lib/analytics";
+import { apiClient } from "@/platform/api/api-client";
+import { invalidateServerQueries } from "@/platform/client-state/server-query-cache";
+import { clientQueryKeys } from "@/platform/client-state/query-key-registry";
 
 type BillingPeriod = "monthly" | "annual";
 type ButtonVariant = "default" | "outline" | "secondary" | "ghost" | "link" | "destructive";
@@ -83,15 +86,9 @@ export function BasicCheckoutButton({
         throw new Error("Could not load Razorpay Checkout.");
       }
 
-      const res = await fetch("/api/billing/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ period }),
+      const data = await apiClient.post<CheckoutPayload>("/api/billing/checkout", {
+        body: { period },
       });
-      const data = (await res.json().catch(() => ({}))) as Partial<CheckoutPayload> & {
-        error?: string;
-      };
-      if (!res.ok) throw new Error(data.error ?? "Could not start checkout.");
 
       const checkout = new window.Razorpay({
         key: data.key,
@@ -102,35 +99,39 @@ export function BasicCheckoutButton({
         notes: data.notes,
         theme: { color: "#111827" },
         handler: async (response: RazorpayCheckoutSuccess) => {
-          const verify = await fetch("/api/billing/verify", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(response),
-          });
-          const verifyData = (await verify.json().catch(() => ({}))) as { error?: string };
-          if (!verify.ok) {
-            setError(verifyData.error ?? "Payment succeeded, but plan activation is pending.");
-            setLoading(false);
-            return;
-          }
-          await waitForBeacon((done) => {
-            trackPurchase(
-              {
-                period,
-                transaction_id: response.razorpay_payment_id,
-              },
-              { event_callback: done }
-            );
-          });
-          setMessage("Basic plan activated.");
-          setLoading(false);
-          onSuccess?.();
-          if (successHref) {
-            const params = new URLSearchParams({
-              period,
-              payment_id: response.razorpay_payment_id,
+          try {
+            await apiClient.post("/api/billing/verify", { body: response });
+            invalidateServerQueries([
+              clientQueryKeys.billing.prefix,
+              clientQueryKeys.dashboard.prefix,
+              clientQueryKeys.authentication.prefix,
+            ]);
+            await waitForBeacon((done) => {
+              trackPurchase(
+                {
+                  period,
+                  transaction_id: response.razorpay_payment_id,
+                },
+                { event_callback: done }
+              );
             });
-            router.push(`${successHref}?${params.toString()}`);
+            setMessage("Basic plan activated.");
+            onSuccess?.();
+            if (successHref) {
+              const params = new URLSearchParams({
+                period,
+                payment_id: response.razorpay_payment_id,
+              });
+              router.push(`${successHref}?${params.toString()}`);
+            }
+          } catch (error) {
+            setError(
+              error instanceof Error
+                ? error.message
+                : "Payment succeeded, but plan activation is pending."
+            );
+          } finally {
+            setLoading(false);
           }
         },
         modal: {

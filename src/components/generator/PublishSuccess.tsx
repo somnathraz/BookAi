@@ -15,6 +15,7 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { apiClient } from "@/platform/api/api-client";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -69,19 +70,13 @@ export function PublishSuccess({
     setSaving(true);
     setError(null);
     try {
-      const res = await fetch("/api/feedback", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      await apiClient.post("/api/feedback", {
+        body: {
           siteId,
           rating,
           experience: comment.trim() || undefined,
-        }),
+        },
       });
-      if (!res.ok) {
-        const data = (await res.json().catch(() => null)) as { error?: string } | null;
-        throw new Error(data?.error ?? "Could not send feedback.");
-      }
       setSubmitted(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not send feedback.");

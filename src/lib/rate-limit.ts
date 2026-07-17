@@ -3,6 +3,7 @@ import "server-only";
 import { ensureSchema, getSql } from "@/lib/db";
 import { ipFromRequest } from "@/lib/abuse";
 import { emailFromRequest } from "@/lib/session";
+import { positiveIntegerEnv } from "@/platform/config/env";
 
 /** Paid / costly API groups tracked in Postgres (falls back to in-memory locally). */
 export type RateLimitRoute =
@@ -20,8 +21,7 @@ interface LimitConfig {
 }
 
 function envInt(name: string, fallback: number): number {
-  const v = Number.parseInt(process.env[name]?.trim() ?? "", 10);
-  return Number.isFinite(v) && v > 0 ? v : fallback;
+  return positiveIntegerEnv(name, fallback);
 }
 
 const HOUR_MS = 60 * 60 * 1000;

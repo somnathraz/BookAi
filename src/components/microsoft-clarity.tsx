@@ -1,13 +1,14 @@
 import Script from "next/script";
+import { publicEnv } from "@/platform/config/public-env";
 
-const projectId = process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID;
+const projectId = publicEnv.clarityProjectId;
 
 /**
  * Minimal Clarity bootstrap: loads after the page is idle so it
  * does not compete with LCP / interactivity. No custom events.
  */
 export function MicrosoftClarity() {
-  if (!projectId || process.env.NODE_ENV !== "production") {
+  if (!projectId || publicEnv.nodeEnv !== "production") {
     return null;
   }
 

@@ -6,6 +6,7 @@ import { Check, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { apiClient } from "@/platform/api/api-client";
 
 interface DomainState {
   domain?: string;
@@ -27,14 +28,9 @@ export function CustomDomainPanel({ siteId }: { siteId: string }) {
   const load = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/sites/${encodeURIComponent(siteId)}/domain`);
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) {
-        setError((data.error as string) ?? "Could not load domain settings.");
-        return;
-      }
-      setState(data as DomainState);
-      setInput((data.domain as string) ?? "");
+      const data = await apiClient.get<DomainState>(`/api/sites/${encodeURIComponent(siteId)}/domain`);
+      setState(data);
+      setInput(data.domain ?? "");
       setError(null);
     } finally {
       setLoading(false);
@@ -50,14 +46,10 @@ export function CustomDomainPanel({ siteId }: { siteId: string }) {
     setMessage(null);
     setError(null);
     try {
-      const res = await fetch(`/api/sites/${encodeURIComponent(siteId)}/domain`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ domain: input }),
+      const data = await apiClient.patch<DomainState>(`/api/sites/${encodeURIComponent(siteId)}/domain`, {
+        body: { domain: input },
       });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error((data.error as string) ?? "Could not save domain.");
-      setState(data as DomainState);
+      setState(data);
       setMessage("Domain saved. Add the DNS records below, then verify.");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Save failed.");
@@ -71,12 +63,8 @@ export function CustomDomainPanel({ siteId }: { siteId: string }) {
     setMessage(null);
     setError(null);
     try {
-      const res = await fetch(`/api/sites/${encodeURIComponent(siteId)}/domain`, {
-        method: "POST",
-      });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error((data.error as string) ?? "Verification failed.");
-      setState(data as DomainState);
+      const data = await apiClient.post<DomainState>(`/api/sites/${encodeURIComponent(siteId)}/domain`);
+      setState(data);
       setMessage("Domain verified. Your site is live on your domain.");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Verification failed.");
@@ -90,14 +78,10 @@ export function CustomDomainPanel({ siteId }: { siteId: string }) {
     setMessage(null);
     setError(null);
     try {
-      const res = await fetch(`/api/sites/${encodeURIComponent(siteId)}/domain`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ clear: true }),
+      const data = await apiClient.patch<DomainState>(`/api/sites/${encodeURIComponent(siteId)}/domain`, {
+        body: { clear: true },
       });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error((data.error as string) ?? "Could not remove domain.");
-      setState(data as DomainState);
+      setState(data);
       setInput("");
       setMessage("Custom domain removed.");
     } catch (err) {

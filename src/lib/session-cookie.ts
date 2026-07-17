@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { COOKIE_NAME, sessionMaxAgeS } from "@/lib/session";
+import { env } from "@/platform/config/env";
 
 export const runtime = "nodejs";
 
@@ -8,7 +9,7 @@ function sessionCookieOptions() {
   return {
     httpOnly: true,
     sameSite: "lax" as const,
-    secure: process.env.NODE_ENV === "production",
+    secure: env.isProduction,
     path: "/",
   };
 }

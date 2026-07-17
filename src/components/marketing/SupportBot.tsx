@@ -12,6 +12,7 @@ import {
 
 import type { AnalysisResult, SourceId } from "@/lib/types";
 import type { BusinessSearchResult } from "@/lib/business-search";
+import { ApiClientError, apiClient } from "@/platform/api/api-client";
 
 const SUPPORT_WHATSAPP = "917008257342";
 const WA_URL = `https://wa.me/${SUPPORT_WHATSAPP}?text=${encodeURIComponent(
@@ -177,21 +178,17 @@ export function SupportBot({
   async function importMaps(url: string) {
     setBusy(true);
     try {
-      const res = await fetch("/api/extract", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ source: "maps", url }),
+      const data = await apiClient.post<{ analysis: AnalysisResult }>("/api/extract", {
+        body: { source: "maps", url },
       });
-      const data = await res.json();
-      if (res.status === 402 && data?.code === "limit_reached") {
-        push("bot", data.error as string);
-        onLimitReached(data.error as string);
+      push("bot", "Got it — building your preview now…");
+      onAnalyzed(data.analysis);
+    } catch (error) {
+      if (error instanceof ApiClientError && error.status === 402) {
+        push("bot", error.message);
+        onLimitReached(error.message);
         return;
       }
-      if (!res.ok) throw new Error(data.error ?? "Could not import that business.");
-      push("bot", "Got it — building your preview now…");
-      onAnalyzed(data.analysis as AnalysisResult);
-    } catch (error) {
       push(
         "bot",
         error instanceof Error
@@ -206,21 +203,17 @@ export function SupportBot({
   async function importWebsite(url: string) {
     setBusy(true);
     try {
-      const res = await fetch("/api/extract", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ source: "competitor", url }),
+      const data = await apiClient.post<{ analysis: AnalysisResult }>("/api/extract", {
+        body: { source: "competitor", url },
       });
-      const data = await res.json();
-      if (res.status === 402 && data?.code === "limit_reached") {
-        push("bot", data.error as string);
-        onLimitReached(data.error as string);
+      push("bot", "Analyzed — opening your draft…");
+      onAnalyzed(data.analysis);
+    } catch (error) {
+      if (error instanceof ApiClientError && error.status === 402) {
+        push("bot", error.message);
+        onLimitReached(error.message);
         return;
       }
-      if (!res.ok) throw new Error(data.error ?? "Could not analyze that site.");
-      push("bot", "Analyzed — opening your draft…");
-      onAnalyzed(data.analysis as AnalysisResult);
-    } catch (error) {
       push(
         "bot",
         error instanceof Error
@@ -236,10 +229,10 @@ export function SupportBot({
     setBusy(true);
     setResults([]);
     try {
-      const res = await fetch(`/api/business-search?q=${encodeURIComponent(query)}`);
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? "Search failed.");
-      const next = (data.results ?? []) as BusinessSearchResult[];
+      const data = await apiClient.get<{ results: BusinessSearchResult[] }>(
+        `/api/business-search?q=${encodeURIComponent(query)}`
+      );
+      const next = data.results ?? [];
       if (!next.length) {
         push(
           "bot",

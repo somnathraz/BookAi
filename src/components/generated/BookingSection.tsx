@@ -18,6 +18,7 @@ import {
 import { buildWhatsAppBookingUrl } from "@/lib/whatsapp";
 import { siteStyle } from "@/lib/site-style";
 import { cn } from "@/lib/utils";
+import { apiClient } from "@/platform/api/api-client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -90,10 +91,8 @@ export function BookingSection({
     setSubmitting(true);
     setError(null);
     try {
-      const res = await fetch("/api/booking", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      await apiClient.post("/api/booking", {
+        body: {
           slug,
           name,
           phone,
@@ -103,10 +102,8 @@ export function BookingSection({
           service: service || undefined,
           notes: notes || undefined,
           website: honeypot,
-        }),
+        },
       });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error((data.error as string) ?? "Could not send request.");
       setSuccess(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, CreditCard, Loader2 } from "lucide-react";
 
@@ -11,43 +11,13 @@ import { MarketingFooter } from "@/components/marketing/MarketingFooter";
 import { MarketingNav } from "@/components/marketing/MarketingNav";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-
-type BillingPeriod = "monthly" | "annual";
-type BillingStatus =
-  | "created"
-  | "authenticated"
-  | "active"
-  | "cancelled"
-  | "halted"
-  | "failed";
-
-type BillingState = {
-  plan: "free" | "basic";
-  subscriptionId?: string;
-  billingPeriod?: BillingPeriod;
-  billingStatus?: BillingStatus;
-  billingUpdatedAt?: number;
-  billingStartedAt?: number;
-  billingCurrentStart?: number;
-  billingCurrentEnd?: number;
-  billingChargeAt?: number;
-  billingCancelAtCycleEnd?: boolean;
-  billingCancelledAt?: number;
-  billingLastReminderAt?: number;
-};
-
-type BillingResponse = {
-  email: string;
-  plan: "free" | "basic";
-  billing: BillingState;
-  used: number;
-  limit: number;
-  activatedAt?: number;
-  reminderActive: boolean;
-  reminderDays: number;
-  dashboardNoticeActive?: boolean;
-  dashboardNoticeDays?: number;
-};
+import { ApiClientError, apiClient } from "@/platform/api/api-client";
+import {
+  replaceCachedBilling,
+  type BillingState,
+  type BillingStatus,
+  useBillingQuery,
+} from "@/features/billing/presentation/billing-query";
 
 function formatDate(value?: number): string {
   if (!value) return "—";
@@ -97,54 +67,25 @@ function currentPeriodEndsAt(billing: BillingState): number | undefined {
 }
 
 export default function DashboardBillingPage() {
-  const [loading, setLoading] = useState(true);
-  const [needsVerify, setNeedsVerify] = useState(false);
-  const [billing, setBilling] = useState<BillingResponse | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [cancelling, setCancelling] = useState(false);
-
-  const load = useCallback(async () => {
-    setLoading(true);
-    try {
-      const res = await fetch("/api/billing");
-      if (res.status === 401) {
-        setNeedsVerify(true);
-        setBilling(null);
-        return;
-      }
-      const data = (await res.json().catch(() => ({}))) as BillingResponse & { error?: string };
-      if (!res.ok) {
-        throw new Error(data.error ?? "Could not load billing.");
-      }
-      setNeedsVerify(false);
-      setBilling(data);
-      setError(null);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Could not load billing.");
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    void load();
-  }, [load]);
+  const billingQuery = useBillingQuery();
+  const billing = billingQuery.data;
+  const loading = billingQuery.status === "idle" || billingQuery.status === "loading";
+  const needsVerify = billingQuery.error instanceof ApiClientError && billingQuery.error.status === 401;
+  const load = useCallback(() => {
+    void billingQuery.refresh().catch(() => undefined);
+  }, [billingQuery]);
 
   async function cancelAtPeriodEnd() {
     setCancelling(true);
     setError(null);
     setMessage(null);
     try {
-      const res = await fetch("/api/billing/cancel", { method: "POST" });
-      const data = (await res.json().catch(() => ({}))) as {
-        error?: string;
-        billing?: BillingState;
-      };
-      if (!res.ok) throw new Error(data.error ?? "Could not schedule cancellation.");
-      setBilling((current) =>
-        current ? { ...current, billing: data.billing ?? current.billing } : current
-      );
+      const data = await apiClient.post<{ billing?: BillingState }>("/api/billing/cancel");
+      if (!data.billing) throw new Error("Could not schedule cancellation.");
+      replaceCachedBilling(data.billing);
       setMessage("Cancellation scheduled for the end of your current billing period.");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not schedule cancellation.");

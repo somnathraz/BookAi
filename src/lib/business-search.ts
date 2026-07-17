@@ -1,6 +1,7 @@
 import "server-only";
 
 import { serpApiAvailable, serpSearch } from "@/lib/serpapi/client";
+import { env } from "@/platform/config/env";
 
 export interface BusinessSearchResult {
   id: string;
@@ -34,7 +35,7 @@ interface SerpPlaceResult {
 }
 
 export function businessSearchAvailable(): boolean {
-  return Boolean(process.env.GOOGLE_PLACES_API_KEY?.trim()) || serpApiAvailable();
+  return Boolean(env.googlePlacesApiKey) || serpApiAvailable();
 }
 
 function fallbackMapsUrl(name: string, address: string, placeId?: string): string {
@@ -47,7 +48,7 @@ function fallbackMapsUrl(name: string, address: string, placeId?: string): strin
 }
 
 async function searchGooglePlaces(query: string): Promise<BusinessSearchResult[]> {
-  const key = process.env.GOOGLE_PLACES_API_KEY?.trim();
+  const key = env.googlePlacesApiKey;
   if (!key) return [];
 
   const res = await fetch("https://places.googleapis.com/v1/places:searchText", {

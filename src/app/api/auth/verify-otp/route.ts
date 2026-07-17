@@ -1,46 +1,27 @@
 import { NextResponse } from "next/server";
 
-import { isValidEmail, normalizeEmail, verifyOtp } from "@/lib/otp";
 import { maybeSendWelcomeEmail } from "@/lib/lifecycle";
-import { enforceRateLimit } from "@/lib/rate-limit";
-import { rateLimitResponse } from "@/lib/rate-limit-response";
-import { makeToken } from "@/lib/session";
 import { setSessionCookie } from "@/lib/session-cookie";
+import { verifyOtpCode } from "@/features/authentication/application/verify-otp";
+import { apiErrors } from "@/platform/http/api-error";
+import { createApiRoute } from "@/platform/http/create-api-route";
+import { logger } from "@/platform/logging/logger.server";
 
 export const runtime = "nodejs";
 
-const MESSAGES: Record<string, string> = {
-  invalid: "That code isn't right. Try again.",
-  expired: "That code expired. Request a new one.",
-  too_many: "Too many attempts. Request a new code.",
-};
-
-export async function POST(request: Request) {
-  let email = "";
-  let code = "";
+export const POST = createApiRoute("auth.verify-otp", async (request) => {
+  let body: { email?: string; code?: string };
   try {
-    ({ email, code } = (await request.json()) as { email: string; code: string });
+    body = (await request.json()) as typeof body;
   } catch {
-    return NextResponse.json({ error: "Invalid request." }, { status: 400 });
+    throw apiErrors.badRequest("Invalid request.");
   }
 
-  email = normalizeEmail(email ?? "");
-  if (!isValidEmail(email) || !code?.trim()) {
-    return NextResponse.json({ error: "Enter the 6-digit code." }, { status: 400 });
-  }
-
-  const limited = await enforceRateLimit(request, "auth", { emailOverride: email });
-  if (!limited.allowed) return rateLimitResponse(limited);
-
-  const result = await verifyOtp(email, code);
-  if (result !== "ok") {
-    return NextResponse.json({ error: MESSAGES[result] ?? "Verification failed." }, { status: 400 });
-  }
-
-  const res = NextResponse.json({ ok: true });
-  setSessionCookie(res, makeToken(email));
-  void maybeSendWelcomeEmail(email).catch((err) =>
-    console.error("[lifecycle] welcome email failed", err)
-  );
-  return res;
-}
+  const result = await verifyOtpCode(body);
+  const response = NextResponse.json({ ok: true });
+  setSessionCookie(response, result.sessionToken);
+  void maybeSendWelcomeEmail(result.email).catch(() => {
+    logger.warn("authentication.welcome-email.failed");
+  });
+  return response;
+});

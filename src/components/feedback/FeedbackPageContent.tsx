@@ -12,6 +12,7 @@ import { MarketingNav } from "@/components/marketing/MarketingNav";
 import { Button } from "@/components/ui/button";
 import { FEEDBACK_FEATURE_OPTIONS } from "@/lib/feedback-options";
 import { cn } from "@/lib/utils";
+import { apiClient } from "@/platform/api/api-client";
 
 const RATING_LABELS: Record<number, string> = {
   1: "Poor",
@@ -49,25 +50,23 @@ export function FeedbackPageContent() {
   const load = useCallback(async () => {
     setLoading(true);
     try {
-      const sessionRes = await fetch("/api/auth/session");
-      const session = sessionRes.ok ? await sessionRes.json() : null;
-      if (!session?.email) {
+      const session = await apiClient.get<{ email?: string }>("/api/auth/session");
+      if (!session.email) {
         setNeedsVerify(true);
         return;
       }
       setEmail(session.email);
 
-      const res = await fetch("/api/feedback");
-      if (res.ok) {
-        const data = (await res.json()) as { feedback: SavedFeedback | null };
-        if (data.feedback) {
-          setExisting(data.feedback);
-          setRating(data.feedback.rating);
-          setExperience(data.feedback.experience ?? "");
-          setDesiredFeatures(data.feedback.desiredFeatures ?? "");
-          setFeatureTags(data.feedback.featureTags ?? []);
-        }
+      const data = await apiClient.get<{ feedback: SavedFeedback | null }>("/api/feedback");
+      if (data.feedback) {
+        setExisting(data.feedback);
+        setRating(data.feedback.rating);
+        setExperience(data.feedback.experience ?? "");
+        setDesiredFeatures(data.feedback.desiredFeatures ?? "");
+        setFeatureTags(data.feedback.featureTags ?? []);
       }
+    } catch {
+      setNeedsVerify(true);
     } finally {
       setLoading(false);
     }
@@ -89,19 +88,15 @@ export function FeedbackPageContent() {
     setSaving(true);
     setError(null);
     try {
-      const res = await fetch("/api/feedback", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      await apiClient.post("/api/feedback", {
+        body: {
           siteId,
           rating,
           experience: experience.trim() || undefined,
           desiredFeatures: desiredFeatures.trim() || undefined,
           featureTags,
-        }),
+        },
       });
-      const data = (await res.json().catch(() => null)) as { error?: string } | null;
-      if (!res.ok) throw new Error(data?.error ?? "Could not save feedback.");
       setSaved(true);
       setExisting({
         rating,

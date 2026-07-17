@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { CustomDomainPanel } from "@/components/dashboard/CustomDomainPanel";
 import type { BookingConfig, BookingStatus, DaySlotConfig } from "@/lib/types";
+import { ApiClientError, apiClient } from "@/platform/api/api-client";
 
 interface BookingRow {
   id: string;
@@ -104,27 +105,24 @@ export default function SiteManagePage({
   const load = useCallback(async () => {
     setLoading(true);
     try {
-      const [siteRes, bookingsRes] = await Promise.all([
-        fetch(`/api/sites/${encodeURIComponent(siteId)}`),
-        fetch(`/api/sites/${encodeURIComponent(siteId)}/bookings`),
+      const [siteData, bookingsData] = await Promise.all([
+        apiClient.get<{ slug: string; name: string; site?: { booking?: BookingConfig } }>(
+          `/api/sites/${encodeURIComponent(siteId)}`
+        ),
+        apiClient.get<{ bookings?: BookingRow[] }>(
+          `/api/sites/${encodeURIComponent(siteId)}/bookings`
+        ),
       ]);
-      if (siteRes.status === 401) {
-        setNeedsVerify(true);
-        return;
-      }
-      if (!siteRes.ok) return;
-      const siteData = await siteRes.json();
-      setSlug(siteData.slug as string);
-      setSiteName(siteData.name as string);
-      const b = (siteData.site?.booking ?? { enabled: false }) as BookingConfig;
+      setSlug(siteData.slug);
+      setSiteName(siteData.name);
+      const b = siteData.site?.booking ?? { enabled: false };
       setBooking(b);
       setServicesText((b.services ?? []).join("\n"));
       syncWeeklyState(b);
 
-      if (bookingsRes.ok) {
-        const bData = await bookingsRes.json();
-        setBookings(bData.bookings ?? []);
-      }
+      setBookings(bookingsData.bookings ?? []);
+    } catch (error) {
+      if (error instanceof ApiClientError && error.status === 401) setNeedsVerify(true);
     } finally {
       setLoading(false);
     }
@@ -162,18 +160,15 @@ export default function SiteManagePage({
           }
         : { enabled: false, weekly: booking.native?.weekly ?? [] };
 
-      const res = await fetch(`/api/sites/${encodeURIComponent(siteId)}/booking`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      const data = await apiClient.patch<{ booking: BookingConfig }>(
+        `/api/sites/${encodeURIComponent(siteId)}/booking`,
+        { body: {
           ...booking,
           services: services.length ? services : undefined,
           native,
-        }),
-      });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error((data.error as string) ?? "Could not save.");
-      const saved = data.booking as BookingConfig;
+        } }
+      );
+      const saved = data.booking;
       setBooking(saved);
       syncWeeklyState(saved);
       setMessage("Booking settings saved. Your live site will update immediately.");
@@ -202,10 +197,8 @@ export default function SiteManagePage({
   }
 
   async function updateStatus(bookingId: string, status: BookingStatus) {
-    await fetch(`/api/sites/${encodeURIComponent(siteId)}/bookings`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ bookingId, status }),
+    await apiClient.patch(`/api/sites/${encodeURIComponent(siteId)}/bookings`, {
+      body: { bookingId, status },
     });
     setBookings((rows) => rows.map((r) => (r.id === bookingId ? { ...r, status } : r)));
   }

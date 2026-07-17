@@ -1,27 +1,20 @@
 import { NextResponse } from "next/server";
 
-import { listBookingsForSite, bookingsToCsv } from "@/lib/booking";
-import { emailFromRequest } from "@/lib/session";
+import { exportOwnedBookings } from "@/features/bookings/application/export-bookings";
+import { createApiRouteWithParams } from "@/platform/http/create-api-route";
 
 export const runtime = "nodejs";
 
-export async function GET(
-  request: Request,
-  { params }: { params: Promise<{ id: string }> }
-) {
-  const email = emailFromRequest(request);
-  if (!email) {
-    return NextResponse.json({ error: "Not verified.", code: "verify_required" }, { status: 401 });
+export const GET = createApiRouteWithParams<{ id: string }>(
+  "site.booking.export",
+  async (_request, context, params) => {
+    const csv = await exportOwnedBookings(context.email!, params.id);
+
+    return new NextResponse(csv, {
+      headers: {
+        "Content-Type": "text/csv; charset=utf-8",
+        "Content-Disposition": `attachment; filename="bookings-${params.id.slice(0, 8)}.csv"`,
+      },
+    });
   }
-
-  const { id } = await params;
-  const bookings = await listBookingsForSite(email, id);
-  const csv = bookingsToCsv(bookings);
-
-  return new NextResponse(csv, {
-    headers: {
-      "Content-Type": "text/csv; charset=utf-8",
-      "Content-Disposition": `attachment; filename="bookings-${id.slice(0, 8)}.csv"`,
-    },
-  });
-}
+);
