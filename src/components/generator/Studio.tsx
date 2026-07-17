@@ -42,6 +42,7 @@ import { Hero3D } from "@/components/marketing/Hero3D";
 import { ComingSoonNotify } from "@/components/marketing/ComingSoonNotify";
 import { LogoMark } from "@/components/marketing/Logo";
 import { MarketingNav } from "@/components/marketing/MarketingNav";
+import { SupportBot } from "@/components/marketing/SupportBot";
 import { GeneratedSite } from "@/components/generated/GeneratedSite";
 import { SourceInput } from "@/components/generator/SourceInput";
 import { EmailGate } from "@/components/generator/EmailGate";
@@ -718,9 +719,9 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
 
       {step === "chooser" ? (
         <div className="relative pb-24">
-          <section className="relative min-h-[calc(100svh-4rem)] overflow-hidden border-b border-[#11130f]/10 bg-[#f3f3ef] dark:border-white/10 dark:bg-[#0d0f0d]">
+          <section className="relative overflow-hidden border-b border-[#11130f]/10 bg-[#f3f3ef] dark:border-white/10 dark:bg-[#0d0f0d] lg:min-h-[calc(100svh-4rem)]">
             <div className="absolute inset-0 opacity-50 [background-image:linear-gradient(to_right,rgba(17,19,15,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(17,19,15,0.035)_1px,transparent_1px)] [background-size:72px_72px] [mask-image:linear-gradient(to_bottom,black,transparent_75%)] dark:opacity-20" />
-            <div className="relative mx-auto grid min-h-[calc(100svh-4rem)] max-w-7xl items-center gap-10 px-5 py-10 sm:px-6 lg:grid-cols-[1.08fr_0.92fr] lg:px-8 lg:py-12">
+            <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 py-10 sm:px-6 lg:min-h-[calc(100svh-4rem)] lg:grid-cols-[1.08fr_0.92fr] lg:px-8 lg:py-12">
               <motion.div
                 initial={reduceMotion ? "show" : "hidden"}
                 animate="show"
@@ -785,9 +786,85 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
                 initial={reduceMotion ? false : { opacity: 0, x: 28 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.9, delay: 0.18, ease: EASE }}
-                className="relative mx-auto w-full max-w-xl lg:max-w-none"
+                className="relative mx-auto hidden w-full max-w-xl lg:block lg:max-w-none"
               >
                 <Hero3D />
+              </motion.div>
+
+              <motion.div
+                initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.12, ease: EASE }}
+                className="relative w-full lg:hidden"
+              >
+                <div className="rounded-[1.5rem] border border-[#11130f]/10 bg-white/65 p-5 dark:border-white/10 dark:bg-[#151815] sm:p-6">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#214f43] dark:text-[#9cc2b3]">
+                    More ways to begin
+                  </p>
+                  <h2 className="mt-3 text-2xl font-semibold tracking-[-0.035em] text-stone-950 dark:text-stone-50">
+                    Build from whatever you already have.
+                  </h2>
+                  <p className="mt-3 max-w-lg text-sm leading-6 text-stone-600 dark:text-stone-300">
+                    Google is the fastest path for local businesses, but it is not
+                    the only path. Professionals can start from a resume, an existing
+                    site, or a short guided brief.
+                  </p>
+                  <div className="mt-5 divide-y divide-stone-900/10 border-y border-stone-900/10 dark:divide-white/10 dark:border-white/10">
+                    <div className="flex items-center gap-3 py-3.5">
+                      <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-white text-stone-800 shadow-sm dark:bg-stone-950 dark:text-stone-200">
+                        <FileText className="size-4" />
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block text-sm font-semibold text-stone-950 dark:text-stone-50">Resume or CV</span>
+                        <span className="mt-0.5 block text-xs text-stone-500 dark:text-stone-400">For developers, designers, freelancers, and professionals</span>
+                      </span>
+                      <button
+                        type="button"
+                        disabled={!capabilities?.ai}
+                        onClick={() => choose("resume")}
+                        className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[#214f43] px-3.5 py-2 text-xs font-semibold text-white transition hover:bg-[#1a3f36] disabled:opacity-50"
+                      >
+                        Build
+                        <ArrowRight className="size-3.5" />
+                      </button>
+                    </div>
+                    <div className="flex items-center gap-3 py-3.5">
+                      <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-white text-stone-800 shadow-sm dark:bg-stone-950 dark:text-stone-200">
+                        <Globe className="size-4" />
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block text-sm font-semibold text-stone-950 dark:text-stone-50">Existing website</span>
+                        <span className="mt-0.5 block text-xs text-stone-500 dark:text-stone-400">Use the structure of a site you already have</span>
+                      </span>
+                      <button
+                        type="button"
+                        disabled={!capabilities?.ai}
+                        onClick={() => choose("competitor")}
+                        className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[#214f43] px-3.5 py-2 text-xs font-semibold text-white transition hover:bg-[#1a3f36] disabled:opacity-50"
+                      >
+                        Build
+                        <ArrowRight className="size-3.5" />
+                      </button>
+                    </div>
+                    <div className="flex items-center gap-3 py-3.5">
+                      <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-white text-stone-800 shadow-sm dark:bg-stone-950 dark:text-stone-200">
+                        <PenLine className="size-4" />
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block text-sm font-semibold text-stone-950 dark:text-stone-50">Answer a few questions</span>
+                        <span className="mt-0.5 block text-xs text-stone-500 dark:text-stone-400">No profile, document, or existing website needed</span>
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => choose("manual")}
+                        className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[#214f43] px-3.5 py-2 text-xs font-semibold text-white transition hover:bg-[#1a3f36]"
+                      >
+                        Build
+                        <ArrowRight className="size-3.5" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </motion.div>
             </div>
           </section>
@@ -917,7 +994,7 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.7, ease: EASE }}
-            className="mx-auto mt-28 max-w-6xl px-5 sm:px-6"
+            className="mx-auto mt-28 hidden max-w-6xl px-5 sm:px-6 lg:block"
           >
             <div className="rounded-[1.5rem] border border-[#11130f]/10 bg-white/65 p-6 dark:border-white/10 dark:bg-[#151815] sm:p-10">
               <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-center">
@@ -935,12 +1012,7 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
                   </p>
                 </div>
                 <div className="divide-y divide-stone-900/10 border-y border-stone-900/10 dark:divide-white/10 dark:border-white/10">
-                  <button
-                    type="button"
-                    disabled={!capabilities?.ai}
-                    onClick={() => choose("resume")}
-                    className="group flex w-full items-center gap-4 py-4 text-left transition enabled:hover:pl-2 disabled:opacity-50"
-                  >
+                  <div className="flex items-center gap-4 py-4">
                     <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-white text-stone-800 shadow-sm dark:bg-stone-950 dark:text-stone-200">
                       <FileText className="size-5" />
                     </span>
@@ -948,17 +1020,17 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
                       <span className="block font-semibold text-stone-950 dark:text-stone-50">Resume or CV</span>
                       <span className="mt-0.5 block text-sm text-stone-500 dark:text-stone-400">For developers, designers, freelancers, and professionals</span>
                     </span>
-                    <span className="rounded-full bg-emerald-100 px-2.5 py-1 text-[11px] font-semibold text-emerald-700 dark:bg-emerald-400/10 dark:text-emerald-300">
-                      {capabilities?.ai ? "Live" : "Unavailable"}
-                    </span>
-                    <ArrowRight className="size-4 text-stone-400 transition group-hover:translate-x-1" />
-                  </button>
-                  <button
-                    type="button"
-                    disabled={!capabilities?.ai}
-                    onClick={() => choose("competitor")}
-                    className="group flex w-full items-center gap-4 py-4 text-left transition enabled:hover:pl-2 disabled:opacity-50"
-                  >
+                    <button
+                      type="button"
+                      disabled={!capabilities?.ai}
+                      onClick={() => choose("resume")}
+                      className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[#214f43] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#1a3f36] disabled:opacity-50"
+                    >
+                      Build
+                      <ArrowRight className="size-4" />
+                    </button>
+                  </div>
+                  <div className="flex items-center gap-4 py-4">
                     <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-white text-stone-800 shadow-sm dark:bg-stone-950 dark:text-stone-200">
                       <Globe className="size-5" />
                     </span>
@@ -966,16 +1038,17 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
                       <span className="block font-semibold text-stone-950 dark:text-stone-50">Existing website</span>
                       <span className="mt-0.5 block text-sm text-stone-500 dark:text-stone-400">Use the structure of a site you already have</span>
                     </span>
-                    <span className="rounded-full bg-emerald-100 px-2.5 py-1 text-[11px] font-semibold text-emerald-700 dark:bg-emerald-400/10 dark:text-emerald-300">
-                      {capabilities?.ai ? "Live" : "Unavailable"}
-                    </span>
-                    <ArrowRight className="size-4 text-stone-400 transition group-hover:translate-x-1" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => choose("manual")}
-                    className="group flex w-full items-center gap-4 py-4 text-left transition hover:pl-2"
-                  >
+                    <button
+                      type="button"
+                      disabled={!capabilities?.ai}
+                      onClick={() => choose("competitor")}
+                      className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[#214f43] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#1a3f36] disabled:opacity-50"
+                    >
+                      Build
+                      <ArrowRight className="size-4" />
+                    </button>
+                  </div>
+                  <div className="flex items-center gap-4 py-4">
                     <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-white text-stone-800 shadow-sm dark:bg-stone-950 dark:text-stone-200">
                       <PenLine className="size-5" />
                     </span>
@@ -983,15 +1056,30 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
                       <span className="block font-semibold text-stone-950 dark:text-stone-50">Answer a few questions</span>
                       <span className="mt-0.5 block text-sm text-stone-500 dark:text-stone-400">No profile, document, or existing website needed</span>
                     </span>
-                    <span className="rounded-full bg-emerald-100 px-2.5 py-1 text-[11px] font-semibold text-emerald-700 dark:bg-emerald-400/10 dark:text-emerald-300">Live</span>
-                    <ArrowRight className="size-4 text-stone-400 transition group-hover:translate-x-1" />
-                  </button>
+                    <button
+                      type="button"
+                      onClick={() => choose("manual")}
+                      className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[#214f43] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#1a3f36]"
+                    >
+                      Build
+                      <ArrowRight className="size-4" />
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </motion.section>
 
           <ComingSoonNotify />
+          <SupportBot
+            canCreate={!verified || canCreate}
+            onChoose={choose}
+            onAnalyzed={onAnalyzed}
+            onLimitReached={(message) => {
+              setError(message);
+              setStep("limit");
+            }}
+          />
         </div>
       ) : (
         <div className="relative mx-auto w-full max-w-6xl min-w-0 px-4 pb-28 pt-6 sm:px-6 sm:pb-24 sm:pt-12">
