@@ -7,6 +7,7 @@
 import type {
   Archetype,
   BusinessDomain,
+  CareerStage,
   Density,
   GalleryVariant,
   SectionType,
@@ -20,6 +21,23 @@ import type {
   VisualKit,
   WorkVariant,
 } from "@/lib/types";
+
+/**
+ * A conservative resume-stage suggestion. A candidate can always change this
+ * during import; the heuristic only saves them an unnecessary decision.
+ */
+export function suggestCareerStage(input: {
+  work?: { title?: string; period?: string }[];
+  projects?: unknown[];
+}): CareerStage {
+  const roles = input.work ?? [];
+  const roleText = roles.map((role) => `${role.title ?? ""} ${role.period ?? ""}`).join(" ").toLowerCase();
+  const seniorSignal = /\b(senior|lead|principal|manager|director|head|architect|staff|founder)\b/.test(roleText);
+  const earlySignal = /\b(intern|internship|trainee|graduate|student|fresher|apprentice)\b/.test(roleText);
+
+  if (seniorSignal || (!earlySignal && roles.length >= 2)) return "experienced";
+  return "early-career";
+}
 
 // Domains that read as a walk-in / local business vs. a personal practice.
 const BUSINESS_DOMAINS: BusinessDomain[] = ["restaurant", "doctor", "fitness"];
@@ -88,6 +106,37 @@ const ARCHETYPE_ORDER: Record<Archetype, SectionType[]> = {
     "testimonials",
     "faq",
     "booking",
+    "cta",
+  ],
+};
+
+const PROFILE_STAGE_ORDER: Record<CareerStage, SectionType[]> = {
+  // Early-career candidates need visible proof of ability before a short work
+  // history. Credentials also carry more weight at this stage.
+  "early-career": [
+    "about",
+    "projects",
+    "skills",
+    "certifications",
+    "experience",
+    "languages",
+    "interests",
+    "testimonials",
+    "cta",
+  ],
+  // Experienced candidates are hired for scope and progression, so their work
+  // history comes immediately after the executive summary.
+  experienced: [
+    "about",
+    "stats",
+    "experience",
+    "projects",
+    "skills",
+    "certifications",
+    "languages",
+    "interests",
+    "testimonials",
+    "faq",
     "cta",
   ],
 };
@@ -214,7 +263,11 @@ function composeInput(site: SiteData): ComposeInput {
 // Build the default ordered sections for a site, dropping empty blocks.
 export function defaultSections(site: SiteData): SiteSection[] {
   const c = composeInput(site);
-  return ARCHETYPE_ORDER[c.archetype]
+  const order =
+    c.archetype === "profile" && site.careerStage
+      ? PROFILE_STAGE_ORDER[site.careerStage]
+      : ARCHETYPE_ORDER[c.archetype];
+  return order
     .filter((type) => sectionHasContent(type, c))
     .map((type) => ({ type }));
 }
@@ -269,6 +322,17 @@ export function sanitizeSections(
   // A portfolio/profile/business with nothing usable → fall back entirely.
   if (out.length < 2) return defaultSections(site);
 
+  // Career stage is a layout decision, not merely a copy hint. Keep AI-written
+  // labels and headings, but always honour the selected hierarchy so an
+  // early-career page cannot drift back to an experience-first sequence.
+  if (site.archetype === "profile" && site.careerStage) {
+    const overrides = new Map(out.map((section) => [section.type, section]));
+    return defaultSections(site).map((section) => ({
+      ...section,
+      ...overrides.get(section.type),
+    }));
+  }
+
   if (!seen.has("cta")) out.push({ type: "cta" });
   return out;
 }
@@ -316,6 +380,21 @@ const ARCHETYPE_DESIGN: Record<Archetype, SiteDesign> = {
   },
 };
 
+const PROFILE_STAGE_DESIGN: Record<CareerStage, SiteDesign> = {
+  "early-career": {
+    styleTheme: "editorial",
+    visualKit: "editorial",
+    density: "airy",
+    variants: { services: "cards", work: "masonry", testimonials: "cards", gallery: "masonry" },
+  },
+  experienced: {
+    styleTheme: "minimal",
+    visualKit: "clean",
+    density: "comfortable",
+    variants: { services: "cards", work: "grid", testimonials: "cards", gallery: "masonry" },
+  },
+};
+
 // When the user (or AI) picks a kit explicitly, apply it and keep styleTheme in
 // step. Otherwise fall back to the archetype's default look.
 function applyKit(base: SiteDesign, kit?: VisualKit): SiteDesign {
@@ -323,8 +402,15 @@ function applyKit(base: SiteDesign, kit?: VisualKit): SiteDesign {
   return { ...base, visualKit: kit, styleTheme: KIT_TO_STYLE_THEME[kit] };
 }
 
-export function defaultDesign(archetype: Archetype, visualKit?: VisualKit): SiteDesign {
-  const base = ARCHETYPE_DESIGN[archetype] ?? ARCHETYPE_DESIGN.profile;
+export function defaultDesign(
+  archetype: Archetype,
+  visualKit?: VisualKit,
+  careerStage?: CareerStage
+): SiteDesign {
+  const base =
+    archetype === "profile" && careerStage
+      ? PROFILE_STAGE_DESIGN[careerStage]
+      : ARCHETYPE_DESIGN[archetype] ?? ARCHETYPE_DESIGN.profile;
   return applyKit(base, visualKit);
 }
 
@@ -339,9 +425,10 @@ function pick<T>(value: unknown, allowed: T[], fallback: T): T {
 export function sanitizeDesign(
   raw: unknown,
   archetype: Archetype,
-  userKit?: VisualKit
+  userKit?: VisualKit,
+  careerStage?: CareerStage
 ): SiteDesign {
-  const base = defaultDesign(archetype);
+  const base = defaultDesign(archetype, undefined, careerStage);
   const r = (raw ?? {}) as {
     styleTheme?: unknown;
     visualKit?: unknown;

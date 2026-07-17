@@ -45,10 +45,12 @@ import { MarketingNav } from "@/components/marketing/MarketingNav";
 import { SupportBot } from "@/components/marketing/SupportBot";
 import { GeneratedSite } from "@/components/generated/GeneratedSite";
 import { SourceInput } from "@/components/generator/SourceInput";
+import { AnalysisReveal } from "@/components/generator/AnalysisReveal";
 import { EmailGate } from "@/components/generator/EmailGate";
 import { SignOutButton } from "@/components/auth/SignOutButton";
 import { MarketingFooter } from "@/components/marketing/MarketingFooter";
 import { GeneratingOverlay } from "@/components/generator/GeneratingOverlay";
+import { PublishSuccess } from "@/components/generator/PublishSuccess";
 import { siteToGeneratorInput } from "@/lib/site-to-input";
 import { deriveArchetype } from "@/lib/compose";
 import { generateSite } from "@/lib/template";
@@ -117,6 +119,7 @@ type Step =
   | "review"
   | "verify"
   | "generating"
+  | "published"
   | "limit"
   | "preview";
 type SmartSource = Exclude<SourceId, "manual">;
@@ -166,6 +169,12 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
   const [editingSiteId, setEditingSiteId] = useState<string | null>(editSiteId ?? null);
   const [editLoading, setEditLoading] = useState(Boolean(editSiteId));
   const [editLoadError, setEditLoadError] = useState<string | null>(null);
+  const [publishedMeta, setPublishedMeta] = useState<{
+    siteId: string;
+    slug: string;
+    siteName: string;
+    liveUrl: string;
+  } | null>(null);
 
   const resetToChooser = useCallback(() => {
     setStep("chooser");
@@ -264,16 +273,9 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
         if (draft.analysis) setAnalysis(draft.analysis);
         if (draft.initialValues) setInitialValues(draft.initialValues);
         if (draft.step === "analysis" && draft.analysis) {
-          const input = previewInputFromAnalysis(draft.analysis);
-          if (input) {
-            setInitialValues(input);
-            setPendingInput(input);
-            setSite(generateSite(input));
-            setPreviewTheme(input.theme);
-            setStep("preview");
-          } else {
-            setStep("review");
-          }
+          // Resume at the import review so a candidate can still choose their
+          // early-career or experienced profile layout after a refresh.
+          setStep("analysis");
         } else if (
           draft.step === "preview" &&
           draft.initialValues?.name &&
@@ -286,7 +288,7 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
           setPreviewTheme(input.theme);
           setStep("preview");
         } else {
-          setStep(draft.step === "analysis" ? "review" : draft.step);
+          setStep(draft.step);
         }
       }
     }
@@ -347,6 +349,7 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
       step === "chooser" ||
       step === "verify" ||
       step === "generating" ||
+      step === "published" ||
       step === "limit"
     ) {
       return;
@@ -377,13 +380,18 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
   function onAnalyzed(result: AnalysisResult) {
     if (result.source !== "manual") setActiveSource(result.source);
     setAnalysis(result);
-    const input = previewInputFromAnalysis(result);
+    setStep("analysis");
+  }
+
+  function confirmAnalysis(values: Partial<GeneratorInput>) {
+    if (!analysis) return;
+    const input = previewInputFromAnalysis(analysis);
     if (!input) {
-      setInitialValues({ ...result.profile, source: result.source });
+      setInitialValues({ ...analysis.profile, ...values, source: analysis.source });
       setStep("review");
       return;
     }
-    openDraftPreview(input);
+    openDraftPreview({ ...input, ...values });
   }
 
   function handleGenerate(input: GeneratorInput) {
@@ -540,12 +548,47 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
           { event_callback: done }
         );
       });
+      if (!isUpdate) {
+        const siteName =
+          (data.site as SiteData | undefined)?.identity?.name?.trim() ||
+          pendingInput?.name?.trim() ||
+          "Your site";
+        setSlug(publishedSlug);
+        setPublishedMeta({
+          siteId: String(data.siteId ?? ""),
+          slug: publishedSlug,
+          siteName,
+          liveUrl,
+        });
+        setStep("published");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
       window.location.assign(liveUrl);
       return;
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
       setStep(site && !editingSiteId ? "preview" : "review");
     }
+  }
+
+  // ---- Published (first publish success) ----
+  if (step === "published" && publishedMeta) {
+    return (
+      <main className="relative min-h-screen overflow-x-hidden bg-[#f3f3ef] dark:bg-[#0d0f0d]">
+        <MarketingNav />
+        <div className="relative mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
+          <PublishSuccess
+            siteId={publishedMeta.siteId}
+            siteName={publishedMeta.siteName}
+            liveUrl={publishedMeta.liveUrl}
+            settingsUrl={`/dashboard/${publishedMeta.siteId}`}
+            onViewSite={() => window.location.assign(publishedMeta.liveUrl)}
+          />
+        </div>
+        <MarketingFooter />
+      </main>
+    );
   }
 
   // ---- Preview ----
@@ -1099,6 +1142,14 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
                   setError(msg);
                   setStep("limit");
                 }}
+              />
+            ) : null}
+
+            {step === "analysis" && analysis ? (
+              <AnalysisReveal
+                analysis={analysis}
+                onBack={() => setStep("source")}
+                onConfirm={confirmAnalysis}
               />
             ) : null}
 

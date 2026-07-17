@@ -283,11 +283,12 @@ function HeroAurora({ accent, y }: { accent?: string; y: MotionValue<number> }) 
 }
 
 function Hero({ site, y, opacity }: { site: SiteData; y: MotionValue<number>; opacity: MotionValue<number> }) {
-  const { identity, cta, accent, heroLayout, archetype } = site;
+  const { identity, cta, accent, heroLayout, archetype, careerStage } = site;
   const st = siteStyle(site.design);
   const contactLinks = buildContactLinks(identity);
   const split = heroLayout === "split" && Boolean(identity.photo);
   const isBusiness = archetype === "business";
+  const isEarlyCareer = archetype === "profile" && careerStage === "early-career";
 
   const badges = (
     <motion.div
@@ -302,6 +303,11 @@ function Hero({ site, y, opacity }: { site: SiteData; y: MotionValue<number>; op
       <Badge variant="secondary" className="rounded-full px-3 py-1">
         {identity.name}
       </Badge>
+      {archetype === "profile" && careerStage ? (
+        <Badge variant="outline" className="rounded-full px-3 py-1">
+          {isEarlyCareer ? "Early-career portfolio" : "Experienced professional"}
+        </Badge>
+      ) : null}
       {identity.location ? (
         <Badge variant="outline" className="rounded-full px-3 py-1">
           <MapPin className="mr-1 size-3" />
@@ -352,7 +358,9 @@ function Hero({ site, y, opacity }: { site: SiteData; y: MotionValue<number>; op
           <ArrowRight className="size-4" />
         </CtaButton>
         <Button size="lg" variant="outline" asChild className={st.ctaRadius}>
-          <a href="#work">View work</a>
+          <a href={isEarlyCareer ? "#projects" : "#work"}>
+            {isEarlyCareer ? "View projects" : "View experience"}
+          </a>
         </Button>
       </div>
       <ContactRow links={contactLinks} accent={accent} />
@@ -363,7 +371,11 @@ function Hero({ site, y, opacity }: { site: SiteData; y: MotionValue<number>; op
     <section
       className={cn(
         "relative flex items-center overflow-hidden px-6",
-        isBusiness ? "min-h-0 pb-16 pt-14 sm:pb-20 sm:pt-16" : "min-h-[88vh]"
+        isBusiness
+          ? "min-h-0 pb-16 pt-14 sm:pb-20 sm:pt-16"
+          : isEarlyCareer
+            ? "min-h-[76vh] sm:min-h-[82vh]"
+            : "min-h-[88vh]"
       )}
     >
       <motion.div
@@ -471,6 +483,7 @@ function AboutSection({ site, section }: SectionProps) {
   const st = siteStyle(site.design);
   const isBusiness = archetype === "business";
   const isProfile = archetype === "profile";
+  const isEarlyCareer = isProfile && site.careerStage === "early-career";
   const bioParagraphs = splitBioParagraphs(bio.body);
 
   return (
@@ -529,6 +542,26 @@ function AboutSection({ site, section }: SectionProps) {
               <PhotoFilmstrip images={gallery.slice(0, 12)} className="mt-6" />
             ) : null}
           </>
+        ) : isEarlyCareer ? (
+          <div className="grid gap-7 border-y border-border/80 py-7 sm:py-9 md:grid-cols-[0.9fr_1.35fr] md:gap-12">
+            <div>
+              <h2 className={cn("mt-3 text-4xl leading-[1.02] sm:text-5xl", st.heading)}>
+                {section?.heading ?? bio.heading}
+              </h2>
+              <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
+                A practical snapshot of what I&apos;ve been learning, building, and looking to contribute.
+              </p>
+            </div>
+            <div className="border-l-2 border-border pl-5 sm:pl-7" style={accent ? { borderColor: accent } : undefined}>
+              <div className="space-y-4 text-base leading-relaxed text-muted-foreground sm:text-lg sm:leading-8">
+                {bioParagraphs.map((para, i) => (
+                  <p key={i} className="text-pretty">
+                    {para}
+                  </p>
+                ))}
+              </div>
+            </div>
+          </div>
         ) : (
           <>
             <h2 className={cn("mt-3 max-w-3xl text-4xl leading-[1.02] sm:text-5xl", st.heading)}>
@@ -784,6 +817,37 @@ function SkillsSection({ site, section }: SectionProps) {
   const skills = site.skills ?? [];
   const st = siteStyle(site.design);
   if (!skills.length) return null;
+  const isEarlyCareer = site.archetype === "profile" && site.careerStage === "early-career";
+
+  if (isEarlyCareer) {
+    return (
+      <section id="skills" className={cn("mx-auto max-w-5xl px-6", st.pad)}>
+        <Reveal>
+          <div className="grid gap-7 md:grid-cols-[0.8fr_1.5fr] md:gap-12">
+            <div>
+              <SectionLabel accent={site.accent} className={st.eyebrow}>
+                {section?.label ?? "Skills"}
+              </SectionLabel>
+              <h2 className={cn("mt-3 text-3xl sm:text-4xl", st.heading)}>
+                {section?.heading ?? "Skills I’m growing"}
+              </h2>
+            </div>
+            <div className="flex flex-wrap content-start gap-2 border-t border-border pt-5 md:border-l md:border-t-0 md:pl-8 md:pt-0">
+              {skills.map((skill) => (
+                <TechMarqueeItem
+                  key={skill}
+                  label={skill}
+                  variant="pill"
+                  accent={site.accent}
+                />
+              ))}
+            </div>
+          </div>
+        </Reveal>
+      </section>
+    );
+  }
+
   return (
     <section id="skills" className={cn("overflow-hidden", st.pad)}>
       <div className="mx-auto max-w-5xl px-6">
@@ -1298,7 +1362,66 @@ function ProjectsSection({ site, section }: SectionProps) {
       ? "rounded-t-3xl"
       : st.card.includes("rounded-2xl")
         ? "rounded-t-2xl"
-        : "rounded-t-xl";
+      : "rounded-t-xl";
+
+  const isEarlyCareer = site.archetype === "profile" && site.careerStage === "early-career";
+
+  if (isEarlyCareer) {
+    return (
+      <section id="projects" className={cn("relative mx-auto max-w-6xl px-6", st.pad)}>
+        <SectionAurora accent={accent} />
+        <Reveal>
+          <SectionLabel accent={accent} className={st.eyebrow}>
+            {section?.label ?? "Selected projects"}
+          </SectionLabel>
+          <h2 className={cn("mt-3 max-w-2xl text-4xl leading-[1.02] sm:text-5xl", st.heading)}>
+            {section?.heading ?? "Proof of what I can build"}
+          </h2>
+        </Reveal>
+        <div className="mt-10 grid gap-4 md:grid-cols-2">
+          {projects.map((item, i) => {
+            const content = (
+              <>
+                <div className={cn("relative h-36 overflow-hidden border-b", mediaRadius)}>
+                  <CardAurora accent={accent} seed={i} />
+                  <span className="absolute right-4 top-3 text-5xl font-semibold tabular-nums text-foreground/[0.08]">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  {item.tech?.length ? (
+                    <div className="absolute inset-0 flex items-center">
+                      <TechMarquee items={item.tech.slice(0, 6)} variant="tile" duration="24s" maskFade className="w-full" />
+                    </div>
+                  ) : null}
+                </div>
+                <div className="flex min-h-44 flex-col p-6">
+                  {item.tag ? (
+                    <span className="text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
+                      {item.tag}
+                    </span>
+                  ) : null}
+                  <h3 className="mt-2 text-xl font-semibold">{item.title}</h3>
+                  {item.description ? <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.description}</p> : null}
+                  {item.link ? (
+                    <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-medium" style={accent ? { color: accent } : undefined}>
+                      View project <ArrowUpRight className="size-4" />
+                    </span>
+                  ) : null}
+                </div>
+              </>
+            );
+            const className = cn("group overflow-hidden text-card-foreground transition-all hover:-translate-y-1 hover:shadow-lg", st.card);
+            return item.link ? (
+              <a key={`${item.title}-${i}`} href={withProtocol(item.link)} target="_blank" rel="noopener noreferrer" className={className}>
+                {content}
+              </a>
+            ) : (
+              <div key={`${item.title}-${i}`} className={className}>{content}</div>
+            );
+          })}
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="projects" className={cn("mx-auto max-w-5xl px-6", st.pad)}>
@@ -1653,6 +1776,7 @@ function CertificationsSection({ site, section }: SectionProps) {
   const items = normalizeCertifications(site.certifications, site.identity.domain);
   const st = siteStyle(site.design);
   const accent = site.accent;
+  const isEarlyCareer = site.archetype === "profile" && site.careerStage === "early-career";
   if (!items.length) return null;
   return (
     <section id="certifications" className={cn("mx-auto max-w-5xl px-6", st.pad)}>
@@ -1661,7 +1785,7 @@ function CertificationsSection({ site, section }: SectionProps) {
           {section?.label ?? "Credentials"}
         </SectionLabel>
         <h2 className={cn("mt-3 text-3xl sm:text-4xl", st.heading)}>
-          {section?.heading ?? "Certifications & awards"}
+          {section?.heading ?? (isEarlyCareer ? "Education & credentials" : "Certifications & awards")}
         </h2>
       </Reveal>
       <Reveal delay={0.1} className="mt-10">

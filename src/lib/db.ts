@@ -100,6 +100,8 @@ export function ensureSchema(): Promise<void> {
     await sql`alter table accounts add column if not exists billing_cancel_at_cycle_end boolean default false`;
     await sql`alter table accounts add column if not exists billing_cancelled_at timestamptz`;
     await sql`alter table accounts add column if not exists billing_last_reminder_at timestamptz`;
+    await sql`alter table accounts add column if not exists welcome_email_sent_at timestamptz`;
+    await sql`alter table accounts add column if not exists upgrade_nudge_sent_at timestamptz`;
     await sql`
       create index if not exists accounts_subscription_idx
         on accounts (razorpay_subscription_id)`;
@@ -218,6 +220,29 @@ export function ensureSchema(): Promise<void> {
       create unique index if not exists sites_custom_domain_idx
         on sites (custom_domain)
         where custom_domain is not null`;
+    await sql`
+      create table if not exists site_feedback (
+        id         bigserial primary key,
+        site_id    uuid not null,
+        email      text not null,
+        rating     int not null check (rating between 1 and 5),
+        comment    text,
+        created_at timestamptz not null default now()
+      )`;
+    await sql`
+      create index if not exists site_feedback_site_idx
+        on site_feedback (site_id, created_at desc)`;
+    await sql`
+      create table if not exists account_feedback (
+        email             text primary key,
+        rating            int not null check (rating between 1 and 5),
+        experience        text,
+        desired_features  text,
+        feature_tags      text[] not null default '{}',
+        site_id           uuid,
+        created_at        timestamptz not null default now(),
+        updated_at        timestamptz not null default now()
+      )`;
   })();
   return _schemaReady;
 }

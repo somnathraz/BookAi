@@ -230,6 +230,9 @@ export default function DashboardPage() {
               </div>
               <div className="flex flex-wrap items-center gap-2">
                 <Button variant="outline" size="sm" asChild>
+                  <Link href="/dashboard/feedback">Feedback</Link>
+                </Button>
+                <Button variant="outline" size="sm" asChild>
                   <Link href="/dashboard/billing">Billing</Link>
                 </Button>
                 {plan === "basic" ? (

@@ -1,4 +1,9 @@
-import { deriveArchetype, defaultSections, defaultDesign } from "@/lib/compose";
+import {
+  deriveArchetype,
+  defaultSections,
+  defaultDesign,
+  suggestCareerStage,
+} from "@/lib/compose";
 import { enrichCertifications } from "@/lib/certifications";
 import { buildMapEmbedUrl } from "@/lib/hours";
 import type {
@@ -506,6 +511,11 @@ export function generateSite(input: GeneratorInput): SiteData {
 
   const socials = normalizeSocials(input);
   const archetype = input.archetype ?? deriveArchetype(input.domain);
+  const isResumeProfile = input.source === "resume" || input.source === "linkedin";
+  const careerStage =
+    archetype === "profile" && (input.careerStage || isResumeProfile)
+      ? input.careerStage ?? suggestCareerStage({ work: input.work, projects: input.projects })
+      : undefined;
   const gallery = (input.gallery ?? []).filter(Boolean).slice(0, 20);
   const mapEmbedUrl =
     input.mapEmbedUrl ?? buildMapEmbedUrl({ address: input.location });
@@ -513,6 +523,12 @@ export function generateSite(input: GeneratorInput): SiteData {
     ...(ARCHETYPE_CTA[archetype] ?? preset.cta),
     href: input.email ? `mailto:${input.email}` : "#contact",
   };
+
+  if (careerStage === "early-career") {
+    cta.heading = "Let’s build something useful";
+    cta.subtext = "Open to entry-level roles, internships, and thoughtful collaborations.";
+    cta.buttonLabel = "Get in touch";
+  }
 
   const site: SiteData = {
     identity: {
@@ -531,7 +547,8 @@ export function generateSite(input: GeneratorInput): SiteData {
     // A photo unlocks the split hero; otherwise stay text-forward and centered.
     heroLayout: input.photo ? "split" : "centered",
     archetype,
-    design: defaultDesign(archetype, input.visualKit),
+    careerStage,
+    design: defaultDesign(archetype, input.visualKit, careerStage),
     sections: [], // filled by defaultSections once content is in place
     sectionLabels: preset.sectionLabels,
     bio: {

@@ -16,6 +16,7 @@ export function siteToGeneratorInput(site: SiteData): GeneratorInput {
     socials: identity.socials,
     accent: site.accent,
     archetype: site.archetype,
+    careerStage: site.careerStage,
     visualKit: site.design.visualKit,
     services: site.services.map((s) => ({
       title: s.title,

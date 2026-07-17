@@ -79,10 +79,17 @@ const ARCHETYPE_BRIEF: Record<Archetype, string> = {
 
 function buildPrompt(input: GeneratorInput, base: SiteData): string {
   const hasPhotos = base.gallery.length > 0;
+  const careerStageBrief =
+    base.archetype !== "profile"
+      ? ""
+      : base.careerStage === "early-career"
+        ? "\nCAREER STAGE: EARLY CAREER. Lead with projects, practical learning, credentials and potential. Keep the about text concise (40-70 words); do not inflate internships or invent senior-level impact."
+        : "\nCAREER STAGE: EXPERIENCED. Lead with career progression, scope, outcomes and relevant leadership. The experience timeline should be the strongest proof point.";
   return `Create the website content AND structure for this business.
 
 SITE TYPE: ${base.archetype.toUpperCase()} (chosen by the user — you MUST respect it; do not turn a profile into a business or vice-versa)
 ${ARCHETYPE_BRIEF[base.archetype]}
+${careerStageBrief}
 Photos available for a gallery: ${hasPhotos ? `yes (${base.gallery.length})` : "no"}.
 
 BUSINESS PROFILE (facts to use — do not contradict these):
@@ -126,7 +133,7 @@ Return ONLY a JSON object with EXACTLY this shape:
   "sections": [ { "type": one of the allowed block types, "label": short eyebrow, "heading": section heading } ],
   "design": { "visualKit": string, "styleTheme": string, "density": string, "variants": { "services": string, "work": string, "testimonials": string, "gallery": string } }
 }
-Return only services, work, projects, testimonials, statistics, and menu items that are directly supported by the supplied profile. Empty is better than invented content; do not fill quotas. For each factual work item: "tag" = company or category; "period" = dates if known (e.g. "2021 — Present"); "tech" = technologies actually supplied; "highlights" = short achievements grounded in the input. "skills" = supplied technologies/tools only. "languages"/"interests" = copy from the input when present, else []. For "certifications": include ONLY names present in the input — never invent new credentials. For each name, write "detail" as one helpful line (12-20 words) explaining what it validates or demonstrates; you may use well-known public knowledge about major certs (AWS, PMP, CPA, etc.) but do NOT invent issuer, date, score, or ID numbers.${base.archetype === "profile" ? ' For profile sites, bio.body MUST be 2-3 paragraphs separated by blank lines (use \\n\\n), 100-150 words — expand thoughtfully from the resume bio and work history.' : ""} NEVER invent tech, dates, services, menu items, client names, testimonials, statistics, or metrics. "menu" must be [] unless menu items are explicitly present in the input. "faq" = 3-5 short, genuinely useful question/answer pairs a real visitor would ask this business (location, booking, pricing approach, what to expect) — answers <= 35 words and must not invent specific facts. The "cta" must fit the site type (profile/portfolio = hire/collaborate/contact). The "sections" array is the ordered page structure you choose for THIS ${base.archetype} site — pick the blocks that fit and skip the rest. Do not include any keys beyond those shown.`;
+Return only services, work, projects, testimonials, statistics, and menu items that are directly supported by the supplied profile. Empty is better than invented content; do not fill quotas. For each factual work item: "tag" = company or category; "period" = dates if known (e.g. "2021 — Present"); "tech" = technologies actually supplied; "highlights" = short achievements grounded in the input. "skills" = supplied technologies/tools only. "languages"/"interests" = copy from the input when present, else []. For "certifications": include ONLY names present in the input — never invent new credentials. For each name, write "detail" as one helpful line (12-20 words) explaining what it validates or demonstrates; you may use well-known public knowledge about major certs (AWS, PMP, CPA, etc.) but do NOT invent issuer, date, score, or ID numbers.${base.archetype === "profile" && base.careerStage !== "early-career" ? ' For experienced profile sites, bio.body MUST be 2-3 paragraphs separated by blank lines (use \\n\\n), 100-150 words — expand thoughtfully from the resume bio and work history.' : ""} NEVER invent tech, dates, services, menu items, client names, testimonials, statistics, or metrics. "menu" must be [] unless menu items are explicitly present in the input. "faq" = 3-5 short, genuinely useful question/answer pairs a real visitor would ask this business (location, booking, pricing approach, what to expect) — answers <= 35 words and must not invent specific facts. The "cta" must fit the site type (profile/portfolio = hire/collaborate/contact). The "sections" array is the ordered page structure you choose for THIS ${base.archetype} site — pick the blocks that fit and skip the rest. Do not include any keys beyond those shown.`;
 }
 
 interface AiSite {
@@ -270,7 +277,8 @@ function mergeSite(base: SiteData, ai: AiSite, input: GeneratorInput): SiteData 
     accent: input.accent ?? base.accent, // analysis choice, else domain default
     heroLayout: base.heroLayout, // derived from whether a photo was added
     archetype: base.archetype,
-    design: sanitizeDesign(ai.design, base.archetype, input.visualKit), // AI-chosen, validated; user kit forced
+    careerStage: base.careerStage,
+    design: sanitizeDesign(ai.design, base.archetype, input.visualKit, base.careerStage), // AI-chosen, validated; user kit forced
     sections: [], // set below once content is merged
     sectionLabels: {
       services: str(ai.sectionLabels?.services, base.sectionLabels.services),

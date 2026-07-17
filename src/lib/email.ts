@@ -360,3 +360,205 @@ export async function sendBillingRenewalReminder(
       </div>`,
   });
 }
+
+function emailShell(title: string, bodyHtml: string): string {
+  return `
+    <div style="font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:520px;margin:0 auto;padding:24px;color:#11130f">
+      <p style="margin:0 0 20px;font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#214f43">${PRODUCT_NAME}</p>
+      <h2 style="margin:0 0 12px;font-size:22px;line-height:1.25">${title}</h2>
+      ${bodyHtml}
+      <p style="color:#888;font-size:12px;margin:28px 0 0;line-height:1.6">
+        You received this because you use ${PRODUCT_NAME}. Reply if you need help — we're happy to guide you.
+      </p>
+    </div>`;
+}
+
+function emailButton(href: string, label: string): string {
+  return `<p style="margin:20px 0 0"><a href="${href}" style="display:inline-block;background:#214f43;color:#fff;text-decoration:none;font-weight:600;padding:12px 18px;border-radius:999px">${label}</a></p>`;
+}
+
+export interface WelcomeEmailDetails {
+  dashboardUrl: string;
+  createUrl: string;
+}
+
+export async function sendWelcomeEmail(
+  to: string,
+  details: WelcomeEmailDetails
+): Promise<void> {
+  const config = getEmailConfig();
+  const lines = [
+    `Welcome to ${PRODUCT_NAME}.`,
+    "",
+    "Here's how to get started:",
+    "1. Create your first site from the homepage",
+    "2. Open My sites to edit, share, or connect a domain",
+    "",
+    `Create a site: ${details.createUrl}`,
+    `My sites: ${details.dashboardUrl}`,
+  ].join("\n");
+
+  const body = `
+    <p style="color:#555;margin:0 0 16px;line-height:1.65">
+      Thanks for joining <strong>${PRODUCT_NAME}</strong>. You can turn a Google listing, resume,
+      or a few answers into a polished website in minutes.
+    </p>
+    <ol style="color:#555;margin:0;padding-left:20px;line-height:1.8">
+      <li>Search your business or paste a Google Maps link</li>
+      <li>Review the draft and publish when you're happy</li>
+      <li>Open <strong>My sites</strong> anytime to edit, share, or connect your domain</li>
+    </ol>
+    ${emailButton(details.createUrl, "Create your first site")}
+    <p style="margin:16px 0 0"><a href="${details.dashboardUrl}" style="color:#214f43;font-weight:600">Go to My sites</a></p>`;
+
+  if (!config) {
+    console.log(`\n[${PRODUCT_NAME}] DEV welcome email to ${to}:\n${lines}\n`);
+    return;
+  }
+
+  await config.transporter.sendMail({
+    from: `${PRODUCT_NAME} <${config.from}>`,
+    to,
+    subject: `Welcome to ${PRODUCT_NAME}`,
+    text: lines,
+    html: emailShell("Welcome — let's build your first site", body),
+  });
+}
+
+export interface SitePublishedEmailDetails {
+  siteName: string;
+  liveUrl: string;
+  dashboardUrl: string;
+  settingsUrl: string;
+  pricingUrl: string;
+  feedbackUrl?: string;
+  subdomainNote?: string;
+  onFreePlan: boolean;
+}
+
+export async function sendSitePublishedEmail(
+  to: string,
+  details: SitePublishedEmailDetails
+): Promise<void> {
+  const config = getEmailConfig();
+  const feedbackUrl = details.feedbackUrl ?? details.dashboardUrl;
+  const lines = [
+    `Your site "${details.siteName}" is live.`,
+    "",
+    `Live URL: ${details.liveUrl}`,
+    `My sites: ${details.dashboardUrl}`,
+    "",
+    "We'd love your feedback — reply to this email and tell us how building went (1–5 stars + anything confusing).",
+    "",
+    details.onFreePlan
+      ? "Upgrade to Basic for custom domain, booking, and more sites."
+      : "Open site settings to connect your custom domain or manage bookings.",
+    "",
+    details.subdomainNote ?? null,
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const upgradeBlock = details.onFreePlan
+    ? `
+      <div style="margin:20px 0 0;padding:16px;border-radius:14px;background:#f4f7f5;border:1px solid #dce8e2">
+        <p style="margin:0 0 8px;font-weight:600;color:#214f43">Want more from your site?</p>
+        <p style="margin:0;color:#555;font-size:14px;line-height:1.6">
+          Basic unlocks up to 5 sites, your own domain, email + WhatsApp booking, and no PaperChai branding.
+        </p>
+        ${emailButton(details.pricingUrl, "See Basic features")}
+      </div>`
+    : `
+      <p style="color:#555;margin:16px 0 0;line-height:1.65">
+        Connect your own domain from site settings — add the DNS records we show you, then verify.
+      </p>`;
+
+  const body = `
+    <p style="color:#555;margin:0 0 16px;line-height:1.65">
+      Thanks for creating <strong>${details.siteName}</strong> with ${PRODUCT_NAME}. Your site is live and ready to share.
+    </p>
+    <p style="margin:0;font-size:15px"><a href="${details.liveUrl}" style="color:#214f43;font-weight:600">${details.liveUrl}</a></p>
+    ${details.subdomainNote ? `<p style="color:#666;font-size:13px;margin:12px 0 0;line-height:1.55">${details.subdomainNote}</p>` : ""}
+    <ol style="color:#555;margin:16px 0 0;padding-left:20px;line-height:1.8">
+      <li>Open your live site and share the link with customers</li>
+      <li>Go to <strong>My sites</strong> to edit copy, photos, or theme</li>
+      <li>In site settings, connect a custom domain when you're ready</li>
+    </ol>
+    ${emailButton(details.liveUrl, "View your live site")}
+    <p style="margin:16px 0 0"><a href="${details.dashboardUrl}" style="color:#214f43;font-weight:600">Open My sites</a>
+      · <a href="${details.settingsUrl}" style="color:#214f43;font-weight:600">Site settings &amp; DNS</a></p>
+    <div style="margin:24px 0 0;padding:16px;border-radius:14px;background:#fff8e8;border:1px solid #eed9a3">
+      <p style="margin:0 0 8px;font-weight:600;color:#7a5a12">Quick feedback?</p>
+      <p style="margin:0;color:#555;font-size:14px;line-height:1.6">
+        How was building your site? Hit reply and send a score from 1–5 plus anything that felt confusing.
+        We read every reply.
+      </p>
+      <p style="margin:12px 0 0"><a href="${feedbackUrl}" style="color:#214f43;font-weight:600">Share feedback</a></p>
+    </div>
+    ${upgradeBlock}`;
+
+  if (!config) {
+    console.log(`\n[${PRODUCT_NAME}] DEV site published email to ${to}:\n${lines}\n`);
+    return;
+  }
+
+  await config.transporter.sendMail({
+    from: `${PRODUCT_NAME} <${config.from}>`,
+    to,
+    replyTo: config.from,
+    subject: `Your site is live — ${details.siteName}`,
+    text: lines,
+    html: emailShell(`Thanks for building ${details.siteName}`, body),
+  });
+}
+
+export interface UpgradeNudgeEmailDetails {
+  dashboardUrl: string;
+  pricingUrl: string;
+  siteName?: string;
+}
+
+export async function sendUpgradeNudgeEmail(
+  to: string,
+  details: UpgradeNudgeEmailDetails
+): Promise<void> {
+  const config = getEmailConfig();
+  const intro = details.siteName
+    ? `You've started with ${details.siteName} on the Free plan.`
+    : "You're on the Free plan.";
+  const lines = [
+    intro,
+    "",
+    "Basic adds custom domain, booking, more sites, and removes PaperChai branding.",
+    "",
+    `Upgrade: ${details.pricingUrl}`,
+    `My sites: ${details.dashboardUrl}`,
+  ].join("\n");
+
+  const body = `
+    <p style="color:#555;margin:0 0 16px;line-height:1.65">${intro}</p>
+    <p style="color:#555;margin:0 0 16px;line-height:1.65">
+      When you're ready to grow, <strong>Basic</strong> unlocks features customers expect from a real business site:
+    </p>
+    <ul style="color:#555;margin:0;padding-left:20px;line-height:1.8">
+      <li>Connect your own domain (we show the DNS steps)</li>
+      <li>Email + WhatsApp booking for enquiries</li>
+      <li>Up to 5 sites and unlimited edits</li>
+      <li>Remove PaperChai branding</li>
+    </ul>
+    ${emailButton(details.pricingUrl, "Upgrade to Basic")}
+    <p style="margin:16px 0 0"><a href="${details.dashboardUrl}" style="color:#214f43;font-weight:600">Go to My sites</a></p>`;
+
+  if (!config) {
+    console.log(`\n[${PRODUCT_NAME}] DEV upgrade nudge to ${to}:\n${lines}\n`);
+    return;
+  }
+
+  await config.transporter.sendMail({
+    from: `${PRODUCT_NAME} <${config.from}>`,
+    to,
+    subject: `Unlock custom domain & booking on ${PRODUCT_NAME}`,
+    text: lines,
+    html: emailShell("Ready for the next step?", body),
+  });
+}

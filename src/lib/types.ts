@@ -185,6 +185,11 @@ export type HeroLayout = "centered" | "split";
 // Business becomes a business site, a designer/photographer a portfolio).
 export type Archetype = "profile" | "business" | "portfolio";
 
+// Resume profiles need a different content hierarchy at the start of a career
+// than later on. This is deliberately separate from `archetype`: both are
+// personal profiles, but one leads with projects and the other with impact.
+export type CareerStage = "early-career" | "experienced";
+
 // The blocks a generated site can be composed from. The AI (or the template
 // fallback) returns an ordered list of these; the renderer maps each to a
 // component. Content for each block still lives on SiteData below.
@@ -270,6 +275,9 @@ export interface SiteData {
   heroLayout: HeroLayout;
   /** The kind of site this is — drives the default section ordering. */
   archetype: Archetype;
+  /** Resume/profile presentation. Optional so previously published sites keep
+   *  their existing layout until they are regenerated. */
+  careerStage?: CareerStage;
   /** Visual style + per-section layout variants. AI-chosen, validated. */
   design: SiteDesign;
   /** Ordered blocks to render after the hero. When present the renderer uses
@@ -364,6 +372,9 @@ export interface GeneratorInput {
   socials?: SocialLinks;
   /** The kind of site to build. Derived in analysis; defaulted from domain. */
   archetype?: Archetype;
+  /** Selected during resume import. The extractor suggests a value, but the
+   *  person always has the final say. */
+  careerStage?: CareerStage;
   /** Photo URLs (e.g. Google Business photos) for a gallery block. */
   gallery?: string[];
   /** Store hours from Google Business. */

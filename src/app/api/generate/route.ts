@@ -18,6 +18,7 @@ import { enforceRateLimit } from "@/lib/rate-limit";
 import { rateLimitResponse } from "@/lib/rate-limit-response";
 import { emailFromRequest } from "@/lib/session";
 import { getPublicSitePath, getPublicSiteUrl } from "@/lib/site-url";
+import { sendPublishLifecycleEmails } from "@/lib/lifecycle";
 import type { GeneratorInput, SiteData } from "@/lib/types";
 
 export const runtime = "nodejs";
@@ -117,6 +118,11 @@ export async function POST(request: Request) {
   }
 
   const stored = await addSite(email, ip, generated);
+  void sendPublishLifecycleEmails(
+    email,
+    { id: stored.id, slug: stored.slug, name: stored.name },
+    host
+  ).catch((err) => console.error("[lifecycle] publish email failed", err));
   return NextResponse.json({
     site: generated,
     engine,

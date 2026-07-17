@@ -200,6 +200,8 @@ interface MemAccount {
   billingCancelAtCycleEnd?: boolean;
   billingCancelledAt?: number;
   billingLastReminderAt?: number;
+  welcomeEmailSentAt?: number;
+  upgradeNudgeSentAt?: number;
   ips: string[];
   sites: StoredSite[];
 }
@@ -840,4 +842,68 @@ export async function deleteSite(
     customDomain: stored.customDomain,
     bookingsDeleted: deleteMemoryBookingsForSite(id),
   };
+}
+
+export async function markWelcomeEmailSent(email: string): Promise<void> {
+  const sql = getSql();
+  const when = Date.now();
+  if (sql) {
+    await ensureSchema();
+    await sql`
+      insert into accounts (email, welcome_email_sent_at)
+      values (${key(email)}, to_timestamp(${when} / 1000.0))
+      on conflict (email) do update
+        set welcome_email_sent_at = coalesce(accounts.welcome_email_sent_at, excluded.welcome_email_sent_at)`;
+    return;
+  }
+  const a = memAcc(email);
+  if (!a.welcomeEmailSentAt) a.welcomeEmailSentAt = when;
+}
+
+export async function welcomeEmailAlreadySent(email: string): Promise<boolean> {
+  const sql = getSql();
+  if (sql) {
+    await ensureSchema();
+    const rows = await sql<{ welcome_email_sent_at: Date | null }[]>`
+      select welcome_email_sent_at from accounts where email = ${key(email)}`;
+    return Boolean(rows[0]?.welcome_email_sent_at);
+  }
+  return Boolean(memAcc(email).welcomeEmailSentAt);
+}
+
+export async function markUpgradeNudgeSent(email: string): Promise<void> {
+  const sql = getSql();
+  const when = Date.now();
+  if (sql) {
+    await ensureSchema();
+    await sql`
+      update accounts
+         set upgrade_nudge_sent_at = to_timestamp(${when} / 1000.0)
+       where email = ${key(email)}`;
+    return;
+  }
+  memAcc(email).upgradeNudgeSentAt = when;
+}
+
+/** Free accounts with a site older than 24h and no upgrade nudge yet. */
+export async function listAccountsForUpgradeNudge(): Promise<string[]> {
+  const sql = getSql();
+  if (sql) {
+    await ensureSchema();
+    const rows = await sql<{ email: string }[]>`
+      select distinct a.email
+        from accounts a
+        join sites s on s.email = a.email
+       where a.plan = 'free'
+         and a.upgrade_nudge_sent_at is null
+         and s.created_at < now() - interval '1 day'`;
+    return rows.map((r) => r.email);
+  }
+  const out: string[] = [];
+  const dayAgo = Date.now() - 24 * 60 * 60 * 1000;
+  for (const [email, account] of mem.entries()) {
+    if (account.plan !== "free" || account.upgradeNudgeSentAt) continue;
+    if (account.sites.some((s) => s.createdAt < dayAgo)) out.push(email);
+  }
+  return out;
 }

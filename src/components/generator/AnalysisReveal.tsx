@@ -18,11 +18,12 @@ import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { PhotoUpload } from "@/components/generator/PhotoUpload";
-import { deriveArchetype } from "@/lib/compose";
+import { deriveArchetype, suggestCareerStage } from "@/lib/compose";
 import type {
   AnalysisResult,
   Archetype,
   BusinessDomain,
+  CareerStage,
   GeneratorInput,
   ThemeMode,
 } from "@/lib/types";
@@ -51,6 +52,23 @@ const ARCHETYPE_OPTIONS: {
     id: "business",
     label: "Business",
     blurb: "Services, photos & reviews. Best for a practice or local shop.",
+  },
+];
+
+const CAREER_STAGE_OPTIONS: {
+  id: CareerStage;
+  label: string;
+  blurb: string;
+}[] = [
+  {
+    id: "early-career",
+    label: "Early career",
+    blurb: "Puts projects, education and credentials first.",
+  },
+  {
+    id: "experienced",
+    label: "Experienced",
+    blurb: "Puts career progression and impact first.",
   },
 ];
 
@@ -116,6 +134,13 @@ export function AnalysisReveal({
   const [archetype, setArchetype] = useState<Archetype>(
     deriveArchetype(domain, analysis.source)
   );
+  const [careerStage, setCareerStage] = useState<CareerStage>(
+    analysis.profile.careerStage ??
+      suggestCareerStage({
+        work: analysis.profile.work,
+        projects: analysis.profile.projects,
+      })
+  );
   const [broken, setBroken] = useState<Record<string, boolean>>({});
 
   const accents = useMemo(() => {
@@ -142,6 +167,7 @@ export function AnalysisReveal({
       accent: accent ?? undefined,
       photo: photo ?? undefined,
       archetype,
+      careerStage: archetype === "profile" ? careerStage : undefined,
       gallery,
     });
   }
@@ -296,8 +322,41 @@ export function AnalysisReveal({
         </div>
       </Section>
 
+      {(analysis.source === "resume" || analysis.source === "linkedin") && archetype === "profile" ? (
+        <Section delay={0.22} className="border-b border-[#11130f]/10 p-5 dark:border-white/10 sm:p-7">
+          <Eyebrow>How should your profile lead?</Eyebrow>
+          <p className="mt-2 text-sm leading-6 text-muted-foreground">
+            We suggested a layout from the roles we found. You can switch it anytime.
+          </p>
+          <div className="mt-3 grid gap-2 sm:grid-cols-2">
+            {CAREER_STAGE_OPTIONS.map((option) => {
+              const active = careerStage === option.id;
+              return (
+                <button
+                  key={option.id}
+                  type="button"
+                  onClick={() => setCareerStage(option.id)}
+                  className={cn(
+                    "flex flex-col gap-1 rounded-xl border p-4 text-left transition-colors",
+                    active
+                      ? "border-[#214f43] bg-[#dce8e2] dark:border-[#9cc2b3] dark:bg-[#214f43]/20"
+                      : "border-[#11130f]/15 hover:border-[#214f43]/40 hover:bg-[#f3f3ef] dark:border-white/15 dark:hover:border-[#9cc2b3]/40 dark:hover:bg-white/[0.04]"
+                  )}
+                >
+                  <span className="flex items-center gap-1.5 text-sm font-semibold">
+                    {active && <Check className="size-3.5" />}
+                    {option.label}
+                  </span>
+                  <span className="text-xs leading-snug text-muted-foreground">{option.blurb}</span>
+                </button>
+              );
+            })}
+          </div>
+        </Section>
+      ) : null}
+
       {/* Accent + theme */}
-      <Section delay={0.24} className="border-b border-[#11130f]/10 p-5 dark:border-white/10 sm:p-7">
+      <Section delay={0.28} className="border-b border-[#11130f]/10 p-5 dark:border-white/10 sm:p-7">
         <Eyebrow>Theme</Eyebrow>
         <div className="mt-3 flex flex-wrap items-center gap-2">
           {accents.map((c) => {

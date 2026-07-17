@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { isValidEmail, normalizeEmail, verifyOtp } from "@/lib/otp";
+import { maybeSendWelcomeEmail } from "@/lib/lifecycle";
 import { enforceRateLimit } from "@/lib/rate-limit";
 import { rateLimitResponse } from "@/lib/rate-limit-response";
 import { makeToken } from "@/lib/session";
@@ -38,5 +39,8 @@ export async function POST(request: Request) {
 
   const res = NextResponse.json({ ok: true });
   setSessionCookie(res, makeToken(email));
+  void maybeSendWelcomeEmail(email).catch((err) =>
+    console.error("[lifecycle] welcome email failed", err)
+  );
   return res;
 }
