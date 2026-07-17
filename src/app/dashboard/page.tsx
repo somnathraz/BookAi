@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ExternalLink, Loader2, Pencil, Plus, Trash2 } from "lucide-react";
 import Link from "next/link";
@@ -18,6 +18,13 @@ import { EmailGate } from "@/components/generator/EmailGate";
 import { SignOutButton } from "@/components/auth/SignOutButton";
 import { MarketingFooter } from "@/components/marketing/MarketingFooter";
 import type { ThemeMode } from "@/lib/types";
+import { ApiClientError, apiClient } from "@/platform/api/api-client";
+import {
+  setServerQueryData,
+  useServerQuery,
+} from "@/platform/client-state/server-query-cache";
+import { clientQueryKeys } from "@/platform/client-state/query-key-registry";
+import { useBillingQuery } from "@/features/billing/presentation/billing-query";
 
 interface SavedSite {
   id: string;
@@ -31,17 +38,11 @@ interface SavedSite {
   updatedAt: number;
 }
 
-interface BillingSummary {
-  plan: "free" | "basic";
-  billing: {
-    billingPeriod?: "monthly" | "annual";
-    billingStatus?: "created" | "authenticated" | "active" | "cancelled" | "halted" | "failed";
-    billingChargeAt?: number;
-    billingCurrentEnd?: number;
-    billingCancelAtCycleEnd?: boolean;
-  };
-  dashboardNoticeActive: boolean;
-  dashboardNoticeDays: number;
+interface DashboardSitesResponse {
+  email: string;
+  sites: SavedSite[];
+  limit: number;
+  plan: string;
 }
 
 const DOMAIN_LABEL: Record<string, string> = {
@@ -59,49 +60,29 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 
 export default function DashboardPage() {
   const reduceMotion = useReducedMotion();
-  const [loading, setLoading] = useState(true);
-  const [needsVerify, setNeedsVerify] = useState(false);
-  const [email, setEmail] = useState<string | null>(null);
-  const [sites, setSites] = useState<SavedSite[]>([]);
-  const [limit, setLimit] = useState(1);
-  const [plan, setPlan] = useState("free");
-  const [billing, setBilling] = useState<BillingSummary | null>(null);
   const [deleting, setDeleting] = useState<string | null>(null);
   const [deleteError, setDeleteError] = useState<string | null>(null);
+  const loadSites = useCallback(
+    () => apiClient.get<DashboardSitesResponse>("/api/sites"),
+    []
+  );
+  const sitesQuery = useServerQuery(clientQueryKeys.dashboard.sites, loadSites, {
+    staleTimeMs: 30_000,
+  });
+  const billingQuery = useBillingQuery();
+  const dashboard = sitesQuery.data;
+  const email = dashboard?.email ?? null;
+  const sites = dashboard?.sites ?? [];
+  const limit = dashboard?.limit ?? 1;
+  const plan = dashboard?.plan ?? "free";
+  const billing = billingQuery.data ?? null;
+  const loading = sitesQuery.status === "idle" || sitesQuery.status === "loading";
+  const needsVerify = sitesQuery.error instanceof ApiClientError && sitesQuery.error.status === 401;
 
-  const load = useCallback(async () => {
-    setLoading(true);
-    try {
-      const res = await fetch("/api/sites");
-      if (res.status === 401) {
-        setNeedsVerify(true);
-        return;
-      }
-      const data = await res.json();
-      setNeedsVerify(false);
-      setEmail(data.email);
-      setSites(data.sites ?? []);
-      setLimit(data.limit ?? 1);
-      setPlan((data.plan as string) ?? "free");
-
-      const billingRes = await fetch("/api/billing");
-      if (billingRes.ok) {
-        const billingData = (await billingRes.json()) as BillingSummary;
-        setBilling(billingData);
-      } else {
-        setBilling(null);
-      }
-    } catch {
-      /* ignore */
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    const timeoutId = window.setTimeout(() => void load(), 0);
-    return () => window.clearTimeout(timeoutId);
-  }, [load]);
+  const refreshDashboard = useCallback(() => {
+    void sitesQuery.refresh().catch(() => undefined);
+    void billingQuery.refresh().catch(() => undefined);
+  }, [billingQuery, sitesQuery]);
 
   function publicHref(site: SavedSite): string {
     const host =
@@ -134,14 +115,16 @@ export default function DashboardPage() {
     setDeleting(id);
     setDeleteError(null);
     try {
-      const response = await fetch(`/api/sites?id=${encodeURIComponent(id)}`, {
-        method: "DELETE",
-      });
-      const data = await response.json().catch(() => ({}));
-      if (!response.ok || data.ok !== true) {
-        throw new Error(data.error ?? "The site could not be deleted.");
+      const data = await apiClient.delete<{ ok: boolean }>(
+        `/api/sites?id=${encodeURIComponent(id)}`
+      );
+      if (!data.ok) throw new Error("The site could not be deleted.");
+      if (dashboard) {
+        setServerQueryData<DashboardSitesResponse>(clientQueryKeys.dashboard.sites, {
+          ...dashboard,
+          sites: dashboard.sites.filter((candidate) => candidate.id !== id),
+        });
       }
-      setSites((s) => s.filter((x) => x.id !== id));
     } catch (error) {
       setDeleteError(
         error instanceof Error ? error.message : "The site could not be deleted."
@@ -180,9 +163,7 @@ export default function DashboardPage() {
                 <p className="text-sm text-muted-foreground">{email}</p>
                 <SignOutButton
                   onSignedOut={() => {
-                    setEmail(null);
-                    setSites([]);
-                    setNeedsVerify(true);
+                    refreshDashboard();
                   }}
                 />
               </div>
@@ -207,7 +188,7 @@ export default function DashboardPage() {
           </div>
         ) : needsVerify ? (
           <div className="mx-auto mt-12 max-w-md rounded-2xl border bg-card/60 p-6">
-            <EmailGate onBack={() => load()} onVerified={() => load()} />
+            <EmailGate onBack={refreshDashboard} onVerified={refreshDashboard} />
           </div>
         ) : (
           <>
@@ -245,9 +226,7 @@ export default function DashboardPage() {
                     size="sm"
                     variant="outline"
                     label="Upgrade to Basic"
-                    onSuccess={() => {
-                      void load();
-                    }}
+                    onSuccess={refreshDashboard}
                   />
                 )}
               </div>

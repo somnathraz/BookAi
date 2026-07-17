@@ -3,7 +3,9 @@
  * No-ops outside production or when gtag / measurement ID is missing.
  */
 
-const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+import { publicEnv } from "@/platform/config/public-env";
+
+const measurementId = publicEnv.gaMeasurementId;
 
 /** Display prices from PricingPlans — used for Ads purchase value. */
 export const BASIC_PLAN_VALUE_INR: Record<"monthly" | "annual", number> = {
@@ -17,7 +19,7 @@ function canTrack(): boolean {
   return (
     typeof window !== "undefined" &&
     Boolean(measurementId) &&
-    process.env.NODE_ENV === "production" &&
+    publicEnv.nodeEnv === "production" &&
     typeof window.gtag === "function"
   );
 }

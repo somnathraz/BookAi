@@ -1,25 +1,8 @@
 import { NextResponse } from "next/server";
 
-import {
-  aiAvailable,
-  emailAvailable,
-  googleAvailable,
-  getActiveProviderId,
-  listConfiguredProviders,
-} from "@/lib/ai/provider";
-import { dbEnabled } from "@/lib/db";
-import { businessSearchAvailable } from "@/lib/business-search";
+import { getApplicationCapabilities } from "@/features/application-status/application/get-capabilities";
+import { createApiRoute } from "@/platform/http/create-api-route";
 
-export async function GET() {
-  return NextResponse.json({
-    ai: aiAvailable(),
-    provider: getActiveProviderId(),
-    providers: listConfiguredProviders(),
-    google: googleAvailable(),
-    businessSearch: businessSearchAvailable(),
-    email: emailAvailable(),
-    // Persistent OTP/site storage. MUST be true in production — without it the
-    // OTP code lives in memory and won't validate across serverless instances.
-    db: dbEnabled(),
-  });
-}
+export const GET = createApiRoute("system.capabilities", async () =>
+  NextResponse.json(getApplicationCapabilities())
+);

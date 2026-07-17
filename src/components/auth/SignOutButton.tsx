@@ -4,6 +4,8 @@ import { LogOut } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { apiClient } from "@/platform/api/api-client";
+import { clearAuthenticatedClientData } from "@/features/authentication/presentation/session-query";
 
 export function SignOutButton({
   onSignedOut,
@@ -15,7 +17,8 @@ export function SignOutButton({
   label?: string;
 }) {
   async function signOut() {
-    await fetch("/api/auth/logout", { method: "POST" });
+    await apiClient.post("/api/auth/logout");
+    clearAuthenticatedClientData();
     onSignedOut?.();
   }
 
@@ -34,5 +37,6 @@ export function SignOutButton({
 }
 
 export async function signOutSession(): Promise<void> {
-  await fetch("/api/auth/logout", { method: "POST" });
+  await apiClient.post("/api/auth/logout");
+  clearAuthenticatedClientData();
 }

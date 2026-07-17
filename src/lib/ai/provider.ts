@@ -4,6 +4,8 @@
 
 import "server-only";
 
+import { optionalEnv } from "@/platform/config/env";
+
 export type ProviderId = "anthropic" | "google" | "openai";
 
 interface ProviderConfig {
@@ -39,8 +41,7 @@ const PROVIDERS: ProviderConfig[] = [
 ];
 
 function keyFor(p: ProviderConfig): string | undefined {
-  const v = process.env[p.envKey];
-  return v && v.trim() ? v.trim() : undefined;
+  return optionalEnv(p.envKey);
 }
 
 function configFor(id: ProviderId): ProviderConfig {
@@ -54,7 +55,7 @@ export function listConfiguredProviders(): { id: ProviderId; label: string }[] {
 }
 
 export function getActiveProviderId(): ProviderId | null {
-  const override = process.env.BOOKAI_AI_PROVIDER?.trim() as ProviderId | undefined;
+  const override = optionalEnv("BOOKAI_AI_PROVIDER") as ProviderId | undefined;
   if (override) {
     const c = PROVIDERS.find((p) => p.id === override);
     if (c && keyFor(c)) return c.id;
@@ -68,8 +69,8 @@ export function aiAvailable(): boolean {
 }
 
 export function googleAvailable(): boolean {
-  const serp = process.env.SERP_API_KEY?.trim();
-  const places = process.env.GOOGLE_PLACES_API_KEY?.trim();
+  const serp = optionalEnv("SERP_API_KEY");
+  const places = optionalEnv("GOOGLE_PLACES_API_KEY");
   return Boolean(serp || places);
 }
 
@@ -85,7 +86,7 @@ export interface EmailEnv {
 
 function pick(...names: string[]): string | undefined {
   for (const n of names) {
-    const v = process.env[n]?.trim();
+    const v = optionalEnv(n);
     if (v) return v;
   }
   return undefined;
@@ -125,7 +126,7 @@ export async function complete(
   if (!id) throw new Error("No AI provider configured.");
   const cfg = configFor(id);
   const key = keyFor(cfg)!;
-  const model = process.env[cfg.modelEnvKey]?.trim() || cfg.defaultModel;
+  const model = optionalEnv(cfg.modelEnvKey) || cfg.defaultModel;
   const { system, maxTokens = 2048, temperature = 0.3, json = false } = opts;
 
   if (id === "anthropic") {

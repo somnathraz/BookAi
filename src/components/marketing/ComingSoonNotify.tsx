@@ -18,6 +18,7 @@ import {
 
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
+import { apiClient } from "@/platform/api/api-client";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -53,12 +54,10 @@ export function ComingSoonNotify() {
     if (states[id] === "sending" || states[id] === "done") return;
     setStates((s) => ({ ...s, [id]: "sending" }));
     try {
-      const res = await fetch("/api/notify", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ source: id, email: email.trim() || undefined }),
+      await apiClient.post("/api/notify", {
+        body: { source: id, email: email.trim() || undefined },
       });
-      setStates((s) => ({ ...s, [id]: res.ok ? "done" : "idle" }));
+      setStates((s) => ({ ...s, [id]: "done" }));
     } catch {
       setStates((s) => ({ ...s, [id]: "idle" }));
     }

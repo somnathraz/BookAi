@@ -3,8 +3,9 @@
 import { Suspense, useEffect, useRef } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import Script from "next/script";
+import { publicEnv } from "@/platform/config/public-env";
 
-const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+const measurementId = publicEnv.gaMeasurementId;
 
 declare global {
   interface Window {
@@ -50,7 +51,7 @@ function GaPageViews() {
  * Loads afterInteractive so it does not block LCP; production only.
  */
 export function GoogleAnalytics() {
-  if (!measurementId || process.env.NODE_ENV !== "production") {
+  if (!measurementId || publicEnv.nodeEnv !== "production") {
     return null;
   }
 

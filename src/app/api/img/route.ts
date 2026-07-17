@@ -1,19 +1,14 @@
-import { NextResponse } from "next/server";
-
 import { isProxiableImageUrl } from "@/lib/image-proxy";
-import { enforceRateLimit } from "@/lib/rate-limit";
-import { rateLimitResponse } from "@/lib/rate-limit-response";
+import { ApiError, apiErrors } from "@/platform/http/api-error";
+import { createApiRoute } from "@/platform/http/create-api-route";
 
 export const runtime = "nodejs";
 
 // Proxies external gallery images (Google / SerpAPI) so they load on generated sites.
-export async function GET(request: Request) {
-  const limited = await enforceRateLimit(request, "proxy");
-  if (!limited.allowed) return rateLimitResponse(limited);
-
+export const GET = createApiRoute("media.proxy", async (request) => {
   const raw = new URL(request.url).searchParams.get("url");
   if (!raw || !isProxiableImageUrl(raw)) {
-    return NextResponse.json({ error: "Invalid image URL." }, { status: 400 });
+    throw apiErrors.badRequest("Invalid image URL.");
   }
 
   const upstream = await fetch(raw, {
@@ -24,7 +19,7 @@ export async function GET(request: Request) {
     },
   });
   if (!upstream.ok || !upstream.body) {
-    return NextResponse.json({ error: "Image unavailable." }, { status: 502 });
+    throw new ApiError(502, "upstream_unavailable", "Image unavailable.");
   }
 
   return new Response(upstream.body, {
@@ -33,4 +28,4 @@ export async function GET(request: Request) {
       "cache-control": "public, max-age=86400",
     },
   });
-}
+});

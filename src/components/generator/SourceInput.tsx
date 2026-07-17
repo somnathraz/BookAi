@@ -23,6 +23,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import type { AnalysisResult, SourceId } from "@/lib/types";
+import { ApiClientError, apiClient } from "@/platform/api/api-client";
 
 type InputKind = "url" | "paste" | "resume";
 
@@ -232,27 +233,17 @@ export function SourceInput({
   const [error, setError] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
-  async function run(body: BodyInit, isForm: boolean) {
+  async function run(body: FormData | { source: string; text?: string; url?: string }) {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("/api/extract", {
-        method: "POST",
-        ...(isForm ? {} : { headers: { "Content-Type": "application/json" } }),
-        body,
-      });
-      const data = await res.json();
-      if (res.status === 402 && data?.code === "limit_reached") {
-        onLimitReached?.(data.error as string);
-        return;
-      }
-      if (res.status === 429 && data?.code === "rate_limited") {
-        setError(data.error as string);
-        return;
-      }
-      if (!res.ok) throw new Error(data?.error ?? "Extraction failed.");
-      onAnalyzed(data.analysis as AnalysisResult);
+      const data = await apiClient.post<{ analysis: AnalysisResult }>("/api/extract", { body });
+      onAnalyzed(data.analysis);
     } catch (err) {
+      if (err instanceof ApiClientError && err.status === 402 && err.code === "limit_reached") {
+        onLimitReached?.(err.message);
+        return;
+      }
       setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {
       setLoading(false);
@@ -263,9 +254,9 @@ export function SourceInput({
     e.preventDefault();
     if (loading) return;
     if (cfg.kind === "url") {
-      run(JSON.stringify({ source, url }), false);
+      run({ source, url });
     } else {
-      run(JSON.stringify({ source, text }), false);
+      run({ source, text });
     }
   }
 
@@ -289,7 +280,7 @@ export function SourceInput({
     setFileName(file.name);
     const form = new FormData();
     form.append("file", file);
-    run(form, true);
+    run(form);
   }
 
   const canSubmit =

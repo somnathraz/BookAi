@@ -1,24 +1,20 @@
-import { NextResponse } from "next/server";
-
-import { enforceRateLimit } from "@/lib/rate-limit";
-import { rateLimitResponse } from "@/lib/rate-limit-response";
+import { apiErrors, ApiError } from "@/platform/http/api-error";
+import { createApiRoute } from "@/platform/http/create-api-route";
+import { env } from "@/platform/config/env";
 
 export const runtime = "nodejs";
 
 // Proxies a Google Place Photo so the API key never reaches the browser.
 // `name` is the Places photo resource, e.g. "places/XXX/photos/YYY".
-export async function GET(request: Request) {
-  const limited = await enforceRateLimit(request, "proxy");
-  if (!limited.allowed) return rateLimitResponse(limited);
-
+export const GET = createApiRoute("media.photo", async (request) => {
   const name = new URL(request.url).searchParams.get("name");
-  const key = process.env.GOOGLE_PLACES_API_KEY?.trim();
+  const key = env.googlePlacesApiKey;
 
   if (!name || !/^places\/[^/]+\/photos\/[^/]+$/.test(name)) {
-    return NextResponse.json({ error: "Invalid photo reference." }, { status: 400 });
+    throw apiErrors.badRequest("Invalid photo reference.");
   }
   if (!key) {
-    return NextResponse.json({ error: "Photos not configured." }, { status: 404 });
+    throw apiErrors.notFound("Photos not configured.");
   }
 
   const upstream = await fetch(
@@ -26,7 +22,7 @@ export async function GET(request: Request) {
     { redirect: "follow" }
   );
   if (!upstream.ok || !upstream.body) {
-    return NextResponse.json({ error: "Photo unavailable." }, { status: 502 });
+    throw new ApiError(502, "upstream_unavailable", "Photo unavailable.");
   }
 
   return new Response(upstream.body, {
@@ -35,4 +31,4 @@ export async function GET(request: Request) {
       "cache-control": "public, max-age=86400",
     },
   });
-}
+});

@@ -17,6 +17,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import type { AnalysisResult, Capabilities } from "@/lib/types";
 import type { BusinessSearchResult } from "@/lib/business-search";
+import { ApiClientError, apiClient } from "@/platform/api/api-client";
 
 type Mode = "search" | "paste" | "help";
 
@@ -97,21 +98,19 @@ export function BusinessStart({
 
     setSearching(true);
     try {
-      const res = await fetch(`/api/business-search?q=${encodeURIComponent(query.trim())}`);
-      const data = await res.json();
-      if (res.status === 429) {
-        setError(data.error as string);
-        return;
-      }
-      if (!res.ok) throw new Error(data.error ?? "Could not search businesses.");
-      const nextResults = (data.results ?? []) as BusinessSearchResult[];
+      const data = await apiClient.get<{ results: BusinessSearchResult[] }>(
+        `/api/business-search?q=${encodeURIComponent(query.trim())}`
+      );
+      const nextResults = data.results ?? [];
       setResults(nextResults);
       if (!nextResults.length) setMode("help");
     } catch (searchError) {
       setError(
-        searchError instanceof Error
+        searchError instanceof ApiClientError && searchError.status === 429
           ? searchError.message
-          : "Could not search businesses."
+          : searchError instanceof Error
+            ? searchError.message
+            : "Could not search businesses."
       );
     } finally {
       setSearching(false);
@@ -126,23 +125,15 @@ export function BusinessStart({
     setImporting(true);
     setError(null);
     try {
-      const res = await fetch("/api/extract", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ source: "maps", url: url.trim() }),
+      const data = await apiClient.post<{ analysis: AnalysisResult }>("/api/extract", {
+        body: { source: "maps", url: url.trim() },
       });
-      const data = await res.json();
-      if (res.status === 402 && data?.code === "limit_reached") {
-        onLimitReached(data.error as string);
-        return;
-      }
-      if (res.status === 429 && data?.code === "rate_limited") {
-        setError(data.error as string);
-        return;
-      }
-      if (!res.ok) throw new Error(data.error ?? "Could not import that business.");
-      onAnalyzed(data.analysis as AnalysisResult);
+      onAnalyzed(data.analysis);
     } catch (importError) {
+      if (importError instanceof ApiClientError && importError.status === 402) {
+        onLimitReached(importError.message);
+        return;
+      }
       setError(
         importError instanceof Error
           ? importError.message

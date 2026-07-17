@@ -1,11 +1,12 @@
 import { NextResponse } from "next/server";
 
 import { clearSessionCookie } from "@/lib/session-cookie";
+import { createApiRoute } from "@/platform/http/create-api-route";
 
 export const runtime = "nodejs";
 
-export async function POST() {
+export const POST = createApiRoute("auth.logout", async () => {
   const res = NextResponse.json({ ok: true });
   clearSessionCookie(res);
   return res;
-}
+});

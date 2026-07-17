@@ -1,25 +1,21 @@
 import "server-only";
 
 import { createHmac, timingSafeEqual } from "crypto";
+import { env } from "@/platform/config/env";
 
 const COOKIE_NAME = "bookai_verified";
 const DEFAULT_SESSION_DAYS = 30;
 
 /** Verified-session lifetime in seconds (default 30 days). Override with BOOKAI_SESSION_DAYS. */
 export function sessionMaxAgeS(): number {
-  const raw = process.env.BOOKAI_SESSION_DAYS?.trim();
-  const days = raw ? Number.parseInt(raw, 10) : DEFAULT_SESSION_DAYS;
-  const n = Number.isFinite(days) && days > 0 ? days : DEFAULT_SESSION_DAYS;
-  return 60 * 60 * 24 * n;
+  return 60 * 60 * 24 * (env.sessionDays ?? DEFAULT_SESSION_DAYS);
 }
 
 export { COOKIE_NAME };
 
 function secret(): string {
   return (
-    process.env.BOOKAI_SECRET?.trim() ||
-    process.env.SES_SMTP_PASSWORD?.trim() ||
-    process.env.GMAIL_APP_PASSWORD?.trim() ||
+    env.sessionSecret || env.smtpPassword ||
     "bookai-dev-secret"
   );
 }

@@ -1,6 +1,7 @@
 import "server-only";
 
 import postgres from "postgres";
+import { env } from "@/platform/config/env";
 
 // Single Postgres connection via DATABASE_URL. Works with local Postgres,
 // Neon, or Supabase — they're all Postgres, only the connection string differs.
@@ -16,28 +17,12 @@ function isLocal(url: string): boolean {
 }
 
 function isLocalhostInProd(url: string): boolean {
-  return process.env.NODE_ENV === "production" && isLocal(url);
-}
-
-/** Vercel's Neon integration often prefixes vars (e.g. bookAi_DATABASE_URL). */
-function resolveDatabaseUrl(): string | undefined {
-  const names = [
-    "DATABASE_URL",
-    "bookAi_DATABASE_URL",
-    "POSTGRES_URL",
-    "bookAi_POSTGRES_URL",
-    "bookAi_POSTGRES_PRISMA_URL",
-  ];
-  for (const name of names) {
-    const v = process.env[name]?.trim();
-    if (v) return v;
-  }
-  return undefined;
+  return env.isProduction && isLocal(url);
 }
 
 export function getSql(): Sql | null {
   if (_sql !== undefined) return _sql;
-  const url = resolveDatabaseUrl();
+  const url = env.databaseUrl;
   if (!url) {
     _sql = null;
     return null;

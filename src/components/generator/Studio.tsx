@@ -55,6 +55,8 @@ import { siteToGeneratorInput } from "@/lib/site-to-input";
 import { deriveArchetype } from "@/lib/compose";
 import { generateSite } from "@/lib/template";
 import { cn } from "@/lib/utils";
+import { ApiClientError, apiClient } from "@/platform/api/api-client";
+import { useCapabilitiesQuery } from "@/features/application-status/presentation/capabilities-query";
 import type {
   AnalysisResult,
   Capabilities,
@@ -65,6 +67,15 @@ import type {
 } from "@/lib/types";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
+
+const unavailableCapabilities: Capabilities = {
+  ai: false,
+  provider: null,
+  providers: [],
+  google: false,
+  businessSearch: false,
+  email: false,
+};
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -124,6 +135,21 @@ type Step =
   | "preview";
 type SmartSource = Exclude<SourceId, "manual">;
 
+interface OwnedSiteResponse {
+  id: string;
+  slug: string;
+  theme?: ThemeMode;
+  site: SiteData;
+}
+
+interface GenerateSiteResponse {
+  siteId?: string;
+  slug: string;
+  updated?: boolean;
+  engine?: "ai" | "template";
+  site?: SiteData;
+}
+
 function previewInputFromAnalysis(result: AnalysisResult): GeneratorInput | null {
   const name = result.profile.name?.trim();
   if (!name) return null;
@@ -152,7 +178,10 @@ function previewInputFromAnalysis(result: AnalysisResult): GeneratorInput | null
 export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
   const reduceMotion = useReducedMotion();
   const [step, setStep] = useState<Step>(editSiteId ? "review" : "chooser");
-  const [capabilities, setCapabilities] = useState<Capabilities | null>(null);
+  const capabilitiesQuery = useCapabilitiesQuery();
+  const capabilities =
+    capabilitiesQuery.data ??
+    (capabilitiesQuery.status === "error" ? unavailableCapabilities : null);
   const [activeSource, setActiveSource] = useState<SmartSource | null>(null);
   const [analysis, setAnalysis] = useState<AnalysisResult | null>(null);
   const [initialValues, setInitialValues] = useState<Partial<GeneratorInput>>();
@@ -225,31 +254,15 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
   }, [activeSource, site]);
 
   useEffect(() => {
-    fetch("/api/capabilities")
-      .then((r) => r.json())
-      .then((c: Capabilities) => setCapabilities(c))
-      .catch(() =>
-        setCapabilities({
-          ai: false,
-          provider: null,
-          providers: [],
-          google: false,
-          businessSearch: false,
-          email: false,
-        })
-      );
-
     // Long-lived verified session (30 days by default) — skip OTP if still valid.
-    fetch("/api/auth/session")
-      .then((r) => (r.ok ? r.json() : null))
+    apiClient
+      .get<{
+        email?: string;
+        canCreate?: boolean;
+        limitReason?: string;
+      }>("/api/auth/session")
       .then(
-        (
-          data: {
-            email?: string;
-            canCreate?: boolean;
-            limitReason?: string;
-          } | null
-        ) => {
+        (data) => {
           if (data?.email) {
             setVerified(true);
             setVerifiedEmail(data.email);
@@ -301,39 +314,29 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
     setEditLoading(true);
     setEditLoadError(null);
 
-    fetch(`/api/sites/${encodeURIComponent(editSiteId)}`)
-      .then(async (res) => {
-        const data = await res.json().catch(() => ({}));
+    apiClient
+      .get<OwnedSiteResponse>(`/api/sites/${encodeURIComponent(editSiteId)}`)
+      .then((data) => {
         if (cancelled) return;
-
-        if (res.status === 401) {
-          setEditingSiteId(editSiteId);
-          setStep("verify");
-          setEditLoading(false);
-          return;
-        }
-        if (!res.ok) {
-          const msg =
-            res.status === 404
-              ? "This site was deleted or is no longer available."
-              : ((data.error as string) ?? "This site could not be loaded.");
-          setEditLoadError(msg);
-          setEditLoading(false);
-          return;
-        }
-
-        const loadedSite = data.site as SiteData;
-        setEditingSiteId(data.id as string);
-        setSlug(data.slug as string);
+        const loadedSite = data.site;
+        setEditingSiteId(data.id);
+        setSlug(data.slug);
         setSite(loadedSite);
-        setPreviewTheme((data.theme as ThemeMode) ?? loadedSite.theme);
+        setPreviewTheme(data.theme ?? loadedSite.theme);
         setInitialValues(siteToGeneratorInput(loadedSite));
         setStep("review");
         setEditLoading(false);
       })
-      .catch(() => {
+      .catch((error: unknown) => {
         if (!cancelled) {
-          setEditLoadError("Could not load this site. Try again from My sites.");
+          if (error instanceof ApiClientError && error.status === 401) {
+            setEditingSiteId(editSiteId);
+            setStep("verify");
+          } else if (error instanceof ApiClientError && error.status === 404) {
+            setEditLoadError("This site was deleted or is no longer available.");
+          } else {
+            setEditLoadError("Could not load this site. Try again from My sites.");
+          }
           setEditLoading(false);
         }
       });
@@ -499,40 +502,13 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
     setStep("generating");
     setError(null);
     try {
-      const res = await fetch("/api/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      const data = await apiClient.post<GenerateSiteResponse>("/api/generate", {
+        body: {
           ...input,
           ...(editingSiteId ? { siteId: editingSiteId } : {}),
-        }),
+        },
       });
-      const data = await res.json();
-      if (res.status === 401 && data?.code === "verify_required") {
-        setVerified(false);
-        setStep("verify");
-        return;
-      }
-      if (res.status === 404) {
-        setError(
-          "This site was deleted or is no longer available. Head back to My sites."
-        );
-        setStep("review");
-        setEditingSiteId(null);
-        return;
-      }
-      if (res.status === 402 && data?.code === "limit_reached") {
-        setError(data.error as string);
-        setStep("limit");
-        return;
-      }
-      if (res.status === 429 && data?.code === "rate_limited") {
-        setError(data.error as string);
-        setStep(site && !editingSiteId ? "preview" : "review");
-        return;
-      }
-      if (!res.ok) throw new Error(data?.error ?? "Generation failed.");
-      const publishedSlug = data.slug as string;
+      const publishedSlug = data.slug;
       const isUpdate = Boolean(data.updated);
       const engine = data.engine === "ai" ? "ai" : "template";
       clearStudioDraft();
@@ -567,6 +543,27 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
       window.location.assign(liveUrl);
       return;
     } catch (err) {
+      if (err instanceof ApiClientError && err.status === 401) {
+        setVerified(false);
+        setStep("verify");
+        return;
+      }
+      if (err instanceof ApiClientError && err.status === 404) {
+        setError("This site was deleted or is no longer available. Head back to My sites.");
+        setStep("review");
+        setEditingSiteId(null);
+        return;
+      }
+      if (err instanceof ApiClientError && err.status === 402) {
+        setError(err.message);
+        setStep("limit");
+        return;
+      }
+      if (err instanceof ApiClientError && err.status === 429) {
+        setError(err.message);
+        setStep(site && !editingSiteId ? "preview" : "review");
+        return;
+      }
       setError(err instanceof Error ? err.message : "Something went wrong.");
       setStep(site && !editingSiteId ? "preview" : "review");
     }
@@ -1231,10 +1228,10 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
                 onVerified={(email) => {
                   setVerified(true);
                   setVerifiedEmail(email);
-                  fetch("/api/auth/session")
-                    .then((r) => (r.ok ? r.json() : null))
-                    .then((data: { canCreate?: boolean; limitReason?: string } | null) => {
-                      const allowed = data?.canCreate !== false;
+                  apiClient
+                    .get<{ canCreate?: boolean; limitReason?: string }>("/api/auth/session")
+                    .then((data) => {
+                      const allowed = data.canCreate !== false;
                       setCanCreate(allowed);
                       if (!allowed && !editingSiteId) {
                         setError(
@@ -1250,21 +1247,22 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
                       }
                       if (editSiteId) {
                         setEditLoading(true);
-                        fetch(`/api/sites/${encodeURIComponent(editSiteId)}`)
-                          .then(async (res) => {
-                            const data = await res.json().catch(() => ({}));
-                            if (!res.ok) {
-                              setEditLoadError(
-                                (data.error as string) ?? "This site could not be loaded."
-                              );
-                              return;
-                            }
-                            const loadedSite = data.site as SiteData;
-                            setEditingSiteId(data.id as string);
-                            setSlug(data.slug as string);
+                        apiClient
+                          .get<OwnedSiteResponse>(`/api/sites/${encodeURIComponent(editSiteId)}`)
+                          .then((data) => {
+                            const loadedSite = data.site;
+                            setEditingSiteId(data.id);
+                            setSlug(data.slug);
                             setSite(loadedSite);
                             setInitialValues(siteToGeneratorInput(loadedSite));
                             setStep("review");
+                          })
+                          .catch((error: unknown) => {
+                            setEditLoadError(
+                              error instanceof Error
+                                ? error.message
+                                : "This site could not be loaded."
+                            );
                           })
                           .finally(() => setEditLoading(false));
                         return;

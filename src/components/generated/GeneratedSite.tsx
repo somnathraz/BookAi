@@ -46,6 +46,7 @@ import {
   UtensilsCrossed,
   type LucideIcon,
 } from "lucide-react";
+import { profileLayoutFor } from "@/features/site-rendering/application/profile-layout-registry";
 
 import { normalizeCertifications } from "@/lib/certifications";
 import { buildDirectionsUrl } from "@/lib/hours";
@@ -288,7 +289,8 @@ function Hero({ site, y, opacity }: { site: SiteData; y: MotionValue<number>; op
   const contactLinks = buildContactLinks(identity);
   const split = heroLayout === "split" && Boolean(identity.photo);
   const isBusiness = archetype === "business";
-  const isEarlyCareer = archetype === "profile" && careerStage === "early-career";
+  const profileLayout = profileLayoutFor(site);
+  const isEarlyCareer = profileLayout?.prioritizeProjectProof === true;
 
   const badges = (
     <motion.div
@@ -305,7 +307,7 @@ function Hero({ site, y, opacity }: { site: SiteData; y: MotionValue<number>; op
       </Badge>
       {archetype === "profile" && careerStage ? (
         <Badge variant="outline" className="rounded-full px-3 py-1">
-          {isEarlyCareer ? "Early-career portfolio" : "Experienced professional"}
+          {profileLayout?.badgeLabel}
         </Badge>
       ) : null}
       {identity.location ? (
@@ -483,7 +485,8 @@ function AboutSection({ site, section }: SectionProps) {
   const st = siteStyle(site.design);
   const isBusiness = archetype === "business";
   const isProfile = archetype === "profile";
-  const isEarlyCareer = isProfile && site.careerStage === "early-career";
+  const profileLayout = profileLayoutFor(site);
+  const isEarlyCareer = profileLayout?.prioritizeProjectProof === true;
   const bioParagraphs = splitBioParagraphs(bio.body);
 
   return (
@@ -817,7 +820,8 @@ function SkillsSection({ site, section }: SectionProps) {
   const skills = site.skills ?? [];
   const st = siteStyle(site.design);
   if (!skills.length) return null;
-  const isEarlyCareer = site.archetype === "profile" && site.careerStage === "early-career";
+  const profileLayout = profileLayoutFor(site);
+  const isEarlyCareer = profileLayout?.prioritizeProjectProof === true;
 
   if (isEarlyCareer) {
     return (
@@ -829,7 +833,7 @@ function SkillsSection({ site, section }: SectionProps) {
                 {section?.label ?? "Skills"}
               </SectionLabel>
               <h2 className={cn("mt-3 text-3xl sm:text-4xl", st.heading)}>
-                {section?.heading ?? "Skills I’m growing"}
+                {section?.heading ?? profileLayout?.skillsFallback ?? "Skills"}
               </h2>
             </div>
             <div className="flex flex-wrap content-start gap-2 border-t border-border pt-5 md:border-l md:border-t-0 md:pl-8 md:pt-0">
@@ -1364,7 +1368,8 @@ function ProjectsSection({ site, section }: SectionProps) {
         ? "rounded-t-2xl"
       : "rounded-t-xl";
 
-  const isEarlyCareer = site.archetype === "profile" && site.careerStage === "early-career";
+  const profileLayout = profileLayoutFor(site);
+  const isEarlyCareer = profileLayout?.prioritizeProjectProof === true;
 
   if (isEarlyCareer) {
     return (
@@ -1375,7 +1380,7 @@ function ProjectsSection({ site, section }: SectionProps) {
             {section?.label ?? "Selected projects"}
           </SectionLabel>
           <h2 className={cn("mt-3 max-w-2xl text-4xl leading-[1.02] sm:text-5xl", st.heading)}>
-            {section?.heading ?? "Proof of what I can build"}
+            {section?.heading ?? profileLayout?.projectsFallback ?? "Selected projects"}
           </h2>
         </Reveal>
         <div className="mt-10 grid gap-4 md:grid-cols-2">
@@ -1776,7 +1781,7 @@ function CertificationsSection({ site, section }: SectionProps) {
   const items = normalizeCertifications(site.certifications, site.identity.domain);
   const st = siteStyle(site.design);
   const accent = site.accent;
-  const isEarlyCareer = site.archetype === "profile" && site.careerStage === "early-career";
+  const profileLayout = profileLayoutFor(site);
   if (!items.length) return null;
   return (
     <section id="certifications" className={cn("mx-auto max-w-5xl px-6", st.pad)}>
@@ -1785,7 +1790,7 @@ function CertificationsSection({ site, section }: SectionProps) {
           {section?.label ?? "Credentials"}
         </SectionLabel>
         <h2 className={cn("mt-3 text-3xl sm:text-4xl", st.heading)}>
-          {section?.heading ?? (isEarlyCareer ? "Education & credentials" : "Certifications & awards")}
+          {section?.heading ?? profileLayout?.certificationsFallback ?? "Certifications & awards"}
         </h2>
       </Reveal>
       <Reveal delay={0.1} className="mt-10">

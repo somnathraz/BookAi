@@ -8,6 +8,7 @@
 // the /[slug] route, so both URL styles keep working.
 
 import { APP_DOMAIN } from "@/lib/brand";
+import { publicEnv } from "@/platform/config/public-env";
 
 function normalizeHost(raw: string | undefined): string | null {
   if (!raw?.trim()) return null;
@@ -22,18 +23,18 @@ function normalizeHost(raw: string | undefined): string | null {
 /** Apex domain for the app — env override, then canonical default. */
 export function getCanonicalAppDomain(): string {
   return (
-    normalizeHost(process.env.NEXT_PUBLIC_SITE_DOMAIN) ??
-    normalizeHost(process.env.NEXT_PUBLIC_APP_URL) ??
+    normalizeHost(publicEnv.siteDomain) ??
+    normalizeHost(publicEnv.appUrl) ??
     APP_DOMAIN
   );
 }
 
 /** App origin for absolute links (emails, OG tags, copy-to-clipboard). */
 export function getAppBaseUrl(): string {
-  const configured = process.env.NEXT_PUBLIC_APP_URL?.trim();
+  const configured = publicEnv.appUrl;
   if (configured) return configured.replace(/\/$/, "");
-  if (process.env.VERCEL_URL && process.env.NODE_ENV !== "production") {
-    return `https://${process.env.VERCEL_URL}`;
+  if (publicEnv.vercelUrl && publicEnv.nodeEnv !== "production") {
+    return `https://${publicEnv.vercelUrl}`;
   }
   const domain = getCanonicalAppDomain();
   const protocol = domain.includes("localhost") ? "http" : "https";
@@ -45,7 +46,7 @@ export function getAppBaseUrl(): string {
  * "paperchaiapp.com". Returns null when subdomain mode is disabled.
  */
 export function getSiteRootDomain(): string | null {
-  const raw = process.env.NEXT_PUBLIC_SITE_DOMAIN?.trim();
+  const raw = publicEnv.siteDomain;
   if (!raw) return null;
   return normalizeHost(raw) ?? APP_DOMAIN;
 }

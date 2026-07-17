@@ -3,6 +3,7 @@ import "server-only";
 import { createHmac, timingSafeEqual } from "crypto";
 
 import Razorpay from "razorpay";
+import { env } from "@/platform/config/env";
 
 import { PRODUCT_NAME } from "@/lib/brand";
 
@@ -43,11 +44,11 @@ export interface BillingSyncPatch {
 }
 
 export function getRazorpayKeyId(): string | null {
-  return process.env.RAZORPAY_API_KEY?.trim() || process.env.RAZORPAY_KEY_ID?.trim() || null;
+  return env.razorpayKeyId ?? null;
 }
 
 function getRazorpaySecret(): string | null {
-  return process.env.RAZORPAY_SECRET?.trim() || process.env.RAZORPAY_KEY_SECRET?.trim() || null;
+  return env.razorpaySecret ?? null;
 }
 
 export function razorpayEnabled(): boolean {
@@ -63,9 +64,9 @@ export function getRazorpayClient(): Razorpay | null {
 
 export function planIdForPeriod(period: BillingPeriod): string | null {
   if (period === "annual") {
-    return process.env.RAZORPAY_PLAN_BASIC_ANNUAL?.trim() || null;
+    return env.razorpayBasicAnnualPlanId ?? null;
   }
-  return process.env.RAZORPAY_PLAN_BASIC_MONTHLY?.trim() || null;
+  return env.razorpayBasicMonthlyPlanId ?? null;
 }
 
 export function periodFromPlanId(planId: string | null | undefined): BillingPeriod | null {
@@ -183,7 +184,7 @@ export function verifyCheckoutSignature(input: {
 }
 
 export function verifyWebhookSignature(payload: string, signature: string | null): boolean {
-  const secret = process.env.RAZORPAY_WEBHOOK_SECRET?.trim() || getRazorpaySecret();
+  const secret = env.razorpayWebhookSecret ?? getRazorpaySecret();
   if (!secret || !signature) return false;
   const expected = sign(payload, secret);
   try {

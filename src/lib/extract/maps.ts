@@ -1,6 +1,7 @@
 import "server-only";
 
 import { serpApiAvailable } from "@/lib/serpapi/client";
+import { env } from "@/platform/config/env";
 import { fetchBusinessFromSerp } from "@/lib/extract/maps-serp";
 import {
   buildMapsAnalysis,
@@ -144,7 +145,7 @@ function placeToBusiness(place: Place): NormalizedMapsBusiness {
 async function fetchBusinessFromGoogle(
   fullUrl: string
 ): Promise<NormalizedMapsBusiness | null> {
-  const key = process.env.GOOGLE_PLACES_API_KEY?.trim();
+  const key = env.googlePlacesApiKey;
   if (!key) return null;
 
   const placeId = extractPlaceId(fullUrl);
@@ -165,7 +166,7 @@ async function fetchBusinessFromGoogle(
 
 export async function extractFromGoogleMaps(rawUrl: string): Promise<AnalysisResult> {
   const hasSerp = serpApiAvailable();
-  const hasGoogle = Boolean(process.env.GOOGLE_PLACES_API_KEY?.trim());
+  const hasGoogle = Boolean(env.googlePlacesApiKey);
 
   if (!hasSerp && !hasGoogle) {
     throw new Error(

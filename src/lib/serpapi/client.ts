@@ -1,13 +1,15 @@
 import "server-only";
 
+import { env } from "@/platform/config/env";
+
 const BASE = "https://serpapi.com/search.json";
 
 export function serpApiAvailable(): boolean {
-  return Boolean(process.env.SERP_API_KEY?.trim());
+  return Boolean(env.serpApiKey);
 }
 
 function apiKey(): string {
-  const key = process.env.SERP_API_KEY?.trim();
+  const key = env.serpApiKey;
   if (!key) throw new Error("SERP_API_KEY is not configured.");
   return key;
 }
