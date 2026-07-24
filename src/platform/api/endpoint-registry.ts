@@ -113,6 +113,12 @@ export const endpointRegistry = {
     access: "authenticated",
     permission: "site:list",
   },
+  "site.recent-public": {
+    method: "GET",
+    path: "/api/sites/recent",
+    version: "v1",
+    access: "public",
+  },
   "site.delete": {
     method: "DELETE",
     path: "/api/sites",

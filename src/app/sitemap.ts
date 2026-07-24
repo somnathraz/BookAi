@@ -3,6 +3,7 @@ import type { MetadataRoute } from "next";
 import { listPublishedSlugs } from "@/lib/accounts";
 import { absoluteUrl } from "@/lib/seo";
 import { getPublicSiteUrl, subdomainSitesEnabled } from "@/lib/site-url";
+import { blogRegistry } from "@/features/content/blog/blog-registry";
 
 /** Marketing + legal pages on the apex domain. */
 const STATIC_PAGES: {
@@ -13,6 +14,7 @@ const STATIC_PAGES: {
   { path: "/", changeFrequency: "weekly", priority: 1 },
   { path: "/pricing", changeFrequency: "monthly", priority: 0.9 },
   { path: "/about", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/blog", changeFrequency: "weekly", priority: 0.8 },
   { path: "/privacy", changeFrequency: "yearly", priority: 0.3 },
   { path: "/terms", changeFrequency: "yearly", priority: 0.3 },
   { path: "/refunds", changeFrequency: "yearly", priority: 0.3 },
@@ -25,10 +27,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: page.changeFrequency,
     priority: page.priority,
   }));
+  const blogPages: MetadataRoute.Sitemap = blogRegistry.map((article) => ({
+    url: absoluteUrl(`/blog/${article.slug}`),
+    lastModified: article.publishedAt,
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
 
   // A sitemap may only contain URLs belonging to its own host. Wildcard
   // subdomains and verified customer domains expose their own sitemap instead.
-  if (subdomainSitesEnabled()) return staticPages;
+  if (subdomainSitesEnabled()) return [...staticPages, ...blogPages];
 
   try {
     const published = await listPublishedSlugs();
@@ -42,8 +50,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: "weekly",
         priority: 0.6,
       }));
-    return [...staticPages, ...siteEntries];
+    return [...staticPages, ...blogPages, ...siteEntries];
   } catch {
-    return staticPages;
+    return [...staticPages, ...blogPages];
   }
 }

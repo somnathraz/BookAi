@@ -10,6 +10,7 @@ import {
   X,
 } from "lucide-react";
 
+import { MapsFindHelp } from "@/components/generator/MapsFindHelp";
 import type { AnalysisResult, SourceId } from "@/lib/types";
 import type { BusinessSearchResult } from "@/lib/business-search";
 import { ApiClientError, apiClient } from "@/platform/api/api-client";
@@ -87,6 +88,7 @@ export function SupportBot({
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const [results, setResults] = useState<BusinessSearchResult[]>([]);
+  const [mapsHelpQuery, setMapsHelpQuery] = useState<string | null>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const dismissedNudge = useRef(false);
 
@@ -98,7 +100,7 @@ export function SupportBot({
 
   useEffect(() => {
     listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" });
-  }, [messages, results, busy, open]);
+  }, [messages, results, mapsHelpQuery, busy, open]);
 
   function push(role: Msg["role"], text: string) {
     setMessages((prev) => [...prev, { id: mid(), role, text }]);
@@ -123,6 +125,7 @@ export function SupportBot({
     setPath(null);
     setInput("");
     setResults([]);
+    setMapsHelpQuery(null);
     setBusy(false);
     setMessages([
       {
@@ -135,6 +138,7 @@ export function SupportBot({
 
   function pickPath(next: Path) {
     setResults([]);
+    setMapsHelpQuery(null);
     setPath(next);
 
     if (next === "google") {
@@ -228,26 +232,29 @@ export function SupportBot({
   async function searchBusiness(query: string) {
     setBusy(true);
     setResults([]);
+    setMapsHelpQuery(null);
     try {
       const data = await apiClient.get<{ results: BusinessSearchResult[] }>(
         `/api/business-search?q=${encodeURIComponent(query)}`
       );
       const next = data.results ?? [];
       if (!next.length) {
+        setMapsHelpQuery(query);
         push(
           "bot",
-          "No matches. Try “Name, City”, paste a Maps share link, or talk to support."
+          "We couldn’t find that business here. Follow the exact steps below in the Google Maps app, copy the Share link, then paste it in the chat."
         );
         return;
       }
       setResults(next.slice(0, 5));
       push("bot", "Pick your business below and I’ll build the site.");
     } catch (error) {
+      setMapsHelpQuery(query);
       push(
         "bot",
         error instanceof Error
-          ? `${error.message} You can also paste a Maps share link.`
-          : "Search unavailable. Paste a Google Maps share link instead."
+          ? `${error.message} Use the Maps steps below, or paste a Maps share link.`
+          : "Search unavailable. Use the Maps steps below, or paste a Google Maps share link."
       );
     } finally {
       setBusy(false);
@@ -275,6 +282,7 @@ export function SupportBot({
 
     if (path === "google") {
       if (isMapsUrl(value)) {
+        setMapsHelpQuery(null);
         push("bot", "Importing from Google Maps…");
         await importMaps(value);
         return;
@@ -413,6 +421,15 @@ export function SupportBot({
                     </span>
                   </button>
                 ))}
+              </div>
+            ) : null}
+
+            {mapsHelpQuery ? (
+              <div className="rounded-2xl border border-[#11130f]/10 bg-white p-3 dark:border-white/10 dark:bg-[#1a1d1a]">
+                <MapsFindHelp query={mapsHelpQuery} />
+                <p className="mt-3 text-[11px] leading-4 text-stone-500 dark:text-stone-400">
+                  After you copy the link, paste it in the chat below.
+                </p>
               </div>
             ) : null}
 

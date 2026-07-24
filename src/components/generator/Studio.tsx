@@ -42,6 +42,7 @@ import { Hero3D } from "@/components/marketing/Hero3D";
 import { ComingSoonNotify } from "@/components/marketing/ComingSoonNotify";
 import { LogoMark } from "@/components/marketing/Logo";
 import { MarketingNav } from "@/components/marketing/MarketingNav";
+import { RecentlyPublishedSites } from "@/components/marketing/RecentlyPublishedSites";
 import { SupportBot } from "@/components/marketing/SupportBot";
 import { GeneratedSite } from "@/components/generated/GeneratedSite";
 import { SourceInput } from "@/components/generator/SourceInput";
@@ -55,6 +56,7 @@ import { siteToGeneratorInput } from "@/lib/site-to-input";
 import { deriveArchetype } from "@/lib/compose";
 import { generateSite } from "@/lib/template";
 import { cn } from "@/lib/utils";
+import type { PublicSiteCard } from "@/lib/public-sites";
 import { ApiClientError, apiClient } from "@/platform/api/api-client";
 import { useCapabilitiesQuery } from "@/features/application-status/presentation/capabilities-query";
 import type {
@@ -175,7 +177,13 @@ function previewInputFromAnalysis(result: AnalysisResult): GeneratorInput | null
   };
 }
 
-export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
+export function Studio({
+  editSiteId,
+  recentSites = [],
+}: {
+  editSiteId?: string;
+  recentSites?: PublicSiteCard[];
+} = {}) {
   const reduceMotion = useReducedMotion();
   const [step, setStep] = useState<Step>(editSiteId ? "review" : "chooser");
   const capabilitiesQuery = useCapabilitiesQuery();
@@ -1028,6 +1036,8 @@ export function Studio({ editSiteId }: { editSiteId?: string } = {}) {
               ))}
             </div>
           </section>
+
+          <RecentlyPublishedSites initialSites={recentSites} />
 
           <motion.section
             initial={reduceMotion ? false : { opacity: 0, y: 28 }}
