@@ -10,6 +10,7 @@ import { Logo } from "@/components/marketing/Logo";
 import { Button } from "@/components/ui/button";
 
 const LINKS = [
+  { href: "/blog", label: "Journal" },
   { href: "/pricing", label: "Pricing" },
   { href: "/about", label: "About" },
   { href: "/dashboard", label: "My sites" },

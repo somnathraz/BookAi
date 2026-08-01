@@ -6,14 +6,14 @@ import {
   ArrowRight,
   Check,
   ClipboardPaste,
-  ExternalLink,
   Loader2,
   MapPin,
   Search,
   Star,
 } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
+import { MapsFindHelp } from "@/components/generator/MapsFindHelp";
 import { Button } from "@/components/ui/button";
 import type { AnalysisResult, Capabilities } from "@/lib/types";
 import type { BusinessSearchResult } from "@/lib/business-search";
@@ -22,11 +22,6 @@ import { ApiClientError, apiClient } from "@/platform/api/api-client";
 type Mode = "search" | "paste" | "help";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
-
-function mapsSearchUrl(query: string): string {
-  const params = new URLSearchParams({ api: "1", query });
-  return `https://www.google.com/maps/search/?${params.toString()}`;
-}
 
 function isMapsUrl(value: string): boolean {
   try {
@@ -67,11 +62,7 @@ export function BusinessStart({
   const [error, setError] = useState<string | null>(null);
   const [openedMaps, setOpenedMaps] = useState(false);
   const [returnedFromMaps, setReturnedFromMaps] = useState(false);
-
-  const mapsHref = useMemo(
-    () => mapsSearchUrl(query.trim() || "business near me"),
-    [query]
-  );
+  const [searchNotFound, setSearchNotFound] = useState(false);
 
   useEffect(() => {
     function onVisibilityChange() {
@@ -90,8 +81,10 @@ export function BusinessStart({
     setError(null);
     setSelected(null);
     setResults([]);
+    setSearchNotFound(false);
 
     if (!capabilities.businessSearch) {
+      setSearchNotFound(true);
       setMode("help");
       return;
     }
@@ -103,7 +96,10 @@ export function BusinessStart({
       );
       const nextResults = data.results ?? [];
       setResults(nextResults);
-      if (!nextResults.length) setMode("help");
+      if (!nextResults.length) {
+        setSearchNotFound(true);
+        setMode("help");
+      }
     } catch (searchError) {
       setError(
         searchError instanceof ApiClientError && searchError.status === 429
@@ -350,47 +346,21 @@ export function BusinessStart({
           >
             <button
               type="button"
-              onClick={() => setMode("search")}
+              onClick={() => {
+                setMode("search");
+                setSearchNotFound(false);
+              }}
               className="mb-4 flex items-center gap-1.5 text-sm text-stone-500 transition hover:text-stone-950 dark:hover:text-white"
             >
               <ArrowLeft className="size-4" />
               Back
             </button>
-            <p className="font-semibold text-stone-950 dark:text-stone-50">
-              Find your business on Google Maps
-            </p>
-            <ol className="mt-4 space-y-3 text-sm text-stone-600 dark:text-stone-300">
-              {["Open your business listing", "Tap Share, then Copy link", "Return to PaperChai and paste it"].map(
-                (step, index) => (
-                  <li key={step} className="flex items-center gap-3">
-                    <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-stone-950 text-xs font-semibold text-white dark:bg-stone-100 dark:text-stone-950">
-                      {index + 1}
-                    </span>
-                    {step}
-                  </li>
-                )
-              )}
-            </ol>
-            <div className="mt-5 flex flex-col gap-2 sm:flex-row">
-              <a
-                href={mapsHref}
-                target="_blank"
-                rel="noreferrer"
-                onClick={() => setOpenedMaps(true)}
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-[#214f43] px-5 text-sm font-semibold text-white transition hover:bg-[#173b32]"
-              >
-                Open Google Maps
-                <ExternalLink className="size-4" />
-              </a>
-              <button
-                type="button"
-                onClick={() => setMode("paste")}
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-stone-900/15 px-5 text-sm font-semibold text-stone-800 transition hover:bg-stone-100 dark:border-white/15 dark:text-stone-200 dark:hover:bg-white/[0.06]"
-              >
-                <ClipboardPaste className="size-4" />
-                Paste copied link
-              </button>
-            </div>
+            <MapsFindHelp
+              query={query}
+              notFoundNotice={searchNotFound}
+              onOpenedMaps={() => setOpenedMaps(true)}
+              onPasteReady={() => setMode("paste")}
+            />
           </motion.div>
         )}
       </AnimatePresence>

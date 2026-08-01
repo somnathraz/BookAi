@@ -591,6 +591,112 @@ export async function listSites(email: string): Promise<StoredSite[]> {
   return [...memAcc(email).sites].sort((a, b) => b.createdAt - a.createdAt);
 }
 
+/** Narrow row for public gallery listings — never includes owner PII or full site data. */
+export interface RecentPublicSiteRow {
+  slug: string;
+  name: string;
+  domain: string;
+  photo?: string;
+  tagline?: string;
+  publishedAt: Date;
+  customDomain?: string;
+  customDomainVerified?: boolean;
+}
+
+function pickPublicPhoto(data: unknown): string | undefined {
+  if (!data || typeof data !== "object") return undefined;
+  const record = data as {
+    identity?: { photo?: unknown };
+    gallery?: unknown;
+  };
+  const identityPhoto =
+    typeof record.identity?.photo === "string" ? record.identity.photo.trim() : "";
+  if (identityPhoto && !identityPhoto.startsWith("data:")) return identityPhoto;
+  const gallery = Array.isArray(record.gallery) ? record.gallery : [];
+  for (const item of gallery) {
+    if (typeof item === "string" && item.trim() && !item.startsWith("data:")) {
+      return item.trim();
+    }
+  }
+  return undefined;
+}
+
+function pickPublicTagline(data: unknown): string | undefined {
+  if (!data || typeof data !== "object") return undefined;
+  const tagline = (data as { identity?: { tagline?: unknown } }).identity?.tagline;
+  if (typeof tagline !== "string") return undefined;
+  const trimmed = tagline.trim();
+  return trimmed || undefined;
+}
+
+/**
+ * Recent live sites for the homepage gallery.
+ * Ordered by last update, limited, public-safe fields only.
+ */
+export async function listRecentPublicSiteRows(
+  limit = 8
+): Promise<RecentPublicSiteRow[]> {
+  const safeLimit = Math.min(Math.max(1, Math.floor(limit)), 24);
+  const sql = getSql();
+  if (sql) {
+    await ensureSchema();
+    const rows = await sql<
+      {
+        slug: string;
+        name: string;
+        domain: string;
+        published_at: Date | null;
+        created_at: Date;
+        custom_domain: string | null;
+        custom_domain_verified: boolean | null;
+        data: unknown;
+      }[]
+    >`
+      select slug,
+             name,
+             domain,
+             coalesce(updated_at, created_at) as published_at,
+             created_at,
+             custom_domain,
+             custom_domain_verified,
+             data
+        from sites
+       where slug is not null and slug <> ''
+       order by coalesce(updated_at, created_at) desc
+       limit ${safeLimit}`;
+    return rows.map((r) => ({
+      slug: r.slug,
+      name: r.name,
+      domain: r.domain,
+      photo: pickPublicPhoto(r.data),
+      tagline: pickPublicTagline(r.data),
+      publishedAt: new Date(r.published_at ?? r.created_at),
+      customDomain: r.custom_domain ?? undefined,
+      customDomainVerified: r.custom_domain_verified ?? false,
+    }));
+  }
+
+  const out: RecentPublicSiteRow[] = [];
+  for (const a of mem.values()) {
+    for (const s of a.sites) {
+      if (!s.slug) continue;
+      out.push({
+        slug: s.slug,
+        name: s.name,
+        domain: s.domain,
+        photo: pickPublicPhoto(s.site),
+        tagline: pickPublicTagline(s.site),
+        publishedAt: new Date(s.updatedAt || s.createdAt),
+        customDomain: s.customDomain,
+        customDomainVerified: s.customDomainVerified,
+      });
+    }
+  }
+  return out
+    .sort((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime())
+    .slice(0, safeLimit);
+}
+
 /** All published sites — used by sitemap.xml (subdomain + verified custom domains). */
 export async function listPublishedSlugs(): Promise<
   {
