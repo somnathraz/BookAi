@@ -17,6 +17,383 @@ export interface BlogArticle {
 /** Editorial source of truth. Scheduled publishing adds a reviewed article here. */
 export const blogRegistry: readonly BlogArticle[] = [
   {
+    slug: "add-whatsapp-chat-google-business-profile-website-india",
+    title:
+      "How to add WhatsApp chat to your Google Business Profile and website in India",
+    description:
+      "Set up a clear WhatsApp enquiry path from Google and your website, with honest response expectations and a simple monthly check.",
+    category: "Local growth",
+    publishedAt: "2026-08-10",
+    readingMinutes: 8,
+    image:
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A small business owner using WhatsApp and a website on a laptop",
+    keywords: [
+      "add WhatsApp chat Google Business Profile India",
+      "WhatsApp click to chat link for local business website",
+      "Google Maps WhatsApp enquiry setup service business",
+      "WhatsApp website contact strategy for freelancers India",
+    ],
+    sections: [
+      {
+        heading: "Use WhatsApp as an enquiry route, not a promise of an instant booking",
+        paragraphs: [
+          "For an electrician, salon, tutor, photographer, architect, therapist, consultant, or home-service team, WhatsApp is often where a customer feels comfortable asking a practical question. They may want to share a location, a photo of a repair, a preferred date, or a short brief before deciding whether to call. A well-placed chat option can remove friction at that moment, especially on a phone. It works best when it is one clear route in a website journey, rather than a substitute for the details a customer needs to make a considered choice.",
+          "Do not label the action ‘Book now’ if a person still has to check availability, price, service area, or suitability by hand. Say ‘Ask on WhatsApp’, ‘Request an estimate’, or ‘Check availability’ instead. Keep a short service summary, area served, regular hours, and a second contact option on the website. This helps a customer who cannot use WhatsApp and gives the business enough context before a conversation begins. A truthful label is more useful than a fast-looking button that creates the wrong expectation.",
+        ],
+      },
+      {
+        heading: "Confirm that the Google Profile option is available before planning around it",
+        paragraphs: [
+          "Google currently lets claimed and verified Business Profiles add a WhatsApp or text-message chat option in select regions. Availability can vary by profile, so first open the profile editor, choose Contact, and look for Chat. If WhatsApp is offered, add the business's click-to-chat URL and save. If the setting is not visible, do not keep changing categories, names, or other unrelated facts in an attempt to unlock it. Keep the official website and public phone number accurate instead, then make WhatsApp available from the website where you control the customer experience.",
+          "Treat the public result as the real test. Google notes that when both WhatsApp and text-message options are added, customers see only the text-message option. It also controls whether and how an available feature is shown. After an edit, search for the business name on a phone and inspect the profile as a customer would. If WhatsApp is important to the workflow, do not rely on a Google button alone. The website's contact action should remain the dependable path, with a visible phone alternative for urgent or accessibility-related needs.",
+        ],
+      },
+      {
+        heading: "Prepare one business-owned chat destination",
+        paragraphs: [
+          "Use a WhatsApp Business account or number that the business can keep operating if a staff member, freelancer, or family member changes. A personal number tied to one employee may be convenient today but becomes a fragile public contact route later. Confirm who can access the account, where notification settings are managed, and who answers when the usual person is away. The profile photo and name should make it clear that the customer has reached the intended business, not a private individual with an unfamiliar display name.",
+          "Create the click-to-chat URL through WhatsApp's supported method and open it from an Android phone, an iPhone, and a desktop browser if those are available to you. Test it while not signed into the business account too. The destination should start a chat with the correct business number without exposing another customer's details or pre-filling sensitive information. A short optional opening message such as ‘Hello, I would like to ask about your services’ is fine; do not embed a customer's name, address, appointment reference, or problem description in a link that could be copied, logged, or shared.",
+        ],
+      },
+      {
+        heading: "Give the website page enough context before the chat button",
+        paragraphs: [
+          "Put the WhatsApp action on the relevant page, not automatically on every screen with no explanation. A plumber's repair page can state the neighbourhoods served, typical jobs, and how quickly requests are reviewed. A freelance accountant can explain the kind of consultation offered and which documents should not be sent in a first message. A wedding photographer can show the package starting point and ask for the event date. Then the customer has a reason to contact you and the business receives a more useful first enquiry.",
+          "On a phone, place the action within easy reach after the key information, and repeat it after longer service details if helpful. Pair it with a compact expectation: ‘Replies Mon–Sat, 10 am–6 pm’ or ‘We confirm appointment requests before they are booked.’ If a request needs a form, payment, calendar selection, or terms acceptance, send the visitor to that step instead of pretending a chat completes it. WhatsApp can begin the conversation; the website should still clearly show the right route for the actual transaction.",
+        ],
+      },
+      {
+        heading: "Build a response routine that protects both time and privacy",
+        paragraphs: [
+          "Write a three-part reply for common enquiries: acknowledge the message, ask only for the details needed to assess it, and state the next step. A home-repair business might ask for locality, job type, and a convenient visit window. A coach might ask what kind of session the person wants and then share the relevant availability page. Avoid requesting identification numbers, payment-card information, full medical details, or other sensitive information in an initial chat. If information is needed for a formal process, use the approved secure route and explain why.",
+          "Set an away message when the business is closed, but make it accurate. ‘We received your message and will reply tomorrow after 10 am’ is useful when it is true. ‘An agent will be with you shortly’ is not helpful if nobody is monitoring the account. Give team members a small escalation rule for emergencies, cancellations, or messages that should move to a call. The point is not to automate every conversation. It is to ensure that a customer who takes the time to contact the business receives a clear, timely, and appropriate response.",
+        ],
+      },
+      {
+        heading: "Run a monthly customer-path check",
+        paragraphs: [
+          "Once a month, search for the business on Google, tap Website and any visible Chat option from a phone, and follow the same path from the relevant service page. Check the business name, number, click-to-chat link, opening hours, service area, and response promise. Ask the person answering messages whether the questions arriving through WhatsApp are useful or whether visitors are repeatedly confused about price, location, or availability. That feedback often points to a missing sentence on the website, not a need for another tool.",
+          "Record only a few operational signals: number of enquiries the team could respond to, the services people asked about, and whether a broken link or stale message was found. Do not turn chat links into a customer-surveillance project or add personal data to tracking URLs. If the profile option disappears or is not available for your region, the routine still pays off because the website contact path remains tested. The goal is simple: a person who finds a local business on Google should be able to understand the offer, choose a suitable way to ask, and receive an honest next step.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "add-instagram-link-google-business-profile-india",
+    title:
+      "How to add an Instagram link to your Google Business Profile without sidelining your website",
+    description:
+      "Use an Instagram link on Google Business Profile as a trust-building handoff while keeping your website as the dependable place to enquire or book.",
+    category: "Local growth",
+    publishedAt: "2026-08-09",
+    readingMinutes: 8,
+    image:
+      "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A small business owner reviewing an Instagram profile and website on a phone",
+    keywords: [
+      "add Instagram link Google Business Profile India",
+      "Google Business Profile social media links local business",
+      "Instagram and website strategy for service business India",
+      "Google Maps Instagram link for freelancers",
+    ],
+    sections: [
+      {
+        heading: "Treat Instagram as proof of your work, not the only place customers can act",
+        paragraphs: [
+          "For a photographer, salon, home baker, interior designer, fitness coach, repair professional, or independent consultant, Instagram can quickly show recent work and a recognisable personality. A Google Business Profile can now let some businesses manage links to selected social platforms, including Instagram. The feature is available only in select regions, so do not assume the field will appear in every account. When it is available, it is a useful supporting route for a person who has found the business on Google and wants a little more confidence before getting in touch.",
+          "That does not make Instagram the best place to complete every customer journey. A profile post can be buried, a direct message can be missed, and a visitor cannot easily compare services, prices, availability, policies, or locations. Keep the website as the stable home for the current offer and the clear next step: call, request a quote, check availability, or book. Think of the Instagram link as evidence that the work is real; think of the website as the place where a customer receives a dependable answer.",
+        ],
+      },
+      {
+        heading: "Get the two destinations ready before you add a link",
+        paragraphs: [
+          "Open your public Instagram profile as someone who does not follow you. The name, profile photo, biography, contact option, and latest few posts should make it obvious what you do and where you work. A Bengaluru makeup artist can state the service area and appointment model. A freelance designer can say whether work is remote. A home-service team can show real jobs without exposing a customer’s address, phone number, or private messages. Archive or correct anything that creates a different impression from the business name and service shown on Google.",
+          "Then test the website from a phone. Its first screen should identify the business, explain the relevant service, and present one action that matches the visitor’s likely need. Add a plain website link in the Instagram bio too, preferably to that same useful page rather than a link list full of stale campaigns. This makes the routes reinforce one another: Google can lead people to the website or social proof; Instagram can send interested people back to a page where they can make a considered enquiry.",
+        ],
+      },
+      {
+        heading: "Add only the official Instagram profile when the option is visible",
+        paragraphs: [
+          "In a verified Google Business Profile, open Edit profile, then Contact, and look for Social profiles. If Instagram is offered, choose it, paste the full public profile URL, and save. Google allows one social link per supported platform, and may also surface a social link automatically in some cases. Use the account owned by the business, not an employee’s personal profile, a campaign account, a local community page, or a marketplace listing. The public URL should open without a login barrier to the profile a customer expects.",
+          "If the social-profiles option is absent, stop there. Availability varies by region and profile, and there is no value in repeatedly changing unrelated fields to force it to appear. Keep the official website link accurate, and make the Instagram address easy to find on the website instead. Do not substitute an Instagram or WhatsApp URL into a Google booking, ordering, or reservation link: Google treats those action links differently and expects a customer to complete the stated transaction on the destination.",
+        ],
+      },
+      {
+        heading: "Give each channel a job the customer can understand",
+        paragraphs: [
+          "A simple division prevents the all-too-common ‘message us for details’ dead end. Use Google Search and Maps for accurate location or service area, hours, website, phone, and discovery. Use Instagram for a selected portfolio, short demonstrations, before-and-after work where customers have consented, and a human view of the business. Use the website for service pages, useful starting information, an enquiry or booking request, and the response promise. Use WhatsApp, calls, or email only after the customer has chosen the contact route you genuinely monitor.",
+          "Make the calls to action agree. A tutor who accepts trial-class requests can say ‘Request a trial class’ on the website and ‘See current class options on our website’ in the Instagram bio. A wedding photographer might use Instagram for recent galleries but keep date availability on a website form. Avoid saying ‘Book now’ in a bio if every request still needs a manual confirmation. Clear language protects the customer from false expectations and helps the business receive enquiries with enough context to respond well.",
+        ],
+      },
+      {
+        heading: "Check what customers see instead of chasing social-link clicks",
+        paragraphs: [
+          "Google currently does not provide performance metrics or click tracking specifically for Business Profile social links. Do not invent certainty by adding a different tracking link to the Instagram profile or treating likes as leads. Instead, check the customer experience directly once a month: search the business name, open the Google Profile, tap Website and any visible social link, and make sure each route loads the right public destination. Ask the person who receives enquiries whether customers mention a post, a service page, or an unclear message.",
+          "Measure actions where you have a sound basis to do so. Your website analytics can show visits to a service page and completed enquiry actions; your booking system may show confirmed requests; a simple enquiry log can record the source when a customer volunteers it. Keep personal details out of tracking URLs and reports that do not need them. The goal is not to connect every click to one person. It is to notice whether a customer can move from discovery to a clear next action without being sent in circles.",
+        ],
+      },
+      {
+        heading: "Keep a lightweight quarterly consistency check",
+        paragraphs: [
+          "Every three months, compare the Google Business Profile, website, and Instagram profile side by side. Confirm the public business name, service area, phone number, website address, hours, and main service description are compatible. Update a bio when a service is discontinued, replace a portfolio highlight that no longer represents the work, and remove a social link if the account is no longer maintained. If an old freelancer or staff member owns the account, arrange a safe transfer before making it part of the official customer path.",
+          "This routine is modest, but it earns trust. Local customers rarely experience your channels separately: they may find you on Maps, glance at a reel, and return to the website later from a saved link. When each surface tells the same honest story and the website gives them a reliable way to act, social proof becomes useful rather than distracting. That is a stronger outcome than collecting another profile link simply because the field is available.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "local-business-schema-markup-website-india",
+    title:
+      "Local business schema markup for an Indian service website: a practical checklist",
+    description:
+      "Use accurate LocalBusiness schema markup to help Google understand your service website, without inventing addresses, ratings, or promises.",
+    category: "Website foundations",
+    publishedAt: "2026-08-08",
+    readingMinutes: 8,
+    image:
+      "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A web professional reviewing website code and business details on a laptop",
+    keywords: [
+      "local business schema markup website India",
+      "LocalBusiness structured data for service business",
+      "schema markup checklist for Indian freelancers",
+      "add business hours schema to local website",
+    ],
+    sections: [
+      {
+        heading: "Schema markup should clarify a real business, not decorate a page",
+        paragraphs: [
+          "A local service website has a simple job: help a person decide whether to call, enquire, visit, or book. A clear name, service area, phone number, hours, and website action do most of that work for a human visitor. Local business schema markup adds the same facts in a machine-readable format so search engines can better understand what the page represents. It is useful housekeeping, especially when a small business wants its official website and its public business details to agree.",
+          "It is not a shortcut to a higher ranking, a map listing, star ratings, or a promised rich result. Google decides how, or whether, to show enhanced search features. Treat markup as an accuracy task: describe the business exactly as customers can experience it. That mindset protects a salon, tutor, consultant, repair team, architect, clinic, or freelancer from publishing overly ambitious data that later conflicts with the website, Google Business Profile, or real availability.",
+        ],
+      },
+      {
+        heading: "Choose the most specific honest business type",
+        paragraphs: [
+          "Start with the schema.org LocalBusiness subtype that most closely describes the main customer-facing activity. A physical salon may use a relevant beauty subtype; a restaurant can use Restaurant; a professional office may use a relevant professional-service type. If no narrower type truly fits, LocalBusiness is safer than forcing a category just because it sounds popular. The purpose is recognition, not keyword insertion. A single truthful type is easier to maintain than a collection of unrelated labels.",
+          "For a home-based or mobile service, pause before adding an address. If customers do not visit the address, do not publish a private home address simply to look local. Describe the service area in visible page content and use the business contact details you are comfortable making public. A mobile repair professional can explain the neighbourhoods served and the appointment process; an online consultant can state that work is remote. Markup should follow the real service model rather than imitate a storefront.",
+        ],
+      },
+      {
+        heading: "Collect one verified set of facts before a developer adds code",
+        paragraphs: [
+          "Prepare a small source sheet from the website and the business owner’s records: public business name, canonical website URL, main contact number, public email if one is intentionally offered, address only where customers can visit, regular hours, logo, and the page that explains each core service. Check spellings, WhatsApp-capable numbers, and holiday expectations with the person who answers enquiries. If the website calls the business ‘Sana Home Repairs’ while the profile says ‘Sana Repairs & Electrical’, resolve that normal customer-facing name first instead of hiding the mismatch in code.",
+          "Use a complete street address only for a location a customer can genuinely visit or collect from. Include locality, region, postal code, and country when they apply. For a service-area business, visible wording such as ‘Serving Indiranagar, Koramangala, and nearby Bengaluru by appointment’ is often more useful than a misleading pin. Keep hours equally precise. ‘Mon–Sat, 10:00–18:00’ is better than ‘always open’ when messages are accepted at any time but calls are answered during working hours.",
+        ],
+      },
+      {
+        heading: "Put JSON-LD on the page that represents the business",
+        paragraphs: [
+          "Ask your website developer to add JSON-LD structured data to the homepage or a clear contact/about page that represents the whole business. JSON-LD is usually easier to maintain than weaving markup through the visible page layout. The data can connect the business name, URL, logo, phone, address where applicable, opening hours, and same-as links for established public profiles. It should not replace the visible contact information; customers still need to see and use those details without inspecting code.",
+          "Keep the markup scoped to facts the page supports. A business can describe one main location and link to a service page, but it should not list every town in a state as an address, create imaginary departments, or add ratings that are not shown and earned through a legitimate review process. Do not place a customer’s phone number, enquiry text, booking reference, or internal notes in markup. Structured data is public page data and can be crawled, cached, and copied.",
+        ],
+      },
+      {
+        heading: "Check the page after every meaningful business change",
+        paragraphs: [
+          "Once the update is live, test the public URL with Google’s Rich Results Test and inspect the page in Search Console if the business has verified ownership. Resolve syntax errors and warnings that show the information is incomplete or contradictory. A passing test means the markup can be read; it does not guarantee a particular Search appearance. Then open the page on a phone and compare the visible business name, phone, hours, and action button with the data your developer entered. The customer view remains the important test.",
+          "Repeat the check when the business moves, changes phone numbers, adjusts regular hours, adds a second public location, changes its legal or customer-facing name, or redesigns the website. Put it beside the Google Business Profile and contact-page review, not in a once-only SEO project folder. If a freelancer maintains the site, record where the markup lives and who can update it. That handover note saves the owner from paying to rediscover a small but important detail after a future redesign.",
+        ],
+      },
+      {
+        heading: "Use a short monthly accuracy routine instead of chasing markup tricks",
+        paragraphs: [
+          "Set aside ten minutes each month. Search for the business name, open the official website, make a test tap on the call, enquiry, or WhatsApp action, and compare the visible details with the Google profile. If something changed, update the website first and then the structured data in the same release. If no fact changed, leave the markup alone. Constantly rewriting it to chase a new keyword adds risk without helping a customer understand the business.",
+          "The practical win is consistency. When an independent professional or local team clearly states what it does, where it works, when it responds, and how to start, both people and search systems have fewer reasons to guess. Schema markup supports that clarity behind the scenes. It cannot compensate for an unclear offer or an unanswered enquiry, but it can make the honest information already on a well-run website easier to interpret and maintain.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "track-google-business-profile-website-clicks-ga4-india",
+    title:
+      "How to track Google Business Profile website clicks in GA4 for a local business",
+    description:
+      "Connect Google Business Profile and GA4, then use a small measurement routine to learn whether Google visitors reach useful website actions.",
+    category: "Local growth",
+    publishedAt: "2026-08-04",
+    readingMinutes: 8,
+    image:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A business owner reviewing simple website traffic charts on a laptop",
+    keywords: [
+      "track Google Business Profile website clicks GA4 India",
+      "Google Maps website traffic Google Analytics local business",
+      "Google Business Profile GA4 link for service business",
+      "measure Google profile website enquiries India",
+    ],
+    sections: [
+      {
+        heading: "Measure the handoff from Google, not just the number of views",
+        paragraphs: [
+          "A Google Business Profile can show that people discovered your salon, tutor service, repair business, studio, clinic, consultancy, or freelance practice. That is useful context, but it does not answer whether they reached the website page that helps them call, enquire, or book. Tracking the handoff helps you improve a customer path rather than celebrate a number that cannot be acted on.",
+          "Start with one modest question. For example: are people who tap Website from our Google profile reaching the right service page, and do they continue to a contact action? This is more useful than trying to prove exactly which individual became a customer. A small local business usually needs enough information to spot a broken page, an unclear offer, or a seasonal change in demand—not a complicated attribution system.",
+        ],
+      },
+      {
+        heading: "Link the Business Profile and GA4 before inventing a workaround",
+        paragraphs: [
+          "Google now allows a Business Profile to be linked with a Google Analytics 4 property. Create the link in Google Analytics Admin under Product links; it requires appropriate access to the Analytics property and Business Profile. When it is active, Google can share aggregated local-profile interactions, including website clicks, calls, directions, messages, bookings, and menu clicks, with Analytics. Check that the website is already using the intended GA4 property before you connect anything.",
+          "Keep the access list small. The person setting up the link needs the role to do it, but every staff member who answers enquiries does not need full Analytics administration. Record the property name and profile location in a simple business handover note, especially if a freelancer or agency helped with the website. This prevents a common problem where a business can see a dashboard but cannot later change the connection when its website or staff changes.",
+        ],
+      },
+      {
+        heading: "Use a focused website destination that can answer the visitor",
+        paragraphs: [
+          "Measurement cannot repair an unclear destination. Open the Website button from the public profile on a phone. It should load securely, identify the business, and put the likely next action within easy reach. A home painter might send Google visitors to an estimate page that asks for locality and job type; a consultant might use a short consultation page; a yoga studio may use its current class schedule. Sending every visitor to a crowded homepage makes both the experience and the data harder to interpret.",
+          "Write down what a successful visit means before looking at a report. It could be a completed enquiry form, a tap on the call button, a WhatsApp conversation started, or a confirmed class request. Do not count a page view as a lead. If the page merely explains a service and sends people elsewhere, make that next step visible and test it. The goal is a truthful path from local discovery to a business action, not an impressive-looking traffic total.",
+        ],
+      },
+      {
+        heading: "Keep campaign names simple if you use tagged links",
+        paragraphs: [
+          "If you share a distinct website URL from a profile field or a campaign, UTM parameters can help separate that traffic in GA4. Google recommends a consistent strategy and identifies source, medium, and campaign as the core fields for custom campaign URLs. A practical convention might be source `google`, medium `business-profile`, and campaign `website-link`. Use lowercase words and the same spelling every time; `Google`, `google`, and `googlemaps` can become separate rows in a report and create needless confusion.",
+          "Do not add a new tag to every service, neighbourhood, or staff member unless it will change a decision. Keep one documented naming pattern and use it only where you control the destination URL. Never place a customer name, phone number, email address, booking reference, or any other personal detail in a UTM value. A URL can be copied, saved, shared, and logged. It is for identifying a marketing route, not for carrying customer information.",
+        ],
+      },
+      {
+        heading: "Review one small report with the person who handles enquiries",
+        paragraphs: [
+          "Once there is enough traffic to make the review worthwhile, open GA4's Traffic acquisition report and look for the agreed source and medium or the Business Profile connection data. Compare the last 28 days with the previous 28. Then look at the landing page and the useful actions you defined. More profile website clicks with no enquiries may mean the page is slow, the offer is vague, the form is difficult on a phone, or customers need a contact option you have hidden.",
+          "Discuss the report with the person who receives calls and messages. They may notice that enquiries now mention a particular service, arrive from a new locality, or stop after a change to hours. Analytics does not replace that human context. It helps test it. If a report says a page is popular but staff say the enquiries are irrelevant, clarify the page's service boundary or action label instead of adding more tracking fields.",
+        ],
+      },
+      {
+        heading: "Run a monthly check that produces one improvement",
+        paragraphs: [
+          "Set a recurring fifteen-minute review: open the Google profile, tap the website destination on a phone, check the same GA4 view, and read a few recent enquiries. Confirm that the destination, business hours, service wording, and form or WhatsApp action still agree. If you changed the site, check that the GA4 tag is still present and that redirects preserve the page a visitor expects. A quiet measurement failure is easy to miss when nobody owns this routine.",
+          "Choose only one response to what you learn. You might move the quote button higher, replace a generic contact form with service choices, correct a stale opening-hours message, or give a popular service its own page. Note the date and the change, then review it next month. This turns Analytics into a practical website-maintenance habit. For an independent professional or local team, the win is not perfect reporting; it is making the next customer's route from Google clearer, faster, and easier to honour.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "update-special-hours-google-business-profile-website-india",
+    title:
+      "How to update special hours on your Google Business Profile and website",
+    description:
+      "Keep holiday and unusual opening hours accurate across your Google Business Profile and website, so local customers know when to call, visit, or book.",
+    category: "Local growth",
+    publishedAt: "2026-08-03",
+    readingMinutes: 7,
+    image:
+      "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A business owner reviewing opening hours and appointments on a laptop calendar",
+    keywords: [
+      "update special hours Google Business Profile India",
+      "holiday opening hours local business website India",
+      "Google Maps business hours website checklist",
+      "service business festival hours update India",
+    ],
+    sections: [
+      {
+        heading: "Special hours are a customer promise, not a seasonal detail",
+        paragraphs: [
+          "For a salon, clinic, tuition centre, café, repair business, studio, or independent professional, a customer may decide whether to call or travel based on the hours shown in Google Search or Maps. During public holidays, festivals, staff leave, training days, or a temporary early close, the usual timetable is no longer enough. An incorrect listing can create a wasted journey, a missed enquiry, and a difficult first impression before the customer has even seen your work.",
+          "Google Business Profile lets an eligible business set special hours for dates when its normal hours do not apply. Use that setting for the exception rather than changing regular hours to fit a one-day closure. Then make the same information easy to find on your website. The aim is simple: a person who sees your Google profile, visits your site, or receives a shared link should get the same truthful answer about whether you are available and what they should do next.",
+        ],
+      },
+      {
+        heading: "Decide the actual customer-facing schedule before editing anything",
+        paragraphs: [
+          "Start with a small written list of the dates that differ from normal operations. Record whether you are closed, opening later, closing early, taking appointments only, or available for messages but not visits. Include the relevant location if you serve more than one area. This avoids a common mistake: publishing a generic “holiday hours” message when the phone is answered from home, one branch is open, or only pre-booked clients can be seen.",
+          "Separate customer access from behind-the-scenes work. A freelancer may spend a Sunday preparing proposals but not take calls. A home-service team may accept emergency WhatsApp requests while its shop counter is closed. State the customer-facing rule plainly: “Closed for walk-ins; pre-booked repair visits continue” is more useful than “Limited availability.” If the exception affects response time rather than opening hours, say when messages will be answered instead of marking the business open around the clock.",
+        ],
+      },
+      {
+        heading: "Set special hours in Google, then check the live result",
+        paragraphs: [
+          "In your verified Business Profile, open Edit profile and find the hours section. Add special hours for each exceptional date, including a closure where appropriate, and save. Do this ahead of the date whenever possible. Google can prompt businesses about holiday hours, but a prompt is not a substitute for checking the real schedule. Keep regular hours for the normal week; they should not be repeatedly rewritten for a short festival break or a single staff event.",
+          "After saving, view the profile on a phone and in Google Search or Maps. Confirm the date, the time range, and the closed/open message match your plan. If the business has multiple locations, repeat the check for every profile rather than assuming one edit applies everywhere. Google’s guidance asks businesses to provide accurate customer-facing hours and allows special hours for exceptions. Treat the public profile as the customer will see it, not merely as an admin form you have completed.",
+        ],
+      },
+      {
+        heading: "Put the exception where website visitors will actually notice it",
+        paragraphs: [
+          "Do not bury a changed schedule in an old blog post or a social-media story that disappears. Add a short, dated notice near the main contact action and the regular-hours block on your website. A clear example is: “Closed 15 August. Enquiries received today will be answered on 16 August.” For a service business still taking bookings, use: “Open by appointment only on 15 August—request a slot before visiting.” The notice should tell a customer exactly how the exception affects them.",
+          "Keep the normal schedule visible underneath, labelled as regular hours, so visitors can distinguish a one-day change from a permanent update. If your site has a contact form, booking page, or WhatsApp action, adjust its expectation text too. A form confirmation that promises a same-day callback while the business is closed undermines an otherwise accurate hours notice. You do not need a separate holiday page: one concise, prominent message on the paths customers already use is usually stronger.",
+        ],
+      },
+      {
+        heading: "Coordinate the people and tools that answer enquiries",
+        paragraphs: [
+          "Before the exception begins, make sure whoever handles calls, WhatsApp, email, or bookings has the same schedule. Prepare one short reply for incoming messages: acknowledge the request, confirm the next response date, and offer the appropriate alternative only if it is genuinely available. For example, a tutor can say that trial-class requests will be confirmed the following day; a photographer can say whether existing shoots remain on schedule. Avoid automated replies that imply a booking is confirmed when it still needs a human check.",
+          "Review linked systems as well. If a calendar, booking tool, delivery provider, or payment page shows availability that does not match your holiday plan, block the unavailable slots or clarify the exception before sharing it. Your Google Profile, website, and booking destination do not have to use the same software, but they must make compatible promises. A customer should never see “closed” on the website, select a slot in a scheduler, and then learn that nobody can honour it.",
+        ],
+      },
+      {
+        heading: "Run a five-minute reopening check",
+        paragraphs: [
+          "When normal operations resume, remove the dated website notice and verify that the next special-hours date has not been left open by accident. Call the listed number, submit a safe test enquiry if your workflow permits it, and open the Google profile as a customer would. Check that the regular hours, booking page, response expectation, and any pinned message now agree. This small reset prevents a temporary notice from becoming next month’s confusing stale information.",
+          "Keep a reusable list for the next exception: Google special hours updated, website notice added, booking availability reviewed, team reply prepared, and reopening check completed. It is not glamorous marketing, but it protects trust at the moment a local customer is ready to act. Accurate hours will not create demand by themselves; they make sure the demand you have worked for is not lost to an avoidable mismatch.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "fix-google-business-profile-booking-link-not-working-india",
+    title:
+      "Why your Google Business Profile booking link is not working: a website checklist",
+    description:
+      "Fix a Google Business Profile booking link with a practical checklist for dedicated pages, working actions, mobile testing, and honest customer handoffs.",
+    category: "Local growth",
+    publishedAt: "2026-08-02",
+    readingMinutes: 7,
+    image:
+      "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A small business team reviewing a customer booking workflow on a laptop",
+    keywords: [
+      "Google Business Profile booking link not working India",
+      "Google Maps booking link website checklist",
+      "Google Business Profile link crawlability requirements",
+      "local service business booking landing page India",
+    ],
+    sections: [
+      {
+        heading: "A booking link must finish the action it advertises",
+        paragraphs: [
+          "When a salon, tutor, accountant, photographer, repair professional, or consultant adds a booking link to a Google Business Profile, the customer expects a direct next step. If the button leads to a generic homepage, an old campaign page, a WhatsApp chat, or a form that does not say what it is for, the handoff feels broken even when the URL technically opens. Google’s local business-link policies make the same distinction: a link should take a customer to a dedicated landing page and allow the promised action to be completed.",
+          "Start by naming the real action. A yoga class with live availability can offer “Book a class”. A home-service business that must check locality and job details should offer “Request an appointment” or “Check availability”. A freelance professional might offer “Request a consultation”. The button label, page headline, form, and confirmation message should all describe that same action. Trying to make every enquiry look like an instant booking creates confusion for customers and extra correction work for the business.",
+        ],
+      },
+      {
+        heading: "Give every Google link a dedicated, recognisable destination",
+        paragraphs: [
+          "Open the exact URL saved in the Business Profile, not a similar page from your website menu. The first screen should show the business name, the service or transaction, and one clear action. For example, a photographer’s link can open a page for checking event-date availability; a clinic can open a consultation-request page; a tutor can open a trial-class enquiry page. A visitor should not need to hunt through navigation to work out why they landed there.",
+          "For a business with more than one location, use a page that matches the specific location or service area shown on that profile. Check the phone number, hours, service language, and response expectation against the profile too. A customer who sees one business identity on Google and another on the destination may stop before enquiring. You do not need a long page: a short explanation, the relevant terms or price guidance, and the correct form or scheduling control are enough when they answer the customer’s immediate question.",
+        ],
+      },
+      {
+        heading: "Test the page as both a customer and a basic web visitor",
+        paragraphs: [
+          "Google says it checks Business Profile links for accessibility and functioning pages, potentially as often as daily. That makes ordinary website upkeep part of local-business operations. Visit the saved URL in a private browser window and on a phone. It should load over HTTPS without a login wall, CAPTCHA, location block, broken page, or unexpected download. Complete the core journey: submit a harmless test enquiry if your process permits it, or select a slot only if you can safely cancel it afterwards. Then check the success message and notification your business receives.",
+          "Pay attention to less visible failures. A redesigned site can leave the old URL returning a 404; an expired domain or maintenance page can interrupt the journey; a security tool can challenge automated visitors; and an overly aggressive rate limit can make a working form appear unavailable. If the public page needs a special rule to load, the Google link is not a dependable customer route. Ask your web provider to preserve a normal successful response for the final booking page and the files it needs to load, rather than adding a workaround that only succeeds on your own device.",
+        ],
+      },
+      {
+        heading: "Do not use a transaction link as a general contact shortcut",
+        paragraphs: [
+          "A Business Profile can show several types of business links, but Google’s policy distinguishes a transaction destination from a social, messaging, app-store, or shortened link. That matters in practice. A WhatsApp button can be excellent on your own service page as a fallback for questions, while the profile’s booking link should still take someone to the page where they can request or complete that booking. Keep the website contact routes visible, but do not make the action link depend on a channel that cannot explain the service, record the request, or confirm the outcome.",
+          "Use the lightest workflow that keeps a promise. A local repair business can ask for service, locality, preferred time, and phone number, then state when it will reply. A salon can use a maintained scheduler only for services and staff calendars it can genuinely honour. A consultant can collect the project type and preferred call time before confirming a slot. Avoid a form that asks for every detail you might eventually need. The customer should be able to take the advertised action quickly, and you should receive enough context to give a truthful next answer.",
+        ],
+      },
+      {
+        heading: "Maintain the link after every website or workflow change",
+        paragraphs: [
+          "Put the saved Business Profile URL on a small monthly checklist. Test it after a website redesign, domain renewal, booking-tool change, security-plugin update, holiday closure, or service-price change. Also review any provider or marketplace links that Google displays beside your own destination. If they lead to an old offer, an unavailable calendar, or the wrong business location, remove or correct them through the appropriate provider or profile controls. A preferred link is helpful, but it does not excuse an outdated secondary route.",
+          "Finally, use real enquiries as the audit. If people reach the page but ask what service they are booking, strengthen the headline. If they abandon after seeing a calendar, clarify whether availability is confirmed immediately. If your team repeatedly asks for a missing locality or project detail, add just that field. The goal is not to satisfy a technical checklist for its own sake. It is to give a person who finds you on Google a reliable path from interest to a clear, manageable next step.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "add-services-google-business-profile-local-business-india",
     title:
       "How to add services to your Google Business Profile for a local business in India",
