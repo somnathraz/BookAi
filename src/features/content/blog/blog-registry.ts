@@ -17,6 +17,127 @@ export interface BlogArticle {
 /** Editorial source of truth. Scheduled publishing adds a reviewed article here. */
 export const blogRegistry: readonly BlogArticle[] = [
   {
+    slug: "request-google-indexing-local-business-website-india",
+    title:
+      "How to request Google indexing for a new local business website in India",
+    description:
+      "Use Search Console, a clean sitemap, and helpful internal links to help Google discover a new or updated local-service website without chasing instant rankings.",
+    category: "Website foundations",
+    publishedAt: "2026-08-17",
+    readingMinutes: 8,
+    image:
+      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "An independent professional reviewing a website checklist on a laptop",
+    keywords: [
+      "request Google indexing for local business website India",
+      "Google Search Console indexing new service website",
+      "submit sitemap for Indian small business website",
+      "new website not appearing on Google India",
+    ],
+    sections: [
+      {
+        heading: "Know what an indexing request can and cannot do",
+        paragraphs: [
+          "When a salon, tutor, architect, photographer, repair professional, consultant, or freelancer launches a website, the first anxious search is often the business name followed by ‘why is my website not on Google?’ Search Console gives an owner a sensible way to ask Google to look again at a page. It does not put a page into results on demand or raise its position. Google still decides whether and when to crawl and index content based on its systems and the page itself.",
+          "That distinction keeps the launch routine focused. Request indexing when you have published a useful homepage, service page, contact page, or a meaningful correction to one of them. Do not request it repeatedly for a half-finished page, a typo change, or every variation of the same URL. Repeated requests do not make Google crawl faster, and an index request cannot repair a page that is blocked, unavailable, misleading, or thin. First give a visitor a reason to stay on the page; then make it easy for Google to discover it.",
+        ],
+      },
+      {
+        heading: "Set up ownership before you announce the new site",
+        paragraphs: [
+          "Create or use a Google Search Console property for the exact domain that the business owns. A domain property is often practical because it can cover protocols and subdomains, while a URL-prefix property is useful when that is the verification method available to you. Keep access with the business owner and grant a web professional only the level of access needed for the work. A site built under a developer’s personal account is a poor handover: the owner should be able to inspect the site after a redesign, staffing change, or contract ends.",
+          "Before requesting anything, open the public page in a private browser window on a phone and desktop. Confirm that it loads over the intended HTTPS address, displays the business name and real service information, and offers a working next step such as a call or enquiry form. Check the version you want customers to share: for example, choose either www or non-www consistently and avoid publishing duplicate pages at both. A Search Console inspection works best as a final check on a public customer page, not as a substitute for testing the customer experience.",
+        ],
+      },
+      {
+        heading: "Inspect one important URL before asking Google to crawl it",
+        paragraphs: [
+          "Start with the homepage or the one newly published service page that matters most. In Search Console, enter its complete canonical URL in URL Inspection. Read the result before pressing Request indexing. If Google already knows the page, the report can show the selected canonical URL, whether it is eligible for indexing, and useful discovery clues such as a referring sitemap or page. If it reports that the live page cannot be fetched, is blocked by noindex or robots rules, redirects unexpectedly, or has a server error, correct that issue first.",
+          "Use the live test when you need to see what Google can access now rather than only the last crawled version. A local electrician might discover that a contact page works in their browser but a temporary password wall blocks visitors and crawlers. A freelance designer might find that an old staging URL redirects to a different page. Fix the public route, retest it, and then submit the request. Keep requests to a few important URLs; Search Console has limits, and a request is most valuable after a real launch or material update.",
+        ],
+      },
+      {
+        heading: "Use the sitemap for the full public website",
+        paragraphs: [
+          "A sitemap tells Google which canonical public URLs you want it to know about. It is especially helpful when a new website has several service pages, location pages that describe real coverage, a portfolio, or a small journal. It is a discovery hint, not a guarantee that every listed page will be indexed or rank. Include only pages a customer should be able to find in search: do not add thank-you screens, internal previews, duplicate URLs with tracking parameters, private client areas, or an enquiry form confirmation containing personal details.",
+          "Open the sitemap URL in a browser before submitting it in Search Console’s Sitemaps report. It should be publicly reachable, use full HTTPS URLs, and list the same preferred versions that the website links to. Many website platforms create it automatically, so ask the platform or developer where it is rather than maintaining a second manual copy. Once submitted, inspect the report for fetch or parsing errors. A small, well-linked site may be discovered without a sitemap, but a clean sitemap makes a launch easier to monitor and gives the owner one reliable place to check.",
+        ],
+      },
+      {
+        heading: "Make every important page reachable from the site itself",
+        paragraphs: [
+          "Google can discover pages through ordinary links, and customers need those links too. Put the homepage, main services, about or portfolio evidence, and contact route in clear navigation or visible page links. Link a related service page from a useful homepage section rather than hiding it behind a hover effect, an image with no text link, or a form that must be completed first. For a home baker, a page about celebration cakes can point to the ordering process. For a consultant, an industry page can point to the consultation format and contact details.",
+          "Avoid manufacturing dozens of near-identical city pages just to request indexing for them. If a business serves Mumbai remotely, says so plainly; if a repair team visits a defined set of Bengaluru neighbourhoods, describe that truthful area and the appointment process. One detailed page that answers pricing approach, suitability, timing, and next steps is more useful than copies with locality names swapped. Internal links and a sitemap should reflect that useful structure, not try to create artificial evidence of a footprint the business does not have.",
+        ],
+      },
+      {
+        heading: "Wait, then review the signal instead of making frantic edits",
+        paragraphs: [
+          "After a request or sitemap submission, allow time. Google says crawling and indexing can take days to weeks, and neither request guarantees a result. Check the URL Inspection and Page Indexing reports after a reasonable interval rather than submitting the same page every morning. If the page is indexed, search the business name and service naturally to confirm the result sends people to the correct destination. If it is not indexed, use the report’s stated reason to investigate one concrete problem at a time rather than replacing the page copy repeatedly.",
+          "Add a short website check to the owner’s monthly routine: open the homepage and one core service page on a phone, test the enquiry route, review Search Console for serious messages, and note business details that need updating. Record who owns the domain and Search Console property. The goal is accurate information and a clear next step for every visitor.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "google-business-profile-post-link-website-india",
+    title:
+      "How to use a Google Business Profile post to bring customers to your website in India",
+    description:
+      "Create a useful Google Business Profile post and send local customers to a focused website page that gives them a clear next step.",
+    category: "Local growth",
+    publishedAt: "2026-08-16",
+    readingMinutes: 8,
+    image:
+      "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A small business team planning a website update together at a table",
+    keywords: [
+      "Google Business Profile post link to website India",
+      "Google Maps post call to action for local business",
+      "Google Business Profile offer post website landing page",
+      "website content ideas for Indian service business",
+    ],
+    sections: [
+      {
+        heading: "Start with one customer question worth answering",
+        paragraphs: [
+          "A Google Business Profile post is most useful when it helps a person who has already found your name on Search or Maps decide what to do next. For a salon, tutor, architect, photographer, repair professional, consultant, or home-service team, that question is rarely ‘What can I publish today?’ It is more often ‘Do you serve my area?’, ‘What should I bring?’, ‘Is this service available this month?’, or ‘How do I request a quote?’ Choose one real question that the business receives repeatedly and make the post a short, timely answer.",
+          "Do not use the space to repeat a generic list of every service or to make a claim you cannot support. A monsoon-season AC-service update, a portfolio-consultation date, a festive order deadline, or a new neighbourhood service day gives a visitor something concrete to assess. If the information will still be helpful after the campaign ends, make the website page the complete reference and let the post introduce it. This keeps the profile useful for discovery while the business retains one dependable place to update details.",
+        ],
+      },
+      {
+        heading: "Match the post type to the promise you are making",
+        paragraphs: [
+          "Google Business Profile supports updates, offers, and events. An update is a sensible fit for a changed process, a useful service explanation, or an availability note. Use an offer only when there is a real benefit with clear terms and dates. Use an event when people can understand the date, time, and nature of the session. The label should describe the customer outcome honestly. A designer inviting enquiries for October can say ‘Request an October website consultation’; they should not call it a booking if each request still needs a manual availability check.",
+          "Before publishing, write one sentence that a customer can act on without guessing. For example: ‘Home visit appliance checks are now available in Indiranagar and Koramangala; see what to prepare before requesting a slot.’ That sentence explains who it is for, what changed, and why the link matters. Avoid adding a phone number to the post description, stuffing city names into every line, or using extra punctuation to manufacture urgency. The customer needs clarity, not a miniature advertisement that competes with the actual service information.",
+        ],
+      },
+      {
+        heading: "Build the website page before you add the action button",
+        paragraphs: [
+          "Google allows a post action button to link to a website where the visitor can complete the stated action. Create that destination first. A visitor who taps ‘Learn more’ should reach a page that repeats the subject in the headline, explains the practical details, and shows one obvious next action. For a wedding photographer, that might be a page about dates, coverage areas, and an enquiry form. For a tutor, it might explain class format, age group, fees or starting range where appropriate, and how a parent can request a call.",
+          "Keep the page accessible on a phone and usable without an account. Put the business name, service area or remote-delivery information, usual response time, and a fallback contact method near the action. If someone must pay, choose a time, or submit a formal request before the result is complete, send them to that exact step; do not use a broad homepage or an Instagram profile as a substitute. Test the page on a mobile connection before posting. A fast-looking Google button that opens a confusing or broken page loses the trust the profile has already earned.",
+        ],
+      },
+      {
+        heading: "Make the picture and copy work as a pair",
+        paragraphs: [
+          "Choose one genuine, permission-safe photo that helps a customer recognise the service: a clean treatment room, a completed repair without a customer address, a teacher preparing materials, or a professional at work. Avoid screenshots with tiny unreadable text, stock imagery that implies facilities you do not have, or before-and-after images without the client’s consent. The image should support the message, not carry the whole explanation. A person using a screen reader or a slow connection should still understand the offer from the written description and the linked page.",
+          "Write the post in a small sequence: what is available or changing, who it helps, and what the visitor can do next. For instance: ‘Planning an office refresh in September? We are taking consultations for small retail interiors in Pune. See the consultation process and request a suitable time.’ The post need not reveal the whole workflow. Its job is to let the right person recognise their need and move to a page that answers the next questions. Keep dates, prices, eligibility, and terms accurate on both surfaces.",
+        ],
+      },
+      {
+        heading: "Check the public result and maintain it like a customer path",
+        paragraphs: [
+          "After publishing, Google reviews the post and its visibility can be pending, live, or not approved. Search for the business on a phone after it is live, open the post, and tap the action as a customer would. Confirm that the title, image, button, and destination match. If the post is not approved, inspect the content against Google’s post policies instead of making unrelated edits to the Business Profile. Keep the official website, business category, hours, and contact facts stable and correct; changing them to force a post feature rarely solves the real issue.",
+          "Put a modest review date in the business calendar. Google says posts older than six months are archived unless a date range is set, and short-lived offers or events can become misleading much earlier. End or edit a promotion when its terms change, then check that the linked page no longer advertises a finished offer. Once a month, note only useful operational evidence: whether the page received enquiries, the questions people still asked, and any broken handoff you found. Use those questions to improve the page or choose the next post topic. The goal is not more posts; it is a clearer route from local discovery to an honest, useful conversation.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "add-whatsapp-chat-google-business-profile-website-india",
     title:
       "How to add WhatsApp chat to your Google Business Profile and website in India",
