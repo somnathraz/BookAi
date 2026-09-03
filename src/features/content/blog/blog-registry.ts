@@ -8,6 +8,8 @@ export interface BlogArticle {
   readonly image: string;
   readonly imageAlt: string;
   readonly keywords: readonly string[];
+  /** Ready-to-adapt copy for the article's social image post, when applicable. */
+  readonly promotionCaption?: string;
   readonly sections: readonly {
     readonly heading: string;
     readonly paragraphs: readonly string[];
@@ -16,6 +18,577 @@ export interface BlogArticle {
 
 /** Editorial source of truth. Scheduled publishing adds a reviewed article here. */
 export const blogRegistry: readonly BlogArticle[] = [
+  {
+    slug: "website-enquiry-form-fields-local-service-business-india",
+    title:
+      "What to ask in a website enquiry form for a local service business in India",
+    description:
+      "Build a short, useful website enquiry form by asking only for the details needed to review a local service request and explain what happens next.",
+    category: "Website foundations",
+    publishedAt: "2026-09-03",
+    readingMinutes: 8,
+    image:
+      "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "Independent professional discussing a customer enquiry at a desk",
+    keywords: [
+      "website enquiry form fields for local service business India",
+      "what to ask in a small business website contact form India",
+      "freelancer project enquiry form checklist India",
+      "local service website lead form questions and confirmation message",
+    ],
+    sections: [
+      {
+        heading: "Design the form around the decision you need to make",
+        paragraphs: [
+          "A website enquiry form is not a test of how much a potential customer is willing to reveal. Its job is to give a local business, freelancer, or independent professional enough information to choose a sensible next step. A plumber may need a locality, the type of issue, and a safe way to call back. A photographer may need the event date, city, and the kind of shoot. A consultant may need a project goal and timeline. Start with that decision, then include only the questions that make it possible.",
+          "This keeps the form useful for both sides. The customer can quickly see whether the business is likely to help, while the person replying does not have to begin every conversation by asking for the missing basics. It also protects against a common small-business mistake: copying a long lead form from a large company even though nobody has time to review every answer. A shorter form with a clear promise is usually easier to complete and easier to operate.",
+        ],
+      },
+      {
+        heading: "Start with a compact set of essential fields",
+        paragraphs: [
+          "For many service businesses, a good first version has four required fields: name, one contact method, the service needed, and a short description. Add locality when the business travels to customers or serves only particular areas. Add a preferred date or time only if availability is central to the next step. A freelance designer or writer can swap locality for project timeline; a tutor can ask for class or subject; a home-repair team can ask for the neighbourhood and problem type. Make every field earn its place.",
+          "Use a visible label for each input rather than relying on placeholder text that disappears as someone types. ‘Which service do you need?’ and ‘Tell us briefly what you need help with’ are clearer than generic labels such as ‘Details’. Mark optional fields as optional, not merely with an unexplained asterisk. If a phone number is required because a call is the only workable reply, say so near the field. If customers may choose WhatsApp, email, or phone, let them choose rather than collecting all three by default.",
+        ],
+      },
+      {
+        heading: "Ask for context, not confidential information",
+        paragraphs: [
+          "A first enquiry rarely needs a full customer record. Do not ask for identity documents, payment card details, exact home address, medical information, account passwords, or large private files just to decide whether to respond. A customer can share more through an appropriate, secure process later if the work genuinely requires it. For an in-home service, an area or nearby landmark is generally enough for an initial availability check; the precise address can wait until a visit is agreed.",
+          "Free-text boxes deserve a short prompt. For example, a renovation business could ask for the room, approximate scope, and desired start month. A professional service can ask for the outcome the customer wants and the deadline. Do not encourage people to paste confidential records into that box. If someone needs to attach a document, state which file types are accepted, why the file is needed, and how it will be handled. A contact form should begin a conversation safely, not turn a first visit into an uncontrolled document collection process.",
+        ],
+      },
+      {
+        heading: "Set truthful expectations before the submit button",
+        paragraphs: [
+          "The surrounding copy is part of the form. State the usual reply window and the action the business will take: ‘We review requests Monday to Saturday and usually reply within one business day’ is concrete. If the business confirms travel area before quoting, say that. If a submitted request is not an appointment, the button should read ‘Request availability’ or ‘Send enquiry’, not ‘Book now’. This prevents a customer from assuming that a form submission has reserved a slot or fixed a price.",
+          "Keep an alternative route visible for people with a genuine urgent need or who cannot use the form. That might be a tap-to-call number with business hours, an accessible email address, or a WhatsApp enquiry link. Do not make the fallback compete with the main action through several bright buttons. One primary route plus one plainly explained alternative is enough. The goal is a calm path to contact, not a page that makes every channel look equally urgent.",
+        ],
+      },
+      {
+        heading: "Make errors and confirmation messages useful",
+        paragraphs: [
+          "Before publishing, intentionally leave a required field blank and submit the form. The error should identify the field and tell the visitor what to do, such as ‘Enter your preferred contact method.’ It should not erase the other answers or depend on a red border alone. Test with a keyboard as well as a phone: people should be able to reach each field, read its label, correct an error, and submit without a mouse. Native form controls and short, predictable validation are generally more dependable than a visually impressive custom widget.",
+          "After submission, show a confirmation on the page itself. Repeat the expected response time, say whether the business will call, email, or message, and provide the fallback for urgent matters. A bare ‘Thanks’ leaves a customer unsure whether the request worked, especially on an unreliable connection. If the form sends an acknowledgement email, make it match the on-page message and avoid repeating private form details unnecessarily. Confirming the next step clearly reduces duplicate submissions and anxious follow-up calls.",
+        ],
+      },
+      {
+        heading: "Review the form using real enquiries, not vanity metrics",
+        paragraphs: [
+          "Once the form is live, review a small sample of genuine enquiries every month. Which question is repeatedly left unclear? Which answer is never used? If customers regularly write ‘Do you cover my area?’ in the description box, move the service-area explanation higher on the page or add locality as a focused field. If everyone chooses the same service option, simplify the choices. Do not add questions merely to make the form feel more sophisticated; add them only when they help the customer receive a better, more accurate response.",
+          "Also test the complete route after any change to the website, form provider, business number, or staff workflow. Open the page on a phone, send one harmless test request where appropriate, and verify that it reaches the responsible person without exposing it elsewhere. Google’s current Business Profile guidance stresses accurate, customer-useful business information; the same standard fits the website path linked from that profile. A well-designed enquiry form will not guarantee leads, but it can turn a moment of interest into a clearer, safer conversation for the right customer.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "google-business-profile-booking-link-local-service-india",
+    title:
+      "How to use a Google Business Profile booking link for a local service business in India",
+    description:
+      "Connect a Google Business Profile booking link to a clear website path, set honest expectations, and test the customer journey before sharing it.",
+    category: "Local growth",
+    publishedAt: "2026-09-02",
+    readingMinutes: 8,
+    image:
+      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "Customer using a mobile phone to complete a local business booking",
+    keywords: [
+      "Google Business Profile booking link for local service business India",
+      "add appointment link to Google Maps business profile India",
+      "local service website booking page checklist India",
+      "Google Maps booking link for freelancers and consultants",
+    ],
+    sections: [
+      {
+        heading: "Give the booking link one honest job",
+        paragraphs: [
+          "A Google Business Profile is often where a nearby customer decides whether to call, visit, or enquire. For a salon, tutor, physiotherapist, photographer, home-service team, or independent consultant, a booking link can shorten that moment: it sends someone from Google Search or Maps to the next useful step on the business website. It is not a promise that every visitor has an appointment. Its job is to make the available action clear and to collect or confirm only what the business can actually handle.",
+          "Start by naming the outcome truthfully. If a customer can choose a real, available slot and receive immediate confirmation, a label such as ‘Book an appointment’ can fit. If the business must first check travel area, service scope, staff availability, or a brief, send the visitor to an ‘Ask about availability’ or ‘Request a booking’ page instead. This small distinction prevents a common mismatch: a customer expects a confirmed visit while the business has only received an enquiry.",
+        ],
+      },
+      {
+        heading: "Choose a destination page that resolves doubt before asking for details",
+        paragraphs: [
+          "Do not point the profile at a generic homepage and make people search again for the relevant service. Use the most specific public page you can maintain: a consultation page for a clinic, a bridal enquiry page for a salon, a class enquiry page for a tutor, or a discovery-call page for a freelancer. The first screen should repeat the service in plain language, say who it is for, and show the primary action. A visitor arriving from Maps should immediately recognise that they have landed in the right place.",
+          "Put the information that changes a decision close to that action. Explain the areas normally served or whether work is remote, the usual response or appointment hours, what the next message or form asks for, and whether a deposit or consultation fee applies. Do not hide a compulsory fee, a minimum order, or a travel boundary after a customer has shared their details. A short explanation is kinder than a long sales page: the goal is a well-informed request, not the highest possible form-completion count.",
+        ],
+      },
+      {
+        heading: "Add and review the link inside the Business Profile",
+        paragraphs: [
+          "Google currently lets eligible Business Profiles add local business links for actions such as booking an appointment, making a reservation, or placing an order. In the profile controls, look for the relevant booking or transaction option, add the full website address, and save it. The precise labels and available link types can vary by business category and region, so check the live profile after publishing rather than assuming every account will show the same control. Keep the profile claimed and verified, and make sure the website address itself is accurate and publicly reachable.",
+          "If more than one booking link is available, use the preferred-link setting only after comparing the customer paths. Choose the destination that you own and can keep current, not simply the first marketplace or provider link that appears. A third-party booking option may still be useful, but customers should not be surprised by a different brand, a forced account creation step, or a price that conflicts with the website. Record where the link goes in your site-maintenance notes so a changed provider, service, or page URL does not silently leave the profile outdated.",
+        ],
+      },
+      {
+        heading: "Make the request short, safe, and easy to complete on a phone",
+        paragraphs: [
+          "Most people will open the link on a phone, often while comparing several businesses. Ask only for the details needed to decide the next step: name, a safe contact method, requested service, preferred date or time, and locality when travel matters. A designer or accountant might ask for a project goal and deadline instead. Mark genuinely optional information as optional. A first enquiry is not a full customer record, so avoid demanding identity documents, detailed health information, payment details, or a long attachment before a conversation has begun.",
+          "Write form labels and errors in ordinary language, then show a clear confirmation after submission. ‘Tell us the service you need’ is more helpful than an unexplained text box; ‘We received your request and will confirm availability during business hours’ is more useful than a blank thank-you screen. Include a genuine fallback for urgent requests, such as a phone number with opening hours. Test keyboard navigation as well as tapping: every visible booking control should be reachable, readable, and usable without forcing a customer through a floating chat button or an inaccessible calendar.",
+        ],
+      },
+      {
+        heading: "Test the whole Google-to-confirmation journey every month",
+        paragraphs: [
+          "Before telling customers about the link, search for the business as an ordinary visitor would. Open the profile on a phone, tap the booking action, and check that the correct page loads quickly over mobile data. Confirm that the service name, contact method, hours, privacy information, and expected next step match what the profile says. Submit one harmless test request if the workflow allows it, then make sure it reaches the person responsible for replying. Delete or clearly mark the test in the same system the business uses to track real enquiries.",
+          "Repeat this review whenever a service is retired, staff schedules change, a booking provider is replaced, or the website page moves. Use the questions received through the link to improve the page: if people repeatedly ask whether you cover a locality, show the area sooner; if they expect instant confirmation, make the request language clearer. A Google Business Profile booking link will not guarantee calls, rankings, or appointments. What it can do is remove a needless detour for a ready customer and give the business a more organised, truthful start to the booking conversation.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "keyboard-accessible-local-service-website-india",
+    title:
+      "How to make a keyboard-accessible website for a local service business in India",
+    description:
+      "Help more customers use a local-service website with clear keyboard navigation, visible focus, readable forms, and a practical phone-and-laptop review routine.",
+    category: "Website foundations",
+    publishedAt: "2026-09-01",
+    readingMinutes: 8,
+    image:
+      "https://images.unsplash.com/photo-1580894894513-541e068a3e2b?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "Small business owner reviewing a service website on a laptop",
+    keywords: [
+      "keyboard accessible local service business website India",
+      "small business website keyboard navigation checklist India",
+      "freelancer website accessible contact form keyboard",
+      "local service website visible focus and touch target guide",
+    ],
+    sections: [
+      {
+        heading: "Treat keyboard access as part of customer service",
+        paragraphs: [
+          "A local-service website should not assume every visitor taps a phone in the same way. Some people browse with a keyboard because of a motor, vision, or temporary access need; others use a laptop at work before calling a tutor, accountant, electrician, photographer, or consultant. If the menu, price guide, portfolio, or contact form works only with a mouse or precise tapping, a ready customer can be shut out before they learn whether the service fits. Keyboard access is therefore not a technical extra. It is part of making the first conversation possible.",
+          "Start with the small customer journey your site is meant to support. Can someone understand the service, compare the relevant options, find opening hours or service area, and send an enquiry without touching a mouse? Do not promise formal accessibility conformance unless you have carried out the appropriate assessment. Begin by removing obvious barriers from the public pages that matter most.",
+        ],
+      },
+      {
+        heading: "Run the Tab-key test before redesigning anything",
+        paragraphs: [
+          "Open the site in an ordinary desktop browser, click away from the page, and press Tab. Each press should move through interactive items in a sensible order: skip link if present, navigation, main calls to action, links, form fields, and submit controls. Shift+Tab should move backwards. Use Enter or Space where expected to open a menu, activate a button, or choose an option. If focus disappears, gets trapped in a pop-up, jumps unpredictably, or lands on a decorative icon with no useful action, note the page and control rather than trying to remember it later.",
+          "Test a real task, not just the home-page menu. For example, look for a home-cleaning package, open its details, choose the contact route, fill the required fields, correct one intentional error, and submit a harmless test request if the workflow permits. A freelance professional can test the path from a case study to an enquiry form. This exposes practical problems such as a modal that cannot close, an accordion that will not open from the keyboard, or a calendar that traps focus. Fix the route that customers actually need before polishing low-priority interactions.",
+        ],
+      },
+      {
+        heading: "Make focus visible, ordered, and unobscured",
+        paragraphs: [
+          "People using a keyboard need to see where they are. Do not remove the browser focus outline unless an equally clear replacement is already in place. A distinct ring, border, or background change around a link, button, field, or menu item gives a visitor confidence to continue. Current W3C WCAG 2.2 guidance also calls attention to focus that is hidden by author-created content. Check sticky headers, chat buttons, cookie notices, promotional bars, and floating WhatsApp controls: a focused control should not vanish entirely behind them.",
+          "Keep the visual and keyboard order aligned whenever possible. A layout that looks left-to-right but tabs through the footer before the main offer is confusing. Avoid using positive `tabindex` values to force an order; they often create a brittle path when content changes. Instead, use native links for destinations, native buttons for actions, and a document order that matches the reading order. If a custom component is essential, make its open, close, and escape behaviour deliberate. A simpler interface with ordinary controls is usually easier to maintain than a clever one with hidden rules.",
+        ],
+      },
+      {
+        heading: "Give forms labels, useful errors, and a recoverable path",
+        paragraphs: [
+          "A contact form is frequently the first operational handoff, so each field needs a persistent, visible label. Placeholder text disappears when someone begins typing and should not be the only instruction. State which fields are required, use plain labels such as ‘Phone number’ or ‘Describe the service you need’, and keep optional fields clearly optional. A screen reader and a keyboard user both benefit when the label and help text are correctly associated with the control. Do not use a colour change alone to announce a problem; explain what needs attention in words.",
+          "When validation fails, move the person to a clear error summary or the first field that needs correction, without erasing the details they already entered. Say what is wrong and how to fix it: ‘Enter a phone number with at least 10 digits’ is more useful than ‘Invalid input’. After a successful request, show a confirmation that explains what happens next and provides a genuine alternative for urgent matters. This reduces duplicate calls and uncertainty for every customer. It also prevents an accessible interface from ending in an inaccessible, vague confirmation screen.",
+        ],
+      },
+      {
+        heading: "Keep touch targets and mobile content comfortable too",
+        paragraphs: [
+          "Keyboard access and phone usability reinforce one another. Small, crowded controls are difficult for someone using a pointer, a thumb, or a hand with limited precision. WCAG 2.2 added a minimum target-size criterion at the AA level, with exceptions, and its practical lesson is straightforward: give important buttons and links enough space to use without accidentally activating a neighbour. Check phone, WhatsApp, booking, menu, close, and form-submit controls at normal zoom on a modest phone. A tiny icon with no text is rarely the best primary action.",
+          "Do not hide the information that makes an enquiry possible on mobile. Google’s current mobile-first guidance recommends responsive design and equivalent primary content across mobile and desktop. That is not a reason to cram every desktop layout onto a small screen. It is a reason to keep the service description, contact route, meaningful headings, and image alt text available even when the layout changes. A tidy accordion can save space, but it must open with the keyboard and should not conceal the only answer about price approach, area served, or expected response time.",
+        ],
+      },
+      {
+        heading: "Create a light review routine the business can sustain",
+        paragraphs: [
+          "Put a 10-minute accessibility check into the same routine used to verify phone numbers, hours, and booking links. Once a month, Tab through the homepage, one main service page, and the contact page. Check that focus remains visible, the menu and any pop-up can close, headings describe their sections, and the form can be completed without a mouse. Then repeat one useful task on a phone: read the offer, tap the main action, and make sure the text stays legible. Record the date and any issue in the site-maintenance notes so changes do not get lost between busy weeks.",
+          "Ask a developer or accessibility specialist for help when a custom booking tool, payment step, map, document viewer, or complex widget fails the basic check. Do not quietly replace useful text with an image or tell customers to call if the website is difficult to use; improve the route itself. Accessibility work will not guarantee search rankings or enquiries, and a short checklist is not a certification. Its practical value is more direct: more people can understand the service, take the next step without unnecessary friction, and reach the business with realistic expectations.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "testimonial-page-local-service-business-india",
+    title:
+      "How to build a trustworthy testimonial page for a local service business in India",
+    description:
+      "Create a credible testimonial page with client permission, useful context, accessible presentation, and an honest path from proof to enquiry.",
+    category: "Website foundations",
+    publishedAt: "2026-08-31",
+    readingMinutes: 8,
+    image:
+      "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "Small business owner listening to a client during a consultation",
+    keywords: [
+      "testimonial page for local service business India",
+      "how to ask clients for website testimonials freelancer India",
+      "small business website client testimonial permission checklist",
+      "display customer testimonials on service business website",
+    ],
+    sections: [
+      {
+        heading: "Make the page answer a customer’s real doubt",
+        paragraphs: [
+          "A testimonial page is useful when it helps a prospective customer understand what working with a business is actually like. A parent considering a tutor may want reassurance about communication and class structure. Someone comparing interior designers may want to know whether the process stayed organised. A freelance accountant’s prospect may care about clarity and deadlines more than a polished slogan. Start with the uncertainty a suitable customer has before collecting quotes. That keeps the page focused on proof, not applause.",
+          "Choose the service you want the page to support, then list the decisions a visitor is making: is this business a fit, what happens during the work, and how can I begin? Testimonials can support those decisions, but they should not replace a clear service description, price approach, portfolio, or contact route. A short honest review beside a useful service page often does more work than a wall of compliments with no context. The goal is to lower reasonable uncertainty, not to make the business appear universally perfect.",
+        ],
+      },
+      {
+        heading: "Ask for permission before publishing anything",
+        paragraphs: [
+          "A message sent privately after a project is not automatically website copy. Ask the client whether you may publish their words, where they may appear, and how they would like to be identified. Offer simple choices: first name and city, first name and business type, business name with a link, or anonymous feedback. Keep the reply that grants permission with the project records. For sensitive work such as health, legal, financial, education, home services, or confidential business projects, the safest option may be a general description or no testimonial at all.",
+          "Do not turn a client’s message into a stronger claim than they made. If they said a photographer was easy to coordinate with, do not rewrite it as a promise of the best event photography in the city. Check names, job titles, company names, photographs, logos, and project details separately; permission to quote is not always permission to use every identifying asset. If the relationship changes or the client later asks for removal, make it easy to act promptly. A modest, accurately attributed testimonial is more credible than a detailed story that exposes someone’s private information.",
+        ],
+      },
+      {
+        heading: "Request feedback in a way that leaves room for an honest answer",
+        paragraphs: [
+          "Send the request when the client has experienced a clear moment of value: after a repair is completed, a design handover is accepted, a workshop finishes, or a monthly engagement reaches a review point. Keep it short and neutral. For example: ‘If you are comfortable sharing feedback about the process, may we quote it on our website? What was the problem you needed help with, and what did you find useful?’ The question gives the customer a useful prompt without scripting praise.",
+          "Do not offer a discount, gift, or other benefit in exchange for a favourable Google review. Google’s current guidance says reviews must reflect genuine experiences and prohibits incentives or selectively asking only happy customers for public reviews. The same principle is a sensible standard for website testimonials: do not invent them, pay for them, or pressure someone to give a particular rating. You can still invite all completed customers to share candid feedback, then use the permission process above for website publication. Honest mixed detail is more durable than a campaign built around five-star language.",
+        ],
+      },
+      {
+        heading: "Edit for clarity while keeping the customer’s meaning intact",
+        paragraphs: [
+          "Most testimonials need light editing for length, spelling, or context. Show the client the edited version if the changes go beyond removing a repeated phrase. A useful format is two or three sentences followed by a small attribution: the original need, what the business did, and the part the customer valued. ‘We needed an electrician who could explain the issue clearly before starting. Arjun confirmed the work and timing by phone, then left the area tidy’ tells a reader more than ‘Excellent service.’ It also avoids claiming an outcome the business cannot verify.",
+          "Put precise performance claims through an extra check. ‘Saved us 40%’ or ‘doubled our sales’ may depend on factors outside the provider’s work and can sound like a promise to a new customer. If a result is public, measured, and the client agrees to the wording, explain the context. Otherwise, describe the delivered work and experience instead. Do not use medical, legal, financial, safety, or income claims as marketing shorthand. A future client needs an accurate view of the service, not a guarantee disguised as a quotation.",
+        ],
+      },
+      {
+        heading: "Place proof beside the decision it supports",
+        paragraphs: [
+          "Add two or three relevant testimonials to the service pages where people decide, and link to a fuller testimonial page only when there is enough distinct material. A home-renovation business might place a communication-focused quote beside its renovation process, while a freelance writer places a collaboration quote beside case studies. Keep the quote close to the claim it helps illustrate. Do not use the same generic sentence on every page simply to repeat a service keyword or city name.",
+          "Present quotations as readable text, not as images of chat messages. Text remains searchable, scales on a phone, and works better with a screen reader. Use quotation marks only around the client’s actual words, give cards enough contrast, and avoid auto-rotating carousels that move before someone can read them. If a testimonial links to a client’s company, make the destination clear and open it only with the client’s approval.",
+        ],
+      },
+      {
+        heading: "Connect the page to a calm, truthful next step",
+        paragraphs: [
+          "End the page with the same action the business can genuinely fulfil: request a quote, share a project brief, call during business hours, or ask about availability. Explain what happens after the action. A local service team might say it confirms area and scope before offering a slot; a freelancer might say they review the brief before proposing a call. This prevents a testimonial page from creating an expectation of instant service that the business cannot meet.",
+          "Review the page every quarter and after a major change in service, team, pricing model, or contact process. Reconfirm older permissions, remove stale references, test the contact link on a phone, and check whether the quotes still represent the work you want to take on. Google’s people-first guidance encourages original, useful material rather than pages made mainly to attract search traffic. A carefully maintained testimonial page follows that idea: it gives prospective customers genuine context from real work. It will not guarantee enquiries or rankings, but it can help the right person decide to start a well-informed conversation.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "paperchai-resume-to-portfolio-website-workflow-india",
+    title:
+      "PaperChai workflow: turn your resume into a portfolio website in India",
+    description:
+      "Use your resume as a starting point for a focused professional website, then review the proof, project stories, and contact path before publishing with PaperChai.",
+    category: "PaperChai workflow",
+    publishedAt: "2026-08-28",
+    readingMinutes: 8,
+    image:
+      "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "Independent professionals reviewing portfolio work together on a laptop",
+    keywords: [
+      "turn resume into portfolio website with PaperChai India",
+      "freelancer portfolio website from CV India",
+      "create professional website from resume for independent consultant",
+      "PaperChai resume website workflow",
+    ],
+    promotionCaption:
+      "A resume lists where you have been. A good portfolio helps the next client see how you can help. Our Friday PaperChai workflow shows how to turn a CV into a clear, reviewable website—without inventing claims or publishing before you are ready.",
+    sections: [
+      {
+        heading: "Start with the client decision, not the chronology of your resume",
+        paragraphs: [
+          "A resume is designed to show a career path. A portfolio website has a different job: it helps a prospective client, employer, or collaborator quickly decide whether to start a conversation. An independent designer, developer, tutor, architect, consultant, writer, or photographer may have years of roles, qualifications, and tools to list. The visitor, however, usually begins with a smaller question: can this person help with the work I have right now? Start by answering that question in one plain sentence before trying to fit every past role onto the page.",
+          "Choose the service or kind of work you want more of, the people you serve, and the evidence you can honestly show. ‘Product designer for early-stage SaaS teams’ is clearer than a long label containing every skill. ‘Maths tutor for Class 9 and 10 students in Pune, online or in person’ gives a parent a useful next step. This is not about making yourself sound narrower than you are. It is about giving a busy visitor a handle. Your broader experience can still appear later, once they understand the central offer.",
+        ],
+      },
+      {
+        heading: "Prepare a small source pack before opening PaperChai",
+        paragraphs: [
+          "Gather the current resume or CV, a short professional introduction, two or three examples of work, and the contact method you genuinely monitor. For each example, write a few private notes: the client or context you may name, the problem, your contribution, and an outcome you can support. If the work is confidential, use a permission-safe description such as ‘redesigned onboarding for a B2B product’ rather than uploading a client document, private dashboard, or unpublished campaign. A clear explanation is usually more useful than a crowded gallery.",
+          "Decide which facts should remain off the site. A portfolio rarely needs a home address, personal identification number, full CV history, former clients’ contact details, or a private salary record. For a freelancer, one professional email or enquiry form is often enough. For a consultant who takes calls, add the hours and usual response time rather than publishing an always-available promise. This small source pack makes review easier: you know what is approved, what needs rewriting, and what should never become public copy.",
+        ],
+      },
+      {
+        heading: "Use the resume route as a draft, then make the homepage specific",
+        paragraphs: [
+          "In PaperChai, choose the Resume or CV starting option and add the document you are comfortable using as a source. PaperChai can create a starting website from that material; it is not a reason to publish the first draft unchanged. Read the top section first. Replace generic phrases such as ‘passionate professional’ with the service, audience, and outcome that are actually true. A website should never claim a qualification, award, client relationship, location, or result that the owner cannot stand behind.",
+          "Then scan the main sections as a customer would. Is the primary service obvious before the career history? Does each listed capability help someone understand a real offer, or is it an internal job-title phrase? Remove duplicate tool lists and stale roles that distract from the work you want. If you offer more than one distinct service, group them in plain language and say when each is appropriate. The aim is not to squeeze every keyword into the page. It is to leave a visitor with a useful, accurate picture of what you do.",
+        ],
+      },
+      {
+        heading: "Turn selected work into short, credible project stories",
+        paragraphs: [
+          "A portfolio item needs context, not a dramatic claim. Use a simple pattern: the kind of project, the challenge, what you personally did, and what changed. For example, a freelance content writer might say that they created a launch email sequence and help centre articles for a small software team, then note that the work gave customers a clearer onboarding path. If a measurable result is public and attributable, state it precisely. If it is not, describe the deliverable and the decision it supported instead of guessing at an impact number.",
+          "Add images only when you have the right to use them and they help the visitor understand the work. A screenshot can expose customer data; a logo may need approval; a stock image should not be presented as a client project. In PaperChai, review every imported image, caption, and link before publishing. One strong, explained example is more convincing than six anonymous tiles. Google’s current people-first guidance similarly favours original, substantial information over pages assembled mainly to attract search traffic. Your first-hand explanation is the part another portfolio cannot copy.",
+        ],
+      },
+      {
+        heading: "Make the contact route match the way you take work",
+        paragraphs: [
+          "The final section a prospect sees should tell them exactly how to begin. A designer who needs a project brief can ask for the goal, timeline, and preferred contact method. A tutor can invite parents to request a short availability call. A consultant may offer an enquiry form with a business email fallback. Write the button honestly: ‘Request a project call’ is different from ‘Book a confirmed appointment’. If you use WhatsApp, use a business-owned number and clarify whether it is for new enquiries, not an open invitation to send confidential files.",
+          "Test the site on a phone before publishing. Check that the core service, a project example, and the contact action are available without tiny text, blocked buttons, or a maze of menus. Google recommends responsive design and that important mobile content and metadata remain equivalent to desktop. More importantly, a prospect may find you between meetings or on a commute. Tap the contact route yourself, submit a harmless test enquiry where appropriate, and confirm that the response expectation and privacy notice match your real workflow.",
+        ],
+      },
+      {
+        heading: "Publish deliberately, then keep the portfolio useful",
+        paragraphs: [
+          "PaperChai lets you review the generated site before you publish. Use that pause. Read the page aloud for claims that feel inflated, check every external link, and confirm that the contact details, location or remote availability, and portfolio examples are current. Ask a trusted colleague to name the service they think you offer after a quick scan; if their answer is vague, improve the opening rather than adding more sections. Publishing a smaller, accurate site is better than waiting for a flawless, exhaustive archive.",
+          "After publication, keep a light maintenance note. Update the portfolio after a new public case study, a changed service, a new availability pattern, or a retired contact method. Do not add a blog post for every job or change the date of old work just to make it look fresh. A portfolio will not guarantee enquiries, interviews, or search rankings. It can do something more dependable: show the right person what you do, give them evidence they can assess, and make a professional first conversation easier to start.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "mobile-contact-page-local-service-business-india",
+    title:
+      "How to make a mobile contact page for a local service business in India",
+    description:
+      "Turn a local-service contact page into a clear mobile customer path with honest response expectations, accessible forms, and practical phone-first checks.",
+    category: "Website foundations",
+    publishedAt: "2026-08-27",
+    readingMinutes: 8,
+    image:
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A business owner using a smartphone beside an open laptop",
+    keywords: [
+      "mobile contact page for local service business India",
+      "small business website contact form checklist India",
+      "freelancer contact page mobile enquiry form",
+      "local service website phone and WhatsApp contact page",
+    ],
+    sections: [
+      {
+        heading: "Treat the contact page as the start of service, not a final footer link",
+        paragraphs: [
+          "For a local service business, the contact page is where a visitor decides whether asking for help will be easy. A homeowner with a leaking tap, a parent seeking a tutor, or a founder looking for a designer may reach it from a phone between other tasks. They should immediately understand who they are contacting, what kind of request the business accepts, and what happens after they tap, call, or submit. A page that only shows a decorative form asks the customer to take the risk of an unclear next step.",
+          "Start with one short sentence that describes the action honestly. For example: ‘Tell us about your appliance repair request and we will confirm availability,’ or ‘Book a 20-minute discovery call for website projects.’ This matters when a business must check travel distance, scope, or capacity before accepting work. Do not label a form ‘Book now’ if it merely sends a request, and do not promise a reply within an hour unless someone is genuinely responsible for that response window.",
+        ],
+      },
+      {
+        heading: "Put the most useful contact option first on a phone",
+        paragraphs: [
+          "Choose the primary route based on how the business actually works. A plumber taking urgent local calls may lead with a tap-to-call number and show service hours nearby. A photographer who needs event details may lead with a short enquiry form. A consultant may offer a calendar request with a form fallback. If the business uses WhatsApp, make sure the link opens a business-owned number and explain whether it is for new enquiries, support, or appointment changes. One clear primary option is usually more reassuring than four competing buttons.",
+          "Keep the essentials visible before a visitor has to scroll far: business name, phone number or enquiry action, usual response period, and a simple indication of service area or remote availability. If calls are not answered after 6 pm, say so and give the expected next response time. If a studio is appointment-only, say that before showing a map. A visitor should never need to submit their details merely to discover that the business does not serve their locality or accept walk-ins.",
+        ],
+      },
+      {
+        heading: "Ask only for details needed to handle the next step",
+        paragraphs: [
+          "A first enquiry needs less information than a full customer record. For most local services, name, a safe contact method, the service needed, and a short description are enough to begin. Add locality or preferred time only when it helps the team decide whether it can help. A freelance professional may ask for a project goal and target date instead of a long brief. Avoid making every field compulsory: a form that demands budget, address, attachments, and a full personal profile before a conversation can discourage a suitable customer.",
+          "Label every field in plain language and place the label beside or above the input rather than relying on placeholder text alone. Tell people what an error means and how to correct it; ‘Enter a valid phone number’ is more useful than a red outline with no explanation. Mark optional fields as optional, preserve what a visitor has already entered if one field fails, and confirm clearly after submission. The confirmation should state what the business received, what happens next, and another contact route for a time-sensitive issue.",
+        ],
+      },
+      {
+        heading: "Make the page comfortable to use with a thumb, keyboard, or screen reader",
+        paragraphs: [
+          "Open the page on an ordinary phone with mobile data, not only on a large desktop screen. Check that the call button is easy to tap, text does not require pinching to read, and the form does not jump behind the keyboard. Keep the page focused: the customer should not have to navigate past a large gallery, pop-up, or rotating banner to make contact. Google’s current mobile-first guidance also recommends responsive design and equivalent primary content across mobile and desktop, so the useful contact details should not disappear in a mobile-only layout.",
+          "Test the page without a mouse as well. A keyboard user should be able to reach every control in a sensible order, see where focus is, open any disclosure, and submit the form. A screen-reader user needs meaningful button text such as ‘Call Saanvi Electricals’ rather than ‘Click here.’ Do not use a map image as the only way to communicate an address or service area. Write the relevant information as text, then treat the map as a helpful visual extra.",
+        ],
+      },
+      {
+        heading: "Protect enquiries without turning every customer into a suspected bot",
+        paragraphs: [
+          "Contact forms attract spam, but a difficult challenge can also block real people. Begin with quiet safeguards that suit the form: server-side validation, a hidden field that genuine visitors do not fill, sensible submission limits, and a review path for suspicious messages. If a business adds a bot-detection service, keep the privacy notice accurate and test that the form still works on a modest phone connection. Someone requesting urgent local help should not have to solve repeated puzzles or reveal more personal information just to ask a question.",
+          "Decide in advance who sees form messages, where they go, and how long they are retained. Do not send full enquiries into a shared group chat or an unprotected inbox. A brief confirmation email or message can be useful, but it should not repeat a customer’s full address, medical information, financial details, or private project notes. The contact page should collect only what the business can protect and act on. Better handling is more valuable than collecting a larger pile of vague leads.",
+        ],
+      },
+      {
+        heading: "Run a five-minute customer-path check each month",
+        paragraphs: [
+          "Once a month, ask someone who is not signed in as the site owner to open the contact page on a phone. Tap the phone, WhatsApp, calendar, and form routes that the business publishes. Check the service area, hours, response promise, confirmation copy, and privacy link. Submit one harmless test enquiry if the workflow allows it, then confirm it reaches the right person without exposing it elsewhere. Repeat the check after changing a number, staff member, form provider, domain, or booking process.",
+          "Use real enquiries to improve the page carefully. If people repeatedly ask for prices, explain the quote process before the form. If they ask whether you travel to their area, make the coverage statement easier to find. If customers expect an instant appointment, change the button and confirmation language. This will not guarantee leads or search rankings, but it removes common reasons that a ready customer abandons contact. A clear mobile contact page is a small operational tool: it helps the right people reach the business with sensible expectations and gives the owner a reliable place to begin the conversation.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "local-service-business-faq-page-website-india",
+    title:
+      "How to create an FAQ page for a local service business website in India",
+    description:
+      "Build a useful FAQ page that answers real customer questions about local services, prices, availability, and next steps without chasing search-result tricks.",
+    category: "Website foundations",
+    publishedAt: "2026-08-20",
+    readingMinutes: 8,
+    image:
+      "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A small business team discussing customer questions around a table",
+    keywords: [
+      "FAQ page for local service business website India",
+      "what to include in small business website FAQs",
+      "freelancer website frequently asked questions India",
+      "local business service pricing and booking FAQ page",
+    ],
+    sections: [
+      {
+        heading: "Build an FAQ page to remove hesitation, not to chase a search feature",
+        paragraphs: [
+          "A good FAQ page answers the small questions that stop a customer from sending an enquiry. A parent considering a tutor may want to know the class format and trial process. A homeowner comparing repair services may ask whether a visit is available in their neighbourhood. A freelance designer may repeatedly hear questions about project timelines, deposits, revisions, or what to prepare before a call. When those answers are hard to find, the customer has to guess, message, or leave. A short, honest FAQ can make the next step feel much easier.",
+          "Do not create the page because you expect FAQ markup to produce a large expanded result on Google. Google has said that FAQ rich results are now shown regularly only for well-known, authoritative government and health sites. Local businesses can still use an FAQ page because it is useful to people who land on the website, but should not sell it as a ranking shortcut or a guaranteed search display. The useful outcome is simpler: visitors understand the service sooner and arrive at an enquiry with better expectations.",
+        ],
+      },
+      {
+        heading: "Collect questions from real customer conversations",
+        paragraphs: [
+          "Begin with material the business already owns: WhatsApp enquiries, call notes, email replies, consultation checklists, reception questions, and objections raised before a quote. Look for questions that recur across several genuine prospects rather than one unusual request. A salon might hear ‘Do I need an appointment?’, a photographer might hear ‘How soon will I receive the images?’, and an accountant might hear ‘What documents should I bring?’ Write down the question in the customer’s plain language before trying to make it sound polished.",
+          "Choose six to twelve questions that matter before a person contacts you or confirms work. Group them by the decision they support: suitability, area served, availability, pricing approach, what happens after an enquiry, and after-service support. This is more helpful than a giant list designed to repeat every city name or service phrase. If two questions need the same answer, combine them. If a question is too specific to a single service, put it on that service page instead. The homepage FAQ should not become a filing cabinet for every operational detail.",
+        ],
+      },
+      {
+        heading: "Answer the decision behind each question",
+        paragraphs: [
+          "A strong answer gives a customer enough information to decide whether to continue, while staying truthful about what varies. For example, instead of saying ‘Affordable prices’, explain how a quote is prepared: ‘We confirm the scope and location first, then share a written estimate before scheduling.’ That tells a visitor what will happen without inventing a fixed price. If you publish starting prices, state what is included, what can change the cost, and when the customer will receive confirmation. Never hide a compulsory travel charge, tax, consultation fee, or minimum order behind a vague answer.",
+          "Use concrete operational language. Explain whether visits are appointment-only, which areas are normally covered, whether remote work is possible, typical response hours, and whether an enquiry is a request rather than an instant booking. For a professional service, explain the boundary of advice and when a specialist consultation is needed. For a home service, explain any safety or access requirement before a visit. The aim is not to answer every edge case; it is to help a suitable customer take the next step and help an unsuitable request identify itself early.",
+        ],
+      },
+      {
+        heading: "Put the answers where customers need them",
+        paragraphs: [
+          "Place a compact FAQ section on the page where the question arises. A service page can answer whether materials are included. A contact page can state the usual reply window and the preferred enquiry route. A booking page can explain what a request confirms. Then link to one fuller FAQ page only if the business has enough shared questions to justify it. Keep headings visible as normal text, not images, so people can scan them on a phone and use browser search. An accordion can be tidy, but it must work with a keyboard and should not hide the only critical information.",
+          "Give every answer an appropriate next action. After a question about service coverage, link to the contact form or phone number. After an answer about portfolio availability, link to relevant examples. After a question about cancellations, link to the published policy. Do not force a visitor to provide a phone number just to see basic conditions. The website should reveal enough information for an informed enquiry, while reserving personal details and project-specific pricing for a direct conversation.",
+        ],
+      },
+      {
+        heading: "Keep claims, privacy, and search markup in proportion",
+        paragraphs: [
+          "Only publish answers the owner can keep current. Avoid promises such as ‘same-day service anywhere in Mumbai’ unless the team can consistently deliver that. Replace broad superlatives with clear conditions: ‘Same-day slots may be available in selected areas; contact us to confirm.’ Do not put a client’s name, address, health details, financial situation, or private project information into an answer simply because it appeared in a past enquiry. An FAQ page is public and can be copied, shared, or found long after the original conversation.",
+          "If a developer adds FAQPage structured data, it must reflect the visible questions and answers on the page, not a larger hidden set written for a crawler. It is acceptable to leave existing valid markup in place, but it should not be the reason for the page or the measure of its success. Review the visible page on a phone, test the links, and make sure its title says what customers will find. Clear, people-first answers are more durable than a tactic tied to one result layout.",
+        ],
+      },
+      {
+        heading: "Review the FAQ after real changes, not on a content treadmill",
+        paragraphs: [
+          "Set a quarterly reminder and an additional review after a changed service area, price model, booking process, holiday schedule, or policy. Read the page alongside the latest quote template and contact flow. If the business now takes three working days to reply during busy season, update the answer rather than leaving an old same-day promise. Remove questions that no longer matter and add a new one only when it has genuinely become common. A lean page is easier for an owner to maintain and easier for a customer to trust.",
+          "Treat the questions that still arrive after someone reads the page as useful feedback. If people keep asking whether the service is available in their locality, improve the service-area answer. If they misunderstand a deposit, clarify the price answer and the booking page together. This modest loop turns a FAQ from a static SEO exercise into a customer-service tool. It will not guarantee rankings or enquiries, but it can reduce avoidable uncertainty and make the website more useful for the people the business most wants to serve.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "google-business-profile-website-details-checklist-india",
+    title:
+      "Google Business Profile and website details checklist for local businesses in India",
+    description:
+      "Keep your Google Business Profile and website aligned with a practical monthly checklist for hours, contacts, service areas, links, and customer handoffs.",
+    category: "Website foundations",
+    publishedAt: "2026-08-19",
+    readingMinutes: 8,
+    image:
+      "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "Two small business owners reviewing business details together on a laptop",
+    keywords: [
+      "Google Business Profile website details checklist India",
+      "keep Google Maps and business website information consistent",
+      "local service business hours and contact details audit",
+      "freelancer website and Google Business Profile update checklist",
+    ],
+    sections: [
+      {
+        heading: "Treat your profile and website as one customer promise",
+        paragraphs: [
+          "A customer deciding between a local service business, freelancer, or independent professional often checks more than one place before making contact. They may find the business on Google Maps, open the website, return to the profile for directions or hours, and then send a WhatsApp message. If the name, phone number, opening hours, service area, or booking expectation changes between those steps, a real enquiry can quietly disappear.",
+          "For a salon, tutor, architect, photographer, repair team, consultant, therapist, or home-based service, choose one owner-controlled record for each operational fact. That could be a short document, a spreadsheet, or the website editor’s business-details area. Record the public business name, primary phone number, email, website address, service area, regular hours, upcoming special hours, and the link used for enquiries or booking requests. This is not a second public listing. It is the small source sheet the owner checks before updating Google or the website.",
+        ],
+      },
+      {
+        heading: "Start with the facts that can stop a customer from contacting you",
+        paragraphs: [
+          "Review the public phone number, website link, and regular hours first. Open the Google Business Profile as a customer would, then open the website on a phone. Tap the number, tap the website button, and compare what appears with the source sheet. A broken click-to-call link, a website pointing to an old domain, or hours that say open while the business is closed creates more friction than an imperfect piece of marketing copy. If the business uses WhatsApp, an enquiry form, or a calendar request, confirm that its label describes the real outcome rather than promising an instant appointment that still needs approval.",
+          "Use the business name customers know and that is used on the physical storefront, invoices, or professional communications. Do not add locality names, a slogan, or a long service list simply to squeeze extra phrases into the Profile name. On the website, make the same name easy to find in the header, contact section, and page title where appropriate. A small difference such as ‘Kavya Interior Studio’ on one surface and ‘Kavya Interiors & Best Designers Pune’ on another makes it harder for a customer to recognise the official business.",
+        ],
+      },
+      {
+        heading: "Describe your location or service area honestly",
+        paragraphs: [
+          "A shop, clinic, studio, or office with a customer-facing address should check that the address, map pin, entry instructions, and parking or appointment notes on the website all agree. If visits are appointment-only, say so plainly on both the profile and the contact page. A customer should not arrive expecting a walk-in service that the business does not offer. Test directions from a phone once after a move or significant map correction, and make sure the public address is not an old rented office or a private home that should no longer be shared.",
+          "For a plumber, photographer, consultant, tutor, or home-service team that travels to customers, explain the actual coverage rather than inventing a storefront location. The website can name the cities, neighbourhoods, or remote-service arrangement that the business genuinely serves, together with travel conditions if they affect a quote. Keep the wording useful: ‘Home visits in South Delhi by prior confirmation’ tells a customer more than a row of district names. If the service area expands, contracts, or changes seasonally, update the Profile and the relevant website page together, then test the enquiry path with the new expectation in mind.",
+        ],
+      },
+      {
+        heading: "Give each public link one job",
+        paragraphs: [
+          "Google Business Profile may show a website link and, where available and appropriate, links for ordering, reservations, appointments, or chat. Each destination should complete the action it names. A ‘Book’ link should reach the real booking step or clearly explain that the visitor is making a request; a ‘Menu’ link should not land on a generic homepage; a WhatsApp link should open the business-owned number. Put the same focused routes on the website so a visitor who arrives from search, a referral, or social media receives an equally clear path.",
+          "Check every public link in a private browser window, on a phone, and without assuming that you are signed in to an owner account. Look for expired offers, old forms, login walls, redirects to a former agency’s site, and pages with no contact fallback. If you use tracking parameters, keep them limited to the campaign or source needed to understand a specific handoff; do not create multiple public versions of the same page. The canonical customer destination should remain a stable, readable URL that can be safely shared in a message or printed on a receipt.",
+        ],
+      },
+      {
+        heading: "Use a calm update routine after any operational change",
+        paragraphs: [
+          "When the business changes a public fact, update the source sheet first, then make the matching edits on Google and the website in one short session. Examples include a new phone number, a temporary holiday closure, a change in consultation hours, a moved studio, or a revised service boundary. Google can receive information from multiple sources and may flag or apply updates to a profile, so owners should also review profile notifications rather than assuming every displayed detail will stay correct forever. Save the date of the change and the person who checked it; that small record prevents a later team member from undoing a deliberate update.",
+          "For a special-hours change, give customers enough notice on the website’s contact page or a short service notice if it materially affects them. Do not turn every minor change into a new blog post or a permanent homepage banner. The customer needs the current answer at the moment they choose to call, visit, or request work. Once the exceptional date has passed, remove the temporary notice and check that normal hours are visible again.",
+        ],
+      },
+      {
+        heading: "Run the 15-minute monthly customer-path check",
+        paragraphs: [
+          "Put one recurring 15-minute check in the owner’s calendar. Search the business name, view the Profile on a phone, and compare the name, category, phone, website, hours, address or service area, and main action link with the source sheet. Then visit the website’s homepage and one important service page. Confirm that the service description still matches what can be delivered, the contact action works, and a visitor can understand the usual response time. Do this before a festival season, a move, or a new campaign as well as on the monthly date.",
+          "When you spot a mismatch, fix the customer-facing fact before redesigning the page or adding more keywords. Note recurring questions such as ‘Do you visit my area?’, ‘Can I walk in?’, or ‘How quickly will you reply?’ and add a short, truthful answer where customers already look. A consistent profile and website will not guarantee a ranking or an enquiry, but it removes avoidable doubt for people who are already considering the business. That is a practical foundation for every local discovery effort: fewer dead ends, clearer expectations, and an official presence the owner can keep accurate.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "google-review-link-qr-code-local-business-website-india",
+    title:
+      "How to use a Google review link and QR code on a local business website in India",
+    description:
+      "Create a respectful Google review-request route from your website, receipts, and follow-up messages without buying, filtering, or pressuring for feedback.",
+    category: "Local growth",
+    publishedAt: "2026-08-18",
+    readingMinutes: 8,
+    image:
+      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A small business owner completing a customer follow-up on a laptop and phone",
+    keywords: [
+      "Google review link for local business website India",
+      "Google Business Profile review QR code India",
+      "ask customers for Google reviews after service",
+      "add Google review request to freelancer website",
+    ],
+    sections: [
+      {
+        heading: "Make the review request part of a good service handover",
+        paragraphs: [
+          "A review request works best after a real customer moment: a repair has been tested, a consultation has concluded, a class has finished, photographs have been delivered, or an invoice has been settled. For a salon, tutor, architect, home-service team, photographer, consultant, or freelancer, that is when a customer can honestly describe what happened. The purpose is not to collect praise on demand. It is to give a person who has genuinely used the service a simple, optional way to share feedback with future customers.",
+          "Start by fixing the customer experience that comes before the request. Confirm the work, explain any care or follow-up needed, send the receipt or summary, and give the customer a way to raise a problem privately. Then make one brief invitation: ‘If you would like to share your experience, you can leave an honest Google review here.’ That language leaves room for every outcome. It is kinder to the customer and more useful to the business than wording that asks specifically for five stars or assumes the job was perfect.",
+        ],
+      },
+      {
+        heading: "Create the official Google review link before adding it to your website",
+        paragraphs: [
+          "Use the review-request link generated from the Business Profile the business actually owns. In the profile, select Read reviews and then Get more reviews to copy the link or obtain the QR code. Google currently says QR codes can be generated in a computer browser, not on mobile. Keep the link with the owner’s other operational records, alongside the domain, Business Profile access, and business phone details. Do not rely on a shortened link a former agency created or on a third-party review tool you cannot administer.",
+          "Test the link in a private browser window and on a phone before publishing it. It should open the review flow for the right business name, not a similarly named listing or a Maps search result that makes the customer hunt. Google notes that a customer needs to sign in to a Google Account to submit a review; they can use a non-Gmail address to create one. Do not treat that as a reason to collect account details or to tell a customer how they must review. Offer the link, then let them decide whether it suits them.",
+        ],
+      },
+      {
+        heading: "Give the website a quiet, useful place for the invitation",
+        paragraphs: [
+          "A dedicated thank-you page is often the cleanest home for a review invitation. After a customer sends an enquiry, completes a booking request, downloads a delivery summary, or reaches a post-service confirmation, the page can thank them, state what happens next, and include the optional review link. Do not place the request before a service is delivered or as the dominant call to action on the homepage. A first-time visitor needs to understand the service, price approach, area served, and contact route before they are asked to endorse it.",
+          "Keep the page short and accessible. Use a clear button such as ‘Leave an honest Google review’, a plain-text fallback link, and a short note that feedback is optional. If a customer had a problem, direct them to the business support contact instead of asking them to debate a complaint in public. The website can also show a modest QR code on a printable completion sheet for in-person work, but pair it with the written URL. Some customers prefer a browser link, and a QR code should never be the only route.",
+        ],
+      },
+      {
+        heading: "Use follow-up channels with context and consent",
+        paragraphs: [
+          "Google suggests using the request link or QR code in receipts, thank-you emails, and at the end of a chat interaction. Choose only the channel a customer already expects. A freelance designer can include one sentence in the handover email. A home-cleaning team can add it below the service summary on a receipt. A tutor can send it after the agreed term review. When using WhatsApp, send the request only as part of a relevant, welcomed service follow-up; do not repeatedly message old leads or contact people who never became customers.",
+          "Make the message specific enough to feel human but not so personal that it exposes private information if forwarded. For example: ‘Thank you for choosing us for your appliance service. If you would like to leave an honest review of your experience, this is the Google link.’ Avoid including an address, appointment details, medical or financial information, or a pre-written review. A customer should use their own words and decide when, or whether, to post. One timely request is usually enough; repeated reminders turn a thank-you into pressure.",
+        ],
+      },
+      {
+        heading: "Keep incentives and review filtering out of the workflow",
+        paragraphs: [
+          "Google’s review guidance is clear that reviews must reflect a genuine experience. Offering a discount, free item, refund, or other incentive in exchange for a review is prohibited. The restriction also covers asking someone to change or remove a negative review. Do not run a ‘leave five stars to enter’ campaign, promise a coupon only to reviewers, or ask staff, friends, and family who were not customers to post. A short-term spike built this way can mislead customers and can create policy consequences for the Business Profile.",
+          "Avoid review gating too. A feedback form that sends only happy respondents to Google while routing dissatisfied people somewhere else distorts the public picture. Ask all genuine customers the same optional question, then make support available to anyone who needs help. Honest mixed feedback is not a failure: Google itself notes that balanced reviews can help people decide. The business gains a more credible public record and a better chance to spot a recurring issue in timing, clarity, pricing, or service quality.",
+        ],
+      },
+      {
+        heading: "Reply and review the system without turning it into surveillance",
+        paragraphs: [
+          "Set a simple owner routine: check new reviews once or twice a week, thank customers in a concise, professional reply where it adds value, and respond calmly to criticism. Replies are public, so never identify a customer, repeat their personal details, or argue about an account. If a review appears to violate Google policy, report it through the Profile; do not report it simply because it is negative or inconvenient. Keep a private operational note of patterns, such as late arrivals or unclear estimates, and improve the underlying website or service process.",
+          "Once a quarter, test the link, button, and QR code. Track only whether they work and which customer questions recur. The aim is a reliable invitation after genuine work, not a vanity metric.",
+        ],
+      },
+    ],
+  },
   {
     slug: "request-google-indexing-local-business-website-india",
     title:
