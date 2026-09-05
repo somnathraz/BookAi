@@ -17,6 +17,70 @@ export interface BlogArticle {
 /** Editorial source of truth. Scheduled publishing adds a reviewed article here. */
 export const blogRegistry: readonly BlogArticle[] = [
   {
+    slug: "google-search-console-setup-local-business-website-india",
+    title:
+      "How to set up Google Search Console for a local business website in India",
+    description:
+      "Set up Google Search Console correctly, check whether key pages are indexed, and use simple monthly signals to improve a local business website.",
+    category: "Local growth",
+    publishedAt: "2026-09-04",
+    readingMinutes: 7,
+    image:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A business owner reviewing website performance charts on a laptop screen",
+    keywords: [
+      "Google Search Console setup for local business website India",
+      "how to verify a small business website in Google Search Console",
+      "Google Search Console for freelancer portfolio website India",
+      "check local service website pages indexed by Google",
+    ],
+    sections: [
+      {
+        heading: "Use Search Console to see the questions your website is answering",
+        paragraphs: [
+          "A local service website can look polished and still be invisible to the people it is meant to help. A tutor, accountant, photographer, or independent designer needs a way to tell whether Google has found the site and which searches bring visitors there. Google Search Console is the practical starting point. It reports how Google crawls and indexes a site, along with search queries, clicks, impressions, and the pages that appeared in results.",
+          "Treat it as a customer-language tool, not a scoreboard. A new website does not need to chase a large national keyword. It needs to learn whether people can find its service page, locality details, and enquiry route. If searchers see your page for “maths tutor near Baner” but the page only describes general coaching, that is a useful prompt to clarify what you offer. If nobody sees a key page at all, check indexing before rewriting the copy or buying ads.",
+        ],
+      },
+      {
+        heading: "Choose the property type before you verify it",
+        paragraphs: [
+          "In Search Console, a property is the website scope whose data you will view. For most businesses that control their domain, a Domain property is the cleanest long-term choice because it includes subdomains and both protocol versions. It requires a DNS verification record, so use it when the person setting up Search Console can safely edit the domain’s DNS. Keep the DNS record in place: Google periodically checks verification, and removing it can remove access later.",
+          "Choose a URL-prefix property when you need a narrower view or cannot edit DNS. It covers only the exact protocol and prefix entered, so https://example.in and https://www.example.in are different scopes. That detail catches many small businesses: they verify one version, but customers and canonical URLs use another. Enter the live public homepage exactly as it resolves, including https and any www. A URL-prefix property can be verified with an HTML tag, HTML file, Google Analytics, or another method offered in the verification flow.",
+        ],
+      },
+      {
+        heading: "Verify access without giving away control of the website",
+        paragraphs: [
+          "Ask the domain owner, not an agency’s shared inbox, to be a verified owner. If a developer or marketer needs access, the owner can add them later under Settings and Users and permissions. This keeps a business from losing its search data when a freelancer leaves. Use individual Google accounts rather than passing a password around, and remove access when a working relationship ends. Search Console ownership is powerful because it exposes search data and can affect how a site appears in Google.",
+          "For DNS verification, copy the TXT record from Google exactly and add it to the domain’s DNS zone. For an HTML-tag method, place the unique meta tag inside the public homepage head; the homepage must load without a login. Do not put the tag in a private dashboard or a page-builder preview. After verification succeeds, add a second method where practical. A backup token can prevent an accidental template change from locking the business out.",
+        ],
+      },
+      {
+        heading: "Check the pages that have a job to do",
+        paragraphs: [
+          "Start with a short checklist: homepage, main service pages, locality or service-area page, contact page, and any booking or enquiry page that should be discoverable. Use URL Inspection to ask whether Google knows the live URL and whether it can be indexed. A page does not need to rank immediately to be useful; first confirm that it is reachable, returns the intended content, and is not blocked by a noindex tag, robots rule, or an accidental redirect.",
+          "Submit the sitemap if the site has one, then use it as a discovery aid rather than a guarantee. A sitemap tells Google about important URLs, but it does not force indexing or replace useful internal links. Link each service page from a clear navigation path. Avoid near-duplicate locality pages with only the city name swapped. A smaller collection of accurate, useful pages is easier to maintain.",
+        ],
+      },
+      {
+        heading: "Read the first reports with a local-business filter",
+        paragraphs: [
+          "Once data has had time to arrive, open the Performance report and look at Queries and Pages together. Filter by a service page and ask three plain questions: which words cause it to appear, do those words describe a customer I can help, and does the page make the next step obvious? An AC technician might see impressions for a repair type that is not explained on the page; a freelancer might see project-type searches that deserve a short case-study section. Improve the page for that real need, not by repeating the phrase in every paragraph.",
+          "Do not panic over a few impressions, position changes, or a short reporting delay. Google recommends checking Search Console roughly monthly and after meaningful site changes, rather than treating it as a daily task. Record a simple monthly note: the pages receiving impressions, useful queries, enquiry quality, and anything broken or excluded. Compare like-for-like periods only after enough data exists. The point is to find practical work, such as clarifying a service, repairing a bad link, or updating a stale phone number.",
+        ],
+      },
+      {
+        heading: "Turn a monthly review into one small website improvement",
+        paragraphs: [
+          "Give the review a 20-minute routine. First, confirm that the homepage and one priority service page are indexed. Next, scan any email alerts from Search Console. Then read the top queries for the priority page and compare them with the page’s heading, service area, pricing guidance, and call to action. Finally, choose one fix that genuinely reduces customer uncertainty. For example, add the areas a home-visit service covers, explain what a consultation includes, or make the enquiry button visible on mobile.",
+          "Keep claims grounded. Search Console can show search visibility, but it cannot prove that a wording change caused revenue or that a page will rank first. Pair it with calls, form enquiries, appointment requests, and customer questions. Over time, this modest habit keeps a local business website aligned with what people actually seek on Google.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "add-services-google-business-profile-local-business-india",
     title:
       "How to add services to your Google Business Profile for a local business in India",
