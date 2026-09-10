@@ -19,7 +19,134 @@ export interface BlogArticle {
 /** Editorial source of truth. Scheduled publishing adds a reviewed article here. */
 export const blogRegistry: readonly BlogArticle[] = [
   {
-<<<<<<< HEAD
+    slug: "show-service-areas-local-service-website-india",
+    title:
+      "How to show service areas on a local service website in India",
+    description:
+      "Explain where a local service business travels, set honest availability expectations, and make the right enquiry easier without creating thin location pages.",
+    category: "Local growth",
+    publishedAt: "2026-09-10",
+    readingMinutes: 8,
+    image:
+      "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A local service professional discussing a job with a customer outdoors",
+    keywords: [
+      "how to show service areas on local business website India",
+      "service area page for home service business India",
+      "local service website coverage area wording",
+      "avoid city keyword pages on small business website India",
+    ],
+    sections: [
+      {
+        heading: "Make the service area answer a customer question",
+        paragraphs: [
+          "For a local service business, ‘where do you work?’ is often the question that decides whether a visitor contacts you. A carpenter who visits homes, a makeup artist who travels to venues, or a freelance photographer who works across a few cities should answer it before the enquiry form. A service-area section is not a chance to mention every district in a state. It is a practical promise about where you can realistically deliver the work, what may affect availability, and what a customer should do next.",
+          "Start with the real operating pattern. Do you work within specific neighbourhoods, across one city, within a travel-time radius, or in selected nearby towns on certain days? Write the answer in the words a customer uses. ‘Home visits across Indiranagar, Koramangala, HSR Layout, and nearby Bengaluru neighbourhoods’ is more useful than ‘serving all of Karnataka’. If a job outside the usual area is possible only after a schedule check, say so. Specificity helps the right customer enquire and avoids disappointing the rest.",
+        ],
+      },
+      {
+        heading: "Choose one clear place for the coverage information",
+        paragraphs: [
+          "Put a short service-area statement on the homepage and the relevant service pages, then give the fuller explanation on the contact page or a dedicated coverage page. The wording should match wherever people encounter it: website, Google Business Profile, social profile, booking page, and printed QR code. A customer should not see ‘Mumbai and Navi Mumbai’ on one page and ‘all Maharashtra’ on another. Inconsistent details create needless calls and make a small business look less dependable.",
+          "A dedicated page earns its place when it explains something useful beyond a list of names. It might group areas by regular visit days, note where travel fees may apply, explain that an on-site estimate depends on locality, or direct customers to the right enquiry route. Keep the page easy to scan: a plain opening statement, a small list of normal areas, any important condition, and a clear action such as ‘Check availability for your area’. A map can help only if it is readable and does not replace text for screen-reader or search users.",
+        ],
+      },
+      {
+        heading: "Use honest boundaries instead of invented precision",
+        paragraphs: [
+          "Do not promise a radius you cannot consistently cover. Traffic, team availability, the type of work, and the time of day can all change whether a visit is sensible. If the business normally serves customers within about 10 kilometres but makes exceptions, explain the normal rule first and invite an availability check for exceptions. Avoid vague reassurance such as ‘we serve everywhere’ when the business actually needs a half-day journey to reach some customers. Honest limits are good customer service, not a missed sales opportunity.",
+          "Distinguish a service area from a physical address. A professional working from home may travel to customers but not receive them at that address. In that case, do not steer visitors to an unstaffed or private location. Google’s current Business Profile guidance similarly says a service-area business that does not serve customers at its address should remove that address and list its service area; it also limits the profile to up to 20 cities, postcodes, or other areas. The website can reflect the same real-world setup without publishing private information.",
+        ],
+      },
+      {
+        heading: "Avoid making a thin page for every locality",
+        paragraphs: [
+          "A common shortcut is to copy one service page many times and swap ‘Pune’ for ‘Baner’, ‘Wakad’, or ‘Kothrud’. That produces pages with no new help for a visitor. It is harder to keep accurate, can confuse customers, and gives the business a large maintenance job whenever its coverage changes. A short, useful coverage section is usually stronger than dozens of near-identical pages. Add a locality-specific page only when it has a distinct purpose and genuinely different information.",
+          "For example, a tutor with recurring sessions at one learning centre can explain its schedule, accessibility, and class format there. A photographer who regularly serves two cities may explain travel planning or venue experience for each. A plumber does not need a page for every apartment complex merely to repeat the same service list. Before publishing another area page, ask: would a customer learn something here that they could not learn on the main service page? If the answer is no, improve the main page instead.",
+        ],
+      },
+      {
+        heading: "Turn the answer into a better enquiry",
+        paragraphs: [
+          "The service-area statement should connect to the contact flow. For home visits, add a field or prompt for neighbourhood, town, or postcode; do not ask for a full home address before you know that the work is a fit. For venue work, ask for the event city and date. A simple prompt such as ‘Tell us your locality and preferred date, and we’ll confirm availability’ sets an accurate expectation. It is better than a button labelled ‘Book now’ when a team still needs to confirm travel and timing.",
+          "Include any meaningful charge with care. If travel outside the normal zone may cost extra, say that it may be discussed before confirmation rather than displaying a made-up flat fee. If some work is remote or can be handled by phone, say so too. A consultant may serve clients across India online but offer in-person meetings only in Chennai; those are two different promises and should not be blended into one ambiguous service area. Make sure the person answering enquiries knows the same rule shown on the website.",
+        ],
+      },
+      {
+        heading: "Test and review the promise as operations change",
+        paragraphs: [
+          "Before publishing, read the page on a phone and ask whether a first-time visitor can tell three things in under a minute: whether you serve their area, whether there is a condition or exception, and how to check availability. Test the links and form with a harmless sample enquiry. If you use a map, confirm it loads without blocking the contact controls and that keyboard users can still reach the page’s essential information. Keep a call or email alternative for visitors who prefer not to use a form.",
+          "Review coverage whenever staffing, business hours, transport, pricing, or regular visit days change. A monthly scan of enquiries can reveal a useful improvement: perhaps customers in one locality repeatedly ask about timing, or a listed area is no longer viable. Update the website and Business Profile together where appropriate. A precise service-area page cannot guarantee search rankings or bookings. What it can do is remove an early uncertainty, so the enquiries you receive start with a clearer, more realistic conversation.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "whatsapp-click-to-chat-link-local-service-website-india",
+    title:
+      "How to add a WhatsApp click-to-chat link to a local service website in India",
+    description:
+      "Create a clear WhatsApp click-to-chat route for a local service website, write a useful pre-filled message, and keep enquiries organised without overpromising.",
+    category: "Website foundations",
+    publishedAt: "2026-09-09",
+    readingMinutes: 8,
+    image:
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A small business owner using WhatsApp on a phone beside a laptop",
+    keywords: [
+      "WhatsApp click to chat link for local service website India",
+      "add WhatsApp enquiry button to small business website India",
+      "WhatsApp pre-filled message for freelancer website enquiries",
+      "local service website WhatsApp enquiry link setup",
+    ],
+    sections: [
+      {
+        heading: "Give WhatsApp one clear role in the customer journey",
+        paragraphs: [
+          "For many Indian local service businesses, WhatsApp is the quickest way for a visitor to ask a practical question before they are ready to call or complete a form. A tutor may need to confirm a class level, a photographer may need an event date, and a home-service team may need to check the locality. A click-to-chat link can remove the awkward step of asking someone to copy and save a phone number. It should begin a useful conversation, not replace every detail a customer needs before choosing you.",
+          "Decide what the link is for before adding a floating green button to every page. It can work well as a secondary route beside an enquiry form, or as the primary route when the business genuinely answers WhatsApp messages during stated hours. If a message only creates an enquiry that someone reviews later, say ‘Ask about availability’ rather than ‘Book now’. A truthful label prevents a visitor from assuming that tapping the button reserves a slot, confirms a quote, or creates an emergency response.",
+        ],
+      },
+      {
+        heading: "Build the link with the correct business number",
+        paragraphs: [
+          "WhatsApp’s click-to-chat format uses a wa.me link followed by the full phone number in international format. For an Indian number, start with 91 and then use the ten-digit mobile number, without a plus sign, spaces, brackets, dashes, or the leading zero. For example, a number written locally as 09876543210 becomes https://wa.me/919876543210. Test the exact link on a phone and a desktop browser before putting it on the website. It should open a chat with the business account, not a staff member’s old personal number.",
+          "Keep ownership in mind. Use a number the business controls and can retain if a freelancer, receptionist, or agency changes. Put the current account owner and handover process in the business’s own operating notes. Do not publish a private number simply because it is convenient during a launch. If the business uses a dedicated WhatsApp Business account, confirm its profile name, hours, and greeting are accurate too; the website button and the chat profile should give a customer the same basic expectation.",
+        ],
+      },
+      {
+        heading: "Use a short pre-filled message to create useful context",
+        paragraphs: [
+          "A click-to-chat link can include a pre-filled message after ?text=. Keep it short and editable. ‘Hello, I found your AC repair page. Do you serve HSR Layout this week?’ tells the business where the conversation started and gives the visitor a simple prompt. The message must be URL-encoded, so spaces and punctuation are converted safely by a link builder or developer. Test the final text in WhatsApp rather than relying on how it looks in the page editor.",
+          "Make the prompt match the page. A wedding photographer’s page can ask about date and city; a consultant’s page can ask about the project goal; a tutor’s page can ask for class and subject. Do not pre-fill sensitive details, a person’s full address, or a claim such as ‘I accept your quoted price’. The visitor should remain free to change or delete the message. A helpful prompt reduces the first round of back-and-forth; it is not a substitute for a clear service description, pricing approach, or privacy information on the page itself.",
+        ],
+      },
+      {
+        heading: "Place the action where a visitor has enough information",
+        paragraphs: [
+          "Put the WhatsApp action near the decision it supports: after a service overview, pricing approach, coverage-area explanation, or portfolio example. The label should name the outcome, such as ‘WhatsApp us about home visits’ or ‘Ask about a project’. A generic icon at the bottom of every page may be familiar, but it does not explain what happens next and can cover form controls or content on a small screen. Give the link visible text, a clear accessible name, and a touch target that is comfortable to use.",
+          "Keep at least one non-WhatsApp route available. Some people prefer to call, email, or submit a form; others may not use WhatsApp at all. A contact page with business hours, an accessible phone link, and a short enquiry form makes the website less dependent on one platform. If a chat button is fixed on screen, check it with keyboard navigation and at narrow mobile widths. It must not block the submit button, hide focused controls, or trap someone in an overlay.",
+        ],
+      },
+      {
+        heading: "Set response expectations and protect customer information",
+        paragraphs: [
+          "Tell customers when replies are normally reviewed. ‘WhatsApp messages are answered Monday to Saturday, 10 am to 6 pm’ is kinder than an always-visible button that implies an instant answer. If an urgent service has a separate phone process, state that plainly. A business should also decide who can view incoming chats, how requests are handed to the right person, and how old conversations are handled. This is basic customer service as much as it is website setup.",
+          "Ask only for the information needed to assess the request. An initial message may need a service type, preferred date, and general locality, but not identity documents, payment card details, passwords, or a precise home address. Move sensitive details to an appropriate later process only when genuinely required. Do not promise an exact quote or availability through an automated greeting if staff still need to review scope. Clear limits protect the customer and make the business easier to trust.",
+        ],
+      },
+      {
+        heading: "Test the complete path and review it every month",
+        paragraphs: [
+          "Before publishing, open the link on Android, iPhone if available, and a desktop browser. Check that the intended number and pre-filled text appear, the label remains visible at common zoom levels, and the page still has a usable fallback contact route. Try the page with a keyboard, especially if the button floats over the layout. Send one harmless test message only if the business has agreed on how it will be identified and cleared from the normal enquiry workflow.",
+          "Review the link whenever the phone number, working hours, service area, or staff process changes. Look at a small sample of real enquiries: are people repeatedly asking a question that the page should answer first, or arriving with a request the business cannot fulfil? Improve the relevant page or pre-filled prompt rather than adding more buttons. A WhatsApp click-to-chat link cannot guarantee leads or reply speed. Its value is simpler: it gives a ready visitor a direct, honest way to begin the right conversation.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "google-search-console-setup-local-business-website-india",
     title:
       "How to set up Google Search Console for a local business website in India",
@@ -79,7 +206,11 @@ export const blogRegistry: readonly BlogArticle[] = [
         paragraphs: [
           "Give the review a 20-minute routine. First, confirm that the homepage and one priority service page are indexed. Next, scan any email alerts from Search Console. Then read the top queries for the priority page and compare them with the page’s heading, service area, pricing guidance, and call to action. Finally, choose one fix that genuinely reduces customer uncertainty. For example, add the areas a home-visit service covers, explain what a consultation includes, or make the enquiry button visible on mobile.",
           "Keep claims grounded. Search Console can show search visibility, but it cannot prove that a wording change caused revenue or that a page will rank first. Pair it with calls, form enquiries, appointment requests, and customer questions. Over time, this modest habit keeps a local business website aligned with what people actually seek on Google.",
-=======
+        ],
+      },
+    ],
+  },
+  {
     slug: "website-enquiry-form-fields-local-service-business-india",
     title:
       "What to ask in a website enquiry form for a local service business in India",
@@ -1144,7 +1275,6 @@ export const blogRegistry: readonly BlogArticle[] = [
         paragraphs: [
           "Put the saved Business Profile URL on a small monthly checklist. Test it after a website redesign, domain renewal, booking-tool change, security-plugin update, holiday closure, or service-price change. Also review any provider or marketplace links that Google displays beside your own destination. If they lead to an old offer, an unavailable calendar, or the wrong business location, remove or correct them through the appropriate provider or profile controls. A preferred link is helpful, but it does not excuse an outdated secondary route.",
           "Finally, use real enquiries as the audit. If people reach the page but ask what service they are booking, strengthen the headline. If they abandon after seeing a calendar, clarify whether availability is confirmed immediately. If your team repeatedly asks for a missing locality or project detail, add just that field. The goal is not to satisfy a technical checklist for its own sake. It is to give a person who finds you on Google a reliable path from interest to a clear, manageable next step.",
->>>>>>> c24d4e0ad77c24971e8d9d24623646ca7df89de7
         ],
       },
     ],
