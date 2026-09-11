@@ -19,6 +19,72 @@ export interface BlogArticle {
 /** Editorial source of truth. Scheduled publishing adds a reviewed article here. */
 export const blogRegistry: readonly BlogArticle[] = [
   {
+    slug: "paperchai-google-reviews-website-proof-workflow-india",
+    title:
+      "PaperChai workflow: turn Google reviews into useful website proof in India",
+    description:
+      "Use real Google Business Profile feedback to strengthen a local business website, then review context, permissions, and the enquiry path before publishing with PaperChai.",
+    category: "PaperChai workflow",
+    publishedAt: "2026-09-11",
+    readingMinutes: 8,
+    image:
+      "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "Two independent professionals reviewing customer feedback together on a laptop",
+    keywords: [
+      "add Google reviews to small business website India",
+      "use Google Business Profile reviews on local service website",
+      "PaperChai Google reviews website workflow",
+      "show genuine customer feedback on freelancer website India",
+    ],
+    promotionCaption:
+      "Your best website proof may already be in your Google Business Profile. This PaperChai workflow shows how to turn genuine customer feedback into a clear, reviewable website section—without inventing claims or publishing before you are ready. Read the guide, then build from the details customers already trust.",
+    sections: [
+      {
+        heading: "Treat reviews as evidence, not decoration",
+        paragraphs: [
+          "A good customer review can help a local service business answer a question that polished marketing copy cannot: what was it actually like to work with this person? A salon client may mention calm service, a tutor’s parent may describe clearer communication, and a photographer’s customer may remember reliable planning. For a freelancer or independent professional, those details can make a website feel grounded. The aim is not to create a wall of five-star badges. It is to help a new visitor understand the kind of experience the business consistently tries to provide.",
+          "Start by reading recent feedback as customer language. Notice the useful specifics: a service someone booked, a concern that was handled, a location, a turnaround expectation, or a result that the reviewer can genuinely describe. Do not turn one enthusiastic sentence into a larger claim such as ‘India’s most trusted’ or ‘guaranteed results’. A review reflects one person’s experience at a point in time. Your website should preserve that proportion while making the service, its limits, and the next action clear in your own words.",
+        ],
+      },
+      {
+        heading: "Prepare a small, accurate source pack",
+        paragraphs: [
+          "Before opening PaperChai, collect the business name, category, current contact details, normal hours, and a handful of reviews you are comfortable using as context. Select feedback that represents the work you want more of, not just the highest rating. A home-repair business might choose comments about punctual communication and a completed repair; a consultant might select feedback that describes the problem solved. Keep a note of the original review URL or date so the owner can recheck it later.",
+          "Read every selected review in full. A short quote can change meaning when separated from its surrounding sentence, and a customer may have mentioned private information that does not belong on a public website. Avoid lifting a reviewer’s full name, photograph, phone number, address, medical details, or project-sensitive information into the site. If a review is vague, mixed, old, or attached to a service you no longer offer, leave it out. The strongest source pack is small enough to verify and current enough to represent the business honestly.",
+        ],
+      },
+      {
+        heading: "Use PaperChai for the first draft, then take ownership of it",
+        paragraphs: [
+          "In PaperChai, start with the Google Business Profile route by searching for the business name and city or using a Google Maps share link. PaperChai can turn the real photos, reviews, hours, and business details customers already see on Google into a focused one-page website. That gives a small business a practical starting point instead of a blank canvas. It does not make the imported details permanently correct, and it does not remove the owner’s responsibility to review every public claim.",
+          "When the draft is ready, begin at the opening section. Confirm that the business name, category, phone number, service area, and hours still match the live operation. Then find the customer-proof section and read it as someone who has never met the business. Does it make a believable point about the service? Does it overstate a review? Is there enough surrounding explanation for a visitor to understand what is offered? Remove anything that feels generic, dated, or too personal. A shorter, true section is more useful than a crowded page of borrowed praise.",
+        ],
+      },
+      {
+        heading: "Add context around feedback instead of repeating it",
+        paragraphs: [
+          "A review works best beside the information that helps a visitor evaluate it. If customers praise a makeup artist’s early-morning punctuality, put that proof near a service description that explains event coverage and how to check availability. If clients mention a designer’s clarity, place it close to a concise explanation of the design process. Let the customer’s words support a concrete page section rather than making them carry the entire sales message. Do not edit a quote until it says something the reviewer did not mean.",
+          "Where you identify a reviewer, use only the form already public and appropriate for the context, such as a first name and business type. When in doubt, ask the customer for permission to feature their feedback on the website, especially when their name, company, image, or detailed project story would be more visible than it was in the original review. Keep that permission with the project records. This is a considerate habit for every business, and particularly important for sensitive professional, health, education, home-service, and confidential client work.",
+        ],
+      },
+      {
+        heading: "Keep the proof connected to an honest next step",
+        paragraphs: [
+          "After a visitor reads a review, tell them what they can actually do. A service business that needs to confirm travel or capacity can use ‘Ask about availability’; a freelancer can invite a project enquiry; a studio that offers real appointment slots can link to booking. Do not put ‘Book now’ below a testimonial if a submitted form only sends a request. The action should match the operational truth, including normal response hours and any condition that affects price, timing, or service area.",
+          "Review the route on a phone before publishing. Tap the phone, WhatsApp, booking, or enquiry action and make sure it opens the correct business-owned destination. A visitor who is convinced by genuine feedback but cannot contact the business has reached a dead end. Keep a visible alternative for people who do not use the main channel. Then have someone outside the business scan the page for one minute and explain what service they think is being offered, why they might trust it, and what they would do next. Their answer exposes unclear copy quickly.",
+        ],
+      },
+      {
+        heading: "Publish carefully and refresh the proof as work evolves",
+        paragraphs: [
+          "PaperChai lets you review the generated website before publishing, so use that final pause. Check spelling, links, image rights, accessibility text, service claims, and the contact path. Confirm that the featured feedback still reflects live services and that a business owner can explain its source if a customer asks. Publish only when the page makes a clear promise the business can keep. A first version does not need every review, every photo, or a full history of the business to earn trust.",
+          "Set a short quarterly review. Read new Google feedback, remove proof tied to retired services, and notice which customer questions still appear before people enquire. Add one helpful answer to the service section or FAQ when it genuinely reduces uncertainty. Never manufacture reviews, pay for favourable public feedback, or selectively pressure only happy customers to post. PaperChai can make the website-building step faster; the durable value still comes from real work, accurate context, and an owner who keeps the promise current.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "show-service-areas-local-service-website-india",
     title:
       "How to show service areas on a local service website in India",
