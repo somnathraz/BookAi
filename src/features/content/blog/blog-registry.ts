@@ -85,6 +85,62 @@ export const blogRegistry: readonly BlogArticle[] = [
     ],
   },
   {
+    slug: "service-menu-local-business-website-india",
+    title: "How to create a clear service menu for a local business website in India",
+    description:
+      "Turn a scattered list of offerings into a clear service menu that helps local customers understand scope, starting prices, and the right way to enquire.",
+    category: "Website foundations",
+    publishedAt: "2026-09-13",
+    readingMinutes: 8,
+    image:
+      "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "An independent professional explaining service options to a client at a table",
+    keywords: [
+      "create service menu for local business website India",
+      "how to list services and prices on small business website India",
+      "service packages for freelancer website India",
+      "local service website pricing and enquiry guide",
+    ],
+    sections: [
+      {
+        heading: "Make the menu answer the first buying question",
+        paragraphs: [
+          "When someone lands on a local business website, they are usually trying to decide whether the business can solve a specific problem. A vague heading such as ‘Our services’ followed by a long list of names makes that harder. A useful service menu tells the visitor what is included, who it is for, and what they should do when the work needs a quote. For a home cleaner, that could separate regular cleaning from a deep-clean visit. For a designer, it could distinguish a logo refresh from a full identity project. The goal is clarity, not a catalogue of every task the owner has ever done.",
+          "Begin with the enquiries the business wants and can reliably fulfil. Look at recent WhatsApp messages, calls, and invoices. Which service names do customers already use? Which requests need a different time commitment, skill, or price discussion? Group those into a small number of plain-language choices. Three to six services is often easier to understand than fifteen overlapping labels. If two offers sound almost identical, combine them or explain the difference in one sentence. A visitor should be able to choose a sensible starting point without knowing your internal terminology.",
+        ],
+      },
+      {
+        heading: "Write each service as a practical promise",
+        paragraphs: [
+          "Give every service a short name, one or two sentences of scope, and a next step. Describe the outcome and the boundaries together. ‘Bridal makeup for one event, including a pre-event consultation; travel and early-morning availability confirmed before booking’ is much more helpful than simply ‘Bridal package’. A tutor can name the class range and format. An accountant can say whether the service is a consultation, filing support, or ongoing bookkeeping. Do not imply licensing, results, turnaround times, or availability that the business cannot prove or consistently provide.",
+          "Use examples only where they reduce uncertainty. A photographer may say a family session typically includes a planning call and a defined delivery format; a repair professional may list common job types while noting that a final assessment happens on site. Avoid turning a service description into a contract, especially when the work depends on condition, location, materials, or client decisions. If something is excluded, state the important exclusion in everyday language. Clear scope prevents a visitor from assuming that every add-on, travel cost, revision, or emergency visit is already included.",
+        ],
+      },
+      {
+        heading: "Show prices honestly, even when every job is different",
+        paragraphs: [
+          "You do not need to publish a fixed price for work that cannot be priced responsibly before a conversation. But hiding all price context can make a customer unsure whether it is worth asking. Choose the most truthful level of detail: a fixed starting price for a standard service, a price range with the factors that change it, or ‘quote after assessment’ with a clear explanation of what the assessment considers. For example, an event decorator might explain that pricing depends on venue, date, guest count, and materials. That helps a visitor prepare a useful enquiry without pretending that one number fits every event.",
+          "Keep the wording consistent with Google Business Profile and other public listings where the business uses a services menu. Google says eligible service businesses can group services and add descriptions or prices, while custom service names must not include prices, phone numbers, or personal information. Treat the website as the fuller explanation, not a contradictory second price list. Recheck any displayed amount when costs, tax treatment, travel policy, or package contents change. Never label an enquiry as a confirmed booking or quote until the business has actually reviewed it.",
+        ],
+      },
+      {
+        heading: "Connect every choice to the right enquiry",
+        paragraphs: [
+          "A menu works when it shortens the first conversation. Put a clear action beside each service: ‘Ask about availability’, ‘Request a consultation’, or ‘Get a project estimate’. The label should reflect what happens next. A caterer who must confirm the date and menu should not use ‘Buy now’; a consultant who offers a paid discovery call can state that plainly. Carry the service name into the contact form or WhatsApp prompt so the customer does not have to repeat it. Then ask only for the details needed to assess the fit, such as locality, preferred date, quantity, or project goal.",
+          "Keep another contact route visible for people who do not use the main channel. Test the path on a phone: choose a service, open the action, and check that the message, form, phone link, or booking page identifies the correct business. If the team has limited response hours, say so near the action. A strong menu does not promise an immediate reply, guaranteed availability, or an exact quote. It gives a ready customer enough context to start a realistic conversation with the right information.",
+        ],
+      },
+      {
+        heading: "Review the menu as the business changes",
+        paragraphs: [
+          "Before publishing, ask someone unfamiliar with the business to look at the page for a minute. Can they say what the three main services are, which one they would choose, what may affect price, and how they would enquire? Their confusion is more useful than adding more sales language. Check that service names match the owner’s real process, images are licensed or owned, and every visible claim is current. Make the descriptions readable on a narrow screen, with headings and actions that can be reached by keyboard as well as touch.",
+          "Set a quarterly reminder to compare the menu with actual work. Remove retired offers, clarify questions that keep arriving, and update price context before it becomes misleading. A new service deserves a menu entry only when the business can explain its scope and handle the resulting enquiry. Do not add city names repeatedly or make a separate thin page for every small variation just to chase searches. Google’s guidance favours helpful, people-first content; the better test is simpler: would this page help a prospective customer choose or contact the business even if they never found it through search?",
+        ],
+      },
+    ],
+  },
+  {
     slug: "show-service-areas-local-service-website-india",
     title:
       "How to show service areas on a local service website in India",
