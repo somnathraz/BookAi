@@ -19,6 +19,177 @@ export interface BlogArticle {
 /** Editorial source of truth. Scheduled publishing adds a reviewed article here. */
 export const blogRegistry: readonly BlogArticle[] = [
   {
+    slug: "click-to-call-phone-link-local-business-website-india",
+    title:
+      "How to add a click-to-call phone link to a local business website in India",
+    description:
+      "Make it easy for ready customers to call a local service business from a phone, with an accurate number, clear labels, realistic response expectations, and a reliable fallback.",
+    category: "Website foundations",
+    publishedAt: "2026-09-17",
+    readingMinutes: 8,
+    image:
+      "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "An independent professional speaking with a customer on a mobile phone",
+    keywords: [
+      "add click to call phone link to local business website India",
+      "clickable phone number for small business website India",
+      "how to add tap to call button for freelancer website India",
+      "phone call link for local service website mobile",
+    ],
+    sections: [
+      {
+        heading: "Use a call link when a call is genuinely the next step",
+        paragraphs: [
+          "A tap-to-call link is useful for a local service business when a visitor needs a quick, human answer before choosing a service: a salon client checking an appointment, a repair professional confirming a locality, or a consultant asking a brief fit question. On a phone, it saves the customer from copying a number, opening the dialler, and risking a transcription error. It is most valuable after the page has already explained the service, service area, and likely next step. A call action cannot compensate for a page that leaves those basics unclear.",
+          "Choose the channel the business can actually answer. If calls go unanswered during jobs, write that plainly and offer a monitored alternative such as a contact form, email, or WhatsApp enquiry. Do not label a call link ‘Book now’ unless calling truly completes a confirmed booking. For a business that needs to inspect a property, discuss a brief, or check a date first, ‘Call to discuss your requirement’ is honest and useful. A clear action reduces both abandoned enquiries and stressful calls caused by false expectations.",
+        ],
+      },
+      {
+        heading: "Keep the displayed number and the link accurate",
+        paragraphs: [
+          "A website can use a tel: link to let compatible devices start a call. For an Indian mobile number, store the destination in international form, for example tel:+919876543210 using a fictional number. The number a customer reads can still use a familiar format such as +91 98765 43210. Keeping the destination in an international form makes the intent clearer when a visitor is travelling or using a device configured outside India. Do not put a private staff member’s number behind a public call action unless that person has agreed to manage public business enquiries.",
+          "Check the number everywhere before publishing: the header, contact page, Google Business Profile, social profiles, quotation footer, and any QR code. A different number in one place makes a small business look unreliable, even when it is only an old detail. If the business uses a landline, test that it can receive the calls the page invites. If a call is routed through a receptionist or shared phone, agree on the greeting, the service information they can give, and where an enquiry should be recorded. The link may be small, but it opens a real operational process.",
+        ],
+      },
+      {
+        heading: "Give the action a specific, accessible label",
+        paragraphs: [
+          "Use visible text that says what happens, such as ‘Call Ananya for a home-cleaning estimate’ or ‘Call our Kochi studio’. A standalone phone icon or the word ‘Call’ repeated beside several numbers is ambiguous, especially for someone scanning links with a screen reader. The link’s text should identify the business or purpose; the same words then become its accessible name in a conventional HTML link. Keep the number visible as well, so a visitor who cannot or does not want to initiate a call can copy it or use another device.",
+          "Place the action near useful decision information rather than hiding it in a floating button. Beside hours, location, price context, or a service description is usually better than above the explanation. Make the target comfortable to tap, reachable by keyboard, and visibly focused when selected. A business with more than one location should not use one generic phone button across the whole site. Name each location or department so the customer knows whom they will reach. Consistent contact placement across pages also helps a returning visitor find help without relearning the layout.",
+        ],
+      },
+      {
+        heading: "Set expectations before the customer calls",
+        paragraphs: [
+          "A short line beside the link can prevent a poor first interaction: ‘Calls answered Monday–Saturday, 10 am–6 pm’, ‘For urgent same-day repairs, call before 4 pm’, or ‘Please leave a WhatsApp message if we are with a client’. Only state a response window or availability rule that the business can maintain. Do not imply twenty-four-hour support, emergency help, professional advice, or instant confirmation when that is not part of the service. If calls are recorded or handled by a third party, give the customer an appropriate notice before they share sensitive information.",
+          "Ask for the least information needed at the start. A visitor can say the service, locality, and preferred date without giving a full address, payment detail, medical information, or a detailed private brief. Explain what will happen next: an estimate, a callback, a site visit, or a consultation. This is particularly important for independent professionals, who may need time to review availability before quoting. A well-framed call invites the right conversation; it does not turn a public webpage into an open promise of availability.",
+        ],
+      },
+      {
+        heading: "Test the whole route like a new customer",
+        paragraphs: [
+          "Test the published link on an Android phone, an iPhone if one is available, and a desktop browser. A tel: link can open a dialler, calling application, or another supported action depending on the device, so it should never be the only way to reach the business. Confirm that the number shown in the prompt is correct and that no accidental extra digits, spaces, or tracking parameters were added. Test from a device that is not already associated with the business account, since familiar devices can hide an outdated contact or a forwarding mistake.",
+          "Then ask someone unfamiliar with the business to try the page. Can they tell what service they are calling about, when they should call, and what to do if nobody answers? If not, improve the surrounding page before adding more sales language. Recheck the journey whenever the number, hours, service area, call handler, or appointment policy changes. Helpful website content earns trust by resolving a real task, not by repeating a keyword. A truthful click-to-call route gives a ready visitor one less obstacle while keeping the business in control of its promise.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "whatsapp-enquiry-link-local-service-website-india",
+    title:
+      "How to add a useful WhatsApp enquiry link to a local service website in India",
+    description:
+      "Create a clear WhatsApp enquiry link that helps local customers ask the right question, sets realistic response expectations, and protects a small business from messy leads.",
+    category: "Website foundations",
+    publishedAt: "2026-09-16",
+    readingMinutes: 8,
+    image:
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A small business owner replying to a customer message on a laptop",
+    keywords: [
+      "add WhatsApp enquiry link to local service website India",
+      "WhatsApp chat button for small business website India",
+      "WhatsApp click to chat link for freelancer website India",
+      "how to use WhatsApp for website enquiries local business",
+    ],
+    sections: [
+      {
+        heading: "Use WhatsApp for a real customer question",
+        paragraphs: [
+          "A WhatsApp link can be a helpful shortcut for a salon, tutor, photographer, repair professional, consultant, or other local service business. It works best when a visitor has already understood the service and needs one small detail: ‘Are you available on this date?’, ‘Do you travel to my area?’, or ‘Can I share the brief?’. The link should reduce the effort of starting that conversation, not pressure someone into a chat before they know what the business offers. Put the service, typical location or service area, and the next-step expectation on the page first.",
+          "Choose the contact channel the owner can genuinely monitor. A personal number that is only checked at night, an old number shared by two staff members, or a number used for private family messages creates a poor customer experience. If the business uses WhatsApp Business, confirm that its business name, profile photo, hours, and greeting accurately represent the current operation. The link is public once it is on a website, so treat every message as a potential enquiry and make sure the person receiving it knows what the page promises.",
+        ],
+      },
+      {
+        heading: "Make one clean link, then test the number",
+        paragraphs: [
+          "WhatsApp’s click-to-chat format uses a link such as https://wa.me/ followed by the full phone number in international format. For an Indian number, that normally starts with 91 and then the mobile number, with no plus sign, spaces, brackets, hyphens, or leading zero. A fictional example is https://wa.me/919876543210. WhatsApp also lets a business share the short link generated in the WhatsApp Business app. Either route is fine when it points to the active, business-owned account; copying the official short link can reduce transcription mistakes.",
+          "Open the finished link on a phone and a desktop browser before publishing. Check that it offers the intended chat, not a colleague’s account or an outdated number. Test while signed out of the owner’s WhatsApp account if possible, because an owner’s device can hide a setup mistake. Do not make the link open a call or claim that a booking is confirmed. A chat is only the beginning of an enquiry. Keep a phone, email, or contact-form alternative for people who do not use WhatsApp or would rather not start a message there.",
+        ],
+      },
+      {
+        heading: "Prefill a prompt that customers can change",
+        paragraphs: [
+          "A short prefilled message can help visitors include the detail the business needs. A home-service business might use ‘Hello, I would like to check availability in [locality]’; a photographer could use ‘Hello, I am enquiring about a shoot on [date]’; a freelancer might use ‘Hello, I would like to discuss a project’. The customer should be able to edit or delete that text before sending. Keep the sentence plain and specific enough to start the right conversation, not a long questionnaire that feels like an obligation.",
+          "Avoid putting personal or sensitive details into a prefilled link. Do not include a visitor’s name, a hidden form response, medical or financial information, an appointment reference, or a detailed project description in the URL. Links can be copied, stored in browser history, or shared in analytics and support tools. Ask for information progressively in the chat, and only after explaining why it is needed. For an on-site service, locality and preferred date are often enough for a first reply; a full address can wait until the work is a fit.",
+        ],
+      },
+      {
+        heading: "Label and place the action honestly",
+        paragraphs: [
+          "Use an explicit label such as ‘WhatsApp us about bridal makeup availability’, ‘Ask about a home visit on WhatsApp’, or simply ‘Message us on WhatsApp’. A floating green icon with no nearby explanation is easy to miss, unclear to screen-reader users, and can cover important content on a small screen. Put the action beside the service description, service-area statement, price context, or contact section where a visitor has enough information to decide. Give the link a visible focus state and a touch target that is comfortable to use on a phone.",
+          "Describe the operational truth close to the action. ‘Replies Monday–Saturday, 10 am–6 pm’ is more useful than implying an instant response. If the business needs a quote, say ‘Send an enquiry’ rather than ‘Book now’. If messages are handled by an assistant, do not pretend that the owner will personally reply. A WhatsApp button is not an emergency line, payment checkout, or guarantee of availability. Clear wording protects the customer from a false expectation and makes the eventual conversation less frustrating for the business too.",
+        ],
+      },
+      {
+        heading: "Keep the chat connected to the rest of the website",
+        paragraphs: [
+          "The same business name, phone number, service list, service area, and reply hours should agree across the website, Google Business Profile, Instagram bio, QR code, and WhatsApp Business profile. A visitor who finds a different number or promise in each place may reasonably hesitate. Review the contact route whenever the business moves, changes its number, pauses a service, changes regular hours, or gives someone else responsibility for enquiries. One accurate contact path is much stronger than several abandoned buttons.",
+          "Finally, test the journey as a new customer: read the service page, tap the WhatsApp action, edit the example message, and decide whether you know what happens next. Ask someone unfamiliar with the business to try it once. If they cannot tell whether their area is covered, whether the service is within their budget, or when they may receive a reply, improve the page instead of adding more promotional text. A useful WhatsApp link will not create trust by itself; it gives a ready visitor an easy route to a truthful, well-managed conversation.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "google-maps-directions-link-local-business-website-india",
+    title:
+      "How to add a Google Maps directions link to a local business website in India",
+    description:
+      "Add a reliable Google Maps directions link for a customer-facing business location, test it on a phone, and avoid sending visitors to a private or inaccurate address.",
+    category: "Website foundations",
+    publishedAt: "2026-09-14",
+    readingMinutes: 8,
+    image:
+      "https://images.unsplash.com/photo-1524666041070-9d87656c25bb?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A person using a phone map while walking through a city street",
+    keywords: [
+      "add Google Maps directions link to local business website India",
+      "Google Maps directions button for small business website India",
+      "how to link business location to Google Maps website India",
+      "Google Maps location link for studio and office website India",
+    ],
+    sections: [
+      {
+        heading: "First decide whether customers should be directed to an address",
+        paragraphs: [
+          "A directions button is helpful when a customer can genuinely visit a place: a salon, studio, clinic, shop, office, classroom, or appointment-only workspace with staff present. It removes a small but important piece of friction for someone who has already decided to come. On a local website, the button should answer one practical question: how do I reach this business location? It is not a decorative map pin, and it should never stand in for a clear explanation of whether walk-ins, appointments, collections, or consultations are actually available.",
+          "Do not add a directions link simply because a business operates from an address. A plumber, home cleaner, freelance photographer, or consultant may work from home while visiting customers or working remotely. Sending visitors to that private base can create a safety and customer-service problem. Google’s current Business Profile guidance makes the same distinction: businesses that do not serve customers at their address should remove the address and use a service area instead. In that case, describe the normal service area and give an honest enquiry route rather than offering directions to a place a customer cannot visit.",
+        ],
+      },
+      {
+        heading: "Start with the location customers can recognise",
+        paragraphs: [
+          "Use the exact customer-facing destination, not the billing address, an old office, a nearby landmark that happens to be easier to find, or a staff member’s personal address. Compare the location shown on the website with the public business address, map pin, phone number, and hours. If the business has moved, correct those core details before promoting the link. A visitor who arrives at the wrong building will not care that the page had a beautiful map.",
+          "Make arrival expectations visible beside the action. A studio could say ‘Visits by appointment, Monday to Saturday’; a tutor might note which entrance or floor to use; a shop can state its regular hours and whether parking is limited. Keep this concise and only include details that help a visitor complete the trip. Do not publish door codes, a customer’s name, private access instructions, or any information that should be shared only after an appointment is confirmed. The destination and the surrounding words should describe the same real-world experience.",
+        ],
+      },
+      {
+        heading: "Create a stable directions URL",
+        paragraphs: [
+          "Google Maps URLs offer a simple, cross-platform way to open directions from a website. A basic pattern is https://www.google.com/maps/dir/?api=1&destination= followed by an encoded business address or place name. The api=1 part matters: Google documents it as required for Maps URL parameters to work. For a fictional example, a destination could be encoded as ‘14%20Example%20Road%2C%20Kochi%2C%20Kerala’. Use the site editor or a developer’s standard URL tools to encode spaces and punctuation correctly instead of manually guessing at symbols.",
+          "When the exact establishment matters, a Google Place ID can make the destination less ambiguous than a common business name or a broad street address. It is worth considering for a building complex, a location with a similar name nearby, or a business whose entrance is difficult to identify. Do not add a Place ID just because it sounds technical; a complete, tested address is often enough for a small business. Keep the link focused on directions. It does not need tracking parameters, a customer name, booking reference, or other information that could be copied into browser history or logs.",
+        ],
+      },
+      {
+        heading: "Give the button a clear place and label",
+        paragraphs: [
+          "Place the action where a visitor has enough context to use it: near the address and hours on the contact page, after an appointment explanation, or in a short visit-us section on the homepage. Use visible language such as ‘Get directions to our Bengaluru studio’ or ‘Open directions to our Kochi office’. A lone map-pin icon is easy to overlook and vague for screen-reader users. If the business requires an appointment, say so in the label or the line immediately above it rather than letting the map button imply that a walk-in visit is welcome.",
+          "Keep a second contact route nearby. Someone may need to check accessibility, parking, lift access, the right entrance, or whether the business is open before travelling. A clickable phone number, a short enquiry form, or a monitored WhatsApp option gives them a way to ask without starting a journey based on an assumption. On a narrow phone screen, ensure a floating chat button does not cover the directions action. Important links should work with a keyboard as well as touch and should have enough space to tap accurately.",
+        ],
+      },
+      {
+        heading: "Test the journey as a first-time customer would",
+        paragraphs: [
+          "Before publishing, open the website on a phone that is not signed in to the business account. Tap the directions link and check that it opens Google Maps or the browser’s Maps view with the intended destination. Then look at the pin, street name, locality, and displayed business name. Try the link on a desktop browser too. Google says Maps URLs can launch the relevant Maps experience across platforms, but a practical test still catches a copied typo, an incomplete address, or a link that points to a previous tenant.",
+          "Repeat the check after a move, a renamed road, a changed entrance, or a new appointment policy. Keep the website, Google Business Profile, social profiles, booking confirmation, and any QR code aligned with the same public location. Ask a person unfamiliar with the business to try the route once if possible; they will notice unclear wording that the owner has learned to overlook. A directions link will not create footfall by itself, but it can turn a ready visitor into a well-informed arrival and prevent a very avoidable bad first impression.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "paperchai-google-reviews-website-proof-workflow-india",
     title:
       "PaperChai workflow: turn Google reviews into useful website proof in India",
