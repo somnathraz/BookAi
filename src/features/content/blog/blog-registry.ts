@@ -19,6 +19,177 @@ export interface BlogArticle {
 /** Editorial source of truth. Scheduled publishing adds a reviewed article here. */
 export const blogRegistry: readonly BlogArticle[] = [
   {
+    slug: "whatsapp-enquiry-button-local-service-website-india",
+    title:
+      "How to add a WhatsApp enquiry button to a local service website in India",
+    description:
+      "Set up a WhatsApp enquiry button that gives local customers a clear first message, protects service boundaries, and does not mistake a chat for a confirmed booking.",
+    category: "Website foundations",
+    publishedAt: "2026-09-28",
+    readingMinutes: 8,
+    image:
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A small-business owner using a smartphone beside an open laptop at a desk",
+    keywords: [
+      "WhatsApp enquiry button local service website India",
+      "WhatsApp click to chat link small business website India",
+      "WhatsApp website enquiry button for freelancer India",
+      "local service business WhatsApp enquiry workflow India",
+    ],
+    sections: [
+      {
+        heading: "Decide what starting a chat actually means",
+        paragraphs: [
+          "A WhatsApp button can remove a small but important obstacle for a customer who has found a plumber, tutor, designer, accountant, photographer, or home-service business online. It should start a conversation, not silently make a commitment. Before placing one on a website, decide the truthful next step. A salon with a live, maintained schedule may be able to invite an appointment request. A home-repair business that must check the locality, job type, or technician availability should invite an enquiry. A freelance professional who needs to assess project fit can invite a short consultation request. The label, first message, and reply process should all describe that same stage.",
+          "This is especially important when a small team handles messages at different times. ‘Chat on WhatsApp’ is a clear label because it says what happens immediately. ‘Book on WhatsApp’ is appropriate only if the business can genuinely reserve the requested slot in that chat. Do not use a button as a way to promise instant support, same-day service across a large area, or a confirmed visit before someone has checked the facts. A customer who understands that a request is pending is easier to help than one who believes a technician is already on the way.",
+        ],
+      },
+      {
+        heading: "Use a business-owned number and a link you can maintain",
+        paragraphs: [
+          "Choose the number deliberately. It should be a number the business owns, monitors, and can keep available if a staff member leaves. For many solo businesses, WhatsApp Business gives customers a more useful public context than a personal account: the profile can show the business name, category, hours, website, and other details the owner chooses to maintain. Review the profile photo and privacy settings before publishing the link. A website button makes the number easy for anyone to reach, so it is the wrong place to expose an employee’s personal number or an inbox that no one has agreed to answer.",
+          "WhatsApp’s click-to-chat format uses a full international phone number with no plus sign, brackets, spaces, or dashes. An Indian mobile number is normally represented after the country code as `91` followed by the number, rather than with a leading local zero. The WhatsApp Business app also creates a shareable short link. Either route can be useful; the safer operational choice is the one the owner can update and test. Keep a simple record of the live button URL, the account that controls it, and the person responsible for replies. If the number changes, update the website, Google Business Profile, social bio, printed QR codes, and saved response templates together.",
+        ],
+      },
+      {
+        heading: "Give customers a helpful, editable starting message",
+        paragraphs: [
+          "A pre-filled message can help a visitor explain why they are getting in touch without forcing them through a long form. Keep it short and plainly editable. A useful home-service example is: ‘Hello, I would like to check availability for AC service in [locality].’ A freelance designer might use: ‘Hello, I would like to discuss a website project. My preferred contact time is [time].’ The brackets signal information the customer should replace. Avoid writing a paragraph that asks for every detail upfront, or wording that sounds like the customer has already accepted a quotation.",
+          "Do not put sensitive information into a pre-filled prompt. An initial enquiry rarely needs identity documents, card or bank information, medical details, tax records, full home access details, or a complete client brief. Ask for only what helps the business choose the next safe step: a service, locality where travel matters, preferred reply method, and a short description. If a repair needs photographs or a professional service needs documents, explain why they are needed after basic fit is established and use the business’s appropriate process. A quick chat is convenient; it is not a reason to collect more information than the enquiry needs.",
+        ],
+      },
+      {
+        heading: "Place the button where it answers a decision",
+        paragraphs: [
+          "A WhatsApp button works best next to a specific decision rather than floating over every sentence on the site. On a service page, put it after the service, service-area, and expectation have been explained: ‘Ask about a home visit in Pune’ is more useful than an unexplained green icon. On a freelancer’s site, place it after the offer and project-fit information: ‘Discuss your website brief on WhatsApp.’ Include a normal phone or email alternative for customers who cannot or do not want to use WhatsApp. Make the button large enough to tap, give it a text label, and ensure keyboard users can reach it and understand where it goes.",
+          "The page should still do the explanatory work before sending someone into chat. Name the business, describe the service, say where or how it is delivered, and explain whether an enquiry is pending or a slot is confirmed. A visitor who comes from a Google result, Instagram bio, or QR code should reach the same maintained page and recognise the same business. Do not hide the only contact path in a fixed button that covers page text on a small screen. On mobile, test that it remains visible without blocking the form, map, cookie controls, or the first line of a useful answer.",
+        ],
+      },
+      {
+        heading: "Test the full conversation and make ownership visible",
+        paragraphs: [
+          "Before publishing, open the link from a phone where the business account is not already signed in. Check that the correct profile appears, the pre-filled message is accurate, and a customer can edit it before sending. Send one harmless test message. Then check who receives it, how quickly they know a message arrived, whether they can identify the page or service that generated it, and how they record a valid enquiry. Test on both mobile data and a desktop browser. A link that opens a personal account, an old number, or the wrong default message can lose trust before the business has said hello.",
+          "Write one short reply template for the first human response. It can thank the customer, restate the request, say what will be checked, and give a response window only if the business can meet it. For example: ‘Thanks for your AC-service enquiry for Baner. We are checking technician availability and will confirm the next available visit option by 5 pm today.’ Review the link whenever hours, staff ownership, service areas, or the phone number change. Then use the first few weeks of real enquiries as feedback. Repeated questions about coverage, price, or booking status belong in clearer website copy—not in more aggressive button text. A maintained WhatsApp path will not replace reliable service, but it can make a suitable customer’s first question much easier to start.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "independent-professional-google-business-profile-website-india",
+    title:
+      "Should an independent professional have a separate Google Business Profile? A website guide for India",
+    description:
+      "Decide when an independent professional needs a dedicated Google Business Profile, then make the linked website clear, accurate, and useful for enquiries.",
+    category: "Website foundations",
+    publishedAt: "2026-09-27",
+    readingMinutes: 8,
+    image:
+      "https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "An independent professional speaking with a client across a desk in a bright office",
+    keywords: [
+      "independent professional Google Business Profile website India",
+      "separate Google Business Profile for consultant India",
+      "individual practitioner website and Google Maps profile India",
+      "freelancer Google Business Profile eligibility India",
+    ],
+    sections: [
+      {
+        heading: "Start with the real customer relationship, not the profile name",
+        paragraphs: [
+          "A separate Google Business Profile can make sense for an independent professional whose name is what a customer searches for and who is genuinely available to be contacted at the verified location during the stated hours. Google’s current practitioner guidance uses examples such as doctors, lawyers, financial planners, and real-estate agents, but the useful question for any consultant, tutor, designer, or advisor is simpler: does this person personally deliver the public-facing service and have their own customer relationship? A support employee, lead-generation agent, or back-office colleague should not be given a profile simply to create more map results.",
+          "Do not use a profile as a substitute for deciding how the business is presented in the real world. If customers know and contact the practice or studio as one organisation, the website, signage, enquiry replies, and Google presence should make that clear. If they choose a named professional for their expertise, the website should introduce that person plainly and explain their relationship to any larger firm. This protects customers from arriving through one name and discovering a different business, contact person, or service promise when they click through.",
+        ],
+      },
+      {
+        heading: "Use Google’s practitioner rules to avoid duplicate or misleading listings",
+        paragraphs: [
+          "Google says an individual practitioner should have a dedicated profile only when they are public-facing and can be contacted directly at the verified location during the hours shown. It also says a practitioner should not make multiple profiles for different specialisations. That means a tax adviser who also offers bookkeeping does not need one Maps listing for each service, and a consultant should not create city-by-city profiles merely because their website has pages for several service areas. One accurate profile is easier to keep current and less confusing for people comparing options.",
+          "Where several public-facing practitioners work at the same location, Google’s guidance allows a profile for the organisation and separate profiles for the practitioners. The practitioner profile should use the person’s name only, not a mash-up of the person and company name. If one professional is the only public-facing practitioner at a branded location, Google recommends a single shared profile in the brand-and-practitioner format instead. Before changing anything, search Maps in a private browser window for the person, organisation, address, phone number, and old business names. Claim or resolve an existing listing instead of creating a near-duplicate that divides reviews and enquiries.",
+        ],
+      },
+      {
+        heading: "Make the website answer the question the Maps result creates",
+        paragraphs: [
+          "A Maps visitor usually wants to know three things quickly: who will help me, what kind of work do they take on, and how do I start? Give the linked website a page that answers those questions before asking for a detailed brief. For a solo architect, that might mean a short introduction, the types of renovation projects accepted, the cities or consultation format served, and a request-consultation button. For a freelance accountant, it could state whether the practice handles individual returns, small-business compliance, or both, along with a clear explanation that final scope follows an initial review.",
+          "Keep names, phone numbers, hours, service area, and the business relationship consistent with the profile. A person listed independently on Google should not land visitors on a generic agency home page where their role is impossible to find. Conversely, do not make a personal site imply that the professional owns the organisation if they work within it. Add a visible line such as ‘Independent consultant working with Studio Name’ or ‘Appointments are provided through Practice Name’ when that is the reality. Clarity is more valuable than trying to pack every qualification, service, and locality into one heading.",
+        ],
+      },
+      {
+        heading: "Design the enquiry path for a professional service, not an impulse purchase",
+        paragraphs: [
+          "Many independent services need a small qualification step before an appointment can be confirmed. The page can say ‘Request a consultation’ rather than ‘Book now’ when project fit, location, documents, conflicts, or availability must be checked. Ask only for the details needed to choose the next step: name, preferred contact method, a short description, preferred time, and locality if in-person work matters. Explain what happens after submission, who responds, and whether the request is pending or confirmed. That avoids an enquiry form accidentally promising a meeting the professional has not accepted.",
+          "Put a normal contact option near the form for visitors who have a time-sensitive but suitable question. Test the whole path on a phone: the Google website link, page heading, phone link, form labels, confirmation message, notification, and reply template. Use real test details, then delete them from any shared inbox or spreadsheet according to the business’s normal process. Do not ask strangers to upload identity documents, financial records, health information, or other sensitive material through a broad first-contact form. Explain a safer next step if those details become necessary after the initial conversation.",
+        ],
+      },
+      {
+        heading: "Review the profile and website together as the practice changes",
+        paragraphs: [
+          "A profile decision is not permanent. Review it when the professional joins or leaves an organisation, moves to a new verified location, stops meeting customers in person, changes public hours, or hands enquiries to a different team. Google’s broader eligibility guidance is based on in-person customer contact during stated hours; an online-only freelancer should not create a Business Profile just to gain a Maps listing. Their website can still be useful, but its discovery plan needs to rely on other channels that accurately match how they work.",
+          "Set a quarterly reminder to compare the public Google result with the first page a customer reaches. Check for duplicate names, incorrect office details, stale staff photos, outdated services, broken enquiry links, and wording that overstates availability. Keep a short note of the questions people ask after arriving from Google. If several visitors ask whether consultations are remote, whether a named professional will respond, or what happens next, improve that answer on the website. A well-matched profile and website will not manufacture trust; it makes the information a real customer needs easier to verify.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "google-business-profile-appointment-link-local-service-business-india",
+    title:
+      "How to set up an appointment link on Google Business Profile for a local service business in India",
+    description:
+      "Choose, test, and maintain a Google Business Profile appointment link that takes local customers from Search or Maps to a clear request or booking journey.",
+    category: "Website foundations",
+    publishedAt: "2026-09-26",
+    readingMinutes: 8,
+    image:
+      "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "An independent professional reviewing an appointment schedule on a laptop with a client",
+    keywords: [
+      "Google Business Profile appointment link local service business India",
+      "add booking link Google Maps small business India",
+      "local service website appointment request page India",
+      "Google Maps booking link for freelancer India",
+    ],
+    sections: [
+      {
+        heading: "Decide whether the customer can book or only request availability",
+        paragraphs: [
+          "An appointment link on a Google Business Profile can be a useful hand-off for a salon, tutor, consultant, clinic, repair professional, or freelance service. It should not, however, make a promise the business cannot operationally keep. Start by naming the real outcome of the page. If a customer can select an available slot that is genuinely reserved, call it a booking. If travel area, job details, a deposit, or staff confirmation still affects the answer, the honest outcome is a request for availability or an appointment request. This distinction protects both the customer and the person who will receive the enquiry.",
+          "Write down the smallest set of facts needed before a date can be confirmed. A home-visit electrician may need the locality, job type, and preferred window. A freelance designer may need a brief before a discovery call is accepted. A music teacher may be able to offer a trial slot immediately, but only for the age groups and formats they actually teach. Do not label an enquiry form ‘Book now’ simply because it looks more decisive. The button, thank-you message, WhatsApp reply, and staff process should all describe the same stage of the journey.",
+        ],
+      },
+      {
+        heading: "Send the action link to one focused page on your own website",
+        paragraphs: [
+          "Google’s current Business Profile guidance lets eligible businesses add appointment links and, where more than one link exists, set a preferred one. Choose a stable URL on the business website rather than a short-lived campaign page, a link-tree with several competing buttons, or a home page that forces a visitor to hunt for the next step. A clear route such as /book, /request-visit, or /consultation gives the customer an immediate answer to the action they selected on Search or Maps.",
+          "The first screen should repeat the service and set the expectation in plain language. For example: ‘Request a home AC service visit in South Pune’ followed by ‘We confirm locality and available time before scheduling.’ For a remote professional: ‘Request a 30-minute project-fit call’ followed by ‘Share a short brief; we reply with the next available consultation option.’ Put the business name and a normal contact option nearby. A person coming from Google should never wonder whether they reached the same business or whether a request has disappeared into an unmonitored form.",
+        ],
+      },
+      {
+        heading: "Make the form short enough to finish on a phone",
+        paragraphs: [
+          "Ask only for information that helps give the right next answer. Name, preferred contact method, service, locality when travel matters, and a short description are often sufficient. Mark required fields visibly, use labels rather than placeholder-only instructions, and explain any format errors beside the field. If you need a photo, appliance model, floor plan, medical information, identity document, or detailed financial information, do not quietly make it a generic first-form requirement. Explain why it is needed, let the customer share it through an appropriate secure process, or collect it only after the service fit is confirmed.",
+          "Make the confirmation useful too. State what the business received, whether the appointment is confirmed or pending, the expected response window only if someone owns it, and an alternate contact route for a time-sensitive request. A message such as ‘We have received your appointment request; we confirm service area and available slots before booking’ avoids the common conflict where a customer assumes a technician is on the way. Test the page with a real phone, a keyboard, and a slow connection before placing the link on the profile.",
+        ],
+      },
+      {
+        heading: "Add and test the link in the Business Profile",
+        paragraphs: [
+          "In Google Search, manage the Business Profile and look for the relevant transaction type, such as Booking; in Google Maps, use Edit profile and the relevant transaction type. Add the full HTTPS URL, save it, then view the public profile while signed out or in a private browser window. Google notes that some links can also be supplied by third-party providers or automated data. Review every visible option so that an old provider, duplicate booking route, or outdated service is not sending customers elsewhere. Where Google offers it and the business has several valid options, mark the maintained first-party route as the preferred link.",
+          "Do not assume a saved URL works because it opens on the owner’s laptop. Tap it from a phone on mobile data. Check that it does not demand a sign-in before explaining the service, load an expired offer, show a different business name, or lead to a page that has been removed. Complete a harmless test request and check the notification, response owner, and calendar or spreadsheet record. If the business changes booking software, staff member, service area, or domain, this test belongs on the migration checklist—not several weeks later when customers report the problem.",
+        ],
+      },
+      {
+        heading: "Use the first requests to improve the website, not inflate claims",
+        paragraphs: [
+          "For two weeks after launch, keep a small log of the questions that arrive through the link. Repeated locality questions may mean the service-area line is too vague. Requests for services you do not offer may mean the profile category, page heading, or menu needs correction. People asking whether a slot is confirmed may mean the form and automated response need plainer language. These are operations signals, not a reason to add every phrase a customer uses to the page or to promise faster response than the business can sustain.",
+          "Review the appointment page whenever hours, availability, pricing, contact ownership, or policies change, and compare it with the website field, Google Business Profile, WhatsApp greeting, and the person answering enquiries. Google’s broader search guidance still favours helpful, people-first content over pages made simply to attract visits. For a local business, that is a practical standard: a Google Maps action should take a real customer to a page that answers the next question and makes one truthful next step easy. A maintained appointment link will not replace reliable service, but it can make the path from discovery to a suitable enquiry much less fragile.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "paperchai-google-maps-service-area-website-workflow-india",
     title:
       "PaperChai workflow: turn a Google Maps listing into a service-area website in India",
