@@ -19,6 +19,383 @@ export interface BlogArticle {
 /** Editorial source of truth. Scheduled publishing adds a reviewed article here. */
 export const blogRegistry: readonly BlogArticle[] = [
   {
+    slug: "transfer-google-business-profile-primary-ownership-agency-india",
+    title:
+      "How to transfer Google Business Profile primary ownership from an agency in India",
+    description:
+      "A calm handover checklist for an Indian local business when an agency or former employee controls its Google Business Profile and website links.",
+    category: "Local growth",
+    publishedAt: "2026-10-04",
+    readingMinutes: 7,
+    image:
+      "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "Two professionals reviewing a website and account access checklist together",
+    keywords: [
+      "transfer Google Business Profile primary ownership from agency India",
+      "Google Business Profile former employee access local business India",
+      "business owner control Google Maps listing website India",
+      "Google Business Profile seven day primary owner transfer India",
+    ],
+    sections: [
+      {
+        heading: "Make the business owner the long-term controller, not the agency login",
+        paragraphs: [
+          "A Google Business Profile is a customer-facing business asset. It can carry the business name, phone number, reviews, website link, opening hours, directions, and booking or enquiry routes. If a web agency, marketing freelancer, or former employee set it up, that person can help manage it, but the actual business owner should retain a Google account with meaningful control. Google’s current ownership guidance says that authorised representatives should encourage the owner to own the profile and add representatives as managers. It also says the website and phone number on the profile should be the business’s single authoritative, verifiable details and that website content must be owned and managed by the business owner.",
+          "This is not about distrusting a helpful contractor. It is a continuity measure. A salon, home tutor, clinic, photographer, repair service, or consultant should be able to update its own public contact route if a relationship ends or the person who handled marketing is unavailable. Do not solve access uncertainty by sharing one Google password with several people. Google provides separate owner and manager roles, so each person can use their own account and the business can see who has access.",
+        ],
+      },
+      {
+        heading: "Check who has access before changing anything",
+        paragraphs: [
+          "Sign in with an account that already has profile access, open the Business Profile, then choose More, Business Profile settings, and People and access. Write down the current primary owner, other owners, managers, and any pending invitations in a private operational note. Do not paste email addresses, recovery codes, or passwords into a website document, public spreadsheet, or WhatsApp group. The immediate question is simple: does a recoverable business-owner account appear as an owner, and does the profile’s website field lead to the business’s real public site?",
+          "If the business runs several locations, the setup may use a Business Profile group. The same principle applies, but access at group level can affect multiple current and future profiles. Pause before removing anyone from a group that you do not understand. For one independent local business, focus first on the single profile customers see on Search and Maps. Take screenshots of the access list and key public fields for the owner’s records, then ask the current primary owner to cooperate with a documented handover.",
+        ],
+      },
+      {
+        heading: "Add the owner first and plan around Google’s seven-day rule",
+        paragraphs: [
+          "The current primary owner can invite the business owner from People and access, selecting Owner rather than Manager. The owner should accept the invitation using an account they can recover with a business-controlled email and two-factor method. Check the invitation has been accepted before discussing any removal. A profile can have multiple owners but only one primary owner, and only an owner can change other users’ access roles. This overlap is useful: it leaves a safe path back while the handover is being confirmed.",
+          "Do not expect to make a newly invited person primary owner immediately. Google says new owners and managers must wait seven days before they can transfer primary ownership, remove other owners or managers, or use certain sensitive profile actions. Put the seven-day date on a calendar and avoid repeatedly changing roles while the restriction is active. A failed transfer attempt during that period is usually a timing limitation, not a reason to create a duplicate profile or start changing business details at random.",
+        ],
+      },
+      {
+        heading: "Transfer primary ownership, then keep only the access that is needed",
+        paragraphs: [
+          "After the waiting period, the current primary owner opens People and access, selects the business owner, changes the access role to Primary owner, and saves. Google’s guidance notes that transferring primary ownership when a business changes hands helps retain the profile’s business information, including reviews. The business owner should then sign in independently, confirm they are shown as primary owner, and test that they can view the public profile and its management controls. Do this before anyone removes an agency or former staff member.",
+          "Once the owner has confirmed control, decide what the former manager still needs. A trusted agency doing regular updates may remain a Manager, which lets it handle many daily profile tasks but not add or remove users or remove the profile. An agency that is no longer engaged should be removed by an owner through the same People and access screen. Do not remove a helpful person prematurely if their knowledge is needed to complete an active website, booking, or advertising change; agree a short handover date and a clear scope instead.",
+        ],
+      },
+      {
+        heading: "Verify the customer journey, not only the role label",
+        paragraphs: [
+          "Primary ownership is worthwhile only if the public information is accurate. From a private browser or a phone not signed in to the business account, open the profile’s website link, call button, directions link, and any booking or enquiry action. The website should describe the real service, location or service area, and next contact step without sending customers to a temporary preview, a former agency domain, or an unmonitored form. If the business uses WhatsApp, test the public link and make the expected response time clear on the site.",
+          "Compare the business name, phone number, hours, and website across the Google profile, website, social bio, and printed QR code or signage. Correct proven mismatches one at a time and record what changed. Do not promise that a change of profile ownership will increase Maps rankings; it is an access and continuity task, not a ranking tactic. The practical outcome is more valuable: a customer reaches information the business itself can maintain.",
+        ],
+      },
+      {
+        heading: "Keep a small owner-controlled access record",
+        paragraphs: [
+          "Store a short private record with the primary-owner account, at least one backup owner, the domain registrar, DNS contact, website platform account, renewal dates, and who handles public enquiries. Keep secrets in a proper password manager or another secure business process, not in the record itself. Review the list when a staff member leaves, a vendor contract ends, the business changes phone number, or the domain is renewed. For a freelancer, this can be a one-page checklist; for a multi-location business, assign a responsible owner for each asset.",
+          "If the business has no route to the current owner, do not impersonate them, create a duplicate listing, or publish misleading edits. Use Google’s ownership-request process and prepare evidence that the requester is authorised to represent the business. Keep the website current while the request is handled, because it remains the clearest owned place to explain services and provide a working contact route. A deliberate handover prevents a marketing account from becoming an avoidable interruption to real customer enquiries.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "google-business-profile-social-media-links-unavailable-india",
+    title:
+      "Google Business Profile social media links unavailable in India: what a local business website should do",
+    description:
+      "If the Social profiles field is missing from a Google Business Profile in India, keep customers on a clear, owned path through the website and verify every public link.",
+    category: "Local growth",
+    publishedAt: "2026-10-03",
+    readingMinutes: 7,
+    image:
+      "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A smartphone showing social media apps beside a laptop displaying a business website",
+    keywords: [
+      "Google Business Profile social media links unavailable India",
+      "Social profiles field missing Google Business Profile India",
+      "add Instagram link to local business website India",
+      "Google Maps profile social media links local service business India",
+    ],
+    sections: [
+      {
+        heading: "Treat a missing Social profiles field as an availability limit, not a website failure",
+        paragraphs: [
+          "A local business owner may see Instagram, Facebook, YouTube, or LinkedIn links on some Google Business Profiles and expect the same editing field on their own listing. Google’s current help page says social media links are available only in selected regions and may not be available on a particular profile. That means an absent Social profiles field is not, by itself, evidence that the profile is unverified, the website is broken, or the owner has missed a required SEO step. The feature can also vary by profile and Google may add links automatically in some cases.",
+          "Do not spend hours changing business categories, adding speculative schema markup, or creating duplicate listings to force the option to appear. Those actions can introduce more serious customer and policy problems. Instead, check the profile while signed in as an owner: choose Edit profile, then Contact, and look for Social profiles. If it is not present, record the date and move on to the links the business controls. Recheck occasionally after a meaningful Google Business Profile interface change, but do not treat availability as a ranking promise or a launch blocker.",
+        ],
+      },
+      {
+        heading: "Make the website the dependable hub for every public channel",
+        paragraphs: [
+          "A business website is the clearest place to link to the official social accounts because the owner controls the page, the wording, and the next customer action. Put a small, labelled social-links section on the contact page or footer, not a row of unexplained icons alone. Use the exact public profile URLs for accounts the business actively maintains. A visitor should be able to tell whether a link goes to Instagram, Facebook, LinkedIn, YouTube, or another channel before opening it, and keyboard users should be able to reach and identify every control.",
+          "Keep the primary journey simple: Google Business Profile to the canonical website, then website to an enquiry, call, booking, or social channel when it adds useful proof. The site should still state the service, location or service area, hours or response expectation, and main contact route without requiring someone to search social posts for basic facts. For example, a home baker can show current work on Instagram but should explain delivery area, order lead time, and how to enquire on the website. Social content is supporting evidence, not a substitute for maintained business information.",
+        ],
+      },
+      {
+        heading: "Audit the official accounts before linking to them",
+        paragraphs: [
+          "Check that names, logos, phone numbers, and locality statements do not contradict the website or Google Business Profile. A mismatch can make a legitimate business feel uncertain: a salon with one phone number on Maps, another in its Instagram bio, and a third on the website asks the customer to guess which route works. Where an account is personal, disclose the relationship honestly rather than presenting a freelancer’s private profile as a company support desk. Never publish customer contact details, appointment information, or private messages just to make an account look active.",
+        ],
+      },
+      {
+        heading: "Use link formats that remain understandable and maintainable",
+        paragraphs: [
+          "Copy each profile URL from the public account in a private browser, then test it on a phone and desktop without being signed in. Avoid links that only work for the account owner, redirect to a login-only screen without explaining why, or point to a single temporary post. Google’s documented formats for supported social links use normal public profile addresses; the same principle makes website links more durable. Use the public username-based URL when the platform provides one, and avoid adding tracking parameters that expose a customer or make a simple link difficult to share.",
+          "Test the complete handoff rather than the icon alone. From the Google Business Profile, tap the website, open a social link, return to the site, and try the main enquiry route. Check this over mobile data if possible. If the business uses WhatsApp for enquiries, make that route explicit and test the greeting text, responsible recipient, and usual response time. A social link can bring attention, but an owner should know exactly where a prospective customer lands and whether the next action leads to a real person.",
+        ],
+      },
+      {
+        heading: "Do not invent signals that Google has not promised to use",
+        paragraphs: [
+          "Avoid promises such as ‘link Instagram to rank on Maps’ or ‘add every social network for better local SEO’. A page packed with irrelevant profile links is harder for customers to use and gives the business another list to maintain. Select channels that serve a clear customer purpose: a photographer might show a portfolio, a tutor might share schedule updates, and a consultant might publish professional insights. If a channel does not help a customer decide or contact the business, it does not need prominent space on the website.",
+        ],
+      },
+      {
+        heading: "Keep a quarterly public-link check",
+        paragraphs: [
+          "Set a quarterly reminder to open the Business Profile, homepage, contact page, and every linked social account as a customer would. Confirm that the website field on Google still points to the canonical public domain, social links open the correct account, and the call, enquiry, or booking path works. Repeat after a rebrand, staff departure, phone-number change, business move, account recovery, or domain change. Keep a private list of account owners and recovery routes; do not put passwords, recovery codes, or private account details in the website or public editorial content.",
+          "If the Social profiles editor later becomes available, add only the same verified links already maintained on the website, then test the saved result and leave the website hub in place. Google’s own help documentation notes that it does not provide performance metrics or click tracking for these links, so judge the setup by whether a customer can reliably recognise the business and take the next informed step. That is a more useful standard than waiting for one optional profile field to appear.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "paperchai-custom-domain-launch-checklist-local-business-india",
+    title:
+      "PaperChai workflow: a custom-domain launch checklist for a local business website in India",
+    description:
+      "Connect a custom domain to a PaperChai site, verify the public customer journey, then update Google and contact links with a calm launch checklist.",
+    category: "PaperChai guides",
+    publishedAt: "2026-10-02",
+    readingMinutes: 8,
+    image:
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A laptop displaying a business website beside a notebook and coffee",
+    keywords: [
+      "PaperChai custom domain launch checklist local business India",
+      "connect custom domain to small business website India",
+      "custom domain website checklist freelancer India",
+      "update Google Business Profile after website domain change India",
+    ],
+    promotionCaption:
+      "A custom domain is only the beginning of a launch. Use this PaperChai checklist to connect the address, test the live customer journey, and update the links people actually use—without breaking enquiries along the way.",
+    sections: [
+      {
+        heading: "Choose the domain that customers can say and type",
+        paragraphs: [
+          "A custom domain is most useful when it makes a local business easier to recognise and reach. Choose an address that matches the public business name closely, is easy to dictate over a phone call, and does not create a different identity from the Google Business Profile, invoice, or WhatsApp Business account. A short `.in` or `.com` can both work; the important decision is ownership and clarity, not an artificial promise that one extension ranks better. Avoid names that borrow a competitor’s brand, add a string of city names, or imply a qualification the business does not have.",
+          "Register the domain in an account the business owner can recover, using a monitored email address and a payment method the business controls. Record the registrar, renewal date, DNS access, and two-factor recovery route in a private business note. A web agency or former employee can be given appropriate access, but should not be the only person capable of renewing the address. Losing a domain can break enquiry links, email addresses, QR codes, and the public trust built around a local name.",
+        ],
+      },
+      {
+        heading: "Connect the address in PaperChai before publicising it",
+        paragraphs: [
+          "Publish the PaperChai site before changing DNS. In the dashboard, add the custom domain in the site settings and use the exact DNS records PaperChai provides at the registrar. Copy values carefully, including any host name, rather than guessing from a similar setup guide. Keep unrelated mail records intact. DNS changes can take time to propagate, so do not delete a working address, announce the new one, or repeatedly change records while the connection is still being verified. A single clean configuration is easier to diagnose than several competing records.",
+          "When PaperChai confirms the connection, open both the bare domain and the `www` version in a private browser. Decide which one is the canonical public address and verify the other resolves or redirects consistently. Check that the browser shows a secure HTTPS connection. Google’s current guidance treats a secure, mobile-friendly site as part of a good user experience; a successful domain connection is not enough if customers see a certificate warning, a blank page, or an old site from their saved link.",
+        ],
+      },
+      {
+        heading: "Read the first screen like a customer who knows nothing yet",
+        paragraphs: [
+          "On a phone using mobile data, open the new domain and give yourself ten seconds to answer: who is this, what service do they offer, where or how is it delivered, and what should I do next? Check the business name, service scope, locality or online format, hours, price guidance where appropriate, and the main enquiry action. A custom domain should not be a polished signpost that sends people to vague copy or an unmonitored form. Rewrite the first message if it makes a reasonable customer work to understand the offer.",
+          "Then test the real interaction. Tap the phone link, WhatsApp link, email link, form, and booking route that the business expects customers to use. Send one harmless test enquiry only when the normal workflow permits it, and remove the test using the business’s usual process. Confirm the notification goes to a responsible person and that confirmation language does not call a request a booked appointment. Test keyboard focus on a desktop browser too; a link that works only by tapping a visual icon excludes customers and is easy to miss in an owner-only check.",
+        ],
+      },
+      {
+        heading: "Move public links in a deliberate order",
+        paragraphs: [
+          "Once the new domain works, update the sources customers are most likely to use: the Google Business Profile website field, Maps or booking links where applicable, WhatsApp Business profile, social bio, email signature, and the QR code at a reception desk or on a brochure. Change one known link at a time and record the date. The Google Business Profile should point to the public, canonical PaperChai address—not a dashboard URL, a temporary preview, or a link shortened by an unknown service. Keep the old working URL available until the new path has been tested everywhere it matters.",
+          "Do not create several nearly identical domains for every suburb, service, or spelling variation. They create a renewal burden and can confuse customers about which website is official. One maintained address with clear service and coverage pages is usually more useful. If an older domain already has printed material or search visibility, plan a proper redirect before retiring it. A redirect preserves the customer’s route; a dead link turns a referral or Google result into a frustrating dead end.",
+        ],
+      },
+      {
+        heading: "Check search visibility without mistaking it for a ranking promise",
+        paragraphs: [
+          "After the link update, search the exact business name and city while signed out or in a private browser. Verify that the public Google profile leads to the new address and still displays the right business information. Do not expect an immediate ranking jump from a domain connection. Google may need time to discover and crawl a new address, and search placement depends on far more than a domain name. The immediate goal is a reliable customer handoff, not a promise about where a business will appear for every local search.",
+          "If the website is new or materially changed, add it to the business-owned Google Search Console property and submit the sitemap only after the canonical domain is stable. Use URL Inspection for a significant page if needed, but do not repeatedly request indexing for an unchanged page. Google’s documentation recommends people-first content, so use this launch moment to correct unclear service details, stale photos, and inaccurate claims rather than fill pages with repeated city phrases. A useful page helps both a visitor and a search system understand what the business actually does.",
+        ],
+      },
+      {
+        heading: "Put renewal and maintenance on the owner’s calendar",
+        paragraphs: [
+          "Set two reminders: one several weeks before domain renewal and one monthly for a five-minute public check. Open the canonical domain, the Google Business Profile link, and the main enquiry or booking route. Review after changing staff, hours, service areas, pricing, email, WhatsApp number, or the person who handles DNS. Keep credentials and recovery codes out of public notes, but make sure the business owner can find them when a contractor is unavailable. Small maintenance habits are much cheaper than discovering a lapsed domain after a customer reports it.",
+          "This is a PaperChai workflow because the platform gives a local business a place to publish and keep its customer path current, but the business remains responsible for the domain and public facts. A memorable address will not create trust on its own. It earns its value when every route—Google, a recommendation, a QR code, or a WhatsApp profile—leads to an accurate, usable site where a real customer can take the next informed step. That is the launch standard worth maintaining after the announcement is over.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "google-search-console-url-inspection-local-business-website-india",
+    title:
+      "How to use Google Search Console URL Inspection after updating a local business website in India",
+    description:
+      "Use Search Console URL Inspection to check an important edited page, fix a real indexing obstacle, and request a recrawl without expecting an instant ranking change.",
+    category: "Local growth",
+    publishedAt: "2026-10-01",
+    readingMinutes: 8,
+    image:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A business owner reviewing website performance information on a laptop",
+    keywords: [
+      "Google Search Console URL Inspection local business website India",
+      "request indexing updated service page India",
+      "check Google indexed version local service website",
+      "Search Console live URL test freelancer website India",
+    ],
+    sections: [
+      {
+        heading: "Use URL Inspection for a meaningful page change",
+        paragraphs: [
+          "When a local service business changes a page that customers depend on, it is reasonable to check how Google can see it. Perhaps a salon has corrected its appointment hours, a repair team has narrowed its service area, or an independent accountant has replaced an old contact route. Google Search Console’s URL Inspection tool is useful for one important URL at a time. It can show what Google knows about the indexed version and let the owner test the live page. It is not a button for making a page rank or for refreshing every small wording tweak.",
+          "Start with the page that has the clearest customer consequence: a primary service page, contact page, booking page, or location page. Do not use it on a private preview, a thank-you page containing enquiry details, or several near-identical suburb pages. Confirm first that the public page is genuinely ready. Its service, locality, hours, price guidance, and enquiry wording should already be accurate. A crawl request only helps Google revisit the page; it cannot make an unfinished or misleading page useful to someone searching.",
+        ],
+      },
+      {
+        heading: "Inspect the exact public URL in the right property",
+        paragraphs: [
+          "Open the Search Console property that covers the live domain, then paste the full public URL into the inspection bar. Copy it from the browser rather than reconstructing it from memory. A difference such as `http` versus `https`, `www` versus non-`www`, an extra trailing path, or a staging subdomain can mean you inspect a different page. The person doing this needs owner or full-user access to request indexing, so the business should retain that access rather than leaving it only with a departing developer or agency.",
+          "Read the initial result as a record of Google’s last known version, not a diagnosis of the page this minute. Note whether the URL is on Google, when it was last crawled, and whether Google selected the expected canonical URL. If the last crawl predates the edit, it is normal that the indexed details are old. If Google selected another canonical page, pause before requesting indexing repeatedly: duplicate content, redirects, or conflicting canonical signals may need attention first. Keep a short operational note of the URL, change made, and date rather than relying on memory.",
+        ],
+      },
+      {
+        heading: "Run the live test before asking Google to revisit it",
+        paragraphs: [
+          "Choose Test live URL after an important update. This asks whether Google can reach the page now; it does not replace the indexed result with a new one. Look for the basics a customer also needs: a successful page fetch, crawl permission, indexing permission, and a visible page that is not blocked behind a login or broken by an error. If the page fails the live test, request indexing later, after the actual problem is corrected. Repeated requests do not repair a 404, a server error, a `noindex` directive, or a robots rule.",
+          "Then open the page yourself on a phone. Search tools cannot judge whether the customer can understand it. Verify the business name, service scope, service area or appointment format, and contact action. Submit a harmless test enquiry only if the normal workflow permits it, and remove that test data using the business’s usual process. A local business can easily spend time on an indexing status while missing a more immediate problem, such as a dead WhatsApp link or a booking form that calls an enquiry a confirmed appointment.",
+        ],
+      },
+      {
+        heading: "Fix the smallest verified obstacle, not the entire website",
+        paragraphs: [
+          "If the report identifies a specific problem, make the narrowest safe correction. For a URL that has moved, use the appropriate permanent redirect and make internal links point to the new public page. For a page blocked from indexing by mistake, remove the blocking instruction only after confirming the page is intended to be public. For an accidental canonical mismatch, make the preferred public version consistent in the page, links, and site setup. Do not solve a thin page by cloning it across cities or by filling it with repeated service phrases.",
+          "Some results are not faults. A newly published page may simply not have been discovered or crawled yet. A page can be crawled without appearing for every search, and a page shown in Google is not guaranteed a fixed position for every person or city. Google’s systems decide whether and when to include content based on many signals, including usefulness. Treat the tool as evidence for technical hygiene and clear publishing, not as proof that a particular keyword should bring enquiries tomorrow.",
+        ],
+      },
+      {
+        heading: "Request indexing once the live page is ready",
+        paragraphs: [
+          "When the live test is sound and the page has a meaningful new change, choose Request indexing. Use this sparingly for a small number of URLs. Google documents a quota for individual requests and notes that repeating the request for the same unchanged URL does not make crawling faster. One request after fixing the page is enough. For a broader launch or many newly added pages, make sure the sitemap includes the correct canonical URLs and is submitted in Search Console; that is the better discovery route than submitting pages one by one.",
+          "Set a realistic expectation with the business owner. Crawling can take days or weeks, and a request does not guarantee immediate indexing or a search-result placement. Do not make new pages just to consume the request quota. Instead, improve the page a customer would actually use: state the service clearly, say where or how it is delivered, use accessible contact controls, and link to it from a relevant public page. Those are useful changes whether Google revisits the URL tomorrow or later.",
+        ],
+      },
+      {
+        heading: "Keep a calm monthly inspection routine",
+        paragraphs: [
+          "Most independent professionals do not need to inspect every URL weekly. Once a month, check the homepage plus one page that has materially changed or receives meaningful search traffic. Record the indexed status, last crawl date, live-test outcome, and one action taken. Review the sitemap after publishing a new group of pages, and use the Page Indexing report for broader patterns rather than treating one URL as a complete site audit. Keep the log free of customer names, messages, or enquiry data; page-level operational notes are enough.",
+          "Pair this routine with the customer journey. Open the Google result or Business Profile website link, land on the page, and make sure the next step still matches the real business process. If customers repeatedly ask whether a service covers their locality, whether a consultation is confirmed, or how soon someone replies, clarify the website first. URL Inspection can confirm that Google can reach a page. The practical win comes from keeping that page accurate enough for a local customer to take an informed next step.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "google-business-profile-photos-local-service-website-india",
+    title:
+      "How to choose Google Business Profile photos that support a local service website in India",
+    description:
+      "Plan truthful Google Business Profile photos that help local customers recognise the business, understand the service, and reach a matching website page.",
+    category: "Local growth",
+    publishedAt: "2026-09-30",
+    readingMinutes: 8,
+    image:
+      "https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A small-business owner and client reviewing service plans at a desk",
+    keywords: [
+      "Google Business Profile photos local service website India",
+      "what photos to add to Google Business Profile India",
+      "Google Maps business photos for service business India",
+      "match Google Business Profile photos with business website",
+    ],
+    sections: [
+      {
+        heading: "Use photos to remove a real customer doubt",
+        paragraphs: [
+          "For a local service business, photos are not a decorative afterthought. A customer who finds a salon, tutor, repair team, studio, consultant, or freelance professional on Google may be asking: is this a real business, and is it the service I need? The right images can make the next website click feel safer. The wrong ones—a stock-looking lobby, an old logo, a filtered job photo, or an unrelated product—can create a gap between the Google result and the experience that follows.",
+          "Choose every image around one decision a customer must make. A customer visiting a physical location may need to recognise the entrance, signage, parking-side approach, or reception. Someone hiring a home-service provider may need evidence of the work environment, equipment, or the kind of job the team actually takes on. A freelance designer or accountant working by appointment may need a clear professional portrait, a truthful workspace image, and a website page that explains whether meetings are remote, in person, or both. Do not manufacture a storefront for a business that does not have one.",
+        ],
+      },
+      {
+        heading: "Build a small, current photo set before choosing a cover image",
+        paragraphs: [
+          "Start with a short audit of what is public now. Search the business name and city while signed out or in a private browser window, then compare the profile photos with the first page of the website. Make a list of images that are inaccurate, out of date, duplicated, or likely to confuse someone: an old address, a former employee, a service no longer offered, or a photo that belongs to a different branch. Keep in mind that customer-contributed photos can appear too, so the aim is not to control every image but to make the business-owned information clear and current.",
+          "For a customer-facing location, collect a modest set: a recognisable exterior, a few honest interior or work-area views, the people or equipment that are appropriate to show, and examples of the actual service. For a service-area business, focus on work that can be represented truthfully without exposing a customer’s home, documents, vehicle number, or personal information. Ask permission before photographing clients, staff, or premises. Photograph one useful detail at a time. A bright, in-focus picture of a real consultation desk or completed repair is more valuable than a collage that makes it hard to see what the business does.",
+        ],
+      },
+      {
+        heading: "Keep the logo, cover photo, and website roles distinct",
+        paragraphs: [
+          "Use the logo to help returning customers recognise the business name, not to carry a full service brochure in tiny type. Use the cover photo as a clear visual introduction to the business: a salon might use its welcoming working space, a tuition centre its real classroom, and a photographer a representative piece of work they have permission to show. Google says choosing a cover image does not guarantee that it will be displayed first, so do not place essential contact details, a limited-time offer, or a complicated message inside it. Those facts belong in maintained profile fields and on the website.",
+          "The website should do the deeper explanatory work. Match its hero image and opening statement to the expectation created on Google, then give the visitor the information a photo cannot: service scope, locality or travel boundary, price guidance when useful, availability expectations, and a clear way to enquire. If the profile shows a real clinic consultation room but the website leads to a generic agency page, the visitor may hesitate. If a home tutor uses a headshot on Google, the website should identify the tutor, subjects, teaching format, and contact path without implying an unverified institution.",
+        ],
+      },
+      {
+        heading: "Prepare files that are easy to publish and honest to inspect",
+        paragraphs: [
+          "Before uploading, keep an original copy of each approved image in a business-owned folder with a simple name and date, such as `exterior-main-entrance-2026-09.jpg`. This is helpful when a phone is replaced, a freelancer leaves, or an old image needs to be found quickly. Google’s current guidance accepts JPG and PNG images between 10 KB and 5 MB, recommends 720 by 720 pixels, and sets a 250 by 250 pixel minimum. Export a clean file rather than taking a screenshot of a social-media post with compressed text and borders.",
+          "Do not use filters, retouching, or AI changes that make the place, person, result, or scale of work look unlike reality. Correcting exposure or cropping a distracting edge is different from adding a crowd, changing the condition of a property, or turning an ordinary workspace into a luxury showroom. Avoid visible phone numbers, prices, QR codes, and claims embedded in photos; they age quickly and may not be the clearest or permitted way to communicate. Check the live image after upload rather than assuming its crop, quality, or approval status will be identical to the file on your device.",
+        ],
+      },
+      {
+        heading: "Run a quarterly photo-and-website check",
+        paragraphs: [
+          "After adding photos, test the customer journey on a phone over mobile data. Open the public Google profile, view the logo, cover, and recent business photos, tap the website link, and ask whether the page answers the question the image raised. Check that the business name, location or service area, people shown, services, and contact route agree. Then test one enquiry or booking path with harmless details. A strong photo set cannot compensate for a broken form, an old number, or a page that does not explain whether a request is confirmed.",
+          "Review the set every quarter and whenever the business moves, renovates, changes staff, expands or reduces service areas, changes its brand, or stops offering a photographed service. Remove or replace owned images that are misleading, and use recurring customer questions as a guide for the next useful photo or website clarification. Do not treat photo views as proof of revenue or rankings. Their practical job is simpler: help the right person recognise the business, understand the offer, and take an informed next step. That makes the Google profile and website feel like one maintained customer experience rather than two disconnected listings.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "search-console-insights-local-service-website-india",
+    title:
+      "How to use Google Search Console Insights for a local service website in India",
+    description:
+      "Use Google Search Console Insights to spot useful customer searches, review the pages they reach, and improve a local service website without chasing vanity metrics.",
+    category: "Local growth",
+    publishedAt: "2026-09-29",
+    readingMinutes: 8,
+    image:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A business owner reviewing website performance charts on a laptop screen",
+    keywords: [
+      "Google Search Console Insights local business website India",
+      "Search Console Insights for service business India",
+      "find customer search queries local service website India",
+      "Google Search performance report freelancer website India",
+    ],
+    sections: [
+      {
+        heading: "Treat Insights as a question list, not a scorecard",
+        paragraphs: [
+          "A local service website does not need a daily SEO ritual. A tutor, salon, home-repair team, accountant, photographer, or independent designer usually needs a way to notice what real people searched before they arrived—and whether the page answered them. Google Search Console’s Insights report is designed as a simplified view of Search performance. It can show clicks, impressions, leading pages, queries, countries, and items trending up or down. For a small website, that is enough to begin a calm monthly review without building a dashboard or turning every phrase into a new page.",
+          "Start with a sensible expectation. Insights is being introduced gradually, so it may not be visible in every Search Console property. It reports activity from Google Search and is not a record of every enquiry, phone call, Google Maps interaction, Instagram visit, or WhatsApp chat. A low number is not proof that the website failed, especially on a new site or for a narrow local service. Its value is directional: it can reveal what customers associate with the business and where a clear answer is missing.",
+        ],
+      },
+      {
+        heading: "Make sure the right person can see the right property",
+        paragraphs: [
+          "Before reading any report, confirm that the business owner or a trusted maintainer has access to the exact public domain in Search Console. A page on `www`, a non-`www` address, and an old staging or temporary domain can produce different views if the property setup is incomplete. Use the production address that customers see, and keep the ownership method and recovery contact in the business’s own records. Do not give a departing freelancer the only owner access merely because they built the site.",
+          "Then check the Search Console Overview for visible security or indexing notices before interpreting traffic changes. If the site was published this week, give Google time to discover and crawl it; a sitemap and a public, working page help discovery but do not guarantee immediate ranking. For an established site, choose a date range that is long enough to reduce weekday, holiday, and campaign noise. Four weeks is a reasonable starting point for a modest local business; compare it with the preceding period only when the service, season, or marketing activity was roughly comparable.",
+        ],
+      },
+      {
+        heading: "Read queries as evidence of customer language",
+        paragraphs: [
+          "Open the Queries leading to your site card and look for three kinds of searches. First, branded searches such as the business name: these show that people already know the business and want a reliable destination. Second, service-and-place searches such as ‘home tutor in Indiranagar’ or ‘AC service near Baner’: these can show the terms customers use when they do not yet know the business. Third, problem searches such as ‘how to prepare for a GST registration consultation’: these may suggest a useful FAQ, guide, or clearer service explanation. Write down only the phrases that match work the business actually does.",
+          "Do not copy a query into a heading simply because it appeared once. Search Console may group similar queries, and Google’s query data is not a complete census of every searcher. Read the customer intent behind it. If people search a locality the business does not serve, make the service area clearer rather than pretending to cover it. If several searches ask about price, add an honest starting-price explanation or explain what affects a quote. If visitors search for an urgent repair but the team only accepts scheduled work, say that early on the page. This is content improvement, not keyword stuffing.",
+        ],
+      },
+      {
+        heading: "Match each useful query to the page a customer reaches",
+        paragraphs: [
+          "Use the Your content card, then open the more detailed Performance report when a query or page needs investigation. Ask one practical question: did the landing page answer the reason someone clicked? A photographer’s portfolio page may receive searches for ‘birthday photographer in Kochi’, but a visitor still needs package scope, service area, availability expectations, and a clear enquiry route. A freelancer’s homepage may receive ‘website designer for clinic’, but it should not imply healthcare expertise unless that is real work they can show and discuss responsibly.",
+          "Fix the smallest honest gap first. Improve the page title and opening paragraph if the service is hard to identify. Add a short FAQ if the same eligibility, locality, turnaround, or pricing question keeps appearing. Repair a broken phone, booking, or enquiry link if the page gets clicks but the next step fails. Combine thin duplicate pages rather than creating a new page for every suburb or variation. The page should become more useful to a person who arrives from search, even if Google never changes its display of the result.",
+        ],
+      },
+      {
+        heading: "Interpret clicks, impressions, CTR, and position without false certainty",
+        paragraphs: [
+          "An impression means Google showed a link to the site under its own reporting rules; it does not mean the person read the listing or saw it in the same way on every device. A click means they selected a Google result leading to the site. Click-through rate is clicks divided by impressions, while average position is a relative average—not a promise of a fixed rank for everyone in a city. Results vary with location, device, language, recent searches, and the result layout. Use these measures to notice patterns, not to guarantee a place on a results page.",
+          "If impressions rise but clicks do not, inspect the query and the page’s public title and description. The result may be reaching a broader audience than the page serves, or it may not explain its next benefit clearly. If clicks fall, compare the specific pages and queries before changing a successful site wholesale; holidays, closed periods, a revised service area, or normal small-volume variation can matter. Search Console also notes that its newest data can be preliminary. Wait for a meaningful pattern and change one customer-facing thing at a time.",
+        ],
+      },
+      {
+        heading: "Keep a small monthly decision log",
+        paragraphs: [
+          "A 20-minute monthly review is enough for many independent businesses. Record the date range, two or three relevant queries, the pages they lead to, one customer question the page does not answer well, and one planned improvement. Then note what actually changed: perhaps a service-area line was clarified, a price guide was rewritten, a broken form was repaired, or an outdated service was removed. This creates a useful history when a business owner, developer, or marketing partner reviews the site later.",
+          "Pair the report with real operational signals. Ask the person answering calls and messages what customers were confused about, and compare that with the landing pages that receive search clicks. Keep private enquiry details out of the log; a short anonymous pattern is enough. A search report cannot replace good service, timely replies, or accurate Google Business Profile information. It can, however, help a local business turn the language of real searches into a clearer website—one small, supportable improvement at a time.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "whatsapp-enquiry-button-local-service-website-india",
     title:
       "How to add a WhatsApp enquiry button to a local service website in India",
