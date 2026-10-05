@@ -19,6 +19,70 @@ export interface BlogArticle {
 /** Editorial source of truth. Scheduled publishing adds a reviewed article here. */
 export const blogRegistry: readonly BlogArticle[] = [
   {
+    slug: "google-business-profile-booking-link-local-service-india",
+    title:
+      "Google Business Profile booking link checklist for a local service business in India",
+    description:
+      "A practical checklist for adding and testing a Google Business Profile booking link without sending Indian customers to a confusing or unmonitored page.",
+    category: "Local growth",
+    publishedAt: "2026-10-05",
+    readingMinutes: 7,
+    image:
+      "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A customer appointment planner beside a laptop displaying an online calendar",
+    keywords: [
+      "Google Business Profile booking link local service business India",
+      "add appointment booking link Google Maps India",
+      "Google Business Profile booking page checklist India",
+      "local service website appointment link Google Business Profile",
+    ],
+    sections: [
+      {
+        heading: "Start with the customer task, not the booking button",
+        paragraphs: [
+          "A booking link on a Google Business Profile can remove a small but costly step for a customer who has already decided to enquire. It is most useful when the business genuinely accepts scheduled appointments: a salon, clinic, tutor, photographer, consultant, fitness professional, repair service, or studio. Google’s current Business Profile guidance says eligible profiles can include action links for appointments, reservations, orders, and similar customer tasks. It also notes that availability depends on the business category and setup. Treat the option as a convenience feature, not a requirement for every local business or a promise of better Maps rankings.",
+          "Before adding any link, decide what a successful customer action means. Is it a confirmed time slot, a request that staff approve later, a paid consultation, or a WhatsApp conversation to check availability? Put that truth on the destination page. A form that says ‘Book now’ but only sends an unmonitored email creates a worse experience than a clear ‘Request an appointment’ route. The right link is the one the business can reliably answer, including during holidays, busy service hours, and staff changes.",
+        ],
+      },
+      {
+        heading: "Make a focused, business-owned destination page",
+        paragraphs: [
+          "Use a page on the business’s own public website when possible, even if the actual calendar is provided by a trusted scheduling tool. The page should state the business name, the specific service or appointment type, the city or service area where relevant, the usual duration, what happens after submission, and the best fallback contact route. A visitor who arrives from Google should not have to wonder whether they reached the real business, an old agency page, or a generic marketplace listing.",
+          "Keep the promise narrow. A physiotherapist can link to an initial-consultation page; a home appliance technician can link to a service-visit request; a photographer can link to a consultation slot. If prices vary, say that the booking confirms a consultation or request rather than implying a fixed quote. Avoid collecting unnecessary personal details. Appointment forms may need a name, contact method, desired service, and preferred time; they do not need identity documents, detailed medical information, or payment details unless the workflow and privacy handling genuinely require them.",
+        ],
+      },
+      {
+        heading: "Check whether the profile exposes the right link option",
+        paragraphs: [
+          "Sign in with a business-owner account, find the profile in Google Search or Maps, and look for Booking or the relevant transaction option. Google may show different choices based on category and region, so do not try to force an unavailable option by changing the primary category away from the business’s real activity. Google’s category guidance recommends choosing the fewest categories that describe the core business. An inaccurate category can confuse customers and may trigger a verification review.",
+          "Where Google lets the business add a direct link, paste the full HTTPS URL to the exact public page. Google says a profile can have multiple links in a supported transaction category and lets a business set a preferred link where that feature is available. Add one well-maintained first-party route before considering extra providers. The profile management interface—not the Business Profile API or a spreadsheet upload—is where Google currently says local business links must be maintained, so make the owner-controlled account part of the process.",
+        ],
+      },
+      {
+        heading: "Test the whole handoff on a customer’s phone",
+        paragraphs: [
+          "After saving, wait for the public profile to reflect the edit, then test without signing in to the business account. Search the business name on a phone, open the booking action, and check four things: the page loads over HTTPS, the business identity matches the profile, the service request is understandable, and the confirmation reaches the responsible person. Test a second route too, such as calling the verified number or using the contact page, in case a customer cannot use the calendar.",
+          "Run one harmless test request only if the normal workflow permits it. Confirm that it does not block a genuine customer slot, reveal another person’s details, or trigger an inaccurate automatic message. Check keyboard navigation on a desktop browser: visible focus, labelled fields, clear error messages, and a usable submit button are basics, not polish. If the calendar is supplied by a third party, also test what happens after it redirects. The booking provider should not obscure the business identity or make a customer start over after completing a form.",
+        ],
+      },
+      {
+        heading: "Keep services, website facts, and profile links aligned",
+        paragraphs: [
+          "Google’s services editor can surface a service when local customers search for that offering. Add only real, current services with plain names a customer would recognise. Do not put phone numbers, prices, or promotional claims in a custom service name; Google’s published guidance says such content may be rejected. Put fuller context, including price guidance when appropriate, on the linked website page where the business can maintain it clearly.",
+          "Then compare the profile and booking page: business name, service description, location or service area, hours, phone number, and main website should agree. A booking link is not a licence to publish a different brand, a temporary campaign page, or a service outside the profile’s real scope. If a third-party link appears automatically and the business no longer wants it, Google’s local-links help explains how to remove that provider route or report a problem after requesting removal. Keep screenshots and dates in a private owner record, not on the public site.",
+        ],
+      },
+      {
+        heading: "Review it whenever the real-world workflow changes",
+        paragraphs: [
+          "Put a quarterly reminder on the business calendar to open the public Google profile and complete the same booking journey. Repeat the check after a new staff member takes appointments, the business changes hours, a service is paused, the website domain changes, or a scheduling vendor contract ends. The owner should retain access to the Google profile, website domain, and scheduling account so a helpful vendor never becomes the only route to a customer.",
+          "Do not judge the change by a promised ranking improvement. Its practical measure is simpler: a prospective customer who discovers the business on Google can understand the offer, request the right next step, and receive a real response. If the team cannot meet that standard yet, link to a clear contact page first and add bookings later. A smaller, honest path protects trust better than an impressive-looking button that leads nowhere.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "transfer-google-business-profile-primary-ownership-agency-india",
     title:
       "How to transfer Google Business Profile primary ownership from an agency in India",
