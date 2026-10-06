@@ -161,6 +161,15 @@ export async function cancelSubscriptionAtCycleEnd(
   return (await client.subscriptions.cancel(subscriptionId, true)) as RazorpaySubscriptionEntity;
 }
 
+/** Cancel immediately (do not wait for the current billing cycle to end). */
+export async function cancelSubscriptionNow(
+  subscriptionId: string
+): Promise<RazorpaySubscriptionEntity | null> {
+  const client = getRazorpayClient();
+  if (!client) return null;
+  return (await client.subscriptions.cancel(subscriptionId, false)) as RazorpaySubscriptionEntity;
+}
+
 function sign(value: string, secret: string): string {
   return createHmac("sha256", secret).update(value).digest("hex");
 }

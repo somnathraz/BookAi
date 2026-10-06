@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, type ReactNode } from "react";
 import Link from "next/link";
 import {
   motion,
@@ -180,9 +180,12 @@ function previewInputFromAnalysis(result: AnalysisResult): GeneratorInput | null
 export function Studio({
   editSiteId,
   recentSites = [],
+  journalSlot = null,
 }: {
   editSiteId?: string;
   recentSites?: PublicSiteCard[];
+  /** Server-rendered journal teaser; keep out of the client props payload. */
+  journalSlot?: ReactNode;
 } = {}) {
   const reduceMotion = useReducedMotion();
   const [step, setStep] = useState<Step>(editSiteId ? "review" : "chooser");
@@ -1038,6 +1041,7 @@ export function Studio({
           </section>
 
           <RecentlyPublishedSites initialSites={recentSites} />
+          {journalSlot}
 
           <motion.section
             initial={reduceMotion ? false : { opacity: 0, y: 28 }}

@@ -125,6 +125,12 @@ export default function TermsPage() {
           platform, create risk for other users, or where required for legal, security or payment
           reasons.
         </p>
+        <p>
+          You may delete your account at any time from Dashboard → Billing. Deletion removes your
+          sites and related content from the service, removes visitor bookings for those sites, and
+          cancels any active paid subscription immediately. Some billing or security records may be
+          retained as described in the Privacy Policy.
+        </p>
       </LegalSection>
 
       <LegalSection title="11. Governing law and contact">

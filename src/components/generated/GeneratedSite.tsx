@@ -48,6 +48,7 @@ import {
 } from "lucide-react";
 import { profileLayoutFor } from "@/features/site-rendering/application/profile-layout-registry";
 
+import { requestBookService } from "@/lib/book-service-intent";
 import { normalizeCertifications } from "@/lib/certifications";
 import { buildDirectionsUrl } from "@/lib/hours";
 import { isOpenNow, toOpeningHoursSpec } from "@/lib/open-hours";
@@ -1082,11 +1083,37 @@ function GallerySection({ site, section }: SectionProps) {
   );
 }
 
+function ServiceBookAction({
+  title,
+  accent,
+  className,
+}: {
+  title: string;
+  accent?: string;
+  className?: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={() => requestBookService(title)}
+      className={cn(
+        "inline-flex items-center gap-1.5 text-sm font-medium transition-opacity hover:opacity-80",
+        className
+      )}
+      style={accent ? { color: accent } : undefined}
+    >
+      Book
+      <ArrowRight className="size-3.5" />
+    </button>
+  );
+}
+
 function ServicesSection({ site, section }: SectionProps) {
-  const { services, sectionLabels, accent, archetype } = site;
+  const { services, sectionLabels, accent, archetype, booking } = site;
   const st = siteStyle(site.design);
   const variant = site.design.variants.services ?? "bento";
   const isBusiness = archetype === "business";
+  const canBook = Boolean(booking?.enabled);
   if (!services.length) return null;
 
   const header = (
@@ -1123,9 +1150,16 @@ function ServicesSection({ site, section }: SectionProps) {
               return (
                 <div key={service.title} className="flex items-start gap-4 p-6">
                   <Icon className="size-7 shrink-0 text-foreground" strokeWidth={1.5} style={accent ? { color: accent } : undefined} />
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <h3 className="text-lg font-semibold">{service.title}</h3>
                     <p className="mt-1 text-muted-foreground">{service.description}</p>
+                    {canBook ? (
+                      <ServiceBookAction
+                        title={service.title}
+                        accent={accent}
+                        className="mt-3"
+                      />
+                    ) : null}
                   </div>
                 </div>
               );
@@ -1143,6 +1177,13 @@ function ServicesSection({ site, section }: SectionProps) {
                   <Icon className="size-10 text-foreground transition-transform duration-300 group-hover:scale-90" strokeWidth={1.5} />
                   <h3 className="text-xl font-semibold">{service.title}</h3>
                   <p className="text-muted-foreground">{service.description}</p>
+                  {canBook ? (
+                    <ServiceBookAction
+                      title={service.title}
+                      accent={accent}
+                      className="mt-auto pt-1"
+                    />
+                  ) : null}
                 </div>
               );
             })}
@@ -1170,6 +1211,13 @@ function ServicesSection({ site, section }: SectionProps) {
                     <p className="mt-2 text-muted-foreground">
                       {service.description}
                     </p>
+                    {canBook ? (
+                      <ServiceBookAction
+                        title={service.title}
+                        accent={accent}
+                        className="relative mt-3"
+                      />
+                    ) : null}
                   </div>
                 </div>
               );

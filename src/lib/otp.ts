@@ -55,6 +55,17 @@ export async function createOtp(email: string): Promise<string | null> {
   return code;
 }
 
+export async function deleteOtpsForEmail(email: string): Promise<void> {
+  const key = normalizeEmail(email);
+  const sql = getSql();
+  if (sql) {
+    await ensureSchema();
+    await sql`delete from otps where email = ${key}`;
+    return;
+  }
+  mem.delete(key);
+}
+
 export type VerifyResult = "ok" | "invalid" | "expired" | "too_many";
 
 export async function verifyOtp(email: string, code: string): Promise<VerifyResult> {

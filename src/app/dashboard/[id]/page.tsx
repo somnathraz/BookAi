@@ -82,6 +82,7 @@ export default function SiteManagePage({
   const [saving, setSaving] = useState(false);
   const [slug, setSlug] = useState("");
   const [siteName, setSiteName] = useState("");
+  const [siteServiceTitles, setSiteServiceTitles] = useState<string[]>([]);
   const [booking, setBooking] = useState<BookingConfig>({ enabled: false });
   const [servicesText, setServicesText] = useState("");
   const [blackoutText, setBlackoutText] = useState("");
@@ -106,15 +107,24 @@ export default function SiteManagePage({
     setLoading(true);
     try {
       const [siteData, bookingsData] = await Promise.all([
-        apiClient.get<{ slug: string; name: string; site?: { booking?: BookingConfig } }>(
-          `/api/sites/${encodeURIComponent(siteId)}`
-        ),
+        apiClient.get<{
+          slug: string;
+          name: string;
+          site?: {
+            booking?: BookingConfig;
+            services?: { title?: string }[];
+          };
+        }>(`/api/sites/${encodeURIComponent(siteId)}`),
         apiClient.get<{ bookings?: BookingRow[] }>(
           `/api/sites/${encodeURIComponent(siteId)}/bookings`
         ),
       ]);
       setSlug(siteData.slug);
       setSiteName(siteData.name);
+      const listed = (siteData.site?.services ?? [])
+        .map((s) => s.title?.trim() ?? "")
+        .filter(Boolean);
+      setSiteServiceTitles(listed);
       const b = siteData.site?.booking ?? { enabled: false };
       setBooking(b);
       setServicesText((b.services ?? []).join("\n"));
@@ -272,7 +282,7 @@ export default function SiteManagePage({
               </label>
 
               <label className="flex flex-col gap-1.5 text-sm">
-                <span className="font-medium">Services (one per line)</span>
+                <span className="font-medium">Booking services (one per line)</span>
                 <textarea
                   value={servicesText}
                   onChange={(e) => setServicesText(e.target.value)}
@@ -280,6 +290,21 @@ export default function SiteManagePage({
                   className="w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
                   placeholder={"Consultation\nFollow-up"}
                 />
+                <span className="text-xs text-muted-foreground">
+                  Leave blank to use services listed on your site. Visitors can also tap Book on a
+                  service card to open booking with that service selected.
+                </span>
+                {siteServiceTitles.length > 0 ? (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    className="mt-1 w-fit"
+                    onClick={() => setServicesText(siteServiceTitles.join("\n"))}
+                  >
+                    Use listed site services
+                  </Button>
+                ) : null}
               </label>
 
               <div className="rounded-xl border p-4 space-y-4">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   CalendarDays,
   Check,
@@ -10,6 +10,12 @@ import {
 } from "lucide-react";
 
 import { NativeSlotPicker } from "@/components/generated/NativeSlotPicker";
+import {
+  BOOK_SERVICE_EVENT,
+  readBookServiceFromUrl,
+  type BookServiceDetail,
+} from "@/lib/book-service-intent";
+import { resolveBookingServiceOptions } from "@/lib/booking-defaults";
 import {
   calendarEmbedSrc,
   calendarProviderLabel,
@@ -51,27 +57,52 @@ export function BookingSection({
   const hasCalendar = Boolean(booking?.calendarUrl);
   const hasTabs = (hasNative ? 1 : 0) + (hasCalendar ? 1 : 0) + 1 > 1;
 
-  const [mode, setMode] = useState<BookingMode>(() =>
-    booking ? defaultMode(booking) : "form"
-  );
+  const [mode, setMode] = useState<BookingMode>(() => {
+    if (readBookServiceFromUrl()) {
+      return booking?.native?.enabled ? "native" : "form";
+    }
+    return booking ? defaultMode(booking) : "form";
+  });
 
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [preferredDate, setPreferredDate] = useState("");
   const [preferredTime, setPreferredTime] = useState("");
-  const [service, setService] = useState("");
+  const [service, setService] = useState(() => readBookServiceFromUrl() ?? "");
   const [notes, setNotes] = useState("");
   const [honeypot, setHoneypot] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
 
+  const baseServices = useMemo(() => resolveBookingServiceOptions(site), [site]);
+  const services = useMemo(() => {
+    if (service && !baseServices.includes(service)) {
+      return [...baseServices, service];
+    }
+    return baseServices;
+  }, [baseServices, service]);
+
+  useEffect(() => {
+    function onBookService(event: Event) {
+      const detail = (event as CustomEvent<BookServiceDetail>).detail;
+      const title = detail?.service?.trim();
+      if (!title) return;
+      setService(title);
+      setSuccess(false);
+      if (hasNative) setMode("native");
+      else setMode("form");
+    }
+
+    window.addEventListener(BOOK_SERVICE_EVENT, onBookService);
+    return () => window.removeEventListener(BOOK_SERVICE_EVENT, onBookService);
+  }, [hasNative]);
+
   if (!booking?.enabled) return null;
 
   const heading = section?.heading ?? booking.buttonLabel ?? "Book with us";
   const label = section?.label ?? "Booking";
-  const services = booking.services ?? [];
   const calendarUrl = booking.calendarUrl!;
   const provider = hasCalendar ? calendarProviderLabel(calendarUrl) : null;
   const embedSrc = hasCalendar ? calendarEmbedSrc(calendarUrl) : null;
@@ -183,7 +214,14 @@ export function BookingSection({
       ) : null}
 
       {hasNative && mode === "native" ? (
-        <NativeSlotPicker site={site} slug={slug} booking={booking} />
+        <NativeSlotPicker
+          site={site}
+          slug={slug}
+          booking={booking}
+          selectedService={service}
+          onServiceChange={setService}
+          serviceOptions={services}
+        />
       ) : null}
 
       {hasCalendar && mode === "calendar" ? (

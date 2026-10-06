@@ -29,3 +29,17 @@ export async function saveNotificationRequest(
   entries.add(email ?? `ip:${ip ?? "unknown"}:${Date.now()}`);
   memoryRequests.set(source, entries);
 }
+
+export async function deleteNotificationRequestsForEmail(email: string): Promise<void> {
+  const normalized = email.trim().toLowerCase();
+  const sql = getSql();
+  if (sql) {
+    await ensureSchema();
+    await sql`delete from notify_requests where email = ${normalized}`;
+    return;
+  }
+  for (const [source, entries] of memoryRequests.entries()) {
+    entries.delete(normalized);
+    if (entries.size === 0) memoryRequests.delete(source);
+  }
+}

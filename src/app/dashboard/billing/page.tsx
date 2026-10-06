@@ -2,7 +2,8 @@
 
 import { useCallback, useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, CreditCard, Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { ArrowLeft, CreditCard, Download, Loader2, Trash2 } from "lucide-react";
 
 import { SignOutButton } from "@/components/auth/SignOutButton";
 import { BasicCheckoutButton } from "@/components/billing/BasicCheckoutButton";
@@ -11,6 +12,7 @@ import { MarketingFooter } from "@/components/marketing/MarketingFooter";
 import { MarketingNav } from "@/components/marketing/MarketingNav";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { ApiClientError, apiClient } from "@/platform/api/api-client";
 import {
   replaceCachedBilling,
@@ -67,9 +69,13 @@ function currentPeriodEndsAt(billing: BillingState): number | undefined {
 }
 
 export default function DashboardBillingPage() {
+  const router = useRouter();
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [cancelling, setCancelling] = useState(false);
+  const [exporting, setExporting] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+  const [confirmEmail, setConfirmEmail] = useState("");
   const billingQuery = useBillingQuery();
   const billing = billingQuery.data;
   const loading = billingQuery.status === "idle" || billingQuery.status === "loading";
@@ -91,6 +97,44 @@ export default function DashboardBillingPage() {
       setError(err instanceof Error ? err.message : "Could not schedule cancellation.");
     } finally {
       setCancelling(false);
+    }
+  }
+
+  async function downloadMyData() {
+    setExporting(true);
+    setError(null);
+    setMessage(null);
+    try {
+      const data = await apiClient.get<unknown>("/api/account/export");
+      const blob = new Blob([JSON.stringify(data, null, 2)], {
+        type: "application/json;charset=utf-8",
+      });
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = "paperchai-data-export.json";
+      document.body.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
+      URL.revokeObjectURL(url);
+      setMessage("Your data export downloaded.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Could not export your data.");
+    } finally {
+      setExporting(false);
+    }
+  }
+
+  async function deleteMyAccount() {
+    setDeleting(true);
+    setError(null);
+    setMessage(null);
+    try {
+      await apiClient.post("/api/account/delete", { body: { confirmEmail } });
+      router.replace("/");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Could not delete your account.");
+      setDeleting(false);
     }
   }
 
@@ -231,6 +275,64 @@ export default function DashboardBillingPage() {
                   </div>
                 </div>
               ) : null}
+            </div>
+
+            <div className="rounded-2xl border border-destructive/25 bg-destructive/5 p-6">
+              <h2 className="text-lg font-semibold tracking-tight">Privacy and account</h2>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Download a copy of your account data, or permanently delete your account, sites,
+                bookings, and subscription.
+              </p>
+
+              <div className="mt-5 flex flex-wrap items-center gap-3">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => void downloadMyData()}
+                  disabled={exporting || deleting}
+                >
+                  {exporting ? (
+                    <Loader2 className="size-4 animate-spin" />
+                  ) : (
+                    <Download className="size-4" />
+                  )}
+                  Download my data
+                </Button>
+              </div>
+
+              <div className="mt-6 space-y-3 border-t border-destructive/15 pt-5">
+                <p className="text-sm font-medium text-destructive">Delete account</p>
+                <p className="text-sm text-muted-foreground">
+                  This cannot be undone. Your sites go offline immediately, visitor bookings for
+                  those sites are removed, and any paid subscription is cancelled now. Type{" "}
+                  <span className="font-medium text-foreground">{billing.email}</span> to confirm.
+                </p>
+                <Input
+                  type="email"
+                  autoComplete="off"
+                  placeholder="Type your email to confirm"
+                  value={confirmEmail}
+                  onChange={(event) => setConfirmEmail(event.target.value)}
+                  disabled={deleting || exporting}
+                />
+                <Button
+                  type="button"
+                  variant="destructive"
+                  onClick={() => void deleteMyAccount()}
+                  disabled={
+                    deleting ||
+                    exporting ||
+                    confirmEmail.trim().toLowerCase() !== billing.email.trim().toLowerCase()
+                  }
+                >
+                  {deleting ? (
+                    <Loader2 className="size-4 animate-spin" />
+                  ) : (
+                    <Trash2 className="size-4" />
+                  )}
+                  Delete my account
+                </Button>
+              </div>
             </div>
 
             {message ? <p className="text-sm text-muted-foreground">{message}</p> : null}

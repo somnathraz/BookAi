@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { CalendarDays, Check, Loader2 } from "lucide-react";
 
+import { resolveBookingServiceOptions } from "@/lib/booking-defaults";
 import { siteStyle } from "@/lib/site-style";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -24,15 +25,24 @@ function todayIso(): string {
 export function NativeSlotPicker({
   site,
   slug,
-  booking,
+  selectedService,
+  onServiceChange,
+  serviceOptions,
 }: {
   site: SiteData;
   slug: string;
+  /** Kept for call-site compatibility; options resolve from site + serviceOptions. */
   booking: BookingConfig;
+  selectedService?: string;
+  onServiceChange?: (service: string) => void;
+  serviceOptions?: string[];
 }) {
   const st = siteStyle(site.design);
   const accent = site.accent;
-  const services = booking.services ?? [];
+  const resolvedOptions = useMemo(
+    () => serviceOptions ?? resolveBookingServiceOptions(site),
+    [serviceOptions, site]
+  );
 
   const [date, setDate] = useState(todayIso());
   const [slots, setSlots] = useState<Slot[]>([]);
@@ -43,12 +53,21 @@ export function NativeSlotPicker({
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [service, setService] = useState("");
+  const [internalService, setInternalService] = useState(selectedService ?? "");
   const [notes, setNotes] = useState("");
   const [honeypot, setHoneypot] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+
+  const service = selectedService ?? internalService;
+  const setService = onServiceChange ?? setInternalService;
+  const services = useMemo(() => {
+    if (service && !resolvedOptions.includes(service)) {
+      return [...resolvedOptions, service];
+    }
+    return resolvedOptions;
+  }, [resolvedOptions, service]);
 
   const minDate = useMemo(() => todayIso(), []);
 

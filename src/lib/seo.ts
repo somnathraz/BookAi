@@ -60,6 +60,9 @@ interface PageMetaInput {
   absoluteTitle?: boolean;
   noIndex?: boolean;
   ogImage?: string;
+  keywords?: readonly string[];
+  /** Extra alternate links (for example RSS). */
+  alternatesTypes?: Record<string, string>;
 }
 
 export function pageMetadata({
@@ -69,6 +72,8 @@ export function pageMetadata({
   absoluteTitle = false,
   noIndex = false,
   ogImage = defaultOgImage(),
+  keywords,
+  alternatesTypes,
 }: PageMetaInput): Metadata {
   const url = absoluteUrl(path);
   const desc = metaDescription(description);
@@ -77,7 +82,11 @@ export function pageMetadata({
   return {
     title: resolvedTitle,
     description: desc,
-    alternates: { canonical: url },
+    ...(keywords?.length ? { keywords: [...keywords] } : {}),
+    alternates: {
+      canonical: url,
+      ...(alternatesTypes ? { types: alternatesTypes } : {}),
+    },
     openGraph: {
       type: "website",
       locale: "en_IN",
@@ -103,5 +112,64 @@ export function pageMetadata({
     robots: noIndex
       ? { index: false, follow: false, nocache: true }
       : { index: true, follow: true },
+  };
+}
+
+interface ArticleMetaInput extends PageMetaInput {
+  publishedAt: string;
+  modifiedAt?: string;
+  authors?: readonly string[];
+  section?: string;
+}
+
+/** Blog / article metadata with Open Graph article fields. */
+export function articleMetadata({
+  title,
+  description,
+  path = "/",
+  absoluteTitle = false,
+  noIndex = false,
+  ogImage = defaultOgImage(),
+  keywords,
+  publishedAt,
+  modifiedAt,
+  authors = [PRODUCT_NAME],
+  section,
+}: ArticleMetaInput): Metadata {
+  const base = pageMetadata({
+    title,
+    description,
+    path,
+    absoluteTitle,
+    noIndex,
+    ogImage,
+    keywords,
+  });
+  const url = absoluteUrl(path);
+  const desc = metaDescription(description);
+  const modified = modifiedAt ?? publishedAt;
+
+  return {
+    ...base,
+    openGraph: {
+      type: "article",
+      locale: "en_IN",
+      url,
+      siteName: PRODUCT_NAME,
+      title,
+      description: desc,
+      publishedTime: publishedAt,
+      modifiedTime: modified,
+      authors: [...authors],
+      ...(section ? { section } : {}),
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+    },
   };
 }

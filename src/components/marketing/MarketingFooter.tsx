@@ -37,6 +37,9 @@ export function MarketingFooter() {
               <CreateSiteLink className="transition-colors hover:text-foreground">
                 Create a site
               </CreateSiteLink>
+              <Link href="/blog" className="transition-colors hover:text-foreground">
+                Journal
+              </Link>
               <Link href="/pricing" className="transition-colors hover:text-foreground">
                 Pricing
               </Link>

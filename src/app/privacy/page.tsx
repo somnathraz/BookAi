@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import { LegalPage, LegalSection } from "@/components/legal/LegalPage";
 import { LEGAL_BRAND_NAME, LEGAL_LAST_UPDATED, getLegalContactEmail } from "@/lib/legal";
@@ -66,20 +67,33 @@ export default function PrivacyPage() {
 
       <LegalSection title="6. Retention">
         <p>
-          We keep information for as long as reasonably necessary to provide the service, comply
-          with legal obligations, resolve disputes, enforce agreements and maintain security or
-          backups. Retention periods may vary by data type.
+          We keep account and site data while your account is active. After you delete your
+          account, we remove your account row, sites, related bookings, feedback and pending
+          verification codes from our primary systems. Short-lived operational logs, backups and
+          payment-provider records may persist for a limited period for security, fraud prevention,
+          accounting or legal obligations, then age out according to those systems&apos; retention
+          schedules.
         </p>
       </LegalSection>
 
       <LegalSection title="7. Your choices and rights">
         <p>
-          Depending on applicable law, you may have rights to access, correct, delete or export
-          your personal data, or to object to certain processing. To make a request, contact us at{" "}
+          If you are signed in, you can export a copy of your account data or permanently delete
+          your account from{" "}
+          <Link className="underline underline-offset-4" href="/dashboard/billing">
+            Dashboard → Billing
+          </Link>
+          . Account deletion removes your sites (they go offline), visitor bookings collected
+          through those sites, account feedback associated with your email, and ends any active
+          paid subscription immediately.
+        </p>
+        <p>
+          Visitors who submitted a booking and do not have an account, or anyone who needs help
+          with access, correction or another privacy request, can contact us at{" "}
           <a className="underline underline-offset-4" href={`mailto:${contactEmail}`}>
             {contactEmail}
           </a>
-          .
+          . Depending on applicable law, you may also have rights to object to certain processing.
         </p>
       </LegalSection>
 

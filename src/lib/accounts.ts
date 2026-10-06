@@ -991,6 +991,69 @@ export async function markUpgradeNudgeSent(email: string): Promise<void> {
   memAcc(email).upgradeNudgeSentAt = when;
 }
 
+export interface DeletedAccountSummary {
+  email: string;
+  sitesDeleted: number;
+  bookingsDeleted: number;
+}
+
+/**
+ * Hard-delete an account and owned sites/bookings. Caller is responsible for
+ * cancelling external billing and clearing related rows (feedback, OTP, notify).
+ */
+export async function deleteAccountByEmail(email: string): Promise<DeletedAccountSummary> {
+  const normalized = key(email);
+  const sql = getSql();
+
+  if (sql) {
+    await ensureSchema();
+    return sql.begin(async (transaction) => {
+      const siteRows = await transaction<{ id: string; slug: string }[]>`
+        select id, slug from sites where email = ${normalized} for update`;
+
+      let bookingsDeleted = 0;
+      for (const site of siteRows) {
+        const bookingRows = await transaction<{ n: number }[]>`
+          select count(*)::int as n from bookings where site_id = ${site.id}`;
+        bookingsDeleted += Number(bookingRows[0]?.n ?? 0);
+        await transaction`
+          insert into deleted_site_slugs (slug_hash)
+          values (${slugHash(site.slug)})
+          on conflict (slug_hash) do nothing`;
+      }
+
+      if (siteRows.length > 0) {
+        await transaction`delete from sites where email = ${normalized}`;
+      }
+      await transaction`delete from accounts where email = ${normalized}`;
+
+      return {
+        email: normalized,
+        sitesDeleted: siteRows.length,
+        bookingsDeleted,
+      };
+    });
+  }
+
+  const account = mem.get(normalized);
+  if (!account) {
+    return { email: normalized, sitesDeleted: 0, bookingsDeleted: 0 };
+  }
+
+  let bookingsDeleted = 0;
+  const sites = [...account.sites];
+  for (const site of sites) {
+    const deleted = await deleteSite(normalized, site.id);
+    bookingsDeleted += deleted?.bookingsDeleted ?? 0;
+  }
+  mem.delete(normalized);
+  return {
+    email: normalized,
+    sitesDeleted: sites.length,
+    bookingsDeleted,
+  };
+}
+
 /** Free accounts with a site older than 24h and no upgrade nudge yet. */
 export async function listAccountsForUpgradeNudge(): Promise<string[]> {
   const sql = getSql();

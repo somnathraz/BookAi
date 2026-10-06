@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 
 import { Studio } from "@/components/generator/Studio";
 import { PaperChaiJsonLd } from "@/components/marketing/PaperChaiJsonLd";
+import { RecentJournal } from "@/components/marketing/RecentJournal";
+import { recentBlogArticles } from "@/features/content/blog/blog-helpers";
 import { listRecentPublicSites } from "@/features/site-management/application/list-recent-public-sites";
 import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, pageMetadata } from "@/lib/seo";
 
@@ -23,7 +25,10 @@ export default async function Home() {
   return (
     <>
       <PaperChaiJsonLd />
-      <Studio recentSites={recentSites} />
+      <Studio
+        recentSites={recentSites}
+        journalSlot={<RecentJournal articles={recentBlogArticles(4)} />}
+      />
     </>
   );
 }

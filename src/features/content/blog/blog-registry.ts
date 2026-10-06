@@ -3,10 +3,18 @@ export interface BlogArticle {
   readonly title: string;
   readonly description: string;
   readonly category: string;
+  /** ISO date `YYYY-MM-DD` — first publish day (UTC). */
   readonly publishedAt: string;
+  /**
+   * ISO date `YYYY-MM-DD` when the article was last materially edited.
+   * Used for sitemap lastmod + BlogPosting dateModified. Defaults to publishedAt.
+   */
+  readonly updatedAt?: string;
   readonly readingMinutes: number;
   readonly image: string;
+  /** Meaningful image description for accessibility + Google Images (not keyword stuffing). */
   readonly imageAlt: string;
+  /** 3–5 natural search phrases; emitted as meta keywords, not stuffed into body copy. */
   readonly keywords: readonly string[];
   /** Ready-to-adapt copy for the article's social image post, when applicable. */
   readonly promotionCaption?: string;
@@ -16,8 +24,141 @@ export interface BlogArticle {
   }[];
 }
 
+/** Prefer updatedAt for crawl freshness signals when present. */
+export function blogArticleModifiedAt(article: BlogArticle): string {
+  return article.updatedAt ?? article.publishedAt;
+}
+
 /** Editorial source of truth. Scheduled publishing adds a reviewed article here. */
 export const blogRegistry: readonly BlogArticle[] = [
+  {
+    slug: "turn-before-after-reels-into-website-proof-india",
+    title: "Turn Before-and-After Reels Into Website Proof",
+    description:
+      "Turn a real before-and-after Reel into credible website proof that helps nearby Indian customers understand a service, ask better questions, and enquire.",
+    category: "Website foundations",
+    publishedAt: "2026-10-06",
+    updatedAt: "2026-10-06",
+    readingMinutes: 8,
+    image:
+      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A bright small business workspace with desks and plants",
+    keywords: [
+      "before and after Reels local service website India",
+      "turn Instagram Reel into website portfolio proof",
+      "local business transformation portfolio page India",
+      "client consent before after photos service website",
+    ],
+    sections: [
+      {
+        heading: "Choose one result a local customer can understand",
+        paragraphs: [
+          "Before-and-after clips are a familiar format on Indian Reels because the change is easy to see quickly. A salon can show a haircut from the back, an interior designer can show a finished corner of a room, and a repair professional can show a working appliance after a repair. That attention is useful only when the result represents real work and a nearby customer can understand what changed. Do not treat a Reel with high views as proof that every viewer is a likely customer, or that the business will rank better in search.",
+          "Pick one completed job with a clear, honest story. For example, a Pune tutor could show a student’s organised study plan without the student’s name or face; a Bengaluru home organiser could show one decluttered wardrobe; a freelance designer could show an approved homepage refresh. Define the job in one sentence before recording: what was the starting problem, what service was supplied, and what can a prospective customer reasonably expect? This keeps the website proof useful after a trend, soundtrack, or social post has passed.",
+        ],
+      },
+      {
+        heading: "Get permission before making client work public",
+        paragraphs: [
+          "Ask for specific permission before posting a customer’s property, face, voice, name, review, booking details, or identifiable documents. A verbal yes at the end of an appointment is easy to misunderstand. Send a short written note that says where the material may appear—for example, the business website and Instagram—and what part of the job it shows. Give the client a simple way to say no or ask for removal later. Keep the approval in a private business record, not in the public page or the Reel caption.",
+          "Permission matters even when a service looks ordinary. A salon client may not want a face shown, a repair customer may not want their home layout visible, and a consultant’s work may reveal confidential information. Crop to hands, tools, the finished result, or a screen with placeholder data where needed. Never use a before-and-after story to expose a health condition, financial difficulty, child, address, phone number, or private message. A good portfolio earns trust by respecting the customer whose work made it possible.",
+        ],
+      },
+      {
+        heading: "Record a small, truthful sequence for the Reel",
+        paragraphs: [
+          "A phone is enough for a useful sequence. Start with the relevant ‘before’ condition, show one or two steps that explain the craft, then show the finished result in similar light and from a comparable angle. A tailor could show fabric selection, stitching detail, and the finished garment on a mannequin; a website freelancer could show a cluttered homepage, a short edit view without client data, and the approved live page. Avoid filters, edits, or camera angles that make the difference look larger than it was.",
+          "Give the first frame a plain-language label, such as ‘Small kitchen storage reset in Indiranagar’ or ‘One-page portfolio refresh for a Chennai illustrator’. Add captions if spoken audio carries important meaning, and use a language the likely customer will understand. Regional-language speech with readable English or local-language text can be more welcoming than a generic marketing slogan. Use music or audio only when you have the right to use it on that platform. The Reel should show evidence, not a promise that every customer will receive an identical outcome.",
+        ],
+      },
+      {
+        heading: "Build the website page around context, not the clip",
+        paragraphs: [
+          "A Reel moves quickly; a website page should answer the questions a ready customer has before they contact you. Embed the published Reel only if the platform and account settings allow it, or use approved stills from the same work. Then add a short case-study caption: the service provided, the general locality if it is relevant and safe, the constraints, and the practical result. ‘Two-hour wardrobe organisation for a rented 2BHK in Koramangala; storage plan supplied after the visit’ tells a clearer story than ‘Amazing transformation!’.",
+          "Keep the page narrow and visual. One project can sit in a portfolio section on the relevant service page rather than becoming a long gallery of weak examples. Include the actual scope and any limit: a salon result depends on hair type and consultation; a repair outcome depends on inspection; a website redesign does not include copywriting unless it did. Do not add invented statistics, ‘viral’ labels, or copied testimonials beside the transformation. The visible page and any structured data should describe only what the customer can genuinely see and verify.",
+        ],
+      },
+      {
+        heading: "Give mobile viewers one accurate next step",
+        paragraphs: [
+          "Most people arriving from a Reel will use a phone, often through the profile link rather than a direct post link. Put the case study where it loads comfortably on a small screen, with images that do not hide the key result behind text or an autoplaying embed. Check that the business name, service area, and main action are visible without making someone pinch, hunt through a social feed, or open a private account. The website should still make sense for visitors who do not use Instagram.",
+          "Match the action to the real service process. An interior designer who needs measurements can use ‘Request a site consultation’; a tutor can invite ‘Ask about class availability’; a photographer who has open slots can link to a booking page. State a realistic reply window near the action and provide an alternative such as a phone call or form. Do not send every Reel viewer to a generic homepage with no mention of the work they just watched. A clear landing page lets a curious viewer decide whether the service fits before they share contact details.",
+        ],
+      },
+      {
+        heading: "Measure qualified interest, then maintain the proof",
+        paragraphs: [
+          "The useful signal is not a view count alone. In a simple private note, track which Reel or portfolio page led to profile visits, service-specific enquiries, consultation requests, or questions that showed real understanding of the offer. A smaller local audience that asks about the exact service can be more valuable than a widely shared clip with no relevant enquiries. Ask new leads where they found the business, but do not put tracking identifiers, names, or private messages into public URLs or screenshots.",
+          "Review each example when the service, pricing approach, availability, or team changes. Remove or update work when consent is withdrawn, the result no longer represents the current standard, or the customer’s situation needs more privacy. Keep the Reel, page, contact route, and Google Business Profile aligned on basic facts, but do not claim that social activity creates a Maps ranking boost. The durable outcome is simpler: a prospective customer sees real work, understands its limits, and reaches a business that can respond honestly.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "google-business-profile-video-verification-service-business-india",
+    title:
+      "Google Business Profile video verification for a service business in India: a practical checklist",
+    description:
+      "Plan a privacy-safe Google Business Profile verification video for an Indian service-area business without showing a home address, customer details, or unsupported claims.",
+    category: "Local growth",
+    publishedAt: "2026-10-06",
+    readingMinutes: 7,
+    image:
+      "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A small-business owner planning a verification checklist on a phone and notebook",
+    keywords: [
+      "Google Business Profile video verification service business India",
+      "how to verify plumber Google Business Profile video India",
+      "Google Business Profile service area business verification checklist",
+      "Google Business Profile video verification without storefront India",
+    ],
+    sections: [
+      {
+        heading: "First, describe the business as it really operates",
+        paragraphs: [
+          "Video verification can feel awkward for a plumber, cleaner, mobile beautician, photographer, tutor, repair technician, or consultant who works at customer locations rather than from a shop. Google’s current guidance specifically supports service-area businesses, but the profile must match the real operating model. If customers do not visit the business base, use a service-area setup and keep the address hidden from customers. Do not turn a home address into a storefront simply because an address seems easier to verify.",
+          "Start by checking the public facts before recording anything: the real business name, primary category, phone number, service area, and website should all describe the same operation. A video cannot make an inaccurate profile trustworthy. If the business name on a vehicle, work shirt, invoice, or website differs from the profile, correct the underlying record or be ready to show other legitimate proof of the business. Avoid adding city names, services, awards, or promotional slogans to the name just to make it more searchable; Google expects the name customers recognise in the real world.",
+        ],
+      },
+      {
+        heading: "Understand what Google is trying to confirm",
+        paragraphs: [
+          "Google says a verification video must show three things: where the business operates, that it exists, and that the person recording it manages or represents it. For a service-area business, this does not mean filming a customer’s home or revealing a private residence in detail. A street sign, nearby landmark, or other identifiable neighbourhood marker can help establish the area. Then show the professional tools, equipment, work space, branded vehicle, business cards, or apparel genuinely used for the work.",
+          "The last part is authority. Record an action that an employee or owner can perform, such as unlocking a branded vehicle, opening a tool store, or accessing a business-only system. Google’s examples also allow documents such as a permit, invoice, or utility bill that matches the profile name. Be deliberately careful with paperwork: frame only the business name or other needed evidence, and cover bank details, GST or tax numbers, account numbers, customer addresses, phone numbers, and invoice amounts. Verification is not a reason to expose sensitive operational information on camera.",
+        ],
+      },
+      {
+        heading: "Plan one simple route before pressing record",
+        paragraphs: [
+          "Write a short route on paper so the video has a beginning, middle, and end. For example: begin outside with a street sign or recognisable landmark; walk to the parked service vehicle or work area; show the tools used for the service; then demonstrate one business-only action. A self-employed electrician could show a nearby road sign, a locked equipment case and branded work gear, then unlock the case. A home-based tutor could show the locality marker, teaching materials and a business-controlled calendar or workspace without showing a student’s information.",
+          "Google requires a single, unedited, complete recording made and uploaded from a mobile device through the Business Profile. It must be at least 30 seconds long. That means a polished marketing reel, an old phone clip, or a stitched-together video is the wrong asset. Record in daylight where possible, move slowly enough for signs and tools to be understandable, and make the business evidence visible rather than narrating a long sales pitch. The purpose is verification, not promotion.",
+        ],
+      },
+      {
+        heading: "Protect people, homes, and customer work",
+        paragraphs: [
+          "Do a privacy check before recording. Google says verification videos must not include other people’s faces or sensitive and private information. Ask colleagues or family members to step out of frame; do not film a customer, a child, an occupied residence, a computer screen with messages, or a booking calendar with names. For businesses that work from home, a neighbourhood landmark can establish the area without lingering on a gate number, doorway, or personal belongings. The public profile should also continue to hide a home address when customers are not received there.",
+          "A safe recording can still be credible. Show the kind of evidence a real operator would have: clean tools, a labelled kit, a work vehicle, business stationery, or a controlled workspace. Do not borrow another person’s signage, film equipment you do not use, or display a fake job to satisfy the process. If the available evidence would misrepresent the business, pause and correct the profile rather than trying to improvise a convincing video. A rejected upload is less damaging than a profile built on misleading evidence.",
+        ],
+      },
+      {
+        heading: "Record and upload through the official profile flow",
+        paragraphs: [
+          "Use the Google account that owns or is authorised to manage the Business Profile. On a mobile device, open the profile, select the verification prompt, choose Business video when offered, review the on-screen requirements, and grant location, camera, and microphone access only for the task. Make sure the phone has enough battery, storage, and a stable connection before beginning. Keep the recording live and continuous; once it is uploaded, do not try to replace it with a file sent by an agency or copied from social media.",
+          "Google says review can take up to five working days. During that period, keep the website, phone number, and service information accurate, but resist the urge to create a duplicate profile or submit repeated changes to force a faster result. If Google returns a specific issue, review the issue carefully and make a new video that includes both the earlier evidence and the missing proof. The correction should answer the stated gap—for example, a clearer local marker or proof of management—not add unrelated footage.",
+        ],
+      },
+      {
+        heading: "Treat verification as the start of a maintained customer path",
+        paragraphs: [
+          "Once the profile is verified, open it as a customer would. Check that the website leads to the business-owned public site, the phone number reaches the right person, the service area is understandable, and any booking or enquiry action reflects the real workflow. A verified profile does not guarantee Maps placement, enquiries, or immediate visibility. Its value is that the business can manage accurate information where customers are already searching.",
+          "Keep the owner in control of the Google account, the domain, and the contact routes shown on the profile. Give an agency or staff member the appropriate role rather than sharing one password, and remove access when the relationship ends. Revisit the public details after a move, number change, new service area, change of hours, or new person handling enquiries. A short, honest video may clear one verification step; the useful long-term work is keeping every customer handoff after it accurate and dependable.",
+        ],
+      },
+    ],
+  },
   {
     slug: "google-business-profile-booking-link-local-service-india",
     title:
@@ -1652,7 +1793,7 @@ export const blogRegistry: readonly BlogArticle[] = [
     ],
   },
   {
-    slug: "google-business-profile-booking-link-local-service-india",
+    slug: "use-google-business-profile-booking-link-local-service-india",
     title:
       "How to use a Google Business Profile booking link for a local service business in India",
     description:
@@ -3008,7 +3149,7 @@ export const blogRegistry: readonly BlogArticle[] = [
       "Turn the details customers already find on Google into a focused, booking-ready website without starting from a blank page.",
     category: "Local growth",
     publishedAt: "2026-07-24",
-    readingMinutes: 6,
+    readingMinutes: 8,
     image:
       "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1800&q=85",
     imageAlt: "A calm, light-filled independent business workspace",
@@ -3016,34 +3157,42 @@ export const blogRegistry: readonly BlogArticle[] = [
       "create website from Google Maps listing",
       "local business website India",
       "Google Business Profile website",
+      "turn Google Maps listing into website India",
     ],
     sections: [
       {
         heading: "Start with the information customers already trust",
         paragraphs: [
-          "For a local service business, the first website does not need a grand reinvention. It needs to make the next customer action obvious: call, message, get directions, or book.",
-          "A complete Google Maps listing already contains useful raw material: your business name, category, location, hours, phone number, reviews, photos, and often the language customers use to describe you. Reusing those facts avoids the most common small-business website problem: a beautiful page that says almost nothing useful.",
+          "For a local service business, the first website does not need a grand reinvention. It needs to make the next customer action obvious: call, message, get directions, or book. A salon in Bhubaneswar, a tutor in Pune, or a repair team covering several neighbourhoods already has much of that story on Google Maps.",
+          "A complete Google Maps or Business Profile listing usually contains useful raw material: business name, category, location or service area, hours, phone number, reviews, photos, and often the language customers use to describe the work. Reusing those facts avoids the most common small-business website problem: a beautiful page that says almost nothing useful.",
+        ],
+      },
+      {
+        heading: "Copy the public listing details into one clear draft",
+        paragraphs: [
+          "Open the listing as a stranger would and write down the facts that still look accurate. Prefer the Share link from the profile so you capture the exact place, not a nearby competitor with a similar name. Note the primary category, secondary categories if they matter, and whether the business is a storefront or a service-area operation with a hidden address.",
+          "Then decide which details belong on the website first: name, one sentence about the service, locality or service area, hours or appointment note, phone or WhatsApp, and one proof signal such as a review theme or a clear photo. Do not invent awards, prices, or coverage areas that the listing does not support. Accuracy beats a longer page.",
         ],
       },
       {
         heading: "Use a short page structure that answers real questions",
         paragraphs: [
-          "A good local-business site usually needs five things: what you do, where you serve, why people choose you, how to contact you, and how to take the next step. Keep the page in that order.",
-          "Add only services you actually offer. Include your locality in the opening copy. If appointments matter, put booking or WhatsApp before a long brand story. Visitors should not need to hunt for a phone number after deciding they want help.",
+          "A good local-business site usually needs five things: what you do, where you serve, why people choose you, how to contact you, and how to take the next step. Keep the page in that order so a mobile visitor from Maps does not have to hunt.",
+          "Add only services you actually offer. Include the locality or service area early. If appointments matter, put booking or WhatsApp before a long brand story. Visitors who already decided they want help should not scroll past three marketing sections before they find a phone number.",
         ],
       },
       {
         heading: "Review before publishing",
         paragraphs: [
-          "Imported details give you a strong first draft, not automatic truth. Check opening hours, pricing language, contact numbers, photos, and every claim that could change. Remove old reviews or outdated services rather than filling space.",
-          "Then open the page on a phone. Most local visitors arrive from a map result, a WhatsApp message, or a social profile; the mobile experience is the real product.",
+          "Imported details give you a strong first draft, not automatic truth. Check opening hours, pricing language, contact numbers, photos, and every claim that could change after festivals, staff changes, or a move. Remove stale services rather than filling space.",
+          "Then open the page on a phone over mobile data. Most local visitors arrive from a map result, a WhatsApp message, or a social profile; the mobile experience is the real product. Tap every action once before you share the link.",
         ],
       },
       {
         heading: "Publish, measure, and improve one useful thing at a time",
         paragraphs: [
-          "Share the link where customers already find you: Google Business Profile, Instagram bio, WhatsApp Business, and printed QR codes. Notice the questions people still ask before booking, then make those answers easier to find on the page.",
-          "The goal is not a larger website. It is fewer missed enquiries and more confident customers.",
+          "Share the link where customers already find you: Google Business Profile website field, Instagram bio, WhatsApp Business profile, and printed QR codes. Notice the questions people still ask before booking, then make those answers easier to find on the page.",
+          "The goal is not a larger website. It is fewer missed enquiries and more confident customers. Improve one unclear section each month rather than rebuilding the whole site every time a new idea appears.",
         ],
       },
     ],
@@ -3055,24 +3204,42 @@ export const blogRegistry: readonly BlogArticle[] = [
       "A practical way to compare a DIY builder, a freelancer, and a custom agency site without paying for features you will not use.",
     category: "Practical guide",
     publishedAt: "2026-07-17",
-    readingMinutes: 5,
+    readingMinutes: 7,
     image:
       "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1600&q=85",
     imageAlt: "Two people planning a business website at a shared table",
-    keywords: ["small business website cost India", "website builder for local business"],
+    keywords: [
+      "small business website cost India",
+      "website builder for local business",
+      "freelancer vs agency website price India",
+    ],
     sections: [
       {
         heading: "Pay for the outcome, not a long feature list",
         paragraphs: [
-          "The right budget depends on what the site must do. A local studio that needs calls and booking has a different job from an online shop with inventory and payment flows.",
-          "Before comparing prices, write down one customer action the site must improve. That makes it easier to reject expensive extras that do not help your business grow.",
+          "The right budget depends on what the site must do. A local studio that needs calls and booking has a different job from an online shop with inventory and payment flows. A freelancer portfolio that needs clear availability is different again.",
+          "Before comparing prices, write down one customer action the site must improve: more qualified WhatsApp enquiries, fewer missed calls, clearer service areas, or faster booking requests. That one sentence makes it easier to reject expensive extras that do not help the business grow.",
+        ],
+      },
+      {
+        heading: "Compare three common routes honestly",
+        paragraphs: [
+          "A simple builder is usually the lowest ongoing cost when your details are ready and you can update text yourself. You still need a domain, clear photos, and time to keep hours and services accurate. A freelancer is useful when the story, photography, or booking path needs deliberate craft, but ask who owns the domain, hosting, and content after handover.",
+          "Custom agency work makes sense when the business model itself needs software, not just a brochure page. It is rarely the first step for a salon, tutor, clinic, or repair service that mainly needs a trustworthy public page. Price quotes should include what happens after launch: edits, hosting, and who answers when a form stops arriving.",
+        ],
+      },
+      {
+        heading: "Add the quiet costs people forget",
+        paragraphs: [
+          "Domain renewal, email, booking tool fees, payment gateway charges, photography, and the owner’s time all sit beside the headline website price. A cheap build that nobody can edit becomes expensive when every phone-number change needs a ticket.",
+          "Also budget for accuracy. Incorrect hours, stale prices, or a broken WhatsApp link cost more in lost trust than a modest monthly plan. Prefer a setup you can maintain after a busy week, not only on launch day.",
         ],
       },
       {
         heading: "Choose a setup that you can maintain",
         paragraphs: [
-          "A simple builder is usually a good start when your details are ready and you want to update text yourself. A freelancer is useful when the story, photography, or integrations need deliberate craft. Custom development makes sense when the business model itself needs custom software.",
-          "Whichever route you choose, make sure you own the domain, can edit core details, and know the ongoing hosting and support cost.",
+          "Whichever route you choose, make sure the business owns the domain, can edit core details, and knows the ongoing hosting and support cost. Keep Search Console and critical login access with the owner, not only with a departing vendor.",
+          "Start with the smallest site that answers a customer’s next question well. You can add galleries, blogs, or complex booking later if the first page is already sending clear enquiries.",
         ],
       },
     ],
@@ -3084,23 +3251,42 @@ export const blogRegistry: readonly BlogArticle[] = [
       "A simple structure for showing proof, services, and availability before a prospective client asks for a PDF.",
     category: "Independent work",
     publishedAt: "2026-07-10",
-    readingMinutes: 4,
+    readingMinutes: 7,
     image:
       "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=85",
     imageAlt: "A laptop and notebook on a creative professional's desk",
-    keywords: ["turn resume into portfolio website", "freelance portfolio website India"],
+    keywords: [
+      "turn resume into portfolio website",
+      "freelance portfolio website India",
+      "resume to website for freelancers",
+    ],
     sections: [
       {
         heading: "Lead with the work a client can understand",
         paragraphs: [
-          "A resume is chronological. A portfolio should be persuasive. Start with the service you want to be hired for, then show a few projects that make that promise believable.",
-          "For each project, describe the client problem, what you contributed, and the result you can support. Clear context is more useful than a gallery of anonymous screenshots.",
+          "A resume is chronological. A portfolio should be persuasive. Start with the service you want to be hired for now, then show a few projects that make that promise believable. A developer, designer, writer, consultant, or photographer in India often already has the raw material in a CV; the website’s job is to translate it for a busy buyer.",
+          "For each project, describe the client problem, what you contributed, and the result you can support. Clear context is more useful than a gallery of anonymous screenshots. If a project is confidential, describe the type of work and outcome without naming the client.",
+        ],
+      },
+      {
+        heading: "Turn resume sections into website sections",
+        paragraphs: [
+          "Map experience to services, not to every job title you have ever held. Group skills around outcomes clients buy: launch a product site, redesign a booking flow, photograph a menu, advise on GST-ready processes. Keep education and certifications short unless they are a required trust signal for the niche.",
+          "Add a brief about section that explains who you help and how engagements usually start. Avoid a long career autobiography on the first screen. Prospective clients decide quickly whether you understand their problem.",
         ],
       },
       {
         heading: "Make the next conversation easy",
         paragraphs: [
           "Your availability, location or time zone, preferred contact method, and the kind of projects you accept should be simple to find. A great portfolio gets wasted when a potential client cannot tell how to start.",
+          "Offer one primary action: email, WhatsApp, or a short enquiry form. State typical response time and whether you take remote, hybrid, or local work. If you charge for discovery calls, say so before someone books your calendar.",
+        ],
+      },
+      {
+        heading: "Publish a living page, not a static PDF copy",
+        paragraphs: [
+          "Update the featured projects when your best work changes. Remove outdated tools and services you no longer offer. Keep the contact route tested after every redesign.",
+          "Share the link in your email signature, LinkedIn featured section, and proposals. The portfolio should reduce back-and-forth, not replace a conversation—but it should answer enough questions that the first message is already useful.",
         ],
       },
     ],

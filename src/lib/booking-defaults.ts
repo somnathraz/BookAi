@@ -1,5 +1,30 @@
 import type { BusinessDomain, BookingConfig, SiteData } from "@/lib/types";
 
+/** Unique trimmed titles for booking dropdowns. */
+function uniqueServiceTitles(titles: string[]): string[] {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const raw of titles) {
+    const title = raw.trim();
+    if (!title) continue;
+    const key = title.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(title);
+  }
+  return out;
+}
+
+/**
+ * Booking form options: explicit booking.services when set, otherwise the
+ * titles from the site Services section.
+ */
+export function resolveBookingServiceOptions(site: SiteData): string[] {
+  const explicit = uniqueServiceTitles(site.booking?.services ?? []);
+  if (explicit.length > 0) return explicit;
+  return uniqueServiceTitles((site.services ?? []).map((s) => s.title));
+}
+
 const DEFAULT_SERVICES: Record<BusinessDomain, string[]> = {
   doctor: ["Consultation", "Follow-up", "Check-up"],
   restaurant: ["Table for 2", "Table for 4+", "Private event"],
@@ -70,10 +95,11 @@ export function applyDefaultBooking(site: SiteData, ownerEmail: string): SiteDat
     ownerEmail.trim();
   if (!notify) return site;
 
+  const fromSite = uniqueServiceTitles((site.services ?? []).map((s) => s.title));
   const booking: BookingConfig = {
     enabled: true,
     notifyEmail: notify,
-    services: defaultBookingServices(site.identity.domain),
+    services: fromSite.length ? fromSite : defaultBookingServices(site.identity.domain),
     buttonLabel: defaultBookingLabel(site.identity.domain),
   };
 

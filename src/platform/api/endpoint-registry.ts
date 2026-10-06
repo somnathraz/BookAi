@@ -250,6 +250,21 @@ export const endpointRegistry = {
     access: "authenticated",
     auditEvent: "billing.cancellation_scheduled",
   },
+  "account.export": {
+    method: "GET",
+    path: "/api/account/export",
+    version: "v1",
+    access: "authenticated",
+    auditEvent: "account.data_exported",
+  },
+  "account.delete": {
+    method: "POST",
+    path: "/api/account/delete",
+    version: "v1",
+    access: "authenticated",
+    maximumBodyBytes: 4_096,
+    auditEvent: "account.deleted",
+  },
   "media.proxy": {
     method: "GET",
     path: "/api/img",

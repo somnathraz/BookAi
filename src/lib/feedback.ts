@@ -134,6 +134,17 @@ export async function saveAccountFeedback(
   return saved;
 }
 
+export async function deleteAccountFeedback(email: string): Promise<void> {
+  const normalizedEmail = key(email);
+  const sql = getSql();
+  if (sql) {
+    await ensureSchema();
+    await sql`delete from account_feedback where email = ${normalizedEmail}`;
+    return;
+  }
+  memAccountFeedback.delete(normalizedEmail);
+}
+
 /** @deprecated Use saveAccountFeedback — kept for publish quick-rating. */
 export async function saveSiteFeedback(
   siteId: string,
