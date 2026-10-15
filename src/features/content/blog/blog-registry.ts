@@ -32,6 +32,478 @@ export function blogArticleModifiedAt(article: BlogArticle): string {
 /** Editorial source of truth. Scheduled publishing adds a reviewed article here. */
 export const blogRegistry: readonly BlogArticle[] = [
   {
+    slug: "change-business-name-website-google-india",
+    title: "Change your business name without confusing local customers",
+    description:
+      "A practical checklist for Indian local businesses changing a public name: align your website, Google Business Profile, and customer contact routes.",
+    category: "Local growth",
+    publishedAt: "2026-10-15",
+    updatedAt: "2026-10-15",
+    readingMinutes: 6,
+    image:
+      "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "People working together at tables in a bright small-business office",
+    keywords: [
+      "change business name on website and Google India",
+      "Google Business Profile business name change India",
+      "local business rebrand website checklist India",
+      "update old business name for customers India",
+    ],
+    sections: [
+      {
+        heading: "First decide whether customers are seeing a rename or a new business",
+        paragraphs: [
+          "A new name can be a tidy refresh for a salon, studio, consultancy, or home-service business. It can also signal that the ownership, core service, or operation has changed so much that customers need a different explanation. Do not begin with a logo file or an edit in Google. Begin with the facts a returning customer would recognise: who provides the service, what they can book or buy, where or how it is delivered, and which phone, WhatsApp, or booking route still reaches the right person.",
+          "Google’s current Business Profile guidelines distinguish an eligible minor rebrand from a new business. They say a minor name change can be eligible when the proper nouns and services in the name, and the business category, remain unchanged; a change that does not meet those criteria is treated as a new business. That is a useful prompt, not a reason to guess at the outcome. If the change involves a new owner, a fundamentally different service, or a new category, pause before editing the profile and review the official route for the actual facts. Never create a second profile merely to test which name appears.",
+        ],
+      },
+      {
+        heading: "Make one private before-and-after fact sheet",
+        paragraphs: [
+          "Write the old public name, proposed new public name, date of change, main service, category, address or service-area model, website URL, primary phone, and the person who owns each account. Add the exact customer explanation: for example, ‘Kavya Home Repairs is now Kavya Repairs; the same team serves the same localities.’ If that sentence cannot be written truthfully, the change needs more care than a simple rename. Keep passwords, customer messages, invoices, and identity documents out of this working sheet.",
+          "Then look for the old name as a customer would. Search it with the city and phone number in a private browser. Check the website header, browser title, homepage introduction, contact page, service pages, booking confirmation, receipts, WhatsApp greeting, email signature, Google Business Profile, Maps, social bios, and controlled directories. Separate places you control from old printed cards, customer bookmarks, and third-party listings. This inventory stops a business from announcing a new name while an old call button or confirmation still makes a customer wonder whether they reached the same provider.",
+        ],
+      },
+      {
+        heading: "Give returning customers a short, visible bridge",
+        paragraphs: [
+          "For a straightforward rename, put a calm explanation where a returning visitor will see it. A short line near the homepage heading or contact details is usually enough: ‘Formerly Old Name’ with the effective date, if it helps recognition. Explain what remains the same only when it is actually true: service area, team, phone route, appointment process, or website address. Do not claim that reviews, Google ranking, or every old listing will automatically follow the new name. Those outcomes are outside the business’s control.",
+          "Avoid turning the transition into a permanent keyword-heavy title such as ‘New Name, formerly Old Name, best plumber in city’. A customer needs recognition and a next step, not a crowded slogan. Keep the current real-world name consistent on the site’s visible heading, contact details, and information sent after an enquiry. If an old name is legally, operationally, or reputationally sensitive, get suitable professional advice before publishing an explanation. The website should not speculate about ownership disputes or expose private business history.",
+        ],
+      },
+      {
+        heading: "Update the website’s customer routes as one release",
+        paragraphs: [
+          "Change the visible name wherever a visitor decides whether to contact the business: the homepage, footer, contact page, booking page, service pages, policies, confirmation messages, and any downloadable estimate or brochure. Update image text, page titles, and email sender labels where the normal site controls support them. Keep the click-to-call number, WhatsApp destination, enquiry form recipient, map link, and booking route working through the release. A correct new name above a dead phone link still fails the customer.",
+          "Use the normal PaperChai controls for public site details instead of adding a one-off browser script or a second ad-hoc landing page. Test on a phone and in a private browser after publishing. Open the website from an old saved link if available, tap the phone and WhatsApp actions, send only a harmless test request if the normal process permits it, and read the confirmation. The person receiving it should be able to identify the new public name and tell a returning customer they have reached the right business.",
+        ],
+      },
+      {
+        heading: "Edit Google and controlled listings carefully, then monitor",
+        paragraphs: [
+          "Use the Google account that normally manages the verified Business Profile. Compare its public name, category, phone, website, hours, address or service area, and services with the fact sheet before submitting an edit. Google may review changes, and its policies can reject significant changes to a business name or category, so do not promise a particular approval time or Maps visibility. Give helpers appropriate access rather than sharing the owner’s password, and keep the business owner involved in a change that affects a public identity.",
+          "Once the owned website and profile are accurate, update social profiles, payment messages, and directories the business actively controls. Check the public result while signed out over the following weeks and keep a dated private record of what was changed and when. If customers still reach an old route, correct that controlled source or add a brief factual bridge on the website. PaperChai can help maintain the public site, but it cannot decide Google’s rebrand result or preserve visibility. The practical success measure is simpler: a returning customer recognises the business and can reach a monitored, truthful next step.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "change-business-phone-number-website-google-india",
+    title: "Change your business phone number without losing enquiries",
+    description:
+      "A practical guide for Indian local businesses: update a public phone number across your website and Google Business Profile without leaving customers at a dead end.",
+    category: "Website foundations",
+    publishedAt: "2026-10-13",
+    updatedAt: "2026-10-13",
+    readingMinutes: 6,
+    image:
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A person holding a smartphone beside an open laptop on a desk",
+    keywords: [
+      "change business phone number on website India",
+      "update Google Business Profile phone number India",
+      "avoid missed calls after changing business number",
+      "local service website contact number checklist",
+    ],
+    sections: [
+      {
+        heading: "Treat a phone-number change as a customer-route change",
+        paragraphs: [
+          "A new business phone number seems like a small edit until a customer taps an old click-to-call button, finds a QR code, or calls the number saved after a previous appointment. For a salon, tutor, repair professional, therapist, or independent consultant, that missed call may be the entire enquiry. The job is to make every public route lead to a person or message that can help, while keeping private numbers and customer information out of public view.",
+          "Begin by deciding what the new number is for: calls, WhatsApp, both, or an answering service that forwards urgent requests. Confirm who monitors it during published hours, what happens after hours, and who can update the account if a staff member leaves. A number that belongs only to a departing employee, an agency, or someone’s personal account is a fragile public contact route. Keep the decision in a small private handover note with the change date and responsible owner; do not put passwords, call recordings, or customer call histories into a shared marketing document.",
+        ],
+      },
+      {
+        heading: "Make an inventory before the old number disappears",
+        paragraphs: [
+          "Search the public web as a customer would before changing anything. Check the website header, footer, contact page, booking page, service pages, FAQ, confirmation emails, and visible WhatsApp button. On a phone, tap each link rather than only reading the text: a correct-looking number can still open an outdated tel link or a WhatsApp conversation with the wrong account. Also list the Google Business Profile, Maps directions card, social bios, directories the business controls, payment receipts, QR codes, and cards still being handed out.",
+          "Separate channels you can change now from routes you can only manage during a transition. An old brochure in a customer’s wallet cannot be edited, but the old number may be able to play a short, factual recorded message or forward calls for an agreed period. Check the telecom provider’s options and costs before promising a forwarding window. If the old number cannot safely remain active, say that internally and make the website’s new enquiry route unusually clear. Do not publish a personal number as a rushed substitute merely because it is available today.",
+        ],
+      },
+      {
+        heading: "Update the website’s call and message routes together",
+        paragraphs: [
+          "Change the visible number and the action behind it in the same publishing pass. A call link should open the new number, and a WhatsApp link should start a message to the intended business account. Use the normal PaperChai site controls or the product’s approved contact setting rather than adding a one-off browser script or an ad-hoc form. If you offer both calls and WhatsApp, label them honestly: for example, ‘Call for urgent availability’ and ‘WhatsApp for a non-urgent enquiry’. A visitor should not have to guess whether a message will be seen.",
+          "Give customers a second reliable path when sensible, such as a monitored enquiry form or booking request. That helps when a caller has poor signal, cannot talk, or reaches the site outside response hours. Ask only for what is needed to respond, explain the reply window if you can stand behind it, and show the same service area, hours, and business name beside the contact action. The best outcome is a clear next step, not a page crowded with duplicate buttons.",
+        ],
+      },
+      {
+        heading: "Align Google Business Profile and other public facts",
+        paragraphs: [
+          "Google’s current Business Profile help says a verified business can edit contact information through Edit profile, and it allows a primary phone number plus up to two additional mobile or landline numbers. Sign in to the account linked to the profile, edit the phone field, save, and check the edit status rather than assuming the public result updates immediately. Google reviews profile edits, so do not tell customers a precise time when Maps will reflect the new number. If another person manages the listing, give them their own appropriate profile access instead of sharing the business Google password.",
+          "Use additional numbers only when they are real, monitored business routes that help customers. A temporary forwarding line may be appropriate during a planned transition; a colleague’s personal number usually is not. Review the website URL, hours, address or service area, and WhatsApp option while you are in the profile, because one correct phone number beside stale facts still creates confusion. Update the same core number on the social accounts and directories the business actively maintains, but do not spend the day chasing every scraped listing before the owned website and Google profile are accurate.",
+        ],
+      },
+      {
+        heading: "Run a live test, then retire the old route deliberately",
+        paragraphs: [
+          "Test from a customer’s point of view after publishing. In a private browser and on a phone, find the business name and city, open the website from the Google profile, tap every call and WhatsApp action, submit one harmless enquiry if permitted, and confirm the right person receives it. Compare the number on the profile, website footer, contact page, booking confirmation, and social bio. Do not use a real customer’s appointment or conversation as a test. Record the date, route, and result in the private handover note.",
+          "Keep the old route only as long as it is genuinely monitored and useful. If calls are forwarded, check that the greeting does not expose personal information and that staff know how to identify the business. If the old number will stop working, remove it from every controlled public surface on the same day and replace any stock of printed material before it is distributed again. Review the public routes a week later, including a saved old link if you have one. A good transition is modest: customers reach the current business without being sent to an unanswered number or asked to solve the change themselves.",
+        ],
+      },
+      {
+        heading: "Keep ownership with the business, not a helper",
+        paragraphs: [
+          "Before closing the task, make sure the business owner knows where the number is managed, who can change the website contact setting, and who holds the Google Business Profile access. This is especially important after an agency engagement, a staff change, or a switch from a personal SIM to a business line. Document the public number, transition date, responsible owner, and the places checked; avoid storing credentials or customers’ messages in that document. Revisit the list after a rebrand, relocation, or change in hours.",
+          "PaperChai can help a local business keep its site’s public contact path clear, but it cannot guarantee carrier forwarding, Google edit approval, or a customer’s response time. Publish only the contact details the business can support, then use the same website URL and primary contact route consistently wherever customers are invited to enquire. The useful result is straightforward: someone who sees an old reference or a new listing can still find a truthful, working way to start a conversation.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "fix-duplicate-google-business-profile-local-business-india",
+    title: "How to fix a duplicate Google Business Profile safely",
+    description:
+      "A practical guide for Indian local businesses: identify duplicate Google Business Profiles, protect the live listing, and choose the right correction route.",
+    category: "Local growth",
+    publishedAt: "2026-10-12",
+    updatedAt: "2026-10-12",
+    readingMinutes: 6,
+    image:
+      "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "Three people looking at a laptop together across a meeting table",
+    keywords: [
+      "fix duplicate Google Business Profile local business India",
+      "remove duplicate Google Maps listing India",
+      "two Google Business Profiles for same business",
+      "merge duplicate Google Business Profile reviews",
+    ],
+    sections: [
+      {
+        heading: "Stop creating profiles and identify the customer-facing problem",
+        paragraphs: [
+          "A duplicate Google Business Profile can make a real local business look unreliable before a customer even reaches its website. One listing may have the right phone number while another shows an old address, different hours, or reviews that nobody is answering. It is tempting to create yet another profile, especially after a move, an agency handover, or a name update. That usually makes the customer journey harder to repair. Google’s current guidance says there should be one profile for each business, and a profile treated as a duplicate may not appear in Search or Maps.",
+          "Start with a private record, not an edit. Search the business name, old name if relevant, phone number, and former address in Google Maps while signed out or in a private browser. Save the links to each result, note the visible name, address or service area, website, phone, hours, review count, and which one customers can actually reach. Do not put customer names, review screenshots with personal details, or account passwords in a shared marketing document. The immediate question is simple: are these two profiles really the same business, or are they separate eligible businesses that happen to share a building or similar name?",
+        ],
+      },
+      {
+        heading: "Choose the route that matches the facts",
+        paragraphs: [
+          "Use the facts, not the label ‘duplicate’, to choose a route. If a verified profile already represents the same business but is owned by a former employee, agency, or old Google account, request access instead of making a replacement. Google says the current owner has three days to respond; a denial can be appealed, and a no-response may offer a claim option. Keep the business owner involved so that the person responsible for the name, phone, website, and address has access when the request is resolved.",
+          "If the business created a second profile by mistake, Google says it can be removed without affecting the verified listing—but removal also removes that profile’s content and linked managers. Compare the links carefully before acting. If two profiles for the same business both appear on Maps, use Google Maps’ suggestion/reporting flow to request a merge, understanding that it is reviewed and that review replies may be lost even when reviews are combined. If the business moved premises, update the existing profile’s address rather than creating a new location. If it simply offers several services, list those services on one profile rather than splitting one business into several listings.",
+        ],
+      },
+      {
+        heading: "Do not erase a genuinely distinct business",
+        paragraphs: [
+          "A shared address does not automatically mean a duplicate. Google allows separate profiles for distinct, eligible businesses at the same location when they have different names and clearly visible differences in signage. That can matter in a clinic with independent practitioners, a co-working building with genuinely staffed offices, or a studio that contains a separately operated business. The profiles should describe what a customer can actually find there, not be an attempt to occupy more map results.",
+          "Consider an illustrative example. A Bengaluru beauty studio changes its public name, and the owner later finds a Google Maps result under the older name plus the current verified profile. Those may be the same business and need a careful merge or update path. But if an independent makeup artist works from a clearly signed room at the same studio and manages her own customer appointments, she may be a distinct business. Before sending a report, collect only the ordinary business facts that establish the difference: permanent signage, correct name, customer-facing address or service model, website, and direct phone route. Do not manufacture evidence, add keyword-heavy names, or expose a residential address for a service-area business.",
+        ],
+      },
+      {
+        heading: "Protect the website and enquiry route while Google reviews it",
+        paragraphs: [
+          "Google may review a correction rather than changing the result immediately, so make the channels you control useful in the meantime. On the PaperChai site, show the real business name, actual service area or visit address, current hours, and one monitored enquiry route. A customer who lands from an old Maps result should be able to work out whether the business is still operating, where it serves, and how to ask a question. Do not use a banner to promise that a listing has been removed or that reviews will transfer on a particular date; those decisions are Google’s to make.",
+          "Test the customer journey on a phone after the public facts are aligned. Open both Maps results, tap each website link and phone number, then compare the site’s contact page, directions link, booking path, and WhatsApp or email route. A good outcome is not merely fewer search results. It is one honest route from a profile to the correct business, with no surprise address, disconnected phone, or request sent to an unattended inbox. If a former website or phone is no longer controlled by the business, remove or correct it through the relevant owner rather than asking customers to guess which listing is current.",
+        ],
+      },
+      {
+        heading: "Keep a short correction record and know when to ask for help",
+        paragraphs: [
+          "Keep a dated private note of the profile URLs, what each represented, the action requested, the account used, and the outcome. This makes a later ownership question or customer report easier to explain without relying on memory. Once the correct profile is stable, review it quarterly or after a move, name change, agency transition, or major website update. Check the public result while signed out, not only inside the account that manages it. The business owner should retain appropriate account access rather than leaving the only owner role with an outside helper.",
+          "Ask Google support through the official path when two distinct eligible businesses were incorrectly merged, when the relevant ownership route does not resolve access, or when the profile status presents a specific issue you cannot safely correct. Prepare the business name, Maps links, exact address or service-area model, website, phone number, signage details where relevant, and a concise timeline. PaperChai can help the business publish a clear, consistent public site, but it cannot decide a Google merge or ownership outcome. Next, make the website’s name, location model, and contact route truthful, then use that same public URL consistently on the one profile that represents the business.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "cancellation-rescheduling-policy-service-website-india",
+    title:
+      "How to explain cancellations and rescheduling on a service website in India",
+    description:
+      "A practical guide for Indian local businesses and freelancers: write a clear booking cancellation policy, place it where customers see it, and test the rescheduling path.",
+    category: "Website foundations",
+    publishedAt: "2026-10-11",
+    updatedAt: "2026-10-11",
+    readingMinutes: 6,
+    image:
+      "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A paper planner, pen, and laptop arranged on a work desk",
+    keywords: [
+      "cancellation policy for local service website India",
+      "reschedule appointment policy freelancer website India",
+      "booking cancellation terms small business India",
+      "how to show no-show policy on booking page India",
+    ],
+    sections: [
+      {
+        heading: "Start with the customer decision, not a copied legal paragraph",
+        paragraphs: [
+          "A cancellation policy is most useful before a customer commits, not after a disputed appointment. A salon holding a stylist’s time, a photographer reserving an event date, a tutor preparing a session, or a consultant blocking a call all need a way to handle change. The visitor needs the same basics: can I move this booking, how do I tell you, what happens to an advance, and when will I know the change is accepted? If those answers are hidden in a footer or appear only after payment, the website has created uncertainty instead of preventing it.",
+          "Write the policy from the real operating process. Look at the smallest amount of notice that gives the business a genuine chance to refill a slot, change travel plans, or avoid preparation costs. Then decide what happens for a timely cancellation, a late cancellation, a reschedule, and a no-show. A one-person home-service business may need to check a new locality and time before agreeing to move a visit. A tutor with recurring online sessions may be able to offer a defined make-up slot. Do not copy a 24-hour rule or a fee from another business just because it sounds standard.",
+        ],
+      },
+      {
+        heading: "Make four outcomes plain before the booking action",
+        paragraphs: [
+          "Keep the customer-facing version short enough to scan on a phone. First, state the notice window in ordinary language: ‘Please request changes at least 24 hours before your appointment.’ Second, say how to request it: a reply to the confirmation message, a booking link, a monitored WhatsApp number, phone, or email. Third, explain the outcome: a reschedule is subject to availability, an advance is adjusted to a new confirmed slot, or a late change may have a stated charge. Fourth, explain what happens if the customer cannot use the normal route. A real contact option is better than asking someone with an accessibility or technical issue to guess.",
+          "Use words that match the service. ‘Request a new time’ is clearer than ‘manage your appointment’ when a person still approves changes. ‘Your booking is confirmed after we reply’ is more honest than a calendar that only receives a request. If a deposit is involved, name the amount or the way it is calculated, what it reserves, and the conditions that apply to it. Avoid vague phrases such as ‘fees may apply’ when the business already knows the rule. Conversely, do not announce a fixed refund or charge that the owner has not decided they can honour. For tax, consumer, or contract questions specific to the business, seek qualified local advice before publishing final terms.",
+        ],
+      },
+      {
+        heading: "Put the same promise in every booking handoff",
+        paragraphs: [
+          "Place a concise policy summary beside the booking or payment action, with a link to fuller terms if the workflow needs them. Repeat the key points in the booking confirmation and reminder, where a customer is most likely to need them. If Google, Instagram, a QR code, or WhatsApp sends people to the booking page, the first screen should identify the service and make the change route easy to find. Google’s current Maps booking guidance notes that cancellations and modifications are subject to the business’s cancellation policy; that makes the business’s own wording and contact path part of the customer experience, not an afterthought.",
+          "Do not let different channels invent different rules. A website saying ‘reschedule up to one day before’, a WhatsApp quick reply saying ‘message us anytime’, and a staff member promising a refund without checking creates a conflict no policy page can repair. Make a small private reference for whoever answers bookings: the public wording, who may approve exceptions, how to record an agreed change, and who sends the confirmation. Keep private circumstances private. A customer does not need to explain a medical, family, or financial situation in a public form merely to discover which contact route can help.",
+        ],
+      },
+      {
+        heading: "Test cancellation as carefully as you test booking",
+        paragraphs: [
+          "Open the live site in a private browser on a phone. Can a new visitor find the cancellation or rescheduling instructions before paying or submitting a request? Tap each named contact link and check that it reaches the correct business account. If there is a self-service link, test it only with a harmless test booking that the normal process permits you to cancel. Check the acknowledgement: it should say whether the request was received, whether a slot is actually released or changed, and what happens next. A message that disappears into an unmonitored inbox is not a cancellation process.",
+          "Then test the internal handoff. The person receiving the request should be able to see the service, date, customer contact method, and current status without copying sensitive notes into a public tool. Confirm that an available slot is not accidentally offered twice and that an advance is not treated as refunded before the responsible person verifies it. A simple dated record of requests and confirmations is often enough for a small operation. The aim is not a complicated booking system; it is a dependable way for a customer and the business to agree on whether a time has changed.",
+        ],
+      },
+      {
+        heading: "Review the rule when the work changes",
+        paragraphs: [
+          "A cancellation rule needs review when the business adds staff, changes service length, begins travelling farther, takes advances, uses a new scheduler, or notices a repeated source of confusion. Look at actual questions without storing more customer information than needed. If people repeatedly ask whether an advance moves to a new date, improve that sentence. If customers choose the wrong contact route, make the button clearer. If the rule routinely feels unfair to either side, change the operating rule first and then update every public message together.",
+          "A good policy does not guarantee fewer cancellations or protect a business from every difficult situation. It does give a ready customer a respectful, realistic next step and gives the owner a process they can follow consistently. PaperChai can help a local business or independent professional publish a clear service and booking journey, but the owner remains responsible for the actual availability, payment terms, and decisions behind it. Before sharing a booking link, make sure the policy, confirmation, reminder, and person answering enquiries all tell the same honest story.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "update-business-address-website-google-india",
+    title: "Move your business address without confusing customers",
+    description:
+      "A practical checklist for Indian local businesses moving premises: update your website and Google details, protect privacy, and test every customer route.",
+    category: "Local growth",
+    publishedAt: "2026-10-10",
+    updatedAt: "2026-10-10",
+    readingMinutes: 6,
+    image:
+      "https://images.unsplash.com/photo-1449247666642-264389f5f5b1?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A person holding a small cardboard box beside a desk in a bright office",
+    keywords: [
+      "update business address on website and Google India",
+      "move local business address Google Business Profile India",
+      "business relocation website checklist India",
+      "change office address without confusing customers India",
+    ],
+    sections: [
+      {
+        heading: "Treat a new address as a customer-journey change",
+        paragraphs: [
+          "Moving a studio, clinic, salon, consultancy, or small office changes more than the line in a footer. A customer may be following an old Google Maps pin, a saved WhatsApp location, a QR code on a visiting card, or directions in an appointment message. If one of those paths still points to the former premises, the customer loses time and the business loses trust. Start with the question a visitor needs answered: where do I go now, and does this business still serve me?",
+          "Make one private relocation sheet before changing public details. List the old and new address exactly as customers should see them, the move date, whether customers are received at the new place, the phone number, normal hours, temporary closure dates, and one person responsible for each update. A home-service business should separately state which address, if any, is public and which cities or localities it serves. This prevents a well-meaning staff member from publishing a residential address merely because it appears on a bill or courier label.",
+        ],
+      },
+      {
+        heading: "Update the website where a visitor makes a decision",
+        paragraphs: [
+          "Find every customer-facing reference before editing: the contact page, footer, map or directions button, booking page, service-area copy, FAQ answers, downloadable brochures, and confirmation emails. Update the plain-text address as well as the clickable map destination. If the premises are changing but the service area is not, say so directly: ‘Appointments now take place at our new Indiranagar studio’ is clearer than silently replacing a pin. If the business is moving next week, use a short dated notice rather than leaving visitors to infer which address is current.",
+          "A physical location is not the right answer for every business. A tutor who visits students, a photographer who travels to shoots, or a consultant who works remotely should not imply walk-in availability at a private home. Explain the actual model instead: service area, appointment-only studio, online consultation, or customer-site visit. Keep the first enquiry light; ask for a locality or preferred meeting mode before requesting a full address. This respects privacy and helps the business check whether the request is workable.",
+        ],
+      },
+      {
+        heading: "Change the Google profile carefully, not repeatedly",
+        paragraphs: [
+          "Google’s current Business Profile guidance says a verified business that moves to a new address must verify again. Sign in to the Google account that owns the existing profile, open Edit profile, then Location, and enter the full new address. If Google cannot place it accurately, use the pin-adjustment step rather than forcing a nearby landmark into the address field. Google also reviews edits, so avoid promising customers that the Maps result will change at an exact time. Keep the old directions available in a private note until the public listing is correct.",
+          "Do not create a second profile just because the new pin is not visible immediately. Use the real-world location: Google’s guidelines require a precise address or service area and do not allow a virtual office that the business does not operate from. Check whether the new premises have the required signage and whether customers can actually visit during the published hours. Then review phone, website URL, category, hours, and service area at the same time. A new address paired with an old website link or obsolete hours still sends customers into the wrong journey.",
+        ],
+      },
+      {
+        heading: "Tell customers what changes before they travel",
+        paragraphs: [
+          "Use the channels you control to make one consistent announcement: the website notice, appointment confirmations, WhatsApp Business profile, social bio, email signature, and printed material that can still be edited. Keep it factual: the effective date, new locality, whether existing bookings are affected, parking or entrance details when useful, and how to ask a question. Do not publish a customer list, booking schedule, or a staff member’s personal number to make the announcement feel personal. One clear route to the business is safer than several informal workarounds.",
+          "Consider a fictional example. A Pune nutritionist moves her appointment-only practice from Kothrud to Baner but continues online consultations across India. Her website should lead with the Baner appointment address and booking instructions, distinguish online from in-person appointments, and retain the same enquiry number. Her Google profile should show the actual customer-facing location and current hours. She should not list her home address as a second location merely to appear in more searches. That approach helps an existing client choose the right route without making a search-ranking promise.",
+        ],
+      },
+      {
+        heading: "Run an old-route and new-route test",
+        paragraphs: [
+          "After the changes are public, test from the customer’s point of view in a private browser and on a phone. Search the business name and city, open the website from the Google profile, tap directions, call the visible number, open the booking or enquiry route, and compare the address, hours, and business name on each screen. Try one older link from a previous email, QR code, or saved social post if you have one. The test passes only when a customer can tell which location is current and can reach a person who can help.",
+          "If a detail is still wrong, correct the source that controls it and record the change; do not paper over it with a confusing banner. Review the same paths a week later because Google edits may take time to appear and older printed material can keep circulating. Keep a short change log with dates, URLs, and the responsible owner, not customer details. The useful outcome is modest: people who find an old or new reference arrive at the right business with an honest expectation of how to visit, book, or ask for help.",
+        ],
+      },
+      {
+        heading: "Next step: publish only the details you can stand behind",
+        paragraphs: [
+          "Before sharing the new location widely, review the site on a phone one more time and remove every outdated address, pin, and instruction you control. PaperChai can help you create or refresh a clear public site, but the business owner must decide what is true about access, hours, privacy, and service coverage. Start a new PaperChai site or review an existing one, publish after the essential details agree, and use that public URL consistently in the Google profile and customer messages. A well-managed relocation is not a visibility trick; it is a reliable handoff from search to a real visit or conversation.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "paperchai-block-holiday-booking-dates-india",
+    title: "Block holiday dates before bookings arrive on your website",
+    description:
+      "A PaperChai workflow for local businesses in India: set accurate availability, block closure dates, test customer booking, and keep Google hours aligned.",
+    category: "PaperChai workflow",
+    publishedAt: "2026-10-09",
+    updatedAt: "2026-10-09",
+    readingMinutes: 6,
+    image:
+      "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "An open paper planner with handwritten dates and a pen on a desk",
+    keywords: [
+      "block holiday dates on booking website India",
+      "PaperChai blackout dates booking workflow",
+      "local business holiday booking availability India",
+      "manage appointment closures on service website India",
+    ],
+    promotionCaption:
+      "A booking button should not promise a slot when your team is closed. This PaperChai workflow shows how to set weekly availability, block holiday dates, test the customer journey, and keep Google hours in step before the next busy period.",
+    sections: [
+      {
+        heading: "Start with the promise a customer should see",
+        paragraphs: [
+          "A holiday closure creates a simple but expensive mismatch when a local business website continues to offer appointment times. A salon may be closed for a festival, a tutor may be away for a family event, or a home-service team may have no travel capacity on particular dates. If a visitor selects one of those slots, the business must later disappoint them or scramble to rearrange work. The useful goal is not to show more availability. It is to show only the times the business can responsibly consider or confirm.",
+          "First separate three situations in a private operating note: usual weekly availability, a full-day closure, and a day with reduced capacity. A full closure is a good use for a blackout date. A reduced day needs narrower booking hours or a request process that explains the limit. Do not use a closure setting to hide an unresolved staffing problem, and do not call every enquiry a confirmed appointment if a manager still checks locality, service scope, or staff availability. The booking button, confirmation, and human reply should describe the same promise.",
+        ],
+      },
+      {
+        heading: "Set the regular booking window in PaperChai first",
+        paragraphs: [
+          "Open the relevant PaperChai site dashboard and find Online booking. Confirm that the notification email belongs to a person who will actually monitor requests, then name the services customers can select. PaperChai can reuse the services listed on the site, which is helpful only after those labels are current and clear. A customer choosing ‘Bridal consultation’ or ‘AC service visit’ should not land in a generic request queue with no owner or acknowledgement.",
+          "For businesses using built-in scheduling, switch it on and set the weekly hours and slot length to the real appointment window, not simply the longest hours shown on a public sign. A studio may be open for walk-ins from 10 am but only take consultations from noon; a field-service business may need a final slot well before the end of its working day. Mark days closed when no slots should be offered. Save the settings before adding exceptions, so the normal pattern is easy to understand when the busy period is over.",
+        ],
+      },
+      {
+        heading: "Block full closure dates without changing the whole week",
+        paragraphs: [
+          "In the same built-in scheduling section, add each full closure under Blackout dates in YYYY-MM-DD format, one date per line, then save. For example, a business closed on 2026-10-20 and 2026-10-21 enters those two dates rather than turning off every Tuesday and Wednesday. The setting removes available slots for those specific dates while leaving the regular weekly schedule in place for other weeks. Keep the list limited to dates the business has actually decided to close; speculative blocks create the same friction as an inaccurate open slot.",
+          "A blackout date controls PaperChai’s built-in slot availability. It does not change the operating hours shown on Google, an external calendar, a WhatsApp profile, or a printed notice. If the business also uses an external scheduler, update that provider separately and test its calendar; do not assume an embedded calendar reads PaperChai blackout dates. If the business is open but cannot take appointments, say that plainly on the website or in the reply process rather than telling customers the whole business is closed.",
+        ],
+      },
+      {
+        heading: "Test the customer path before announcing it",
+        paragraphs: [
+          "Use a phone on mobile data or a private browser to open the live site. Choose a normal future date, then a blackout date, and confirm that the first offers only sensible slots while the second offers none. Check the business name, selected service, button wording, form labels, and any WhatsApp fallback. Keyboard-test the date and slot controls on a desktop browser as well. A booking path that works only for the owner’s saved session is not ready for customers.",
+          "If the normal process permits it, submit one harmless request for an available future slot. Confirm that the notification reaches the responsible person and that the customer-facing message makes clear whether the request is pending or confirmed. Do not take a genuine customer slot merely to test the workflow. Record the test date and remove test records through the usual business process. If the check exposes a wrong service, response owner, or unavailable time, correct the underlying setting before sharing the booking link on Google, social profiles, or a QR code.",
+        ],
+      },
+      {
+        heading: "Keep Google and the website truthful, then review after the closure",
+        paragraphs: [
+          "Update Google Business Profile special hours separately when the public opening hours change. Google’s current guidance treats special hours as dates that need their own confirmation; they are not automatically supplied by a website booking tool. Review the public profile while signed out, along with the PaperChai site, phone message, and any social bio. A customer should not see ‘open today’ on Maps, a closed door, and an apparently bookable website without an explanation of what is still available.",
+          "After the closure, remove or revise only the blackout dates that no longer apply, then repeat the quick live-site check. PaperChai is a practical place to keep the booking path and requests together, but it cannot decide who is staffed, which work fits, or whether a Google profile is accurate. Begin a new site or review the existing one in PaperChai, publish only after the details are correct, and use the public link for the customer routes you maintain. The outcome worth measuring is modest: visitors see an honest next step and the business receives requests it can actually handle.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "google-business-profile-suspended-after-website-change-india",
+    title:
+      "Google Business Profile suspended after a website change in India: what to check before appealing",
+    description:
+      "A calm, evidence-first checklist for an Indian local business whose Google Business Profile is suspended after a website or business-detail update.",
+    category: "Local growth",
+    publishedAt: "2026-10-08",
+    readingMinutes: 7,
+    image:
+      "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A small business team reviewing a checklist together at a table",
+    keywords: [
+      "Google Business Profile suspended after website change India",
+      "appeal suspended Google Business Profile local business India",
+      "Google Business Profile suspension evidence checklist India",
+      "website link change Google Business Profile suspended",
+    ],
+    sections: [
+      {
+        heading: "Pause the edits and confirm what is actually suspended",
+        paragraphs: [
+          "A suspended Google Business Profile is alarming when it is a main path from Maps to a local business website. Start by slowing down. Sign in to the Google account that normally manages the profile and read the notice, the affected profile name, and any policy link in the Google Business Profile appeals tool. A missing edit, a rejected photo, an account restriction, and a suspended profile are different situations with different next steps. Do not assume that changing a website field caused the action just because both happened on the same day. Record the date, the exact public details, and the last deliberate change in a private operating note.",
+          "Do not create a replacement profile while an appeal is under review. Google’s current suspension guidance explicitly says not to create a new Business Profile for the same business during that period. A duplicate can confuse customers and make the original problem harder to assess. Keep the existing website, phone number, and enquiry routes working while the profile is unavailable. A customer who has a saved link, found the business through a referral, or opened an old QR code should still be able to understand the service and contact a responsible person.",
+        ],
+      },
+      {
+        heading: "Check the public facts against the real business",
+        paragraphs: [
+          "Before appealing, compare the profile with what the business can honestly support. Google says the business name should reflect the real-world name used consistently on signage, stationery, the website, and with customers. Remove added city names, services, offers, or ranking claims from the name if they are not genuinely part of that recognised name. The website should represent the individual business location, not a temporary agency preview, lead-generation page, unrelated directory, or an address that sends visitors somewhere unexpected. A clean, simple website link is more useful than a clever keyword-heavy one.",
+          "Then review location type. A plumber, home cleaner, photographer, or freelancer who travels to customers and does not receive them at a staffed, signed location should normally operate as a service-area business and hide a home address. Google’s guidance says service areas should be specific and accurate, entered as cities, postal codes, or other areas rather than a radius; it also advises keeping the overall area to roughly two hours’ drive from the base. A studio that really welcomes customers can show its address, but only when the public location and stated hours describe how the business actually operates.",
+        ],
+      },
+      {
+        heading: "Prepare evidence before opening the appeal flow",
+        paragraphs: [
+          "Gather only documents that genuinely identify the business and match the profile you are appealing. Google lists examples such as official registration, a business licence, tax certificates, and business utility bills. Check names and addresses closely before uploading. A document with a different trade name, an old address, or a personal address that is hidden on the service-area profile may need context rather than an unsupported explanation. Do not alter documents, borrow another business’s records, or upload customer information just to make the file look stronger. Keep copies in the business’s private records, not in a shared marketing folder.",
+          "This preparation matters because Google says supporting evidence must be submitted within 60 minutes after opening the linked evidence form. Make a short private list beforehand: the owner account, affected profile, current website URL, correct phone number, business name, operating model, and the evidence file names. Redact material that is unnecessary for the purpose, where the document and submission process allow it, but do not obscure the business facts Google needs to compare. If an agency previously managed the profile, ensure the actual business owner has the relevant account access before starting; never solve an access problem by sharing passwords.",
+        ],
+      },
+      {
+        heading: "Submit one focused appeal through the official tool",
+        paragraphs: [
+          "Use the Google account connected to the affected profile, open the Business Profile appeals tool, select the profile, and follow the shown reason and policy link. Submit a concise account of the correction: for example, that the website field now leads to the business-owned public site, the service area is accurate, or the business name matches real-world use. Describe facts, not theories about rankings or competitors. If the tool invites evidence, attach the prepared files within its stated window. An appeal is a request for review, not a promise that the profile will be restored or appear immediately in local results.",
+          "Avoid repeated submissions for the same issue while waiting for the decision. Google’s appeals guidance says reviews and decisions can take up to five working days and tells businesses not to submit multiple appeals before receiving a response. Watch the associated email inbox and the tool’s status rather than asking several staff members to make conflicting edits. If the notice indicates that the Google account itself is restricted, that account restriction must be resolved before a Business Profile suspension can be appealed. Keep this workflow assigned to one accountable owner so the evidence, messages, and public facts remain consistent.",
+        ],
+      },
+      {
+        heading: "Use the waiting period to protect the customer journey",
+        paragraphs: [
+          "A profile suspension is a useful prompt to check channels the business controls. On a phone and in a private browser, open the website’s homepage, key service pages, contact page, call link, WhatsApp link, booking route, and privacy information. Confirm the business name, service area, hours, and response expectation agree with the facts used in the appeal. Submit one harmless test enquiry only if the normal process permits it, then remove it through the standard process. Do not announce a false reopening date or tell customers that a Google review guarantees they will be helped sooner.",
+          "When the profile is restored, make future changes deliberately. Keep the business owner as an owner, give helpers the appropriate access level, and keep a dated private record of changes to name, address visibility, service area, phone, website, and hours. Change one verified fact at a time and test the corresponding customer route after it is visible. A reinstated profile does not guarantee Maps placement, leads, or a particular review outcome. Its practical value is more modest and important: customers who search for a real local business can find accurate information and reach a website that keeps its promises.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "move-local-business-website-to-new-domain-india",
+    title:
+      "Move a local business website to a new domain in India without losing customer routes",
+    description:
+      "A practical checklist for moving an Indian local business website to a new domain while keeping enquiries, Google Business Profile links, and Search Console signals in order.",
+    category: "Website foundations",
+    publishedAt: "2026-10-07",
+    readingMinutes: 7,
+    image:
+      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A business owner reviewing a website migration plan on a laptop beside a notebook",
+    keywords: [
+      "move local business website to new domain India",
+      "change website domain without losing Google Business Profile link",
+      "Search Console Change of Address small business website India",
+      "redirect old domain to new business website India",
+    ],
+    sections: [
+      {
+        heading: "Decide whether this is a domain move or only a hosting change",
+        paragraphs: [
+          "A domain move changes the address customers see, such as moving from an agency-owned address or a long temporary URL to yourbusiness.in. A hosting change keeps that visible address exactly the same while the technical provider changes behind it. The difference matters. Google’s Change of Address tool is for a move from one domain or subdomain to another, not for a hosting change with no visible URL change. Before doing anything, write down the current public address, the proposed address, and whether each important page will keep its path.",
+          "For a local business, start with the customer-facing routes rather than search jargon. List the homepage, contact page, service pages, booking page, WhatsApp link, portfolio pages, and any page named on a Google Business Profile or social bio. A Pune photographer may have a gallery URL shared in old wedding enquiries; a home-repair business may have a specific estimate form in a QR code. Those are not disposable links. If the old address is still useful and the customer experience is working, do not move merely because a new name sounds more fashionable.",
+        ],
+      },
+      {
+        heading: "Keep control of both domains and both Search Console properties",
+        paragraphs: [
+          "A migration is safer when the business owner—not only a former agency or freelancer—can access the old domain registration, the new domain, DNS settings, website platform, and the Google account used for Search Console. Keep credentials in a proper private password process and give a trusted backup person only the access they genuinely need. Do not publish recovery details in a project sheet or send passwords in a customer group. If an agency owns the old domain and will not cooperate, clarify ownership before promising a launch date; redirects cannot be created from a domain the business cannot control.",
+          "Add and verify both the old and new site in Search Console with the same owner account before the move. Google requires ownership of both properties for its Change of Address tool. A domain-level property is often useful because it combines protocol and subdomain reporting, but follow the verification method your setup supports. This is an operational check, not a guarantee of rankings. It gives the owner a place to see indexing and crawl issues after the address changes.",
+        ],
+      },
+      {
+        heading: "Map every useful old page to its closest new page",
+        paragraphs: [
+          "Make a small URL map before switching anything: old homepage to new homepage, old contact page to new contact page, old service page to the equivalent service page. Use the most specific relevant destination. Sending every old page to the new homepage may leave a person who wanted ‘AC repair in Baner’ searching again for the right service. Google’s site-move guidance recommends a mapping and direct permanent server-side redirects; it also advises avoiding redirect chains. A browser should make one clean jump to the final page, not hop through an agency preview or tracking address.",
+          "Keep the familiar information available on the new site while the move is happening: business name, phone number, service area, hours, and the real way to enquire. Avoid combining the address change with a wholesale rewrite, new site structure, rebrand, and new booking provider on the same day. Google notes that a domain move combined with a redesign can make it harder to understand what changed. For a small business, a calm first move is usually better: carry the essential pages across, test them, then improve copy or design in a later release.",
+        ],
+      },
+      {
+        heading: "Launch only after a real customer can complete the journey",
+        paragraphs: [
+          "Open the new domain in a private browser on a phone and desktop. Check that the address uses HTTPS, the homepage and service pages load, the contact form has clear labels and useful errors, the call link starts the right number, and the WhatsApp or booking action opens the intended business account. Submit only a harmless test enquiry if the normal workflow allows it, then confirm that the responsible person receives it without exposing someone else’s details. Ask a colleague to try one old bookmarked link as well; that simple test catches missing redirects quickly.",
+          "Then update the website field on the verified Google Business Profile through its normal editor. Review social bios, QR codes, email signatures, directories the owner controls, and paid campaign destinations one at a time. Do not create a duplicate Business Profile or alter the business name to announce the new web address. The profile should continue to describe the real business, and its website link should send customers to the same dependable contact path. It may take time for edits and search results to refresh, so set expectations honestly rather than promising an immediate visibility lift.",
+        ],
+      },
+      {
+        heading: "Tell Google about a genuine domain move, then monitor the basics",
+        paragraphs: [
+          "After the new site is live and permanent redirects work, use Search Console’s Change of Address tool when the move is from one domain or subdomain to another and its pre-checks pass. Google says to use it after moving and redirecting the site. Do not use it for an HTTP-to-HTTPS-only switch, a move of a few pages within the same site, a www/non-www change within one domain, or a pure hosting change. For those cases, use the relevant redirects and sitemap updates instead. The tool is an instruction about a site move, not a substitute for working pages and redirects.",
+          "Keep the old domain and redirects in place for at least 180 days; Google recommends retaining the old domain for at least a year to reduce the risk of someone else using an abandoned name. During that period, watch Search Console and the customer routes: are old URLs redirecting, are important new pages indexed, and are enquiries arriving? Correct one proven issue at a time and keep a dated private change log. Success is not a promised ranking number. It is a customer reaching the right local business even when they use an old link, a Maps listing, or a saved bookmark.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "turn-before-after-reels-into-website-proof-india",
     title: "Turn Before-and-After Reels Into Website Proof",
     description:
