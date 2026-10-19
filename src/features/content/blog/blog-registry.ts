@@ -32,6 +32,264 @@ export function blogArticleModifiedAt(article: BlogArticle): string {
 /** Editorial source of truth. Scheduled publishing adds a reviewed article here. */
 export const blogRegistry: readonly BlogArticle[] = [
   {
+    slug: "handle-google-business-profile-suggested-edits-india",
+    title: "How to handle a Google Business Profile suggested edit",
+    description:
+      "A practical response plan for Indian local businesses when Google suggests a profile change: check the facts, protect customers, and align your website.",
+    category: "Local growth",
+    publishedAt: "2026-10-19",
+    updatedAt: "2026-10-19",
+    readingMinutes: 6,
+    image:
+      "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "People gathered around a table during a meeting in a bright office",
+    keywords: [
+      "Google Business Profile suggested edit India",
+      "how to review Google Maps business information change",
+      "website and Google Business Profile information mismatch",
+      "respond to Google business profile update local business",
+    ],
+    sections: [
+      {
+        heading: "Treat the alert as a customer-information check, not an emergency",
+        paragraphs: [
+          "A local business may receive an email or in-product alert that Google has suggested a new phone number, opening hour, category, website, address, or closure status. The first instinct can be to accept or reject it quickly just to clear the notification. Pause instead. A suggested edit is a prompt to check what a customer can see across Google Search, Maps, and the business website. It is not proof that the suggestion is correct, malicious, or urgent enough to make an unverified change.",
+          "Google says it gathers Business Profile information from sources that can include user reports, licensed data, and publicly available web content. Its current guidance says some suggested edits give the business four days to accept or reject before Google may publish an update supported by public information, while some edits can be applied without prior review. That makes a calm, repeatable response more useful than a one-off argument: verify the real-world fact, correct the channels you control, and record what you decided.",
+        ],
+      },
+      {
+        heading: "Check the exact public fact before changing anything",
+        paragraphs: [
+          "Open the profile in the Google account that normally manages it and read the proposed change word for word. Then view the profile from a private browser or a phone where possible. Write a short private note with the date, field, current value, suggested value, source or notification shown, and the person who can confirm the fact. A business owner can verify normal hours with the staff rota, a phone route with a real test call, and a website address by opening the live page. Keep account passwords, customer messages, and identity documents out of this note.",
+          "Use evidence that matches the field. For example, a storefront address should reflect a real customer-facing location; a service-area professional who does not receive visitors should not expose a home address to defeat an edit. A proposed website should lead to the business-owned public site, not an old agency preview or a directory. Do not accept a category merely because it sounds more popular, and do not reject a factual change simply because it is inconvenient. The question is what a new customer can honestly rely on today.",
+        ],
+      },
+      {
+        heading: "Compare the profile with the website’s customer routes",
+        paragraphs: [
+          "The official website can be one of the public sources Google uses, so inspect it before making the profile response. Check the business name, main phone number, address or service-area wording, regular and special hours, website link, booking page, and contact action. A stale footer, old WhatsApp link, or dormant service page can make a correct profile look inconsistent. Fix the owned website through its normal controls when the website is wrong; do not add a hasty banner claiming that Google has made a mistake.",
+          "Think in journeys, not isolated fields. A customer may find the business in Maps, tap Website, then use a booking button or call link. If the profile says a business is open but the website says enquiries are paused, the person has no reliable next step. If a new number is accurate but the contact page still displays the old number, the update has not solved the customer problem. Make one truthful route the source of the public promise, then bring the related profile and site details into agreement.",
+        ],
+      },
+      {
+        heading: "Accept, reject, or directly correct with a clear reason",
+        paragraphs: [
+          "Accept a suggestion when it is accurate and the rest of the public journey supports it. For example, if a real move has already happened and the website, directions link, and appointment message are ready, accepting the new address can help customers reach the right place. If the suggestion is wrong, reject it using the normal profile controls and keep the explanation factual. State the actual business detail and the evidence a reviewer can verify; avoid claims about competitors, rankings, or lost revenue.",
+          "Sometimes neither button settles the underlying issue. The business may need to update its own profile field directly after a planned change, correct an obsolete website page, or follow the official ownership, duplicate, suspension, or appeal path for the specific problem. Do not create a second profile, add a keyword-heavy name, or invent a temporary address to force an outcome. Google reviews profile changes and may not display them immediately, so never promise customers a particular Maps update time.",
+        ],
+      },
+      {
+        heading: "Protect live customers while the public information is unsettled",
+        paragraphs: [
+          "If the disputed fact could send someone to the wrong place or person, make the safest customer route clear on the business website immediately. A short factual notice beside an affected booking, directions, or call action can explain the current route without describing an internal Google dispute. For instance, a business changing premises can say where appointments currently take place; a freelancer changing a phone route can direct visitors to a monitored enquiry form. Do not ask customers to post booking details or personal information in public comments.",
+          "Give whoever answers calls, WhatsApp, and forms a small, honest script. It should explain the current service availability, location model, or contact route and offer the next workable step. Do not tell a customer that a Google change will be resolved by a promised date unless that is within the business’s control. A clear human response matters more than making every public surface look perfect during a review.",
+        ],
+      },
+      {
+        heading: "Verify the result and build a light monthly habit",
+        paragraphs: [
+          "After responding, check the profile again from a signed-out or private view and compare it with the website on a phone. Open the main website link, call or enquiry action, directions route where relevant, and booking page. Test only a harmless enquiry when the normal process permits it, then remove test data through the usual process. Check keyboard access as well: a customer should be able to understand any change notice and reach the contact option without relying on a popup or an image.",
+          "Add a short monthly check for the owner: review Business Profile notifications, then compare the public name, hours, contact route, service area or address, and website link with the business’s current operating facts. Record only material changes and their owner. PaperChai can help keep the business website clear and maintainable, but it cannot accept Google updates or decide whether a suggested edit is true. The useful outcome is simple: customers see information the business can stand behind and reach a person or action that actually works.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "remove-discontinued-service-website-google-india",
+    title: "Remove a discontinued service without confusing customers",
+    description:
+      "A practical checklist for Indian local businesses retiring a service: update your website, Google Business Profile, booking routes, and customer handoff clearly.",
+    category: "Website foundations",
+    publishedAt: "2026-10-18",
+    updatedAt: "2026-10-18",
+    readingMinutes: 6,
+    image:
+      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A person reviewing notes and charts beside an open laptop on a desk",
+    keywords: [
+      "remove discontinued service from website India",
+      "delete service from Google Business Profile India",
+      "update local business website after stopping a service",
+      "retire booking option for service business India",
+    ],
+    sections: [
+      {
+        heading: "Treat a discontinued service as a customer-route change",
+        paragraphs: [
+          "A salon may stop offering a treatment when a trained staff member leaves. A repair professional may no longer support a product line. A freelancer may close a small package to focus on work that is sustainable. The difficult part is not removing a line of text. It is preventing a customer from seeing an invitation, asking for the old service, and discovering only after a call or payment that it is unavailable. A useful change keeps the public promise aligned with the work the business can actually accept today.",
+          "Write a short private decision note before editing anything: the service to retire, the last date it can be booked, any existing commitments, who can answer related enquiries, and the replacement route if one exists. Keep the reason factual and internal; customers rarely need staffing or commercial detail. Decide whether the service is permanently unavailable, temporarily paused, or available only to existing customers. Those are different messages. Calling a pause a permanent removal, or leaving a permanent offer visible during a pause, creates avoidable confusion.",
+        ],
+      },
+      {
+        heading: "Find every place where a customer can still choose it",
+        paragraphs: [
+          "Search the site as a visitor would, not only the main services page. Check the homepage, navigation, service cards, price or starting-price list, FAQs, portfolio captions, blog calls to action, contact form choices, booking form choices, confirmation emails, downloadable brochures, and WhatsApp pre-filled messages. Tap the live actions on a phone as well as reading the text. A retired service can survive in a booking dropdown or an automated confirmation even when its main page has been removed.",
+          "Then list the external places the business controls: its Google Business Profile, social bios, pinned posts, link-in-bio page, marketplace profile, online directory, QR code destination, and paid listing if one is active. Do not chase every old mention across the web before fixing the routes you own. A dated review or an older customer photo may accurately describe past work. The immediate priority is to stop present-tense public invitations and make the next action clear for a customer who arrives through a saved link.",
+        ],
+      },
+      {
+        heading: "Update the website without creating a dead end",
+        paragraphs: [
+          "Remove the service from the normal PaperChai site controls wherever it is offered, and edit related copy so remaining services are described honestly. If the old page has a close substitute, a brief factual note can direct a visitor there: ‘We no longer offer X; ask about Y if it fits your need.’ Do not pretend that a different service is equivalent when it is not. If there is no relevant alternative, make the contact route suitable for a general question or remove the old call to action rather than sending a person to a blank page.",
+          "A former service page can still receive links from a customer’s bookmark, a social post, or Google. Keep the customer outcome in mind when choosing how the site handles it. A short maintained explanation and a relevant next step are often kinder than a generic error page. Do not leave an old price, ‘Book now’ label, or payment instruction beside the notice. For a paid appointment or project, stop new payment requests first, then verify that the booking, form, and confirmation journey no longer imply that the discontinued work can be reserved.",
+        ],
+      },
+      {
+        heading: "Make Google Business Profile and booking choices match reality",
+        paragraphs: [
+          "Google’s current Business Profile service guidance lets eligible businesses edit or delete listed services through Edit services. Use the account that normally manages the verified profile, remove only the service that is genuinely no longer offered, and compare the remaining names and details with the website. Google may review public-profile changes, so do not promise a specific display time. Avoid adding a new category or a second profile merely to make the old service disappear; update the profile that represents the real business.",
+          "Also inspect the website and appointment links attached to the profile. If a link lands on a page that still promotes the retired service, change it to a maintained page with the current offer or remove the unsuitable route through the normal profile controls. A Google service entry and a website page do not have to repeat every sentence, but they should not make opposite promises. The practical check is simple: someone who finds the business in Maps and opens its website should be able to tell what is available and how to ask a sensible question.",
+        ],
+      },
+      {
+        heading: "Handle existing customers separately from new enquiries",
+        paragraphs: [
+          "A public update does not settle an appointment already confirmed or a project already agreed. Contact affected customers privately through the channel already used for the work. Say whether the commitment remains possible, must be rescheduled, needs an alternative arrangement, or should be cancelled under the business’s actual policy. Do not ask customers to disclose booking details in a public comment, and do not publish names, dates, addresses, health information, or a private reason for changing the service.",
+          "Give the person answering calls, WhatsApp messages, and forms a short response they can use consistently. It might say that the business no longer provides the service, name an honest alternative if there is one, and invite an enquiry about current services. It should not claim a referral partner will take the work unless that relationship and handoff are real. A calm, direct answer protects trust better than a vague ‘currently unavailable’ message that leaves the customer wondering whether to wait, pay, or look elsewhere.",
+        ],
+      },
+      {
+        heading: "Test the new customer journey and review it once",
+        paragraphs: [
+          "After publishing, use a private browser and a phone to open the homepage, service menu, old saved link if available, Google profile website link, booking action, contact form, call link, and WhatsApp prompt. Look for the retired service by its ordinary customer name, not just the exact internal label. Confirm that a harmless test enquiry, where the usual workflow permits it, reaches the right person and receives a truthful response. Keyboard users should be able to reach and understand the replacement action without a hidden popup or an unexplained disabled button.",
+          "Review related enquiries after a few weeks. If people keep asking for the retired service, identify the source: an old social post, a printed QR code, unclear wording, or a real gap in the remaining offer. Correct the controlled route rather than adding keyword-heavy paragraphs about work the business does not do. PaperChai can help a local business keep its public site current, but it cannot decide the operating choice or update third-party profiles automatically. The durable result is modest and useful: customers see today’s services, existing commitments receive proper care, and no public route invites a request the business cannot fulfil.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "temporary-business-closure-website-google-india",
+    title: "Tell customers about a temporary business closure clearly",
+    description:
+      "A practical guide for Indian local businesses: pause enquiries responsibly, align your website and Google Business Profile, and reopen with clear customer routes.",
+    category: "Local growth",
+    publishedAt: "2026-10-17",
+    updatedAt: "2026-10-17",
+    readingMinutes: 6,
+    image:
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "People working together around a laptop in a small office",
+    keywords: [
+      "temporary business closure notice website India",
+      "temporarily close Google Business Profile local business India",
+      "pause website enquiries during business closure India",
+      "reopen local business website checklist India",
+    ],
+    sections: [
+      {
+        heading: "Decide whether customers need a short-hours update or a closure notice",
+        paragraphs: [
+          "A local business may pause work for a family emergency, renovation, seasonal break, staff shortage, or a period when an independent professional cannot take new projects. The immediate temptation is to leave the website alone and answer messages later. That creates a poor first experience: a customer sees an open-looking service page, sends an enquiry, and has no idea whether anyone is reading it. The useful goal is not to make the business look continuously available. It is to give a visitor an honest next step while operations are paused.",
+          "Start by defining the real situation in a private operating note. Is the business closed to visits but still answering messages? Is it serving existing customers but not taking new work? Is it unavailable for a known date range, or is reopening uncertain? A one-day late opening needs a different message from a two-week shutdown. Keep the note limited to the public facts, the person responsible for updates, and the planned review date; do not add customer details, medical information, passwords, or private family circumstances.",
+        ],
+      },
+      {
+        heading: "Write a small notice that answers the customer’s next question",
+        paragraphs: [
+          "A useful closure notice says what has changed, when the business expects to review or resume the route, and what a customer can do now. For example: ‘New home-visit requests are paused until 12 November. Existing customers can use this email for an active booking; new enquiries will be reviewed after reopening.’ Only give a return date when the business can reasonably stand behind it. If the date is unknown, say when the notice will be reviewed instead of inventing certainty.",
+          "Put the message near the action it affects. A notice beside an appointment button, quote form, or WhatsApp link is more helpful than a vague homepage banner alone. Change the button label when needed: ‘Enquiries reopen soon’ is clearer than ‘Book now’ if nobody can assess a request. Do not collect detailed forms or payments merely to keep a lead pipeline full while there is no owner for the response. A monitored alternative for urgent existing customers can be appropriate, but label its purpose and response expectation precisely.",
+        ],
+      },
+      {
+        heading: "Make the website routes agree before you announce the pause",
+        paragraphs: [
+          "List every route a prospective customer can use: the homepage contact action, service-page form, click-to-call link, WhatsApp button, booking calendar, Google Maps website link, social bio, QR code, and confirmation message. Decide for each one whether it remains available, becomes an information-only route, or should be temporarily disabled through the normal site controls. A calendar that still displays bookable slots, or a form confirmation that promises a quick reply, can undo an otherwise clear notice.",
+          "Keep the public site simple. A business that can still answer low-risk questions may leave a short contact form with a realistic reply window. A business that cannot monitor messages should remove the invitation to send one and instead show the reopening review date. Do not replace the public site with a blank page or a password prompt: existing customers may need to confirm an address, policy, or contact method. Retain only the information that remains true, including the business name, safe contact route, and any change to scheduled work.",
+        ],
+      },
+      {
+        heading: "Use the Google Business Profile status that matches the real gap",
+        paragraphs: [
+          "Google’s current Business Profile guidance distinguishes temporary adjustments from a longer closure. It says special hours suit a brief change or closure of up to six consecutive days, while a business closed for more than seven days, for an off-season, or indefinitely can be marked ‘Temporarily closed.’ Sign in with the account that normally manages the verified profile, check the public facts, and use the normal Edit profile and Hours controls. Google may review changes, so do not promise a precise time when Search or Maps will display the update.",
+          "This status is not a substitute for the website message. A customer can arrive through a saved link, a social post, or a referral without seeing Maps first. Conversely, do not use a temporary-closure setting merely because the business is busy for one afternoon or wants fewer leads; accurate regular or special hours are more useful in that situation. Never create a replacement profile to test an edit. Keep one business identity, make one truthful change, and verify how the public result and website work together.",
+        ],
+      },
+      {
+        heading: "Protect current customers without making new visitors guess",
+        paragraphs: [
+          "Existing bookings deserve a direct, appropriate update through the channel already used for that booking. Explain whether the appointment remains scheduled, must be moved, or needs a customer response. Do not publish a client’s name, appointment date, address, or private reason for a closure in a public notice. A salon may keep a limited phone route for appointments already confirmed; a freelance designer may keep project email open while pausing discovery calls. Separate that support path from a broad invitation to new work.",
+          "If a refund, rescheduling, or cancellation decision is involved, state only the policy the business can honour and communicate individual details privately. Avoid a social post that asks customers to share booking references in public comments. A clear website notice, a controlled customer message, and a monitored route for existing commitments are enough for most small operations. The aim is to respect people who have already trusted the business while preventing a new visitor from investing time in a request that cannot be handled.",
+        ],
+      },
+      {
+        heading: "Reopen deliberately and test the customer journey",
+        paragraphs: [
+          "Before switching every contact route back on, confirm the real capacity: who answers enquiries, which services are available, which areas can be reached, what hours apply, and whether the booking calendar is accurate. Remove or update the closure message, restore forms and booking actions through the normal controls, and set regular or special hours on the Google Business Profile as appropriate. Reopening is not a reason to promise same-day responses or every old service if the team is still catching up.",
+          "Then test as a new customer would. In a private browser and on a phone, open the website from the Google profile, read the homepage and contact page, tap the call and WhatsApp links, inspect a normal booking date, and submit only a harmless test enquiry if the normal workflow permits it. Confirm that the right person receives it and that the confirmation text matches the new reality. Record the date, routes checked, and owner in the private operating note. A temporary closure is handled well when a customer is never left wondering whether the business is open, who can help, or what to do next.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "paperchai-manage-website-appointment-requests-india",
+    title: "Manage website appointment requests with a daily workflow",
+    description:
+      "A PaperChai workflow for Indian service businesses: route booking requests, confirm the right details, update status, and review the handoff every day.",
+    category: "PaperChai workflow",
+    publishedAt: "2026-10-16",
+    updatedAt: "2026-10-16",
+    readingMinutes: 6,
+    image:
+      "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "An open laptop, notebook, and coffee cup on a wooden work desk",
+    keywords: [
+      "manage appointment requests from small business website India",
+      "PaperChai booking request workflow",
+      "track website appointment enquiries local service business",
+      "follow up online booking requests India",
+    ],
+    promotionCaption:
+      "A booking form is only useful when every request reaches a real person and gets a clear next step. This PaperChai workflow covers the daily routine: route the notification, confirm availability, update the request status, and review what needs a follow-up.",
+    sections: [
+      {
+        heading: "Treat every request as a conversation waiting for an owner",
+        paragraphs: [
+          "An appointment request is not a confirmed booking just because it appears on a website. A customer may be asking for a service outside the business’s area, a time that cannot be supported, or a visit that needs more detail before it can be accepted. The first job is simple: make sure one named person can see the request and knows what a useful next response looks like. Without that owner, a polished booking button can quietly turn into an unanswered inbox.",
+          "For example, an illustrative home-repair business may receive a request for an evening visit. Before promising a slot, the person handling it may need to check the locality, the type of repair, travel time, and who is available. A consultant may instead need to confirm the client’s topic and whether the meeting is online. The website should collect only the information needed to begin that decision; the business should not ask visitors to expose private background details merely to request a call.",
+        ],
+      },
+      {
+        heading: "Set up the PaperChai handoff before sharing the booking link",
+        paragraphs: [
+          "In the relevant PaperChai site dashboard, open Online booking and first decide whether bookings are enabled. Set the notification email to an inbox that a responsible person actively monitors, not an account that belonged to a former staff member or outside helper. Choose a short button label that matches the promise, such as ‘Request an appointment’ when a person still confirms availability. If customers can select a service, use clear current service names or reuse the services already listed on the site rather than creating a second, inconsistent menu.",
+          "PaperChai can also offer built-in scheduling, an optional external calendar link, and a WhatsApp number on the booking form. Pick the route the business can actually support. Built-in slots help when the weekly hours and blackout dates are current; an external calendar may fit an existing process; WhatsApp can be a useful fallback when it reaches a monitored business account. Do not enable several routes just to look responsive. If two channels give different answers, the customer has to solve the business’s internal process.",
+        ],
+      },
+      {
+        heading: "Use a small daily triage sequence",
+        paragraphs: [
+          "At the start and end of the working day, open Recent requests in the site dashboard and work from oldest unanswered request first. Read the visitor’s preferred contact details, selected service, requested slot when present, and any notes. Check the live booking settings before replying if the request looks surprising: a stale service title, incorrect weekly window, or missed blackout date is a site problem to fix, not a reason to blame the visitor. Keep customer messages and any sensitive context in the normal business system rather than copying them into a public note or a social post.",
+          "Then give the customer a real outcome. Confirm a suitable time, ask one focused question needed to offer one, explain that the proposed time is unavailable and offer an alternative, or politely say the work is outside scope. Send the response through the contact route the business normally uses and update the request status in PaperChai so another team member does not repeat or miss the follow-up. A status is a handoff signal, not proof that a customer has read a message, so use it honestly.",
+        ],
+      },
+      {
+        heading: "Make availability and public links agree",
+        paragraphs: [
+          "When native scheduling is on, test a normal slot and a date the business cannot take appointments before promoting the link. Weekly hours, slot length, and blackout dates should describe the appointment window—not merely the hours a phone might be answered. If the business uses an external calendar, open it as a visitor would and check that it still loads, identifies the business, and does not reveal another customer’s details. A calendar link that fails or opens the wrong account is worse than a simple request form with a timely reply.",
+          "If the business places the booking link on its Google Business Profile, Google’s current guidance says that a business can add booking links where eligible and that Google reviews business links. Keep the PaperChai page accessible without a special login, and do not promise a particular Google approval time or position in Maps. The owned website comes first: test its button, confirmation, notification email, and WhatsApp fallback on a phone and in a private browser before sending more visitors there.",
+        ],
+      },
+      {
+        heading: "Review the handoff each week, not only after a missed lead",
+        paragraphs: [
+          "Once a week, scan recent requests for practical patterns: a service people select but the business no longer offers, a common locality outside the service area, a time that repeatedly cannot be accepted, or a status that stays unchanged. Do not infer demand or revenue from a handful of requests. Instead, use the pattern to ask a narrow operating question: should the service wording change, should a day be closed to bookings, does the enquiry form need one clarifying field, or does the responsible person need cover during leave? Make one justified adjustment, then test the public journey again.",
+          "A concise private handover note is enough for a small team: who owns the notification inbox, normal response hours, who can approve an exception, and where the live booking settings are changed. Do not put login credentials, customer notes, or payment details in that note. If the business cannot reliably monitor bookings for a period, turn off the relevant public route or state the response delay honestly. It is better to receive fewer workable requests than to collect enquiries that nobody can responsibly answer.",
+        ],
+      },
+      {
+        heading: "Next step: make the booking promise match the real workflow",
+        paragraphs: [
+          "Open your PaperChai site dashboard, review Online booking, and send one harmless test request through the live site if the normal process permits it. Confirm that the right inbox receives it, the customer-facing message is truthful about whether the request is pending or confirmed, and the request can be given a clear status after a real response. Also test the flow with a keyboard and on a phone, where many local customers will meet it first.",
+          "PaperChai gives a local business one place to maintain the public booking route and review incoming requests; it does not decide availability, send a human reply, or guarantee a Google listing’s review outcome. Start a new PaperChai site or improve an existing one, publish only the contact and booking details the business can support, and keep the same working route in the public places customers use to enquire.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "change-business-name-website-google-india",
     title: "Change your business name without confusing local customers",
     description:
