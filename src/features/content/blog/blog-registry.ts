@@ -32,6 +32,134 @@ export function blogArticleModifiedAt(article: BlogArticle): string {
 /** Editorial source of truth. Scheduled publishing adds a reviewed article here. */
 export const blogRegistry: readonly BlogArticle[] = [
   {
+    slug: "add-whatsapp-contact-button-business-website-india",
+    title: "Add a WhatsApp contact button without confusing website visitors",
+    description:
+      "A practical guide for Indian local businesses and freelancers: create a clear WhatsApp route, set expectations, and keep your website and Google profile aligned.",
+    category: "Website foundations",
+    publishedAt: "2026-10-21",
+    updatedAt: "2026-10-21",
+    readingMinutes: 6,
+    image:
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A person using a smartphone beside an open laptop at a desk",
+    keywords: [
+      "add WhatsApp button to business website India",
+      "WhatsApp click to chat link for local business India",
+      "Google Business Profile WhatsApp contact link India",
+      "WhatsApp website enquiry button for freelancers India",
+    ],
+    sections: [
+      {
+        heading: "Start with the customer question the button is meant to answer",
+        paragraphs: [
+          "For an Indian local business or independent professional, WhatsApp can be the quickest route from a website question to a real conversation. That does not mean every page needs a floating chat icon or that every visitor should be pushed into a message. Decide first what the route is for. A home tutor might use it for availability questions; a photographer might use it for an event date; a repair professional might use it to collect a model number before arranging a visit. A clear purpose produces a clearer button, opening message, and reply process.",
+          "Write a short private note with the number that will receive enquiries, the person responsible for responding, normal response hours, and the questions that can genuinely be handled in chat. Do not choose a staff member’s personal number merely because they are available today. If the business uses a WhatsApp Business account, make sure the account and phone number are under the business’s control and that someone can safely take over when roles change. The contact route is part of the customer promise, not a decorative website feature.",
+        ],
+      },
+      {
+        heading: "Create the link in the official format and test it on a phone",
+        paragraphs: [
+          "WhatsApp’s current click-to-chat guidance uses a link in the form https://wa.me/ followed by the complete phone number in international format. For an Indian number, that normally means 91 followed by the mobile number, with no plus sign, leading zero, spaces, brackets, or dashes. For example, the shape is https://wa.me/919876543210. The number must have an active WhatsApp account. Make the link only after confirming it reaches the intended business account; a typo can send a potential customer to the wrong person.",
+          "A pre-filled message can help a visitor say why they are contacting you, but keep it short and optional in spirit. A useful example is ‘Hello, I would like to ask about your home cleaning service.’ The message must be URL encoded when added after ?text=, so spaces become %20. Never pre-fill a customer’s name, address, health details, or other sensitive information. Open the completed link on a phone and desktop browser, confirm the right account appears, and check that the visitor can edit or delete the suggested text before sending it.",
+        ],
+      },
+      {
+        heading: "Place one honest action near the decision point",
+        paragraphs: [
+          "Put the WhatsApp action where it helps someone take the next sensible step: near a service description, after a short price guide, on a contact page, or beside a booking question. Label the action precisely, such as ‘Ask about availability on WhatsApp’ or ‘Message us about repair options.’ ‘Chat now’ is less useful if the business responds only during weekday hours or if the message will not create a booking. Keep a phone call, enquiry form, or email route when those customers need a more appropriate option.",
+          "Avoid adding the same action several times on every screen just because it is easy to do. Repeated floating controls can cover content on small phones, distract keyboard users, and make it unclear which service the enquiry concerns. A page about a specific service can use a message that names that service; a general contact page can ask what the visitor needs. Make the visible button, its accessible label, and the destination agree. If it contains only an icon, it still needs a text alternative that says it opens a WhatsApp conversation with the business.",
+        ],
+      },
+      {
+        heading: "Set boundaries before messages start arriving",
+        paragraphs: [
+          "A contact button can create expectations faster than a small business can answer them. Near the route, state normal reply hours when an immediate response is not realistic. If the business takes appointments, explain whether WhatsApp starts an enquiry or confirms a booking; do not imply that a message reserves a time unless the team has actually confirmed it. If quotes depend on an inspection or brief, say so. A simple expectation prevents a visitor from treating a first message, payment screenshot, or verbal estimate as a completed transaction.",
+          "Give the person answering messages a brief, repeatable first response. It can acknowledge the enquiry, ask only for the minimum information needed, set a response expectation, and move private or detailed matters to the right channel. Do not ask a visitor to send government ID, card data, passwords, medical information, or sensitive documents through a casual chat. Save customer information only through the business’s normal process. A WhatsApp link is a conversation starter, not a replacement for safe record-keeping or a considered service agreement.",
+        ],
+      },
+      {
+        heading: "Keep Google and the website on the same customer route",
+        paragraphs: [
+          "If the business has a claimed and verified Google Business Profile, its current profile controls may offer a WhatsApp or text-message chat option in supported regions. Google says chat availability can vary, so follow the live settings in the account instead of assuming the field will appear. WhatsApp’s own guidance says a Business Profile can use a WhatsApp click-to-chat URL. Add it only when the business can monitor the number and the website presents the same public identity, services, and response expectations.",
+          "Check the whole path as a customer would: find the business in Search or Maps, open the website, select the relevant service, tap the WhatsApp action, and compare the phone number and business name shown. Google’s guidance asks businesses to use a phone number or website that connects directly to and is controlled by that business. Do not use a redirecting lead broker, an old agency number, or a provider’s personal account as the public contact route. If the business changes a number, update the website and profile together, then test both again.",
+        ],
+      },
+      {
+        heading: "Review the route monthly instead of chasing more buttons",
+        paragraphs: [
+          "Once the link is live, review it after real use. Are visitors asking the same question because the service page is vague? Are messages arriving after hours with no acknowledgement? Are customers trying to make a booking when the business only intended to offer a consultation? Improve the page copy, action label, and response process before adding popups, automation, or more channels. The point is a reliable route for a real customer, not the largest possible message count.",
+          "Do one light monthly test: open the link on a phone, verify the active business account, review the response-hours wording, and compare the website, Google Business Profile, and any printed QR code. Remove old links when staff or numbers change. PaperChai can help a business keep its website contact journey clear, but the business must decide who answers and what it can promise. A good WhatsApp button is modest: it reaches the right person, explains what happens next, and does not expose customers to unnecessary pressure or data requests.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "request-google-business-profile-access-india",
+    title: "Request Google Business Profile access without losing enquiries",
+    description:
+      "A practical guide for Indian local businesses that need access to an existing Google Business Profile while keeping their website and customer routes accurate.",
+    category: "Local growth",
+    publishedAt: "2026-10-20",
+    updatedAt: "2026-10-20",
+    readingMinutes: 6,
+    image:
+      "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "Colleagues working together at computers in a bright shared office",
+    keywords: [
+      "request access to Google Business Profile India",
+      "Google Business Profile owned by former agency India",
+      "recover Google Maps business listing access local business",
+      "website and Google Business Profile ownership checklist India",
+    ],
+    sections: [
+      {
+        heading: "First confirm that this is an access problem, not a reason to create another profile",
+        paragraphs: [
+          "A local business can lose practical control of its Google Business Profile when a former staff member, web agency, family member, or old Google account remains the listed owner. That is not a reason to create a second listing. Two profiles can give customers conflicting phone numbers, locations, or websites and make an access issue harder to understand.",
+          "Start by viewing the profile as a customer would in a signed-out or private browser. Record the public business name, category, phone, website, address or service area, hours, and any booking link. Then ask the business owner which Google account, if any, was used previously and whether someone may already have access. Google says a person who sees the “You manage this Business Profile” badge, sees the business after searching “my business,” or sees “Manage your Business Profile” on Maps may already be an owner. Check before sending requests or changing public facts.",
+        ],
+      },
+      {
+        heading: "Keep a short evidence file without collecting sensitive material",
+        paragraphs: [
+          "Before requesting access, make a small private record of the details a legitimate owner or authorised representative can verify: the public profile URL or Maps result, current public contact route, business website domain, name of the operating owner, and date access was checked. This is a working note, not a dossier. Do not paste passwords, customer messages, identity documents, payment records, or staff personal information into a shared document. Avoid guesses if an agency, colleague, or Google support conversation needs a clear factual summary.",
+          "Separate proof of authority from public marketing claims. A website alone does not prove every ownership question, but Google’s current eligibility and ownership guidance says the business’s phone number and website should be authoritative, verifiable by the owner, and owned and managed by the business owner. If the profile points to an expired agency site, a directory, or a former employee’s phone, correct the business-controlled website route when you safely can. Do not add keywords to the business name, invent an address, or use a temporary number to make an access request look stronger.",
+        ],
+      },
+      {
+        heading: "Use the ownership-request path that matches the business model",
+        paragraphs: [
+          "For a storefront or hybrid business, Google’s current instructions say to go to business.google.com/add, enter the business name and address, choose the existing business, select Request access, complete the form, and submit it. The existing owner receives an email asking them to contact the requester, and the requester receives a confirmation. Use a Google account controlled by the real business owner or an authorised person who will remain reachable. Do not share one account password across an owner, an employee, and an outside provider merely to speed up the request.",
+          "A service-area business that goes to customers and has no customer-facing shop or office follows a different route: Google’s ownership-request guidance directs it to contact support rather than using the storefront process. Be precise about the real operating model. A home address is not a public shop simply because the owner works there, and a virtual office is not a shortcut to a profile change. If the business has a genuine mixed model, use the public facts it can stand behind and follow the prompts Google presents rather than forcing a category that does not fit.",
+        ],
+      },
+      {
+        heading: "Protect the website journey while the request is pending",
+        paragraphs: [
+          "An ownership request does not pause the business’s responsibility to customers. Review the website first because it is the public route the business controls today. Open the homepage, contact page, call link, WhatsApp action, service menu, directions link, enquiry form, and booking page on a phone. Confirm that each route reaches a monitored person and that the text matches current services, hours, and location model. If a Maps visitor follows the profile’s website link, they should still be able to get a truthful answer even if the profile itself cannot yet be edited.",
+          "If a public profile detail is seriously misleading, such as a dead phone number or a closed location, give customers a clear, factual alternative on the owned website near the relevant action. Do not publish a public complaint about the prior owner or ask customers to provide booking details in a review. Existing appointments should be handled privately through the normal channel. A short internal script for whoever answers calls or forms can explain the current route without promising that Google will approve access or update a field by a certain date.",
+        ],
+      },
+      {
+        heading: "Know the response window and avoid destructive workarounds",
+        paragraphs: [
+          "Google says the current profile owner has three days to respond to an ownership request. Check the request status from the Business Profile or the confirmation email rather than submitting repeated requests. If approved, the requester receives an email and can manage the profile. If denied, Google says the requester may still suggest an edit and may be able to appeal. If there is no response after three days, the confirmation flow can offer an option to claim the profile. Follow the live instructions shown in the account, since Google can require verification before a claim is completed.",
+          "Do not use the waiting period to make a replacement listing, report the existing profile as closed when the business is operating, or pressure a former provider through public reviews. Those moves can confuse customers and risk the correct profile. If an agency still cooperates, ask it to add the business owner through the normal People and access controls, then plan a clean handover. Google recommends that authorised representatives respond promptly to access requests and transfer ownership to the business owner when requested. The durable arrangement is an owner-held account with specific staff or providers invited at the appropriate access level.",
+        ],
+      },
+      {
+        heading: "Secure the handover, then test what a customer sees",
+        paragraphs: [
+          "Once access is granted, open People and access and list the current owners, managers, and pending invitations. Give each real person their own Google account; Google explicitly says this avoids password sharing. The business owner should understand who can change the profile and why. Remove access only after confirming the new owner can sign in and the former person no longer needs it. If roles must change, use the profile’s own controls and respect any timing or eligibility restrictions Google shows instead of assuming that a transfer is immediate.",
+          "Finally, compare the public profile with the website one field at a time: name, primary phone, website, hours, service area or address, services, and booking route. Open the website link from Maps on a phone, test a harmless enquiry when the usual process permits it, and verify keyboard users can reach the contact action. Record the date, changed field, and responsible owner in the small private note. PaperChai can help a business maintain its website, but it cannot request or accept Google profile ownership on the business’s behalf. The useful outcome is modest: one legitimate owner, one accurate public customer journey, and no duplicate listing created out of panic.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "handle-google-business-profile-suggested-edits-india",
     title: "How to handle a Google Business Profile suggested edit",
     description:
