@@ -32,6 +32,200 @@ export function blogArticleModifiedAt(article: BlogArticle): string {
 /** Editorial source of truth. Scheduled publishing adds a reviewed article here. */
 export const blogRegistry: readonly BlogArticle[] = [
   {
+    slug: "set-service-area-google-business-profile-india",
+    title: "Set a service area on Google without misleading local customers",
+    description:
+      "A practical guide for Indian plumbers, cleaners, tutors, and freelancers to set an accurate Google service area and make their website enquiry route match.",
+    category: "Local growth",
+    publishedAt: "2026-10-24",
+    updatedAt: "2026-10-24",
+    readingMinutes: 6,
+    image:
+      "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A tradesperson using a hand tool while completing a home repair",
+    keywords: [
+      "set Google Business Profile service area India",
+      "service area business Google Maps India plumber cleaner",
+      "hide home address Google Business Profile India",
+      "website service area page for local business India",
+    ],
+    sections: [
+      {
+        heading: "Decide whether customers visit you, you visit them, or both",
+        paragraphs: [
+          "A plumber who travels to homes, a cleaner who works at a client’s premises, and a tutor who teaches at different addresses have a different customer journey from a salon or shop. Google describes the first group as service-area businesses: they serve customers directly but do not serve them at their own address. A hybrid business does both, such as an auto workshop that also provides roadside assistance. This distinction matters because it determines whether an address should be public and what a visitor reasonably expects after finding the listing.",
+          "Write the answer in ordinary operational terms before opening Google. Can a new customer walk in during the displayed hours? Is there permanent signage and staff who can receive them? Which localities can the business reach reliably, and does travel time change the price or response time? A home office used only for admin is not a customer location. Do not publish it simply to make the profile appear more local. A clear internal answer keeps the Google profile, website, and person answering enquiries from making conflicting promises.",
+        ],
+      },
+      {
+        heading: "Use named places, not a radius or an ambitious map claim",
+        paragraphs: [
+          "Google’s current Business Profile guidance lets a service-area or hybrid business choose up to 20 service areas using cities, postal codes, or other named areas. It does not support editing a service area as a radius. Choose the places where the business can genuinely provide the advertised service, rather than adding every nearby suburb in the hope of appearing in more searches. Google also advises that the overall area should generally stay within about two hours’ drive from the business base. That is a useful reality check for a one-person repair service or independent consultant.",
+          "Build a small working list from actual jobs, travel constraints, and the customer’s likely language. A cleaner might serve Andheri, Powai, and Ghatkopar; a freelance photographer might serve Bengaluru and accept destination work only after a separate discussion. Do not describe all of Mumbai, Delhi, or India as a routine local service area if the practical service is much narrower. If a place requires a travel surcharge, an advance booking, or a different team, state that before a visitor believes the standard offer applies to them.",
+        ],
+      },
+      {
+        heading: "Edit the Google profile carefully and allow it to catch up",
+        paragraphs: [
+          "Sign in with the account that manages the Business Profile, choose Edit profile, then Location, and review the Service area field. Add or remove named areas one at a time and save. Google says approved service-area changes can take up to 48 hours to appear publicly, so a change in the editor is not proof that customers can see it. Keep a brief dated note of the areas you changed and why. It is enough for a small business owner to check the public result later without relying on memory or a screenshot of a different account.",
+          "If the business does not serve customers at its address, remove the public address and keep only the service area. If it does serve customers there and also travels, it can be a hybrid business and show both, provided the location is genuinely staffed and available during the stated hours. Do not create separate profiles for each suburb, virtual office, employee home, or service type. One legitimate service-area profile gives customers one phone number, website, and review history to assess; duplicates create confusion and can lead to enforcement problems.",
+        ],
+      },
+      {
+        heading: "Make the website say what the map listing cannot explain",
+        paragraphs: [
+          "A Google service area answers where a business may operate. The website should answer what happens next. Put a short service-area statement near the relevant enquiry action: name the usual areas, clarify whether a quote or appointment needs confirmation, and explain any meaningful visit constraint. For example, ‘Home appliance repairs in Powai, Vikhroli, and Ghatkopar; send the model and locality for a visit time.’ This is more useful than a long row of locality names or an unsupported promise of ‘service anywhere.’",
+          "Use one primary route that the business can monitor: a short form, a call link, or WhatsApp for questions it can handle safely. Ask only for details needed to assess the request, such as locality, service needed, and a preferred time. Never make a Google result imply that a message confirms an appointment when availability is checked manually. If someone lands outside the usual area, offer an honest alternative: ask for their locality before promising travel, refer them to a relevant remote option, or say that the business does not currently cover it. Clear boundaries save both sides wasted calls.",
+        ],
+      },
+      {
+        heading: "Test the route as a customer after the public listing updates",
+        paragraphs: [
+          "After allowing time for the change to appear, use a signed-out or private browser on a phone. Search for the business name and a normal service query, open the profile, then tap through to the website. Check that the profile does not reveal a private address for a mobile-only business, that the visible phone number reaches the business, and that the website states the same practical coverage. Test the contact action with keyboard navigation on a desktop browser too. The goal is not to force a ranking result for every area; it is to ensure a customer who finds the business receives an accurate next step.",
+          "Where the normal process permits it, make a clearly labelled harmless test enquiry rather than using a real customer request. Confirm it reaches the responsible person and that the response does not contradict the area wording. Do not add customer details, passwords, payment data, or personal home addresses to a shared test note. If a listing or website remains outdated, correct the owned website immediately and review the Business Profile again once Google has processed the change. A short delay is manageable when the customer route remains honest.",
+        ],
+      },
+      {
+        heading: "Review coverage when the business changes, not only when leads slow down",
+        paragraphs: [
+          "Service areas should change with real operations: a new technician, a move, a lost vehicle, different opening hours, or a decision to stop visiting a distant locality. Review the Google profile and website together after any of those changes, then revisit the public view. Keep hours, service names, booking links, and the enquiry message aligned as well. A business can be visible in a wider area and still disappoint people if the public route is silent about travel time, eligibility, or the fact that appointments need confirmation.",
+          "PaperChai can help an owner keep the website’s service statement and contact action clear on the same stable site URL. It does not change Google Business Profile settings, decide which places a business can serve, or answer leads on the owner’s behalf. The useful routine is modest: set accurate named areas in Google, explain the real coverage on the website, test one enquiry route, and revise both whenever operations change. That gives local customers information they can act on without exposing a private address or overpromising availability.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "paperchai-diwali-website-refresh-workflow-india",
+    title: "PaperChai workflow: refresh your website before Diwali",
+    description:
+      "A practical PaperChai workflow for Indian service businesses to refresh customer details, publish an honest Diwali update, and check every enquiry route.",
+    category: "PaperChai workflow",
+    publishedAt: "2026-10-23",
+    updatedAt: "2026-10-23",
+    readingMinutes: 6,
+    image:
+      "https://images.unsplash.com/photo-1512389142860-9c449e58a543?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A lit candle and small festive decorations arranged on a table",
+    keywords: [
+      "update local business website before Diwali India",
+      "PaperChai Diwali website refresh workflow",
+      "Diwali special hours local service website India",
+      "prepare WhatsApp enquiries for Diwali business closure",
+    ],
+    promotionCaption:
+      "Diwali is on 8 November in 2026. Before the rush, give customers one honest answer about your hours, availability, and best enquiry route. This PaperChai workflow helps you review, publish, and test the details they will actually use.",
+    sections: [
+      {
+        heading: "Treat the Diwali refresh as a customer-route check",
+        paragraphs: [
+          "Diwali falls on 8 November in 2026, but a business may reduce capacity, close on different days, or work longer hours around it. A salon may take only pre-booked appointments, a repair team may pause visits, and an independent professional may answer new enquiries after the break. The customer does not need an elaborate festival campaign to understand that change. They need one accurate route from Google, a shared link, or a WhatsApp message to the information that applies to them.",
+          "Start with a short operating note, not the website editor. Write the exact dates, normal versus temporary hours, services that are unavailable, the last day a new request can be accepted, and the person who will reply. Separate a full closure from reduced availability. If the business is still open but cannot guarantee same-day work, say so; do not label it closed just because the owner wants fewer interruptions. This small fact check gives every public channel the same source material.",
+        ],
+      },
+      {
+        heading: "Choose the one promise the website should make",
+        paragraphs: [
+          "A useful seasonal update answers the next decision. For example: ‘Appointments are available until 6 November; requests received from 7 to 10 November will be confirmed from 11 November.’ That wording is more helpful than a generic festive greeting because it tells a ready customer whether to call, request a future slot, or wait. Use only dates and response commitments the business can genuinely meet. Do not invent limited-stock offers, urgency, or a reopening date that depends on an undecided team member.",
+          "Keep the update close to the action it changes. A temporary notice belongs near a booking or enquiry action, while a reduced service list belongs on the relevant service section. Make the normal contact route visible too: call for urgent questions, WhatsApp for a non-urgent request, or a form when the business needs job details first. A visitor using a screen reader or a small phone should be able to understand the change without relying on an image, a colour cue, or a disappearing social-story post.",
+        ],
+      },
+      {
+        heading: "Review the PaperChai site before you publish",
+        paragraphs: [
+          "Open the existing site in PaperChai and review the public facts a customer will see: business name, phone, WhatsApp number, location or service area, opening-hours text, services, and the main action. PaperChai's edit flow lets an owner update details and republish to the same live URL, so a well-maintained link can remain the reference shared from a Google Business Profile, QR code, or customer message. Change only the facts that are true for this period; a seasonal refresh is not a reason to rewrite the whole site.",
+          "If the live site was originally built from business information, compare the imported details with the operating note rather than assuming they are still current. A field-service business may need to remove a service that has no staff coverage. A consultant may need to change an open-ended ‘Book now’ instruction to an honest request-and-confirmation route. PaperChai can present the business's chosen information, but it cannot decide staffing, approve an appointment, or monitor an unattended contact channel. Keep those responsibilities with a named person before publishing.",
+        ],
+      },
+      {
+        heading: "Update Google and external booking tools separately",
+        paragraphs: [
+          "The PaperChai website is an owned customer destination; it does not update Google Business Profile hours, an external calendar, or a WhatsApp Business profile for you. When public opening hours change, use Google Business Profile's Special hours controls for the applicable dates. Google's current guidance says special hours are appropriate for temporary changes and recommends confirming official-holiday hours even when they stay the same. Follow the labels in the live account, which can differ by profile and category.",
+          "Then check any external scheduler or marketplace independently. A customer should not see a closed notice on the website, an open status on Maps, and a bookable time elsewhere with no explanation. If the business accepts requests but confirms them later, use that exact distinction everywhere. Avoid making a duplicate Google profile, changing the public business name for a festival, or directing customers to an unmonitored personal number as a quick workaround. Consistency is more valuable than adding another channel.",
+        ],
+      },
+      {
+        heading: "Run a five-minute customer test after republishing",
+        paragraphs: [
+          "Use a private browser or a phone that is not signed in as the owner. Open the live PaperChai URL from the Google profile if it is linked there, then check the homepage, affected service information, call link, WhatsApp link, and booking or enquiry action. Read the result as someone who does not know the business: can they tell whether the service is available, what happens after they enquire, and when they should expect a reply? Test keyboard access to the primary action on a desktop browser as well.",
+          "If the usual process permits it, send one clearly labelled harmless test enquiry and confirm the responsible person receives it. Do not use a real customer's booking as a test and do not put customer details into a shared planning note. Record the date, route, and outcome privately. The check is complete only when the public page and the human response agree. A correct page with a silent WhatsApp inbox still leaves the customer stranded.",
+        ],
+      },
+      {
+        heading: "Set a post-festival review now",
+        paragraphs: [
+          "Put one reminder in the operating note for the first working day after the change. Reopen the site, remove or revise only the seasonal wording, and test the contact route again. Check Google special hours and any external calendar separately. This prevents an old Diwali closure notice from becoming a January problem, and it gives the business a repeatable pattern for future local holidays, staff training, or a planned move.",
+          "The next useful PaperChai step is simple: sign in, review the existing site's public details, update the honest customer message, and republish only when the person answering enquiries is ready. Use the same live URL in the customer channels the business maintains. PaperChai helps make the owned website easy to review and share; the business owner remains responsible for the real availability, Google settings, and customer response. A small, tested refresh is enough to make a busy period less confusing.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "remove-third-party-booking-link-google-business-profile-india",
+    title: "Remove an incorrect third-party booking link from Google",
+    description:
+      "A practical guide for Indian local businesses to remove an outdated third-party booking link from Google while keeping their website enquiry route clear.",
+    category: "Local growth",
+    publishedAt: "2026-10-22",
+    updatedAt: "2026-10-22",
+    readingMinutes: 6,
+    image:
+      "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A notebook, smartphone, and laptop arranged on a desk for planning work",
+    keywords: [
+      "remove third party booking link Google Business Profile India",
+      "wrong booking provider shown on Google Maps business listing",
+      "remove old appointment link from Google Business Profile",
+      "local business website booking link checklist India",
+    ],
+    sections: [
+      {
+        heading: "Identify the exact customer route before trying to remove it",
+        paragraphs: [
+          "A salon, tutor, clinic, photographer, repair service, or consultant may discover that Google Search or Maps shows a booking link from a marketplace, old scheduler, or provider it no longer uses. The link may still open, but lead to an unavailable calendar, the wrong service, an old price, or a page that does not represent the business. Treat this as a customer-route problem rather than a reason to change everything at once. The first job is to establish what a person can actually see and where that person lands.",
+          "Open the Business Profile in a signed-out or private browser and on a phone. Search for the business by name and locality, then record the visible booking label, destination URL, provider name, service or location it mentions, and date checked. Also note the working route the business wants customers to use today. Do not collect booking details, screenshots containing customer information, account passwords, or payment records in this working note. A short factual record is enough to explain the issue to a provider or colleague.",
+        ],
+      },
+      {
+        heading: "Separate a business-added link from a provider-supplied link",
+        paragraphs: [
+          "Google Business Profile can show links that the business adds and links supplied by third-party providers. These are not always managed in the same place. Start by signing in with the account that normally manages the profile. Open the Booking controls in Google Search or Edit profile in Maps, then inspect the links shown. If the unwanted destination is a link the business added, remove or replace it through the normal profile controls. Make only the change you can verify; do not remove a working link merely because the display order is unfamiliar.",
+          "If the unwanted destination is supplied by a third-party provider, Google’s current local-business-link guidance says to use the Booking controls and choose Remove Provider. That asks the provider to remove its link. Google says providers should process such a request within five days. The exact options can vary by business category, region, and profile, so follow the live labels in the account rather than relying on an old screenshot. A missing control is not evidence that the listing is broken or that a duplicate profile is needed.",
+        ],
+      },
+      {
+        heading: "Put a truthful owned destination in place first",
+        paragraphs: [
+          "Before reducing a customer’s choices, make the website route dependable. A business that needs to review location, scope, or availability before committing should use a clear request page, not an empty calendar. Name the service, state whether the request is pending or confirmed, explain the service area or appointment model, and provide one monitored way to ask a question. A website visitor should understand what happens after pressing the main action without being sent through a maze of generic contact pages.",
+          "If the business can genuinely accept appointments online, test the scheduler before presenting it as a replacement. Confirm the service list, staff availability, closure dates, price guidance, confirmation message, and cancellation route. A specific Google booking link must lead to the task it promises, so a social profile, WhatsApp chat, link shortener, or broad homepage is not an equivalent replacement. Keep WhatsApp or phone available as an appropriate fallback on the page, but label it honestly as an enquiry route when it does not itself confirm a booking.",
+        ],
+      },
+      {
+        heading: "Ask the provider to correct its own record when that is the durable fix",
+        paragraphs: [
+          "Removing a provider link from Google does not necessarily end the business’s relationship with that provider. If the business still has an account, open the provider’s own dashboard or support channel and ask it to remove, correct, or deactivate the relevant Google-facing listing. Give only the public facts needed to identify it: business name, public profile URL, location or service area, and the incorrect destination. Keep the message factual. Do not share Google credentials, customer data, card details, or identity documents over an unverified support channel.",
+          "Be especially careful when a past agency, franchise, marketplace, or scheduling vendor set up the listing. Confirm who owns the provider account and whether a real booking history or current customer communication still depends on it. A provider may need to keep a record for its own service terms, but that does not make an outdated public booking route useful. Agree on the customer-facing end state: a corrected provider page, a removed provider link, or a maintained business-owned page. Avoid publishing a complaint about the provider in Google reviews or on the website while an operational handoff is in progress.",
+        ],
+      },
+      {
+        heading: "Protect customers while Google and the provider catch up",
+        paragraphs: [
+          "A removal request may not change what customers see immediately. During that window, make the owned website helpful for anyone who arrives through the existing profile Website link. Keep the business name, current services, response hours, and a monitored contact route accurate. If the old booking destination is seriously misleading, a short factual notice on the relevant website page can explain the current route: for example, that appointment requests are confirmed after availability is checked. Do not claim that Google has removed the old link until you have verified the public result.",
+          "Give the person who receives calls, WhatsApp messages, and forms a concise response for affected customers. It can acknowledge the request, explain the legitimate next step, and avoid blaming a platform or promising a resolution date outside the business’s control. Existing bookings made through the old provider should be handled through the process the customer was given, not silently discarded because a link is being removed. A clear human response is more useful than asking customers to navigate a changing set of links on their own.",
+        ],
+      },
+      {
+        heading: "Verify the public profile and prevent the same problem returning",
+        paragraphs: [
+          "After the provider has had time to act, repeat the original customer check in a signed-out browser and on a phone. Search the business, open every visible booking option, and confirm that each destination matches the service, location, and action the label promises. Test the website link, too. If the usual workflow permits it, submit a harmless test request or use a clearly labelled internal test path, then remove test data through the normal process. Check keyboard access and mobile readability before deciding the journey is complete.",
+          "Add this to a modest monthly public-information check: Google Business Profile website link, booking destinations, phone, hours, service list, and the website’s primary contact action. Review it after changing a booking provider, redesigning the site, pausing a service, moving location, or giving a new person responsibility for enquiries. PaperChai can help keep the owned website route clear, but the business must manage its Google and provider accounts. The practical goal is not to make every possible link disappear; it is to ensure each live route gives a ready customer an accurate next step.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "add-whatsapp-contact-button-business-website-india",
     title: "Add a WhatsApp contact button without confusing website visitors",
     description:
