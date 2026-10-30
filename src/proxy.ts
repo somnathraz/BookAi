@@ -41,6 +41,15 @@ export async function proxy(req: NextRequest) {
     );
   }
 
+  // www.<apex> would otherwise serve a full duplicate of the apex site, which
+  // Search Console reports as "Alternate page with proper canonical tag".
+  if (root && host.split(":")[0].toLowerCase() === `www.${root}`) {
+    const canonical = req.nextUrl.clone();
+    canonical.hostname = root;
+    canonical.port = "";
+    return withPlatformHeaders(NextResponse.redirect(canonical, 308), requestId);
+  }
+
   let slug: string | null = null;
   if (root) {
     slug = subdomainFromHost(host, root);
