@@ -85,6 +85,11 @@ export function getRelatedBlogArticles(
   article: BlogArticle,
   limit = 3
 ): BlogArticle[] {
+  const curated = article.relatedSlugs
+    ?.map((slug) => blogRegistry.find((candidate) => candidate.slug === slug))
+    .filter((candidate): candidate is BlogArticle => Boolean(candidate));
+  if (curated?.length) return curated.slice(0, limit);
+
   const sameCategory = blogRegistry.filter(
     (candidate) =>
       candidate.slug !== article.slug && candidate.category === article.category
