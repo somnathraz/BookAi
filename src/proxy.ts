@@ -54,8 +54,16 @@ export async function proxy(req: NextRequest) {
   if (root) {
     slug = subdomainFromHost(host, root);
   }
-  if (!slug) {
-    slug = await getSiteSlugByVerifiedHost(host);
+  // The apex never maps to a customer site, so marketing pages must not depend
+  // on the database. A failed lookup also falls through to the app instead of
+  // turning every request into a 500.
+  const isAppHost = root !== null && host.split(":")[0].toLowerCase() === root;
+  if (!slug && !isAppHost) {
+    try {
+      slug = await getSiteSlugByVerifiedHost(host);
+    } catch {
+      slug = null;
+    }
   }
   if (!slug) {
     return withPlatformHeaders(
