@@ -34,6 +34,75 @@ export function blogArticleModifiedAt(article: BlogArticle): string {
 /** Editorial source of truth. Scheduled publishing adds a reviewed article here. */
 export const blogRegistry: readonly BlogArticle[] = [
   {
+    slug: "accessibility-statement-local-service-website-india",
+    title: "Write an honest accessibility statement for your service website",
+    description:
+      "A practical guide for Indian local businesses to write a plain-language accessibility statement, offer help when a website barrier appears, and keep it current.",
+    category: "Website foundations",
+    publishedAt: "2026-10-31",
+    updatedAt: "2026-10-31",
+    readingMinutes: 6,
+    image:
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "A laptop, phone, and notebook on a desk used for planning a small business website",
+    keywords: [
+      "accessibility statement for local business website India",
+      "write an accessibility statement small business website India",
+      "website accessibility feedback contact local service business",
+      "accessible service website checklist India",
+    ],
+    relatedSlugs: [
+      "keyboard-accessible-local-service-website-india",
+      "mobile-contact-page-local-service-business-india",
+      "add-accessibility-details-google-business-profile-india",
+    ],
+    sections: [
+      {
+        heading: "Treat the statement as a customer-help page, not a badge",
+        paragraphs: [
+          "An accessibility statement is a short page that explains how a visitor can use a website, where the business knows there may still be difficulty, and how to get help. For a local salon, tutor, clinic, photographer, or independent consultant, its first job is practical: make sure a customer who cannot complete an online action is not left without a way to ask about the service. It is not a logo, a legal shield, or proof that every page works perfectly for every person.",
+          "Start because customers deserve a clear route when a website gets in their way, not because the page might make a business appear more technical. W3C guidance recommends that an accessibility statement include a commitment to accessibility, the standard applied where appropriate, and contact information for reporting a problem. It also recommends describing known limitations in plain language. That is a useful small-business standard: say what you have checked, do not claim what you have not checked, and give a real person or team a way to respond.",
+        ],
+      },
+      {
+        heading: "Check the customer journeys before writing a promise",
+        paragraphs: [
+          "Open the public site on a phone and a desktop browser. Can someone understand the service, find the price approach or next step, and use the main call, WhatsApp, enquiry, or booking action? Then use the Tab key on a desktop to move through the menu, links, fields, and buttons. Look for a visible focus indicator, sensible order, useful labels, and error messages that explain what needs correcting. If a short video, PDF, map, image-based price list, or third-party booking tool is central to the customer journey, include it in the review rather than testing only the homepage.",
+          "Make a small list of facts, not a score. For example: ‘The enquiry form can be completed with a keyboard’; ‘the service gallery has brief text descriptions’; or ‘the embedded booking calendar may be difficult to use with some assistive technology’. Ask someone who handles enquiries whether customers have already reported a barrier. A customer who says ‘the form would not submit’ may be reporting a browser issue, unclear validation, a poor connection, or an accessibility problem. Record the observation without assuming the cause before it is checked.",
+        ],
+      },
+      {
+        heading: "Write only the facts a visitor can use",
+        paragraphs: [
+          "Use a recognisable page name such as ‘Accessibility statement’ and link to it consistently from the footer or help area. Lead with a brief commitment: the business aims to make its website usable for customers with different access needs and is working to improve it. Name the website or public domain the statement covers, then add the date it was last reviewed. A visitor needs to know whether the statement belongs to this site, rather than a generic paragraph copied from another company.",
+          "If the business has completed a defined assessment, state its scope accurately. If it has not, do not write ‘fully compliant’, ‘certified’, or ‘accessible to everyone’. It is more useful to say that the owner checked the primary customer routes on a phone and keyboard on a stated date, and will continue to review them. Technical references such as WCAG 2.2 can be helpful when they are true and explained, but a customer should not need to understand a success criterion to ask for an appointment or a service estimate.",
+        ],
+      },
+      {
+        heading: "Describe limits and an immediate alternative",
+        paragraphs: [
+          "Name known limitations plainly and pair each one with the most useful alternative. If a menu is currently provided as an image, say that some people may not be able to read it easily and offer to send the menu as text by email or WhatsApp. If a third-party calendar is hard to operate, offer a phone or short enquiry route for the same availability question. If an old PDF has inaccessible tables, explain which service information is affected and how a customer can receive it in another format. Do not make the alternative slower, more expensive, or less private than the website route where that can be avoided.",
+          "Keep the statement specific enough to help but do not publish private operational detail. A customer needs a monitored contact route and a realistic response expectation, not an employee’s personal number or an internal defect list. Do not tell people to send a diagnosis, disability information, identity document, or full medical history just to report a barrier. Ask for the page or task that was difficult and a preferred way to receive help; let the person share only what is necessary.",
+        ],
+      },
+      {
+        heading: "Give feedback a human response path",
+        paragraphs: [
+          "Choose a contact method that the business genuinely monitors: an email address, phone number, WhatsApp route, or concise form. Say what a visitor can expect, such as ‘We aim to acknowledge accessibility feedback within two business days.’ Only publish a timeframe the business can meet. If the normal contact form may itself be the problem, include an alternative that does not depend on that form. Test every listed route from a phone before publishing the statement.",
+          "Decide who will receive and own the request. A freelance designer may handle it personally; a studio may assign one shared inbox and a backup. The reply should first help the customer complete the task, then capture a safe note about the problem for the next website review. Do not put message contents or personal information into analytics, public comments, or a marketing case study. PaperChai can help a business maintain its public website; the business still needs a person responsible for answering customers and acting on a reported barrier.",
+        ],
+      },
+      {
+        heading: "Review the page whenever the website journey changes",
+        paragraphs: [
+          "Revisit the statement after a new booking provider, redesign, video, downloadable document, language version, contact form, or map is added. Retest the changed customer path on a phone and with a keyboard, update any limitation or alternative, and change the review date. A quarterly reminder is enough for many small service sites; a business that changes its website frequently should review it more often. Remove a limitation once it has actually been resolved, rather than leaving a stale warning that confuses visitors.",
+          "The useful outcome is modest: a customer can discover the service, tell the business when an online route fails, and still reach a fair alternative. Begin with the pages that create an enquiry, booking, or payment question, then improve the next barrier you find. An honest accessibility statement will not repair the website by itself, and it should never substitute for testing or professional advice where required. It does make the business accountable for a clear human response while PaperChai helps keep the public information accurate and easy to update.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "paperchai-website-qr-code-workflow-local-service-india",
     title:
       "PaperChai workflow: create a website QR code for local service referrals",
