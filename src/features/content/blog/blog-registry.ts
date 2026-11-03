@@ -34,6 +34,213 @@ export function blogArticleModifiedAt(article: BlogArticle): string {
 /** Editorial source of truth. Scheduled publishing adds a reviewed article here. */
 export const blogRegistry: readonly BlogArticle[] = [
   {
+    slug: "google-search-show-business-name-favicon-local-website-india",
+    title: "Help Google show your business name, not just your URL",
+    description:
+      "A practical check for Indian service businesses whose Google result shows an unclear site name or icon, with honest fixes that keep the website recognisable.",
+    category: "Website foundations",
+    publishedAt: "2026-11-03",
+    updatedAt: "2026-11-03",
+    readingMinutes: 5,
+    image:
+      "https://images.unsplash.com/photo-1456324504439-367cee3b3c32?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "Person using a laptop beside a notebook while reviewing a small business website",
+    keywords: [
+      "Google Search showing URL instead of business name India",
+      "how to change site name shown in Google Search for local business",
+      "favicon not showing in Google Search local service website",
+      "WebSite schema business name checklist India",
+    ],
+    relatedSlugs: [
+      "local-business-schema-markup-website-india",
+      "paperchai-custom-domain-launch-checklist-local-business-india",
+      "google-search-console-url-inspection-local-business-website-india",
+    ],
+    sections: [
+      {
+        heading: "Solve the recognition problem, not a ranking myth",
+        paragraphs: [
+          "A local customer may search for a salon, tutor, repair service, photographer, or independent consultant and find the right website, yet hesitate because the result seems to come from an unfamiliar URL. In Google results, the small site name and icon help identify the source before a person reads the page title. When those details are unclear, the sensible goal is not to force a special search result. It is to make the official website easier for a customer to recognise wherever Google chooses to display it.",
+          "Google generates site names automatically. Its documentation says it considers the home page and references across the web, with WebSite structured data the most important way to state a preference. Google may still choose a domain or another name, and adding markup is not a ranking guarantee. That is useful discipline for a small business: fix an identity mismatch because a potential customer needs confidence, not because someone promised an instant traffic increase.",
+        ],
+      },
+      {
+        heading: "Choose one public name before touching the website",
+        paragraphs: [
+          "Write down the short name a real customer would use. It might be ‘Meera Maths Studio’, ‘Khan Home Repairs’, or ‘Arun Rao Architect’. It should be specific enough to identify the business, but not a string such as ‘Best AC Repair in Pune’. Google advises choosing a concise, recognised, non-misleading name rather than a generic phrase. If the business has a familiar short form, note that too, but do not invent an acronym merely for search.",
+          "Compare that name with the homepage heading, browser title, footer, logo treatment, contact page, and Google Business Profile where one exists. Small differences such as ‘Meera Maths’ versus ‘Meera Math Classes’ may be fine when they clearly refer to the same business; a former trading name or a former agency’s brand is not. Decide the current customer-facing name with the owner first. Do not change a legal name, Business Profile name, or domain simply to make every label identical—those decisions can have operational consequences beyond a website edit.",
+        ],
+      },
+      {
+        heading: "Give the homepage one clear identity signal",
+        paragraphs: [
+          "Ask the person who maintains the website to check for a WebSite structured-data entry on the canonical homepage. Google’s required fields are the website name and the canonical home-page URL; an alternate name can be supplied only when customers genuinely know it. The entry belongs on the domain or subdomain home page, not on a service-page folder such as /plumbing or /blog. If the site already has WebSite data, update that same entry instead of adding competing copies.",
+          "The visible homepage should support the same answer. Put the business name in an understandable heading, logo alternative text where appropriate, and page title; make the contact details and primary service easy to verify. A home-service electrician does not need to repeat the city in every label, but should clearly explain the actual service area in normal page copy. Do not hide a long list of towns, slogans, or keywords in markup. Search systems and customers both need a trustworthy description of the site, not a second invisible advert.",
+        ],
+      },
+      {
+        heading: "Use a simple, stable favicon customers can recognise",
+        paragraphs: [
+          "A favicon is the small square icon associated with a website. It can appear alongside the site name in Google Search, but Google does not guarantee that it will. Choose a clean brand mark, letterform, or simple symbol that remains recognisable at a tiny size. A full price list, phone number, seasonal offer, or detailed logo often becomes unreadable. Keep the graphic distinct from offensive or misleading imagery and avoid swapping it whenever a promotion changes.",
+          "Google’s current guidance requires a square image at least 8 by 8 pixels and recommends a size above 48 by 48 pixels. The home page needs an icon link in its header, and Googlebot must be able to crawl the home page while Googlebot-Image can crawl the icon file. Ask the maintainer to use a stable URL and to check that robots rules, a login wall, or a broken redirect do not block either resource. A standard browser tab test is helpful, but it does not prove that Google has processed the change.",
+        ],
+      },
+      {
+        heading: "Validate the public page before requesting a recrawl",
+        paragraphs: [
+          "Open the homepage in a private browser window on both a phone and desktop. Confirm the address redirects to the intended secure canonical version, the name is visible, the icon loads, and the contact action works. Then have the developer validate the structured data with Schema Markup Validator. Google notes that its Rich Results Test does not support site-name markup, so a rich-result pass or failure is not the right verdict for this particular task.",
+          "If the owner has Search Console access, inspect the exact public homepage URL. Check that Google can access the page and that it is not blocked by noindex, robots rules, or a login requirement. Only after a real correction should the owner request indexing. Google says recrawling and processing can take days to weeks; submitting again without a change does not create a clearer identity. Keep a dated note of the name, URL, and icon that were published so an old file is not restored during a later redesign.",
+        ],
+      },
+      {
+        heading: "Keep the answer consistent after a rebrand or site move",
+        paragraphs: [
+          "Review this small identity set whenever the business launches a custom domain, changes its public name, or moves to a new website: canonical homepage, displayed business name, WebSite markup, favicon, contact route, and Google Business Profile website link. Test the old address if one exists and make sure it reaches the relevant new page. A customer following an old invoice, QR code, or search result should not land on an empty page or an unrelated service.",
+          "The next PaperChai step is modest: choose the one customer-recognised name, make it consistent on the homepage, and ask a maintainer to verify the site-name and favicon setup as part of the normal website release. Then allow Google time to process the update. A clear name and icon will not substitute for a useful service page or a prompt reply, but they remove a small, avoidable moment of doubt when a local customer is deciding whether the result belongs to the business they meant to contact.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "service-page-not-indexed-google-search-console-india",
+    title: "Why your local service page is not on Google yet",
+    description:
+      "Use Search Console to find why an important local service page is not indexed, fix the real issue, and check it again without chasing rankings.",
+    category: "Website foundations",
+    publishedAt: "2026-11-02",
+    updatedAt: "2026-11-02",
+    readingMinutes: 5,
+    image:
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "Laptop screen showing charts beside a notebook on a desk",
+    keywords: [
+      "why is my local service website page not indexed by Google",
+      "fix service page not indexed Search Console India",
+      "Google URL Inspection for local business website",
+      "new website page not appearing in Google India",
+    ],
+    relatedSlugs: [
+      "google-search-console-setup-local-business-website-india",
+      "request-google-indexing-local-business-website-india",
+      "google-search-console-url-inspection-local-business-website-india",
+    ],
+    sections: [
+      {
+        heading: "Start with one customer-important page",
+        paragraphs: [
+          "A new service page can be live, open perfectly on a phone, and still not appear in Google straight away. That is frustrating when a tutor has just added a trial-class page or a home painter has published a page for estimates. But a Google search made from one person’s location is not a reliable indexing test. Results vary by location, language, device, and query. The useful first question is narrower: is the exact public page eligible to be in Google’s index?",
+          "Choose one page that matters to a real customer journey: a main service, portfolio, booking, or contact page. Copy its final public URL from a private browser window. Do not start with an editor preview, a logged-in dashboard address, a WhatsApp link, or a URL with campaign parameters. For a small site, Google’s current guidance favours checking key pages individually rather than trying to interpret every line in the Page Indexing report. This keeps the task connected to a customer need instead of chasing a bigger number in a dashboard.",
+        ],
+      },
+      {
+        heading: "Inspect the exact URL before changing anything",
+        paragraphs: [
+          "Open Google Search Console for the verified property that matches the public site, paste the URL into URL Inspection, and read the Page indexing status. “URL is on Google” means it is indexed and may be eligible to appear; it does not promise a particular ranking or that it will appear for every search. If that is the result, stop trying to force another indexing request. Review whether the page clearly answers the service question, names the right area where relevant, and gives a truthful next action instead.",
+          "If the tool says “URL is not on Google”, expand the details before attempting a fix. Note the crawl-allowed result, page fetch result, indexing-allowed result, Google-selected canonical, and last crawl date. Then run Test live URL. The indexed view describes what Google knew from an earlier crawl; the live test checks the current public page. Keep a short note of the status and date so a future change has an observable before-and-after record.",
+        ],
+      },
+      {
+        heading: "Match the message to the right response",
+        paragraphs: [
+          "Some statuses are problems only when they affect the page you chose. A 404, 403, server error, redirect loop, login requirement, or accidental noindex instruction needs a technical fix before requesting another crawl. If the page moved, the old public address should redirect to the relevant replacement rather than sending a visitor to a generic homepage. Ask the developer or hosting support for the exact URL, the status shown in Search Console, when it began, and whether the page is meant to be public. That is a far better support brief than “Google is not working.”",
+          "Other messages can be expected. A duplicate version may correctly point to a preferred canonical page. A removed page may properly return 404. “Discovered – currently not indexed” can mean Google knows the URL but has not crawled it yet; “Crawled – currently not indexed” is not an instruction to submit the same page repeatedly. Check that the important version is linked from the site’s normal navigation or another crawlable page, included in the sitemap where appropriate, and offers distinct, useful information for the customer. Do not make near-identical pages for every neighbourhood just to create more URLs.",
+        ],
+      },
+      {
+        heading: "Check the customer-facing route while you wait",
+        paragraphs: [
+          "A technical indexing check is also a good moment to test the page a customer sees. Open it on mobile data, read the first screen, and use the main call, enquiry, or booking route. Make sure the page does not depend on a hidden login, show a temporary closure message, or lead to a different service than the title promises. A salon’s bridal-booking page, for example, should say what the enquiry is for and what happens next; it should not be a thin copy of the general services page with one phrase changed.",
+          "Check the page’s own links too. A visitor and Google both need a normal, crawlable path to important pages. Link a new service page from a relevant menu, service overview, or related guide using natural wording. Keep the canonical public address consistent when sharing it on a Google Business Profile or a printed QR code. PaperChai can help maintain the customer-ready page and its public details, but the business still needs to confirm that the offered service, area, availability, and reply route are real.",
+        ],
+      },
+      {
+        heading: "Request indexing once, after a meaningful fix",
+        paragraphs: [
+          "When Test live URL shows the important page can be fetched and indexed, use Request indexing once after publishing a real correction or a genuinely new page. It is a request, not a guarantee or a same-day publication button. Google’s guidance says discovery and indexing can take days or, in some cases, longer. Repeating the request without a change does not make the page more useful and can distract from the actual reason it was excluded.",
+          "Avoid treating robots.txt as a way to remove a page from results: Google’s current documentation explains that a robots rule can prevent Google from seeing a noindex directive. If the aim is to keep a private page out of search, get technical advice on the intended access and indexing setup rather than guessing. Likewise, do not unblock or expose customer documents, invoices, private booking pages, or draft work merely to make an index count look better. Privacy and the correct public boundary come first.",
+        ],
+      },
+      {
+        heading: "A calm five-minute check for the owner",
+        paragraphs: [
+          "Before asking for help, collect five facts: the exact URL, the page’s customer purpose, the URL Inspection verdict, the live-test result, and the date the page was published or changed. Add whether the page is linked from the main site and whether it appears in the sitemap. This gives a developer enough context to investigate without being sent screenshots of an unrelated search result. It also prevents a harmless duplicate or retired page from becoming an urgent task.",
+          "The next PaperChai step is to publish one complete page for a service customers can actually request, link it from the rest of the site, and keep its public details current. Then inspect that one URL and respond to the specific evidence. A page being indexed is an important technical milestone, not proof of rankings or enquiries; the durable win is a clear public page that is useful when a local customer does find it.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "privacy-notice-website-contact-form-india",
+    title: "Write a clear privacy notice for your website contact form",
+    description:
+      "A plain-language guide for Indian local businesses to explain what a website contact form collects, why it is needed, and how customers can ask questions.",
+    category: "Website foundations",
+    publishedAt: "2026-11-01",
+    updatedAt: "2026-11-01",
+    readingMinutes: 5,
+    image:
+      "https://images.unsplash.com/photo-1735825764457-ffdf0b5aa5dd?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "Hands using a laptop beside a phone and paper documents on a desk",
+    keywords: [
+      "privacy notice for website contact form India",
+      "what to say below a small business enquiry form",
+      "local service website contact form privacy notice",
+      "freelancer website enquiry data notice India",
+    ],
+    relatedSlugs: [
+      "website-enquiry-form-fields-local-service-business-india",
+      "reduce-spam-website-enquiry-form-local-business-india",
+      "mobile-contact-page-local-service-business-india",
+    ],
+    sections: [
+      {
+        heading: "Give people the answer before they press send",
+        paragraphs: [
+          "A website contact form is a small exchange of trust. A visitor may share their name, phone number, locality, preferred date, or a short project question because they want help from a salon, tutor, repair team, or independent professional. Before they send it, they should be able to see what the business will do with that information. A short privacy notice beside the form answers that question in the moment it matters. It is not the same thing as a long legal policy, and it should not be hidden behind vague words such as ‘we respect your privacy’.",
+          "This is especially worth reviewing as India’s Digital Personal Data Protection Act is being brought into effect in stages. The official material emphasises clear, standalone, understandable notice and a description of the data and purpose involved. A small business should not try to turn a form label into legal advice or claim compliance it has not checked. Instead, use the notice to make the real customer journey visible, then ask a qualified adviser to review the wider privacy obligations where the business’s situation calls for it.",
+        ],
+      },
+      {
+        heading: "List only the details the first reply actually needs",
+        paragraphs: [
+          "Start by opening the form as a customer and writing down every field: name, email, phone, service, locality, date, message, file upload, or anything supplied by a chat or booking tool. Then ask the person who replies to enquiries which details they use in the first response. A home-repair team may need the service type and neighbourhood. A photographer may need the event date and city. A freelance designer may need a short project summary. If nobody uses a field to decide the next step, remove it rather than collecting it ‘just in case’.",
+          "Do not ask for a full home address, identity document, payment-card detail, medical information, passwords, or a large private file merely to start a conversation. A general locality is usually enough to check whether a home visit is possible; a precise address can wait until a visit is agreed. If a form has an optional upload or a sensitive question because a particular service genuinely needs it, make the reason clear and provide a safer route when appropriate. A shorter form is easier to complete on a phone and easier for a small team to protect.",
+        ],
+      },
+      {
+        heading: "Say the purpose in ordinary language",
+        paragraphs: [
+          "A useful notice names the purpose a customer would expect. For example: ‘We use your contact details and enquiry to reply about this service request and check availability.’ That is clearer than ‘By submitting, you agree to processing.’ If a tutor uses the form to arrange a call, say that. If a consultant uses it only to decide whether a project is a fit, say that instead. Do not add a promise to send promotions, share a number with partners, or create a customer account unless the business genuinely does those things and can explain the choice separately.",
+          "Keep the sentence close to the submit button, in normal-sized text that a phone visitor can read. Link to the full privacy page if one exists, but do not make the visitor search through that page to understand the immediate use of the form. A simple fictional example for a makeup artist is: ‘We use the details in this form to reply about your event enquiry. We do not use them to add you to marketing messages without asking.’ Only publish wording the business can honour; the value is accuracy, not a longer disclaimer.",
+        ],
+      },
+      {
+        heading: "Make marketing a separate, genuine choice",
+        paragraphs: [
+          "An enquiry about a repair, a class, or a consultation is not automatically a request for future offers. If a business wants to invite someone to a workshop list, seasonal update, or marketing WhatsApp broadcast, present that as a separate optional choice with a clear explanation of what will arrive and how often. Do not pre-tick it, bundle it into the enquiry button, or make it a condition for receiving a quote. The customer should still be able to ask the original question without being pushed into another channel.",
+          "Likewise, do not move form submissions into a personal group chat, an unprotected spreadsheet, or a former staff member’s inbox because it is convenient. Decide which business inbox or tool receives them, who can access it, and who handles a request to stop promotional contact. If an outside booking, form, email, analytics, or spam-prevention provider is involved, check its settings and make sure the broader privacy information reflects the real setup. A notice cannot repair a careless handoff behind the scenes.",
+        ],
+      },
+      {
+        heading: "Give customers a simple way to ask or correct something",
+        paragraphs: [
+          "Put a monitored contact route in the full privacy page or near the form when practical: an email address, phone number, or other business contact that can answer a privacy question. A visitor may want to correct a phone number, withdraw a marketing preference, or ask what happened to an enquiry. The business does not need to publish an employee’s personal number or promise an impossible response time. It does need to ensure the route reaches someone who knows how to respond or escalate a question responsibly.",
+          "Test the whole experience once before publishing. Complete the form with harmless test details if the normal process allows it, check the confirmation message, and see where the submission lands. Confirm that the notice still matches the fields, the real recipient, and the reason the data was collected. On a desktop, use the Tab key to reach the fields, consent choice if present, policy link, and submit button. A privacy message that cannot be found or used by a keyboard visitor is not doing its customer-help job.",
+        ],
+      },
+      {
+        heading: "Review the notice whenever the contact route changes",
+        paragraphs: [
+          "Return to the notice when a new field, file upload, booking calendar, chat link, anti-spam service, assistant, or external provider is added. Also review it if the business starts using enquiries for a new purpose, such as an email update. Update the form and the wording together, then keep a short private note of the change date and owner. Do not leave an old statement saying that messages go only to the owner after a team or agency now receives them.",
+          "The next PaperChai step is small: review the public form, remove unnecessary fields, write one honest sentence about the enquiry purpose, and publish only after the person handling messages confirms it. PaperChai can help make the public website clear and easy to maintain; it does not replace legal advice or decide how a business should meet its data obligations. The useful outcome is more immediate: a potential customer knows what they are sharing, why they are sharing it, and how to begin a sensible conversation.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "accessibility-statement-local-service-website-india",
     title: "Write an honest accessibility statement for your service website",
     description:
