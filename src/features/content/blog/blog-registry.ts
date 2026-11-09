@@ -34,6 +34,420 @@ export function blogArticleModifiedAt(article: BlogArticle): string {
 /** Editorial source of truth. Scheduled publishing adds a reviewed article here. */
 export const blogRegistry: readonly BlogArticle[] = [
   {
+    slug: "google-search-old-phone-number-after-website-update-india",
+    title: "Google Search still shows your old phone number? Fix the source first",
+    description:
+      "A practical guide for Indian local businesses and freelancers to update an old phone number in Google Search by checking the public page, the exact result URL, and Search Console calmly.",
+    category: "Website foundations",
+    publishedAt: "2026-11-09",
+    updatedAt: "2026-11-09",
+    readingMinutes: 5,
+    image:
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "Person checking contact details on a laptop beside a notebook",
+    keywords: [
+      "Google Search still showing old phone number after website update India",
+      "how to update old business phone number in Google search results",
+      "Search Console request indexing after changing contact number",
+      "old phone number in Google snippet local service business website",
+    ],
+    relatedSlugs: [
+      "change-business-phone-number-website-google-india",
+      "google-search-console-url-inspection-local-business-website-india",
+      "google-business-profile-website-details-checklist-india",
+    ],
+    sections: [
+      {
+        heading: "An old result is a customer problem before it is an SEO problem",
+        paragraphs: [
+          "When a customer searching for a plumber, tutor, salon, photographer, or consultant sees an old phone number in Google, the immediate risk is simple: they call a number the business no longer answers. The search snippet may lag behind the website even after the new number is live. That is frustrating, but it does not mean the new page is broken or that a ranking has fallen. Treat it as a contact-path check. First make sure every customer-facing source under the business’s control gives the same truthful answer, then ask Google to revisit the relevant page if appropriate.",
+          "Do not solve the visible snippet by putting both old and new numbers on the page, adding the number repeatedly to headings, or creating a duplicate contact page. Those shortcuts make a human visitor less certain about which number to use and can leave the old information available for Google to find. The goal is one clear, working contact route that the owner can monitor. Google’s display can update after that; it cannot reliably correct a live page that still presents conflicting information.",
+        ],
+      },
+      {
+        heading: "Record the exact search result before changing anything else",
+        paragraphs: [
+          "Search for the business name and old number in a private browser window, then write down the exact result URL that shows the outdated detail. A home page, contact page, service page, PDF, old campaign page, or a different version of the domain can each appear separately. Copy the result link itself, rather than assuming that the page open in the browser is the one Google indexed. If the outdated number appears in multiple results, list each URL. This tiny inventory prevents a team from repeatedly updating the homepage while an overlooked service page remains public.",
+          "Also distinguish a Google web result from a Google Business Profile, an ad, a directory listing, a social profile, or a customer screenshot. Each is managed in a different place. This article concerns a result pointing to the business-owned website. A PaperChai site update does not automatically change a Google Business Profile, WhatsApp Business profile, advertising account, or third-party directory. Keep a short private note with the result URL, date checked, old number, correct public number, and owner responsible. Do not put customer call records, passwords, or recovery details in it.",
+        ],
+      },
+      {
+        heading: "Check the public page, not the editor preview",
+        paragraphs: [
+          "Open the exact URL while signed out or in a private browser, on a phone as well as a desktop. Confirm that the old number is gone from visible text, click-to-call links, contact buttons, footer, FAQs, downloadable files, and any page a customer reaches after submitting an enquiry. Tap the new number only if a harmless test is permitted and make sure it reaches the intended person or business line. If the number is an Indian mobile number, do not publish a personal line merely because it is convenient; use a number the business has chosen to receive customer calls on.",
+          "Then use the site’s own search, if it has one, and a web search with the old number in quotation marks plus the domain. This can reveal a forgotten service area page or archived PDF. Remove or correct the number at its source. Do not hide it only with an image overlay, a redirect, or a page that requires visitors to log in. Search engines and customers need a normal public page that returns the current information. If the old number is still in the live page source, wait to request indexing until that is fixed.",
+        ],
+      },
+      {
+        heading: "Make the contact route consistent across owned website pages",
+        paragraphs: [
+          "A number change often affects more than one field. Review the website header, footer, contact page, booking page, mobile call button, WhatsApp link, confirmation copy, and service templates. A visitor who sees one number at the top of a page and another after pressing ‘Request a quote’ has no reason to know which is current. Use one clear label such as ‘Call’ or ‘WhatsApp enquiries’ when those routes have different purposes, and state a realistic reply expectation if the business cannot answer immediately.",
+          "Do not make the page promise emergency help, same-day visits, or 24-hour calling unless the business can actually deliver it. For a sole practitioner, ‘Send an enquiry; replies on working days’ may be more useful than a vague always-open message. If Google Business Profile has the old number too, change it separately in the verified profile and compare the public profile with the website after it updates. The business owner remains responsible for external profile settings; the PaperChai site should stay accurate as the owned source of the customer journey.",
+        ],
+      },
+      {
+        heading: "Use Search Console for the changed URL, once",
+        paragraphs: [
+          "After the live page is correct, a verified owner or full user of the relevant Search Console property can inspect the exact canonical public URL with URL Inspection. Check that it is the address customers use, not an editor preview, tracking link, or a redirected variant. The inspection view can help establish whether Google can access the page and lets an eligible owner request indexing for a small number of recently changed URLs. It is a request to recrawl, not an instruction to replace the result immediately.",
+          "Google says crawling can take days to weeks, and repeatedly requesting the same unchanged URL does not make it faster. Submit once after a material correction, then note the date and return to the public result later. Do not submit the whole website as individual URLs just because one phone number changed. For a broad, intentional contact-detail migration, a current sitemap helps Google discover URLs, but it is still a suggestion rather than a guarantee. This blog’s sitemap already reads article details from its registry; no sitemap contract change is needed for this editorial addition.",
+        ],
+      },
+      {
+        heading: "Verify the customer path again after Google catches up",
+        paragraphs: [
+          "Check the original search query after a reasonable period and repeat the exact-URL check. If Google still shows the old number, first confirm that the live HTML, the indexed URL, and any duplicate URL variants all remain corrected. A search result may show a different page or an older cached understanding of a page, so a fresh public-page check matters more than guessing from the snippet alone. If the result has updated, place a modest future review reminder after the next website release or contact change.",
+          "The practical PaperChai workflow is deliberately small: identify the exact source, correct every owned customer route, test the public action, request indexing once where eligible, and wait for Google’s normal processing. PaperChai can help keep the business website clear and publishable; it cannot guarantee a crawl date, a snippet format, or a volume of calls. What the owner can control is more valuable: customers who reach the current number and know what response to expect.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "search-console-24-hour-performance-small-business-website-india",
+    title: "Use Search Console’s 24-hour view without chasing noise",
+    description:
+      "A practical guide for Indian local businesses and freelancers to use Search Console’s 24-hour performance data after a website change without mistaking preliminary numbers for results.",
+    category: "Website foundations",
+    publishedAt: "2026-11-08",
+    updatedAt: "2026-11-08",
+    readingMinutes: 5,
+    image:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "Person reviewing a website analytics dashboard on a large screen",
+    keywords: [
+      "Search Console 24 hour performance data small business website India",
+      "how to check website change in Search Console hourly data",
+      "Search Console preliminary data local service business website",
+      "Google Search Console traffic drop after website update India",
+    ],
+    relatedSlugs: [
+      "improve-service-page-low-ctr-search-console-india",
+      "google-search-console-url-inspection-local-business-website-india",
+      "fix-poor-mobile-core-web-vitals-local-service-website-india",
+    ],
+    sections: [
+      {
+        heading: "Use the 24-hour view to investigate a moment, not judge the business",
+        paragraphs: [
+          "After changing a service page, publishing a new price explanation, or fixing a broken contact link, it is natural to want immediate proof that the website is working. Google Search Console’s 24-hour view can help a salon, tutor, repair professional, photographer, or independent consultant see the most recent search activity in hourly detail. It is most useful for asking a narrow question: did something unusual happen around the time a known change was published? It is not a scorecard for whether the update succeeded, whether Google approves of the page, or whether the business will receive more enquiries.",
+        ],
+      },
+      {
+        heading: "Start with one recorded website change and one customer path",
+        paragraphs: [
+          "Before opening the report, write a tiny private note: what changed, the public URL, the approximate time it went live, and the customer action the page supports. For example: ‘At 2 pm, corrected the Bengaluru service area on the AC-repair page; the expected action is a quote request.’ Or: ‘At 11 am, restored the portfolio contact button; the expected action is an enquiry.’ Keep this note free of customer messages, passwords, analytics access, or other sensitive information. Its job is simply to stop memory from turning a normal chart movement into a story.",
+          "Then open the Search results Performance report for the verified property and select Web search. Choose 24 hours and hourly granularity. If the business uses several domains or subdomains, make sure the selected property actually contains the public URL a customer uses. Search Console only reports links that point to the property being viewed, so data for another property will not appear there. A clean record of the exact public address is more useful than comparing unrelated dashboards or editor-preview links.",
+        ],
+      },
+      {
+        heading: "Read clicks, impressions, and position as different clues",
+        paragraphs: [
+          "An impression means a person saw a link to the site in a Google service under the report’s rules; a click means they selected that link. Neither one proves an enquiry, a booking, or a sale. Average position is also not a live rank tracker: results vary by location, device, language, search history, and the exact query. For a local business, an hourly position movement may reflect who searched and where they were as much as anything changed on the website.",
+          "Look first for an obvious, sustained break connected to the recorded change. If impressions and clicks had been arriving and both stop for several completed hours after a release, that is a reason to check the public page. Open the URL in a private browser on a phone, confirm it loads, and test the main safe customer action. Check that the page did not accidentally become a login screen, a redirect, a blank error, or a different service. If the page is normal, resist inventing a technical cause from a short chart alone; allow more complete data to arrive.",
+        ],
+      },
+      {
+        heading: "Use a page filter before looking for a site-wide explanation",
+        paragraphs: [
+          "A whole-site chart combines many pages and can hide the page that actually changed. Add a page filter for the exact public URL when the question is about one service, booking, or contact page. This helps separate a genuine page issue from normal activity elsewhere on the site. If a freelancer changed a portfolio case study, for example, a quiet hour for the homepage does not answer whether the portfolio page can be found or whether its enquiry action works.",
+          "Once the page is filtered, use the Queries tab only to understand the searches that were associated with it, not to force more phrases into the copy. Ask whether the page still describes a service the business really provides, in an area it can genuinely serve, with a next step a person can use. Do not add every query to headings, create city pages for places the business does not serve, or copy a competitor’s wording. The immediate maintenance task is accuracy and a working route; search-demand decisions need a longer, calmer view of the data.",
+        ],
+      },
+      {
+        heading: "Pair the report with the right technical check",
+        paragraphs: [
+          "The 24-hour report cannot tell you why a page was not crawled or indexed. When the concern is a specific URL after a meaningful change, use Search Console’s URL Inspection tool to check the indexed and live views according to Google’s guidance. Confirm that the inspected address is the final canonical public page, not a tracking URL, preview URL, WhatsApp link, or a page that requires a customer login. If the page is intentionally private, do not expose it merely to improve a report; privacy and the correct access boundary come first.",
+        ],
+      },
+      {
+        heading: "Wait for complete periods before deciding what to improve",
+        paragraphs: [
+          "Return after the preliminary window has settled, then compare a meaningful completed period with a comparable earlier period. For many small service websites, several weeks is more useful than a few hours; seasonal businesses may need to compare the same part of a previous season as well. Look at impressions and clicks together, then open the relevant pages and queries. Google itself recommends focusing on trends in impressions and clicks more than position alone. Keep the timing of any site changes in the note so a later pattern has context.",
+          "Choose one action only when evidence and the customer journey agree. It might be correcting a misleading page title, adding a missing service detail, repairing a contact route, or leaving a sound page alone while more data accumulates. PaperChai can help a business keep its owned website clear and its enquiry route usable; it cannot guarantee a Google position, a crawl time, or a volume of leads. The next sensible step is simple: record one change, use hourly data as a cautious early check, test the public page, and let completed data guide the next improvement.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "google-business-profile-generate-hours-checklist-india",
+    title: "Check AI-generated business hours before customers see them",
+    description:
+      "A practical checklist for Indian local businesses using Google Business Profile’s Generate hours feature without publishing an inaccurate customer promise.",
+    category: "Local growth",
+    publishedAt: "2026-11-07",
+    updatedAt: "2026-11-07",
+    readingMinutes: 5,
+    image:
+      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "Person reviewing a written business schedule beside an open laptop",
+    keywords: [
+      "Google Business Profile Generate hours checklist India",
+      "how to check AI generated business hours local business website",
+      "verify Google Maps hours before publishing service business India",
+      "update local business website after changing Google hours",
+    ],
+    relatedSlugs: [
+      "update-special-hours-google-business-profile-website-india",
+      "google-business-profile-website-details-checklist-india",
+      "temporary-business-closure-website-google-india",
+    ],
+    sections: [
+      {
+        heading: "Treat generated hours as a draft, not an operating decision",
+        paragraphs: [
+          "Google Business Profile now offers a Generate hours feature in selected regions and languages. An owner can describe a schedule in ordinary language and Google produces hours to review. That can be useful when a salon has a lunch break, a tutor changes weekday sessions, or a repair team has split customer-facing hours. It is not a reason to paste a sentence into Google and trust the result without reading it. A generated entry becomes a public promise on Search and Maps once it is saved.",
+          "Start with the business’s actual operating plan, not a marketing version of it. Write the normal opening and closing times, closed days, breaks, and any service-specific limits in a small private note. Decide what ‘open’ means to a customer: can they visit, call, collect an item, or request a service? A home-service professional who answers calls at 9 am but cannot visit before noon should not publish an ambiguous schedule simply because it sounds more available. The tool can help format facts; it cannot decide which facts are true.",
+        ],
+      },
+      {
+        heading: "Give Google a simple, complete source sentence",
+        paragraphs: [
+          "Use a short instruction with every material detail. For example: ‘Open Monday to Saturday, 10 am to 7 pm; closed Sunday; closed for lunch 1 pm to 2 pm.’ Do not write ‘open most days’ or add a seasonal offer, phone number, price, service area, or slogan. Those do not make the hours clearer and belong in other profile fields or on the website. If the business has an irregular plan that cannot fit honestly into a simple weekly pattern, enter the regular hours manually or use a request-based customer route instead.",
+          "Before selecting Generate, make sure you are editing the verified business profile the owner normally uses. Google says the feature is not available to every region or language, and it may interpret the wording in a way that needs correction. That is expected. The useful standard is not whether the generated result looks polished; it is whether each day and break matches what a real customer could rely on. Keep the original note open while reviewing so nobody has to reconstruct the timetable from memory.",
+        ],
+      },
+      {
+        heading: "Review every day, break, and midnight boundary before saving",
+        paragraphs: [
+          "Read the generated grid one day at a time. Check that a closure is not shown as open, that a break is represented as two opening periods where appropriate, and that 24-hour operation appears only when the business really supports customers around the clock. A misplaced AM or PM can send a person to a closed studio or leave a field-service team answering unnecessary calls. If an evening schedule runs past midnight, split it carefully across the relevant days rather than assuming a single entry will describe it correctly.",
+          "Also separate main hours from limited services. Google’s hours guidance allows More hours for certain customer-facing services with different times, while Special hours suit a short-term adjustment such as a holiday. Do not force a one-off Diwali closure into the normal weekly schedule, and do not claim a specialised service is available throughout the day because the premises are open. If a customer must request confirmation, say that beside the website action rather than making a calendar or hours field imply an instant appointment.",
+        ],
+      },
+      {
+        heading: "Make the website carry the same customer expectation",
+        paragraphs: [
+          "A correct Google entry is only one part of the journey. Open the business website and compare the displayed hours, contact-page wording, booking page, and any service-specific availability with the profile before you save. A customer who sees ‘open until 7 pm’ on Maps but a site that says ‘calls answered until 5 pm’ needs an explanation, not a guess. If the website is the source that is stale, update it through PaperChai’s normal editing and publishing flow; do not change Google to match an old page.",
+          "Use plain, visible text near the affected action. A concise line such as ‘Phone enquiries answered until 5 pm; studio visits by confirmed appointment’ can resolve a genuine distinction without exposing an internal rota. Do not put the only hours information inside an image, a pop-up, or an unmonitored social story. For an independent professional, it is often better to state a realistic reply window than to copy retail opening hours that imply walk-ins are welcome.",
+        ],
+      },
+      {
+        heading: "Test the public result and the next customer action",
+        paragraphs: [
+          "After saving, view the profile while signed out or in a private browser. Google may take time to process an edit, so a saved screen is not proof that customers see the new information. When the public result updates, compare it with the homepage and the exact page reached from the profile’s website or booking link. Use a phone as well as a desktop browser. A customer should be able to tell whether they can visit, call, request a quote, or book without switching between conflicting statements.",
+          "Then test the handoff that the hours affect. Check a booking calendar for unavailable dates, a click-to-call link for the right number, and a form or WhatsApp acknowledgement for a response promise the business can honour. Submit only a clearly marked harmless test enquiry when the normal process permits it. Do not make a real customer appointment the test case. If something conflicts, fix the owned route that is inaccurate and retest; adding a vague banner is not a substitute for correcting the calendar or confirmation message.",
+        ],
+      },
+      {
+        heading: "Keep an owner-led hours review after every real change",
+        paragraphs: [
+          "Review public hours after a holiday, staff change, move, new service, new booking provider, or a shift in who answers calls. Google advises using Special hours for brief adjustments and a temporary-closure status for longer or uncertain closures; choose the setting that matches the actual situation. Keep a small dated note of the change and the person who checked it. That record is useful when a colleague sees a different result later, but it should not contain customer details, passwords, or recovery information.",
+          "The next PaperChai step is modest: write the real timetable, use Generate hours only as a draft, review the result line by line, and compare it with the published customer path. PaperChai can help keep the owned website clear, while the owner remains responsible for Google settings, schedules, and replies. This does not guarantee Maps visibility or more enquiries. It prevents a more immediate problem: a customer relying on hours that the business did not mean to promise.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "paperchai-diwali-enquiry-cutoff-workflow-india",
+    title: "PaperChai workflow: set an honest Diwali enquiry cut-off",
+    description:
+      "A practical PaperChai workflow for Indian local businesses to state a Diwali enquiry cut-off, keep pending requests clear, and reopen the right customer route.",
+    category: "PaperChai workflow",
+    publishedAt: "2026-11-06",
+    updatedAt: "2026-11-06",
+    readingMinutes: 5,
+    image:
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "Person planning website updates on a laptop beside a notebook",
+    keywords: [
+      "Diwali enquiry cut off message local business website India",
+      "Diwali booking request confirmation website workflow India",
+      "PaperChai Diwali availability update for service business",
+      "how to pause new service enquiries during Diwali India",
+    ],
+    promotionCaption:
+      "Taking requests around Diwali is not the same as confirming availability. This PaperChai workflow helps you publish one clear cut-off, preserve a monitored enquiry route, and set an honest follow-up date before customers need to ask.",
+    relatedSlugs: [
+      "paperchai-diwali-website-refresh-workflow-india",
+      "paperchai-block-holiday-booking-dates-india",
+      "website-enquiry-form-fields-local-service-business-india",
+    ],
+    sections: [
+      {
+        heading: "Use a cut-off when capacity, not the website, is the constraint",
+        paragraphs: [
+          "Diwali is on 8 November in 2026. In the days around it, a salon, photographer, tutor, repair team, or independent consultant may still be willing to receive messages but unable to promise a visit, appointment, delivery, or estimate before the break. Leaving a normal ‘Book now’ message live can turn that honest capacity limit into a customer disappointment. The useful update is not a dramatic closure banner. It is a clear distinction between the last date for confirmed work, the requests the business can still receive, and when someone will review them.",
+          "This is especially helpful when the owner has a small team or handles enquiries personally. A customer who sees ‘Send your request; we will confirm Diwali-period availability by 11 November’ can decide whether waiting is acceptable. A customer who sees an open-looking button with no context may assume a same-day response or a confirmed slot. Do not use a cut-off to manufacture urgency or to collect more leads than the business can answer. Use it when it reflects the real operating plan.",
+        ],
+      },
+      {
+        heading: "Write the operating note before you edit the site",
+        paragraphs: [
+          "Start with a short note agreed by the person who will actually answer customers. Include the last date and time for work that can be confirmed before the break; the dates when new requests will be read; the services, areas, or job sizes that are temporarily unavailable; and the first realistic response date. If one team member can handle urgent repair calls while another cannot take design consultations, record that difference. A vague instruction such as ‘we are busy for Diwali’ is not enough to make a public promise.",
+          "Choose wording that describes a process, not a guarantee. For example: ‘Requests received after 6 November will be reviewed from 11 November. We will confirm availability before scheduling a visit.’ Only use a date the business has capacity to honour. If the reopening day is uncertain, say that the business will respond after the holiday period rather than inventing a precise date. Keep urgent and safety-critical situations out of a normal marketing contact flow; a local service site should not imply that an enquiry form is an emergency channel.",
+        ],
+      },
+      {
+        heading: "Make one PaperChai page carry the full customer answer",
+        paragraphs: [
+          "In PaperChai, review the existing homepage and the service page where enquiries normally start. Add the temporary message beside the affected call, WhatsApp, or request action, rather than hiding it in a blog post or image. Keep the business name, service description, regular contact details, and usual service area intact. The visitor should be able to tell what the business does, whether a new request is still welcome, and what happens next without decoding a festive graphic or scrolling through social posts.",
+          "If the business takes appointment requests rather than instant bookings, label the action accordingly: ‘Request an appointment’ is more truthful than ‘Book now’ when a person must check availability. Do not remove a working contact route simply to reduce interruptions unless the business has chosen to stop receiving requests altogether. A short form can ask for only the information needed to review the request, such as the service, locality, and preferred date. Avoid asking customers to send payment details, identity documents, or a long personal history through a seasonal enquiry form.",
+        ],
+      },
+      {
+        heading: "Keep Google, WhatsApp, and the website from contradicting each other",
+        paragraphs: [
+          "PaperChai publishes the business-owned website; it does not automatically change Google Business Profile hours, a scheduling service, or a WhatsApp Business greeting. If public opening hours differ temporarily, update Google Business Profile Special hours separately. Google recommends confirming holiday hours even when they match the normal schedule, and its Special hours setting is intended for short-term changes. Check any booking calendar as well: an unavailable slot should not remain selectable simply because the website message is accurate.",
+          "Use the same practical distinction in each customer channel. If calls are answered but visits are paused, say that; if WhatsApp messages are reviewed later, say when. Do not change the Google business name for a festival, create another profile, or point customers to an unmonitored personal number as a shortcut. The goal is consistency, not identical software. A customer arriving from Maps, a QR code, or a forwarded WhatsApp link should reach the same trustworthy expectation.",
+        ],
+      },
+      {
+        heading: "Test the request route as a customer before sharing it",
+        paragraphs: [
+          "Republish the updated PaperChai site, then open the final public URL in a private browser on a phone. Read the first visible screen and the relevant service section. Can a first-time visitor identify the cut-off, the request action, and the expected follow-up without needing to call? Tap the call and WhatsApp links only when a harmless test is permitted, and submit one clearly marked test request only if it will not enter a real customer queue. Confirm that the named person receives it and that the automatic confirmation does not make a conflicting promise.",
+          "Also test the main action with a keyboard on a desktop browser. The temporary information needs to be readable text, not colour alone, a timed pop-up, or words baked into an image. Record the date, final URL, and the person responsible for replies in the operating note. This small check is more useful than adding extra festive copy: it confirms that the customer path, the website statement, and the human handoff match before someone relies on them.",
+        ],
+      },
+      {
+        heading: "Remove the temporary rule only after normal capacity returns",
+        paragraphs: [
+          "Set a review for the first working day when the business can truly handle new requests again. Check the enquiry inbox, contact route, booking availability, Google special hours, and the public PaperChai page together. Remove the cut-off wording or replace it with the current response expectation. If a backlog remains, keep the request route open only with a realistic response time; reopening a ‘same-day’ promise too early creates a second round of confusion.",
+          "The next PaperChai step is modest: agree one truthful cut-off and one follow-up date, place them near the existing enquiry action, and test the published route before sharing it. PaperChai helps a business present and maintain that customer-ready information on its own website. The owner still decides what can be delivered, updates external profiles, and responds to every request. That clear division makes a festive period easier for both the team and the people trying to reach it.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "fix-poor-mobile-core-web-vitals-local-service-website-india",
+    title: "Fix a poor mobile Core Web Vitals group without guessing",
+    description:
+      "A practical way for Indian local businesses to read a poor mobile Core Web Vitals group, choose one useful fix, and verify it calmly.",
+    category: "Website foundations",
+    publishedAt: "2026-11-05",
+    updatedAt: "2026-11-05",
+    readingMinutes: 5,
+    image:
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "Person using a laptop while reviewing website work at a desk",
+    keywords: [
+      "fix poor mobile Core Web Vitals local service website India",
+      "Search Console Core Web Vitals group small business website",
+      "why is my local business website slow on mobile India",
+      "how to improve LCP INP CLS service website",
+    ],
+    relatedSlugs: [
+      "improve-service-page-low-ctr-search-console-india",
+      "google-search-console-url-inspection-local-business-website-india",
+      "mobile-contact-page-local-service-business-india",
+    ],
+    sections: [
+      {
+        heading: "Treat the report as a customer-experience clue",
+        paragraphs: [
+          "A salon, tutor, home-repair team, photographer, or independent consultant may open Google Search Console and see a worrying red ‘Poor’ label under Core Web Vitals. The tempting response is to install every speed plugin, replace the whole site, or assume Google has stopped recommending the business. None of those is a sensible first step. The report is better used as a clue that people on a particular device may be having a slow, unresponsive, or visually jumpy experience while using the website.",
+          "Core Web Vitals are measures of loading, responsiveness, and visual stability from real visitor data. Google uses the terms LCP, INP, and CLS, but an owner does not need to become a performance engineer to act responsibly. The practical goal is simple: make the important page easier for a person on a phone to understand and use. That can protect a useful enquiry route even when it does not produce a guaranteed ranking, traffic, or booking result.",
+        ],
+      },
+      {
+        heading: "Read the group before blaming one page",
+        paragraphs: [
+          "In Search Console, open the Core Web Vitals report and choose Mobile first if most customers contact the business from phones. The report groups pages with a similar experience, rather than giving every page an independent diagnosis. Its status reflects the worst relevant metric for the group. A page that looks fine during one office Wi-Fi test can still belong to a group where real mobile visitors had a poor experience, and a single example URL may represent a wider set of similarly built pages.",
+          "Open the issue detail and note three things in a small task note: the device, the named metric, and the representative example URLs. Then ask which customer journey those URLs share. Perhaps every service page has the same large hero image, every page loads the same chat widget, or every booking form shifts when an embedded calendar arrives. This is more useful than sending a developer a screenshot that only says ‘website slow’. It points them towards the common template, script, image, or form component that may need attention.",
+        ],
+      },
+      {
+        heading: "Translate LCP, INP, and CLS into a visible symptom",
+        paragraphs: [
+          "LCP is about when the largest visible content appears. On a local service site, that might be a large banner image, a video, or the opening text block. If the first screen stays blank or an oversized photograph appears late on mobile data, ask the maintainer to inspect the leading image, its dimensions, and other blocking page resources. Do not remove useful information merely to chase a number; a clear service name, location context, and contact path are usually more valuable than a decorative full-screen image.",
+          "INP is about how quickly the page responds during a visit. A customer may tap ‘Call now’, choose a service, open an FAQ, or begin a form and experience a noticeable pause. CLS is unexpected movement: the enquiry button shifts just as a visitor tries to tap it, an image appears without reserved space, or a late banner pushes the price information down. Reproduce the visible symptom on a real phone where possible. A developer can use a diagnostic tool to identify the technical cause, but the owner’s description of the failed customer action is essential context.",
+        ],
+      },
+      {
+        heading: "Choose one customer-important fix, not a speed makeover",
+        paragraphs: [
+          "Prioritise a ‘Poor’ issue before a ‘Need improvement’ issue, then prefer a group that affects the pages customers use to call, book, request a quote, or understand a core service. Search Console lists example URLs in order of impressions, which can help indicate where an issue is being seen most often. Still, use judgement: a modestly visited booking page may matter more to the business than an old article. Confirm that the page and the service it describes are still current before spending time on it.",
+          "Make a focused brief. For example: ‘On mobile, the physiotherapy home-visit page has a poor LCP group; the hero photo is the likely largest visible element; preserve the page title and call button, but serve an appropriately sized image and test the page.’ Or: ‘The consultation form’s submit button moves when the calendar loads; reserve the component’s space and retest a phone enquiry.’ Avoid asking for a vague ‘make it fast’ job, adding another optimisation service, or rewriting every page at once. One observable repair is easier to test and less likely to break the public site.",
+        ],
+      },
+      {
+        heading: "Use a live test and the field report for different questions",
+        paragraphs: [
+          "After a real change is published, test the affected public URL on a phone and complete a harmless customer action. Then use PageSpeed Insights or another appropriate diagnostic tool to see the page’s current behaviour and suggested investigations. A live test helps check whether the changed page is now technically healthier. It does not replace Search Console’s report, which is built from real-user data and groups URLs by their observed experience. The two views can differ without either being wrong.",
+          "If the fix addresses the issue across the relevant template, use Search Console’s ‘Start Tracking’ option for that issue and keep the original note. Google’s validation process monitors the fix over time, so do not call the work a success on the day a developer finishes. Also avoid repeatedly changing images, fonts, widgets, and copy while the check is underway. Record the deployment date, the pages affected, the customer action tested, and any unexpected behaviour. That makes a later result useful rather than mysterious.",
+        ],
+      },
+      {
+        heading: "Keep a small mobile maintenance habit",
+        paragraphs: [
+          "Once a month, open the key service, contact, and booking pages on an ordinary phone connection. Check that the first screen explains the offer, images do not cover or push controls, the main contact route responds, and a form can be completed with the keyboard. If Search Console has no Core Web Vitals data for a small site, do not manufacture traffic or panic. Keep the page lean, accurate, and usable, and use an individual live test when a specific page feels slow.",
+          "The next PaperChai step is to choose one mobile journey a customer relies on and make its public page dependable before adding another promotion or feature. PaperChai can help keep the service details and enquiry path clear while a maintainer handles a targeted performance repair. Good Core Web Vitals are worthwhile because they support a better visit, not because they are a shortcut to a promised position in Google or a substitute for replying helpfully when the enquiry arrives.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "improve-service-page-low-ctr-search-console-india",
+    title: "Choose one service page to improve with Search Console",
+    description:
+      "A calm, practical way for Indian local businesses to use Search Console impressions and clicks to choose one service page worth improving.",
+    category: "Website foundations",
+    publishedAt: "2026-11-04",
+    updatedAt: "2026-11-04",
+    readingMinutes: 5,
+    image:
+      "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "Small team reviewing a website report together at a table",
+    keywords: [
+      "how to improve a local service page with low click through rate",
+      "Search Console high impressions low clicks small business India",
+      "which service page should I improve first on my website",
+      "improve Google Search title for local service business India",
+    ],
+    relatedSlugs: [
+      "search-console-insights-local-service-website-india",
+      "service-page-not-indexed-google-search-console-india",
+      "google-search-console-url-inspection-local-business-website-india",
+    ],
+    sections: [
+      {
+        heading: "Use evidence to choose the next page, not to chase a score",
+        paragraphs: [
+          "A small business owner can easily collect a list of website jobs: rewrite every service page, add more cities, change every headline, or ask why Google is not sending enough enquiries. That list is too broad to be useful. Google Search Console can help narrow it down by showing which pages were displayed in Google Search and which received clicks. For a tutor, salon, repair team, photographer, or independent consultant, the useful question is usually: which real service page should we make clearer for the next customer?",
+          "This is not a promise that a changed title will raise rankings or bookings. Search results differ by location, device, language, and a searcher’s recent activity. Search Console metrics also describe a sample of how people encountered the site, not every decision they made. Treat the report as a way to spot a customer-facing mismatch worth investigating. The page still needs to describe a service the business actually offers, in an area it can genuinely serve, with a contact route a person can use.",
+        ],
+      },
+      {
+        heading: "Start with a steady comparison period",
+        paragraphs: [
+          "Open the Search results Performance report for the verified website and choose Web search. For a small site, compare a meaningful recent period with the preceding period rather than reacting to a single day. Four weeks is often a practical starting point when the service and opening hours have been stable; a seasonal business may need a longer comparison or the same period last year. Search Console lets you compare date ranges, then sort the Pages table by the difference in clicks or impressions.",
+          "Before reading the table, write down anything that could explain a normal change: a festival closure, school holidays, a paused service, a new website launch, a price change, or an offline campaign. A fall in a wedding photographer’s enquiry-page impressions during an off-season does not automatically mean the page is broken. Equally, a sudden rise after a campaign may not tell you whether the page will perform the same way next month. The aim is a fair comparison, not a dramatic graph.",
+        ],
+      },
+      {
+        heading: "Find a page that people can actually act on",
+        paragraphs: [
+          "In the Pages tab, look for a public page that has enough impressions to be worth examining and is connected to a genuine customer task: a main service, a booking page, a pricing explanation, or a portfolio enquiry page. Avoid beginning with a private dashboard, an old redirect, a thank-you page, or a blog post that has no practical next step. Click the page row to filter the report, then open Queries to see the words that led people to that particular page.",
+          "A page with impressions and few clicks can be a useful candidate, but it is not automatically a bad page. Google’s own guidance suggests looking at low-CTR pages to see whether the title, description, or page content accurately represents the query. Read several visible queries as a group. If a home painter’s page appears for ‘wall texture ideas’ while the business only offers repainting estimates, the answer may be to clarify the offer, not to promise a service it does not provide. If the queries match the service, continue to the public-page check.",
+        ],
+      },
+      {
+        heading: "Read the result and the landing page as one customer journey",
+        paragraphs: [
+          "Search the relevant phrase in a private browser, while remembering that your own result may not match the report exactly. Look at the page title and snippet Google chooses, then open the page on a phone. Can a first-time visitor tell what the service is, who it is for, where it is available when location matters, and what to do next? Does the headline answer the same intent as the query, or does it lead with a slogan that hides the useful information?",
+          "Make one honest improvement at a time. A physiotherapist might change a vague title such as ‘Care that moves with you’ to one that names the actual consultation or home-visit service, while keeping the brand voice in the visible heading. A freelancer might add a short project-fit section and clearer enquiry prompt. Do not manufacture neighbourhood pages, insert a string of search phrases, or overwrite a precise service name with ‘best’. A result earns a click when it sets the right expectation; the page earns trust when it keeps it.",
+        ],
+      },
+      {
+        heading: "Check the technical basics before calling it a content problem",
+        paragraphs: [
+          "If the page looks right but its data changes sharply, inspect the exact URL in Search Console. Confirm that the public version can be crawled and indexed, that the canonical points where expected, and that the page is not a duplicate or a redirect to something unrelated. Test the main call, WhatsApp, booking, or form action on a real phone as well. A customer who clicks but reaches a broken form is not helped by a more polished search title.",
+          "Keep the scope small. Note the original title, the date of the change, the page URL, and the reason you chose it. Then give Google time to recrawl and report enough data before judging the result. Search Console cautions that filtering by query or URL can affect totals because of anonymised queries and data truncation, so do not try to reconcile every number across every filtered view. Look for a sustained pattern and for whether the enquiries arriving are relevant.",
+        ],
+      },
+      {
+        heading: "A repeatable monthly habit for a small team",
+        paragraphs: [
+          "Once a month, spend fifteen calm minutes on the same routine: compare a stable date range, choose one public page, read its visible queries, review the result and page on mobile, make one customer-helpful improvement if warranted, and record it. If no page has enough data, that is useful information too. Focus on keeping the core service, location, contact details, and page links accurate rather than inventing a report-driven project.",
+          "The next PaperChai step is simple: select one page a customer can use today and review its public promise before changing anything. PaperChai can help you keep that page, its service details, and its enquiry route clear as the business evolves. Search Console is most valuable here as a prompt for careful maintenance, not as a verdict on the quality of the business or a shortcut to guaranteed demand.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "google-search-show-business-name-favicon-local-website-india",
     title: "Help Google show your business name, not just your URL",
     description:
