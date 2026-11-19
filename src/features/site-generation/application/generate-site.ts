@@ -15,6 +15,7 @@ import { sendPublishLifecycleEmails } from "@/lib/lifecycle";
 import { mergeSiteOnUpdate } from "@/lib/merge-site-update";
 import { getPublicSitePath, getPublicSiteUrl } from "@/lib/site-url";
 import { generateSite } from "@/lib/template";
+import { submitToIndexNow } from "@/lib/indexnow";
 import { addSiteDomain } from "@/lib/vercel-domains";
 import type { GeneratorInput, SiteData } from "@/lib/types";
 import { ApiError } from "@/platform/http/api-error";
@@ -102,6 +103,7 @@ export async function generateAndStoreSite(
   // Start Vercel's per-host certificate for <slug>.sites.kritvani.com now so
   // it's ready by the time the owner opens the link.
   await addSiteDomain(stored.slug);
+  void submitToIndexNow([getPublicSiteUrl(stored.slug)]);
   void sendPublishLifecycleEmails(
     email,
     { id: stored.id, slug: stored.slug, name: stored.name },
