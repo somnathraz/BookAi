@@ -1,6 +1,6 @@
 # Kritvani journal: research, write, verify, learn
 
-This is the reusable editorial workflow for https://kritvani.com/blog.
+This is the reusable editorial workflow for https://builder.kritvani.com/blog.
 Read it before each scheduled or manual article run, together with AGENTS.md.
 It adapts the supplied SomSite checklist to Kritvani's publishing system.
 

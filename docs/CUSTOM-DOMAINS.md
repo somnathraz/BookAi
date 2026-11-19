@@ -9,7 +9,7 @@ The code is already wired:
 - `src/lib/site-url.ts` builds `https://<slug>.<domain>` share links.
 - Path URLs (`kritvani.com/<slug>`) keep working as a fallback.
 
-Production setup for Kritvani: the app is on `kritvani.com`, customer sites are on
+Production setup for Kritvani: the builder app is on `builder.kritvani.com`, customer sites are on
 `<slug>.sites.kritvani.com`. DNS stays on Cloudflare (the domain is registered there,
 so its nameservers can't move to Vercel).
 
@@ -18,11 +18,13 @@ so its nameservers can't move to Vercel).
 ## 1. Env vars (Vercel → book-ai → Settings → Environment Variables)
 
 ```bash
-NEXT_PUBLIC_APP_URL=https://kritvani.com
+NEXT_PUBLIC_APP_URL=https://builder.kritvani.com
 NEXT_PUBLIC_SITE_DOMAIN=sites.kritvani.com
 ```
 
 `NEXT_PUBLIC_SITE_DOMAIN` is the root that customer slugs sit under, **not** the apex.
+Set it to `off` to fall back to path URLs (`builder.kritvani.com/<slug>`) — this is the
+current production value until the `*.sites.kritvani.com` wildcard certificate is issued.
 Changing it needs a redeploy (it's baked into the client bundle).
 
 Local dev doesn't need either — `<slug>.localhost:3000` works out of the box.
@@ -33,12 +35,12 @@ Local dev doesn't need either — `<slug>.localhost:3000` works out of the box.
 
 | Domain | Purpose |
 | --- | --- |
-| `kritvani.com` | App, marketing, blog, path URLs (`kritvani.com/<slug>`) |
-| `www.kritvani.com` | 308 → `kritvani.com` |
+| `builder.kritvani.com` | App, marketing, blog, path URLs (`builder.kritvani.com/<slug>`) |
 | `*.sites.kritvani.com` | Every customer site |
-| `paperchaiapp.com`, `www.`, `*.` | Legacy — 308 to the kritvani equivalents until the domain lapses |
+| `paperchaiapp.com`, `www.`, `*.` | Legacy — proxy.ts 308s to the kritvani equivalents until the domain lapses |
 
 The invoice app (`paperchai` Vercel project) lives separately at `paperchai.kritvani.com`.
+The bare `kritvani.com` / `www` serve a separate static brand page (Vercel project `kritvani-home`).
 
 ---
 
@@ -46,9 +48,10 @@ The invoice app (`paperchai` Vercel project) lives separately at `paperchai.krit
 
 | Type | Name | Value |
 | --- | --- | --- |
-| `A` | `@` | `216.198.79.1` |
-| `A` | `@` | `64.29.17.1` |
-| `CNAME` | `www` | `72a53af7970d38c3.vercel-dns-017.com` |
+| `A` | `@` | `216.198.79.1` (brand page) |
+| `A` | `@` | `64.29.17.1` (brand page) |
+| `CNAME` | `www` | Vercel (brand page) |
+| `CNAME` | `builder` | `72a53af7970d38c3.vercel-dns-017.com` |
 | `CNAME` | `*.sites` | `72a53af7970d38c3.vercel-dns-017.com` |
 | `NS` | `_acme-challenge.sites` | `ns1.vercel-dns.com` |
 | `NS` | `_acme-challenge.sites` | `ns2.vercel-dns.com` |
@@ -65,9 +68,9 @@ if Vercel ever changes its recommended targets.
 
 ## 4. Verify
 
-1. `https://kritvani.com` renders the app.
-2. `https://<slug>.sites.kritvani.com` renders that site; `https://kritvani.com/<slug>` still works.
-3. `https://paperchaiapp.com/anything` 308s to `https://kritvani.com/anything`.
+1. `https://builder.kritvani.com` renders the app.
+2. `https://<slug>.sites.kritvani.com` renders that site; `https://builder.kritvani.com/<slug>` still works.
+3. `https://paperchaiapp.com/anything` 308s to `https://builder.kritvani.com/anything`.
 
 Local dev check (no DNS needed):
 

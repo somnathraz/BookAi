@@ -35,7 +35,7 @@ export function Hero3D() {
             <span className="size-2 rounded-full bg-white/20" />
           </div>
           <span className="font-mono text-[9px] tracking-wide text-white/35">
-            kritvani.com/studio
+            builder.kritvani.com/studio
           </span>
           <div className="flex items-center gap-1.5 text-[9px] font-medium text-[#9cc2b3]">
             <span className="size-1.5 rounded-full bg-[#67b99a]" />

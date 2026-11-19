@@ -15,7 +15,7 @@ async function fetchHtml(rawUrl: string): Promise<{ html: string; url: string }>
     const res = await fetch(url, {
       headers: {
         "user-agent":
-          "Mozilla/5.0 (compatible; KritvaniBot/1.0; +https://kritvani.com)",
+          "Mozilla/5.0 (compatible; KritvaniBot/1.0; +https://builder.kritvani.com)",
         accept: "text/html,application/xhtml+xml",
       },
       signal: controller.signal,

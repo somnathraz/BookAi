@@ -1,8 +1,11 @@
 /** Public product name — use everywhere user-facing. */
 export const PRODUCT_NAME = "Kritvani";
 
-/** Canonical production apex domain (no protocol). Used when env vars are unset. */
-export const APP_DOMAIN = "kritvani.com";
+/** Company apex — hosts a brand page; products live on subdomains. Use for emails. */
+export const BRAND_DOMAIN = "kritvani.com";
+
+/** Canonical production host for the builder app (no protocol). Used when env vars are unset. */
+export const APP_DOMAIN = "builder.kritvani.com";
 
 /**
  * Former apex domains. Requests on these (and their subdomains) are 308'd to

@@ -10,7 +10,7 @@ import {
 
 /**
  * Where a legacy-domain request should go, or null if the host isn't legacy.
- *   paperchaiapp.com/x, www.paperchaiapp.com/x → https://kritvani.com/x
+ *   paperchaiapp.com/x, www.paperchaiapp.com/x → https://builder.kritvani.com/x
  *   glamzone.paperchaiapp.com/x                → https://glamzone.sites.kritvani.com/x
  */
 function legacyRedirectTarget(

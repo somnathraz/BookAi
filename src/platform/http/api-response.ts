@@ -18,7 +18,7 @@ export function apiFailure(
     {
       // RFC 9457 Problem Details fields. `error` stays as a temporary string
       // alias so migrated routes do not break the existing client contract.
-      type: `https://kritvani.com/problems/${code}`,
+      type: `https://builder.kritvani.com/problems/${code}`,
       title: message,
       status,
       detail: message,

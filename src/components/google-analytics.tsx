@@ -47,7 +47,7 @@ function GaPageViews() {
 }
 
 /**
- * GA4 for Kritvani (kritvani.com).
+ * GA4 for Kritvani (builder.kritvani.com).
  * Loads afterInteractive so it does not block LCP; production only.
  */
 export function GoogleAnalytics() {

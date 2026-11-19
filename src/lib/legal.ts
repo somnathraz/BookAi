@@ -1,6 +1,6 @@
 import "server-only";
 
-import { APP_DOMAIN, PRODUCT_NAME } from "@/lib/brand";
+import { BRAND_DOMAIN, PRODUCT_NAME } from "@/lib/brand";
 import { resolveEmailEnv } from "@/lib/ai/provider";
 import { env } from "@/platform/config/env";
 
@@ -14,5 +14,5 @@ export function getLegalContactEmail(): string {
   if (explicit) return explicit;
   const emailFrom = resolveEmailEnv().from?.trim();
   if (emailFrom) return emailFrom;
-  return `support@${APP_DOMAIN}`;
+  return `support@${BRAND_DOMAIN}`;
 }

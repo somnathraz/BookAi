@@ -1,6 +1,6 @@
 // Public URLs for published sites.
 //
-//   Path mode (default):       kritvani.com/glamzone
+//   Path mode (default):       builder.kritvani.com/glamzone
 //   Subdomain mode (wildcard): glamzone.sites.kritvani.com
 //
 // Subdomain mode turns on automatically when NEXT_PUBLIC_SITE_DOMAIN is set
@@ -47,7 +47,9 @@ export function getAppBaseUrl(): string {
  */
 export function getSiteRootDomain(): string | null {
   const raw = publicEnv.siteDomain;
-  if (!raw) return null;
+  // "off" keeps the variable in place (sensitive Vercel vars can't be renamed)
+  // while falling back to path URLs, e.g. until wildcard SSL is ready.
+  if (!raw || raw.trim().toLowerCase() === "off") return null;
   return normalizeHost(raw) ?? APP_DOMAIN;
 }
 
