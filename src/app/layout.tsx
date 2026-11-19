@@ -11,6 +11,7 @@ import {
 import { getAppBaseUrl } from "@/lib/site-url";
 import { GoogleAnalytics } from "@/components/google-analytics";
 import { MicrosoftClarity } from "@/components/microsoft-clarity";
+import { PlatformOnly } from "@/components/platform-only";
 import { ThemeProvider } from "@/components/theme-provider";
 
 import "./globals.css";
@@ -92,8 +93,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${newsreader.variable} antialiased bg-background text-foreground`}
       >
         <ThemeProvider>
-          <GoogleAnalytics />
-          <MicrosoftClarity />
+          {/* Kritvani's own analytics — never on customer sites. */}
+          <PlatformOnly>
+            <GoogleAnalytics />
+            <MicrosoftClarity />
+          </PlatformOnly>
           {children}
         </ThemeProvider>
       </body>
