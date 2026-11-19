@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useSyncExternalStore, type ReactNode } from "react";
 
 import { BRAND_DOMAIN } from "@/lib/brand";
 import { publicEnv } from "@/platform/config/public-env";
@@ -19,11 +19,16 @@ function platformHosts(): Set<string> {
  * Clarity. Decided client-side so the root layout stays statically renderable.
  */
 export function PlatformOnly({ children }: { children: ReactNode }) {
-  const [allowed, setAllowed] = useState(false);
-
-  useEffect(() => {
-    setAllowed(platformHosts().has(window.location.hostname.toLowerCase()));
-  }, []);
+  // The hostname never changes for a page, so there's nothing to subscribe to.
+  const allowed = useSyncExternalStore(
+    noopSubscribe,
+    () => platformHosts().has(window.location.hostname.toLowerCase()),
+    () => false
+  );
 
   return allowed ? <>{children}</> : null;
+}
+
+function noopSubscribe(): () => void {
+  return () => {};
 }
