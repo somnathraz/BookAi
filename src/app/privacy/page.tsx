@@ -8,7 +8,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Privacy Policy",
   description:
-    "How PaperChai collects, uses, stores and shares personal data for accounts, sites, bookings and billing.",
+    "How Kritvani collects, uses, stores and shares personal data for accounts, sites, bookings and billing.",
   path: "/privacy",
 });
 

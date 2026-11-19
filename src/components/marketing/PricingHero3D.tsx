@@ -91,11 +91,11 @@ export function PricingHero3D() {
                 <Zap className="size-3.5" />
                 Free plan
               </div>
-              <p className="mt-2 font-mono text-xs text-foreground">salon.paperchaiapp.com</p>
+              <p className="mt-2 font-mono text-xs text-foreground">salon.sites.kritvani.com</p>
               <div className="mt-3 h-14 rounded-lg bg-gradient-to-br from-stone-200 to-stone-300 dark:from-stone-600/40 dark:to-stone-500/30" />
               <p className="mt-2 text-[10px] text-muted-foreground">1 site · contact links</p>
               <span className="mt-2 inline-flex rounded-md bg-muted px-2 py-0.5 text-[9px] text-muted-foreground">
-                Built with PaperChai
+                Built with Kritvani
               </span>
             </motion.div>
           </motion.div>
@@ -193,7 +193,7 @@ export function PricingHero3D() {
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1.4 }}
               className="flex items-center gap-2 rounded-full border border-border/70 bg-background/95 px-3 py-2 shadow-xl backdrop-blur dark:border-white/12"
             >
-              <span className="text-[11px] font-medium text-foreground">No PaperChai badge</span>
+              <span className="text-[11px] font-medium text-foreground">No Kritvani badge</span>
             </motion.div>
           </motion.div>
         </motion.div>

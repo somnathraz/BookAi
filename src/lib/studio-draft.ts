@@ -6,8 +6,8 @@ import type {
 } from "@/lib/types";
 import type { SourceId } from "@/lib/types";
 
-const STORAGE_KEY = "paperchai_studio_draft";
-export const DRAFT_PREVIEW_STORAGE_KEY = "paperchai_draft_preview";
+const STORAGE_KEY = "kritvani_studio_draft";
+export const DRAFT_PREVIEW_STORAGE_KEY = "kritvani_draft_preview";
 const MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000; // keep import data for a week
 
 export type DraftStep = "source" | "analysis" | "review" | "preview";

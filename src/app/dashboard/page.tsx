@@ -108,7 +108,7 @@ export default function DashboardPage() {
       ? `\n\nYour DNS records for ${site.customDomain} are managed by your registrar and must be removed there separately.`
       : "";
     const confirmed = window.confirm(
-      `Permanently delete ${site.name}?\n\nThis removes the website and all booking or enquiry submissions. Its PaperChai address will never be assigned to another site.${domainWarning}`
+      `Permanently delete ${site.name}?\n\nThis removes the website and all booking or enquiry submissions. Its Kritvani address will never be assigned to another site.${domainWarning}`
     );
     if (!confirmed) return;
 

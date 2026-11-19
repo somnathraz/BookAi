@@ -29,7 +29,7 @@ export function LogoMark({
   );
 }
 
-/** Logo mark + optional PaperChai wordmark. */
+/** Logo mark + optional Kritvani wordmark. */
 export function Logo({
   href = "/",
   size = 28,

@@ -1,10 +1,10 @@
 // Public URLs for published sites.
 //
-//   Path mode (default):       paperchaiapp.com/glamzone
-//   Subdomain mode (wildcard): glamzone.paperchaiapp.com
+//   Path mode (default):       kritvani.com/glamzone
+//   Subdomain mode (wildcard): glamzone.sites.kritvani.com
 //
 // Subdomain mode turns on automatically when NEXT_PUBLIC_SITE_DOMAIN is set
-// (e.g. "paperchaiapp.com"). proxy.ts then rewrites <slug>.<domain> to
+// (e.g. "sites.kritvani.com"). proxy.ts then rewrites <slug>.<domain> to
 // the /[slug] route, so both URL styles keep working.
 
 import { APP_DOMAIN } from "@/lib/brand";
@@ -20,13 +20,13 @@ function normalizeHost(raw: string | undefined): string | null {
     .toLowerCase();
 }
 
-/** Apex domain for the app — env override, then canonical default. */
+/**
+ * Apex domain for the app — env override, then canonical default.
+ * Deliberately ignores NEXT_PUBLIC_SITE_DOMAIN: customer sites live under a
+ * separate root (sites.kritvani.com), not the app apex.
+ */
 export function getCanonicalAppDomain(): string {
-  return (
-    normalizeHost(publicEnv.siteDomain) ??
-    normalizeHost(publicEnv.appUrl) ??
-    APP_DOMAIN
-  );
+  return normalizeHost(publicEnv.appUrl) ?? APP_DOMAIN;
 }
 
 /** App origin for absolute links (emails, OG tags, copy-to-clipboard). */
@@ -43,7 +43,7 @@ export function getAppBaseUrl(): string {
 
 /**
  * Root domain that published sites get a subdomain under, e.g.
- * "paperchaiapp.com". Returns null when subdomain mode is disabled.
+ * "sites.kritvani.com". Returns null when subdomain mode is disabled.
  */
 export function getSiteRootDomain(): string | null {
   const raw = publicEnv.siteDomain;

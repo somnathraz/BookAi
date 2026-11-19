@@ -69,7 +69,7 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "Record the exact search result before changing anything else",
         paragraphs: [
           "Search for the business name and old number in a private browser window, then write down the exact result URL that shows the outdated detail. A home page, contact page, service page, PDF, old campaign page, or a different version of the domain can each appear separately. Copy the result link itself, rather than assuming that the page open in the browser is the one Google indexed. If the outdated number appears in multiple results, list each URL. This tiny inventory prevents a team from repeatedly updating the homepage while an overlooked service page remains public.",
-          "Also distinguish a Google web result from a Google Business Profile, an ad, a directory listing, a social profile, or a customer screenshot. Each is managed in a different place. This article concerns a result pointing to the business-owned website. A PaperChai site update does not automatically change a Google Business Profile, WhatsApp Business profile, advertising account, or third-party directory. Keep a short private note with the result URL, date checked, old number, correct public number, and owner responsible. Do not put customer call records, passwords, or recovery details in it.",
+          "Also distinguish a Google web result from a Google Business Profile, an ad, a directory listing, a social profile, or a customer screenshot. Each is managed in a different place. This article concerns a result pointing to the business-owned website. A Kritvani site update does not automatically change a Google Business Profile, WhatsApp Business profile, advertising account, or third-party directory. Keep a short private note with the result URL, date checked, old number, correct public number, and owner responsible. Do not put customer call records, passwords, or recovery details in it.",
         ],
       },
       {
@@ -83,7 +83,7 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "Make the contact route consistent across owned website pages",
         paragraphs: [
           "A number change often affects more than one field. Review the website header, footer, contact page, booking page, mobile call button, WhatsApp link, confirmation copy, and service templates. A visitor who sees one number at the top of a page and another after pressing ‘Request a quote’ has no reason to know which is current. Use one clear label such as ‘Call’ or ‘WhatsApp enquiries’ when those routes have different purposes, and state a realistic reply expectation if the business cannot answer immediately.",
-          "Do not make the page promise emergency help, same-day visits, or 24-hour calling unless the business can actually deliver it. For a sole practitioner, ‘Send an enquiry; replies on working days’ may be more useful than a vague always-open message. If Google Business Profile has the old number too, change it separately in the verified profile and compare the public profile with the website after it updates. The business owner remains responsible for external profile settings; the PaperChai site should stay accurate as the owned source of the customer journey.",
+          "Do not make the page promise emergency help, same-day visits, or 24-hour calling unless the business can actually deliver it. For a sole practitioner, ‘Send an enquiry; replies on working days’ may be more useful than a vague always-open message. If Google Business Profile has the old number too, change it separately in the verified profile and compare the public profile with the website after it updates. The business owner remains responsible for external profile settings; the Kritvani site should stay accurate as the owned source of the customer journey.",
         ],
       },
       {
@@ -97,7 +97,7 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "Verify the customer path again after Google catches up",
         paragraphs: [
           "Check the original search query after a reasonable period and repeat the exact-URL check. If Google still shows the old number, first confirm that the live HTML, the indexed URL, and any duplicate URL variants all remain corrected. A search result may show a different page or an older cached understanding of a page, so a fresh public-page check matters more than guessing from the snippet alone. If the result has updated, place a modest future review reminder after the next website release or contact change.",
-          "The practical PaperChai workflow is deliberately small: identify the exact source, correct every owned customer route, test the public action, request indexing once where eligible, and wait for Google’s normal processing. PaperChai can help keep the business website clear and publishable; it cannot guarantee a crawl date, a snippet format, or a volume of calls. What the owner can control is more valuable: customers who reach the current number and know what response to expect.",
+          "The practical Kritvani workflow is deliberately small: identify the exact source, correct every owned customer route, test the public action, request indexing once where eligible, and wait for Google’s normal processing. Kritvani can help keep the business website clear and publishable; it cannot guarantee a crawl date, a snippet format, or a volume of calls. What the owner can control is more valuable: customers who reach the current number and know what response to expect.",
         ],
       },
     ],
@@ -164,7 +164,7 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "Wait for complete periods before deciding what to improve",
         paragraphs: [
           "Return after the preliminary window has settled, then compare a meaningful completed period with a comparable earlier period. For many small service websites, several weeks is more useful than a few hours; seasonal businesses may need to compare the same part of a previous season as well. Look at impressions and clicks together, then open the relevant pages and queries. Google itself recommends focusing on trends in impressions and clicks more than position alone. Keep the timing of any site changes in the note so a later pattern has context.",
-          "Choose one action only when evidence and the customer journey agree. It might be correcting a misleading page title, adding a missing service detail, repairing a contact route, or leaving a sound page alone while more data accumulates. PaperChai can help a business keep its owned website clear and its enquiry route usable; it cannot guarantee a Google position, a crawl time, or a volume of leads. The next sensible step is simple: record one change, use hourly data as a cautious early check, test the public page, and let completed data guide the next improvement.",
+          "Choose one action only when evidence and the customer journey agree. It might be correcting a misleading page title, adding a missing service detail, repairing a contact route, or leaving a sound page alone while more data accumulates. Kritvani can help a business keep its owned website clear and its enquiry route usable; it cannot guarantee a Google position, a crawl time, or a volume of leads. The next sensible step is simple: record one change, use hourly data as a cautious early check, test the public page, and let completed data guide the next improvement.",
         ],
       },
     ],
@@ -218,7 +218,7 @@ export const blogRegistry: readonly BlogArticle[] = [
       {
         heading: "Make the website carry the same customer expectation",
         paragraphs: [
-          "A correct Google entry is only one part of the journey. Open the business website and compare the displayed hours, contact-page wording, booking page, and any service-specific availability with the profile before you save. A customer who sees ‘open until 7 pm’ on Maps but a site that says ‘calls answered until 5 pm’ needs an explanation, not a guess. If the website is the source that is stale, update it through PaperChai’s normal editing and publishing flow; do not change Google to match an old page.",
+          "A correct Google entry is only one part of the journey. Open the business website and compare the displayed hours, contact-page wording, booking page, and any service-specific availability with the profile before you save. A customer who sees ‘open until 7 pm’ on Maps but a site that says ‘calls answered until 5 pm’ needs an explanation, not a guess. If the website is the source that is stale, update it through Kritvani’s normal editing and publishing flow; do not change Google to match an old page.",
           "Use plain, visible text near the affected action. A concise line such as ‘Phone enquiries answered until 5 pm; studio visits by confirmed appointment’ can resolve a genuine distinction without exposing an internal rota. Do not put the only hours information inside an image, a pop-up, or an unmonitored social story. For an independent professional, it is often better to state a realistic reply window than to copy retail opening hours that imply walk-ins are welcome.",
         ],
       },
@@ -233,17 +233,17 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "Keep an owner-led hours review after every real change",
         paragraphs: [
           "Review public hours after a holiday, staff change, move, new service, new booking provider, or a shift in who answers calls. Google advises using Special hours for brief adjustments and a temporary-closure status for longer or uncertain closures; choose the setting that matches the actual situation. Keep a small dated note of the change and the person who checked it. That record is useful when a colleague sees a different result later, but it should not contain customer details, passwords, or recovery information.",
-          "The next PaperChai step is modest: write the real timetable, use Generate hours only as a draft, review the result line by line, and compare it with the published customer path. PaperChai can help keep the owned website clear, while the owner remains responsible for Google settings, schedules, and replies. This does not guarantee Maps visibility or more enquiries. It prevents a more immediate problem: a customer relying on hours that the business did not mean to promise.",
+          "The next Kritvani step is modest: write the real timetable, use Generate hours only as a draft, review the result line by line, and compare it with the published customer path. Kritvani can help keep the owned website clear, while the owner remains responsible for Google settings, schedules, and replies. This does not guarantee Maps visibility or more enquiries. It prevents a more immediate problem: a customer relying on hours that the business did not mean to promise.",
         ],
       },
     ],
   },
   {
-    slug: "paperchai-diwali-enquiry-cutoff-workflow-india",
-    title: "PaperChai workflow: set an honest Diwali enquiry cut-off",
+    slug: "kritvani-diwali-enquiry-cutoff-workflow-india",
+    title: "Kritvani workflow: set an honest Diwali enquiry cut-off",
     description:
-      "A practical PaperChai workflow for Indian local businesses to state a Diwali enquiry cut-off, keep pending requests clear, and reopen the right customer route.",
-    category: "PaperChai workflow",
+      "A practical Kritvani workflow for Indian local businesses to state a Diwali enquiry cut-off, keep pending requests clear, and reopen the right customer route.",
+    category: "Kritvani workflow",
     publishedAt: "2026-11-06",
     updatedAt: "2026-11-06",
     readingMinutes: 5,
@@ -254,14 +254,14 @@ export const blogRegistry: readonly BlogArticle[] = [
     keywords: [
       "Diwali enquiry cut off message local business website India",
       "Diwali booking request confirmation website workflow India",
-      "PaperChai Diwali availability update for service business",
+      "Kritvani Diwali availability update for service business",
       "how to pause new service enquiries during Diwali India",
     ],
     promotionCaption:
-      "Taking requests around Diwali is not the same as confirming availability. This PaperChai workflow helps you publish one clear cut-off, preserve a monitored enquiry route, and set an honest follow-up date before customers need to ask.",
+      "Taking requests around Diwali is not the same as confirming availability. This Kritvani workflow helps you publish one clear cut-off, preserve a monitored enquiry route, and set an honest follow-up date before customers need to ask.",
     relatedSlugs: [
-      "paperchai-diwali-website-refresh-workflow-india",
-      "paperchai-block-holiday-booking-dates-india",
+      "kritvani-diwali-website-refresh-workflow-india",
+      "kritvani-block-holiday-booking-dates-india",
       "website-enquiry-form-fields-local-service-business-india",
     ],
     sections: [
@@ -280,31 +280,31 @@ export const blogRegistry: readonly BlogArticle[] = [
         ],
       },
       {
-        heading: "Make one PaperChai page carry the full customer answer",
+        heading: "Make one Kritvani page carry the full customer answer",
         paragraphs: [
-          "In PaperChai, review the existing homepage and the service page where enquiries normally start. Add the temporary message beside the affected call, WhatsApp, or request action, rather than hiding it in a blog post or image. Keep the business name, service description, regular contact details, and usual service area intact. The visitor should be able to tell what the business does, whether a new request is still welcome, and what happens next without decoding a festive graphic or scrolling through social posts.",
+          "In Kritvani, review the existing homepage and the service page where enquiries normally start. Add the temporary message beside the affected call, WhatsApp, or request action, rather than hiding it in a blog post or image. Keep the business name, service description, regular contact details, and usual service area intact. The visitor should be able to tell what the business does, whether a new request is still welcome, and what happens next without decoding a festive graphic or scrolling through social posts.",
           "If the business takes appointment requests rather than instant bookings, label the action accordingly: ‘Request an appointment’ is more truthful than ‘Book now’ when a person must check availability. Do not remove a working contact route simply to reduce interruptions unless the business has chosen to stop receiving requests altogether. A short form can ask for only the information needed to review the request, such as the service, locality, and preferred date. Avoid asking customers to send payment details, identity documents, or a long personal history through a seasonal enquiry form.",
         ],
       },
       {
         heading: "Keep Google, WhatsApp, and the website from contradicting each other",
         paragraphs: [
-          "PaperChai publishes the business-owned website; it does not automatically change Google Business Profile hours, a scheduling service, or a WhatsApp Business greeting. If public opening hours differ temporarily, update Google Business Profile Special hours separately. Google recommends confirming holiday hours even when they match the normal schedule, and its Special hours setting is intended for short-term changes. Check any booking calendar as well: an unavailable slot should not remain selectable simply because the website message is accurate.",
+          "Kritvani publishes the business-owned website; it does not automatically change Google Business Profile hours, a scheduling service, or a WhatsApp Business greeting. If public opening hours differ temporarily, update Google Business Profile Special hours separately. Google recommends confirming holiday hours even when they match the normal schedule, and its Special hours setting is intended for short-term changes. Check any booking calendar as well: an unavailable slot should not remain selectable simply because the website message is accurate.",
           "Use the same practical distinction in each customer channel. If calls are answered but visits are paused, say that; if WhatsApp messages are reviewed later, say when. Do not change the Google business name for a festival, create another profile, or point customers to an unmonitored personal number as a shortcut. The goal is consistency, not identical software. A customer arriving from Maps, a QR code, or a forwarded WhatsApp link should reach the same trustworthy expectation.",
         ],
       },
       {
         heading: "Test the request route as a customer before sharing it",
         paragraphs: [
-          "Republish the updated PaperChai site, then open the final public URL in a private browser on a phone. Read the first visible screen and the relevant service section. Can a first-time visitor identify the cut-off, the request action, and the expected follow-up without needing to call? Tap the call and WhatsApp links only when a harmless test is permitted, and submit one clearly marked test request only if it will not enter a real customer queue. Confirm that the named person receives it and that the automatic confirmation does not make a conflicting promise.",
+          "Republish the updated Kritvani site, then open the final public URL in a private browser on a phone. Read the first visible screen and the relevant service section. Can a first-time visitor identify the cut-off, the request action, and the expected follow-up without needing to call? Tap the call and WhatsApp links only when a harmless test is permitted, and submit one clearly marked test request only if it will not enter a real customer queue. Confirm that the named person receives it and that the automatic confirmation does not make a conflicting promise.",
           "Also test the main action with a keyboard on a desktop browser. The temporary information needs to be readable text, not colour alone, a timed pop-up, or words baked into an image. Record the date, final URL, and the person responsible for replies in the operating note. This small check is more useful than adding extra festive copy: it confirms that the customer path, the website statement, and the human handoff match before someone relies on them.",
         ],
       },
       {
         heading: "Remove the temporary rule only after normal capacity returns",
         paragraphs: [
-          "Set a review for the first working day when the business can truly handle new requests again. Check the enquiry inbox, contact route, booking availability, Google special hours, and the public PaperChai page together. Remove the cut-off wording or replace it with the current response expectation. If a backlog remains, keep the request route open only with a realistic response time; reopening a ‘same-day’ promise too early creates a second round of confusion.",
-          "The next PaperChai step is modest: agree one truthful cut-off and one follow-up date, place them near the existing enquiry action, and test the published route before sharing it. PaperChai helps a business present and maintain that customer-ready information on its own website. The owner still decides what can be delivered, updates external profiles, and responds to every request. That clear division makes a festive period easier for both the team and the people trying to reach it.",
+          "Set a review for the first working day when the business can truly handle new requests again. Check the enquiry inbox, contact route, booking availability, Google special hours, and the public Kritvani page together. Remove the cut-off wording or replace it with the current response expectation. If a backlog remains, keep the request route open only with a realistic response time; reopening a ‘same-day’ promise too early creates a second round of confusion.",
+          "The next Kritvani step is modest: agree one truthful cut-off and one follow-up date, place them near the existing enquiry action, and test the published route before sharing it. Kritvani helps a business present and maintain that customer-ready information on its own website. The owner still decides what can be delivered, updates external profiles, and responds to every request. That clear division makes a festive period easier for both the team and the people trying to reach it.",
         ],
       },
     ],
@@ -373,7 +373,7 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "Keep a small mobile maintenance habit",
         paragraphs: [
           "Once a month, open the key service, contact, and booking pages on an ordinary phone connection. Check that the first screen explains the offer, images do not cover or push controls, the main contact route responds, and a form can be completed with the keyboard. If Search Console has no Core Web Vitals data for a small site, do not manufacture traffic or panic. Keep the page lean, accurate, and usable, and use an individual live test when a specific page feels slow.",
-          "The next PaperChai step is to choose one mobile journey a customer relies on and make its public page dependable before adding another promotion or feature. PaperChai can help keep the service details and enquiry path clear while a maintainer handles a targeted performance repair. Good Core Web Vitals are worthwhile because they support a better visit, not because they are a shortcut to a promised position in Google or a substitute for replying helpfully when the enquiry arrives.",
+          "The next Kritvani step is to choose one mobile journey a customer relies on and make its public page dependable before adding another promotion or feature. Kritvani can help keep the service details and enquiry path clear while a maintainer handles a targeted performance repair. Good Core Web Vitals are worthwhile because they support a better visit, not because they are a shortcut to a promised position in Google or a substitute for replying helpfully when the enquiry arrives.",
         ],
       },
     ],
@@ -442,7 +442,7 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "A repeatable monthly habit for a small team",
         paragraphs: [
           "Once a month, spend fifteen calm minutes on the same routine: compare a stable date range, choose one public page, read its visible queries, review the result and page on mobile, make one customer-helpful improvement if warranted, and record it. If no page has enough data, that is useful information too. Focus on keeping the core service, location, contact details, and page links accurate rather than inventing a report-driven project.",
-          "The next PaperChai step is simple: select one page a customer can use today and review its public promise before changing anything. PaperChai can help you keep that page, its service details, and its enquiry route clear as the business evolves. Search Console is most valuable here as a prompt for careful maintenance, not as a verdict on the quality of the business or a shortcut to guaranteed demand.",
+          "The next Kritvani step is simple: select one page a customer can use today and review its public promise before changing anything. Kritvani can help you keep that page, its service details, and its enquiry route clear as the business evolves. Search Console is most valuable here as a prompt for careful maintenance, not as a verdict on the quality of the business or a shortcut to guaranteed demand.",
         ],
       },
     ],
@@ -468,7 +468,7 @@ export const blogRegistry: readonly BlogArticle[] = [
     ],
     relatedSlugs: [
       "local-business-schema-markup-website-india",
-      "paperchai-custom-domain-launch-checklist-local-business-india",
+      "kritvani-custom-domain-launch-checklist-local-business-india",
       "google-search-console-url-inspection-local-business-website-india",
     ],
     sections: [
@@ -511,7 +511,7 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "Keep the answer consistent after a rebrand or site move",
         paragraphs: [
           "Review this small identity set whenever the business launches a custom domain, changes its public name, or moves to a new website: canonical homepage, displayed business name, WebSite markup, favicon, contact route, and Google Business Profile website link. Test the old address if one exists and make sure it reaches the relevant new page. A customer following an old invoice, QR code, or search result should not land on an empty page or an unrelated service.",
-          "The next PaperChai step is modest: choose the one customer-recognised name, make it consistent on the homepage, and ask a maintainer to verify the site-name and favicon setup as part of the normal website release. Then allow Google time to process the update. A clear name and icon will not substitute for a useful service page or a prompt reply, but they remove a small, avoidable moment of doubt when a local customer is deciding whether the result belongs to the business they meant to contact.",
+          "The next Kritvani step is modest: choose the one customer-recognised name, make it consistent on the homepage, and ask a maintainer to verify the site-name and favicon setup as part of the normal website release. Then allow Google time to process the update. A clear name and icon will not substitute for a useful service page or a prompt reply, but they remove a small, avoidable moment of doubt when a local customer is deciding whether the result belongs to the business they meant to contact.",
         ],
       },
     ],
@@ -566,7 +566,7 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "Check the customer-facing route while you wait",
         paragraphs: [
           "A technical indexing check is also a good moment to test the page a customer sees. Open it on mobile data, read the first screen, and use the main call, enquiry, or booking route. Make sure the page does not depend on a hidden login, show a temporary closure message, or lead to a different service than the title promises. A salon’s bridal-booking page, for example, should say what the enquiry is for and what happens next; it should not be a thin copy of the general services page with one phrase changed.",
-          "Check the page’s own links too. A visitor and Google both need a normal, crawlable path to important pages. Link a new service page from a relevant menu, service overview, or related guide using natural wording. Keep the canonical public address consistent when sharing it on a Google Business Profile or a printed QR code. PaperChai can help maintain the customer-ready page and its public details, but the business still needs to confirm that the offered service, area, availability, and reply route are real.",
+          "Check the page’s own links too. A visitor and Google both need a normal, crawlable path to important pages. Link a new service page from a relevant menu, service overview, or related guide using natural wording. Keep the canonical public address consistent when sharing it on a Google Business Profile or a printed QR code. Kritvani can help maintain the customer-ready page and its public details, but the business still needs to confirm that the offered service, area, availability, and reply route are real.",
         ],
       },
       {
@@ -580,7 +580,7 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "A calm five-minute check for the owner",
         paragraphs: [
           "Before asking for help, collect five facts: the exact URL, the page’s customer purpose, the URL Inspection verdict, the live-test result, and the date the page was published or changed. Add whether the page is linked from the main site and whether it appears in the sitemap. This gives a developer enough context to investigate without being sent screenshots of an unrelated search result. It also prevents a harmless duplicate or retired page from becoming an urgent task.",
-          "The next PaperChai step is to publish one complete page for a service customers can actually request, link it from the rest of the site, and keep its public details current. Then inspect that one URL and respond to the specific evidence. A page being indexed is an important technical milestone, not proof of rankings or enquiries; the durable win is a clear public page that is useful when a local customer does find it.",
+          "The next Kritvani step is to publish one complete page for a service customers can actually request, link it from the rest of the site, and keep its public details current. Then inspect that one URL and respond to the specific evidence. A page being indexed is an important technical milestone, not proof of rankings or enquiries; the durable win is a clear public page that is useful when a local customer does find it.",
         ],
       },
     ],
@@ -649,7 +649,7 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "Review the notice whenever the contact route changes",
         paragraphs: [
           "Return to the notice when a new field, file upload, booking calendar, chat link, anti-spam service, assistant, or external provider is added. Also review it if the business starts using enquiries for a new purpose, such as an email update. Update the form and the wording together, then keep a short private note of the change date and owner. Do not leave an old statement saying that messages go only to the owner after a team or agency now receives them.",
-          "The next PaperChai step is small: review the public form, remove unnecessary fields, write one honest sentence about the enquiry purpose, and publish only after the person handling messages confirms it. PaperChai can help make the public website clear and easy to maintain; it does not replace legal advice or decide how a business should meet its data obligations. The useful outcome is more immediate: a potential customer knows what they are sharing, why they are sharing it, and how to begin a sensible conversation.",
+          "The next Kritvani step is small: review the public form, remove unnecessary fields, write one honest sentence about the enquiry purpose, and publish only after the person handling messages confirms it. Kritvani can help make the public website clear and easy to maintain; it does not replace legal advice or decide how a business should meet its data obligations. The useful outcome is more immediate: a potential customer knows what they are sharing, why they are sharing it, and how to begin a sensible conversation.",
         ],
       },
     ],
@@ -711,25 +711,25 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "Give feedback a human response path",
         paragraphs: [
           "Choose a contact method that the business genuinely monitors: an email address, phone number, WhatsApp route, or concise form. Say what a visitor can expect, such as ‘We aim to acknowledge accessibility feedback within two business days.’ Only publish a timeframe the business can meet. If the normal contact form may itself be the problem, include an alternative that does not depend on that form. Test every listed route from a phone before publishing the statement.",
-          "Decide who will receive and own the request. A freelance designer may handle it personally; a studio may assign one shared inbox and a backup. The reply should first help the customer complete the task, then capture a safe note about the problem for the next website review. Do not put message contents or personal information into analytics, public comments, or a marketing case study. PaperChai can help a business maintain its public website; the business still needs a person responsible for answering customers and acting on a reported barrier.",
+          "Decide who will receive and own the request. A freelance designer may handle it personally; a studio may assign one shared inbox and a backup. The reply should first help the customer complete the task, then capture a safe note about the problem for the next website review. Do not put message contents or personal information into analytics, public comments, or a marketing case study. Kritvani can help a business maintain its public website; the business still needs a person responsible for answering customers and acting on a reported barrier.",
         ],
       },
       {
         heading: "Review the page whenever the website journey changes",
         paragraphs: [
           "Revisit the statement after a new booking provider, redesign, video, downloadable document, language version, contact form, or map is added. Retest the changed customer path on a phone and with a keyboard, update any limitation or alternative, and change the review date. A quarterly reminder is enough for many small service sites; a business that changes its website frequently should review it more often. Remove a limitation once it has actually been resolved, rather than leaving a stale warning that confuses visitors.",
-          "The useful outcome is modest: a customer can discover the service, tell the business when an online route fails, and still reach a fair alternative. Begin with the pages that create an enquiry, booking, or payment question, then improve the next barrier you find. An honest accessibility statement will not repair the website by itself, and it should never substitute for testing or professional advice where required. It does make the business accountable for a clear human response while PaperChai helps keep the public information accurate and easy to update.",
+          "The useful outcome is modest: a customer can discover the service, tell the business when an online route fails, and still reach a fair alternative. Begin with the pages that create an enquiry, booking, or payment question, then improve the next barrier you find. An honest accessibility statement will not repair the website by itself, and it should never substitute for testing or professional advice where required. It does make the business accountable for a clear human response while Kritvani helps keep the public information accurate and easy to update.",
         ],
       },
     ],
   },
   {
-    slug: "paperchai-website-qr-code-workflow-local-service-india",
+    slug: "kritvani-website-qr-code-workflow-local-service-india",
     title:
-      "PaperChai workflow: create a website QR code for local service referrals",
+      "Kritvani workflow: create a website QR code for local service referrals",
     description:
-      "A practical PaperChai workflow for Indian local businesses to create, test, and maintain a QR code that sends referrals to a clear website page.",
-    category: "PaperChai workflow",
+      "A practical Kritvani workflow for Indian local businesses to create, test, and maintain a QR code that sends referrals to a clear website page.",
+    category: "Kritvani workflow",
     publishedAt: "2026-10-30",
     updatedAt: "2026-10-30",
     readingMinutes: 6,
@@ -740,13 +740,13 @@ export const blogRegistry: readonly BlogArticle[] = [
     keywords: [
       "website QR code for local service business India",
       "create QR code for small business website India",
-      "PaperChai website sharing workflow",
+      "Kritvani website sharing workflow",
       "QR code on visiting card service professional India",
     ],
     promotionCaption:
-      "A QR code should lead to a customer-ready website, not a dead preview or a confusing link list. Use this PaperChai workflow to publish one clear page, create a code for the final URL, and test it before it reaches a visiting card, counter, or referral partner.",
+      "A QR code should lead to a customer-ready website, not a dead preview or a confusing link list. Use this Kritvani workflow to publish one clear page, create a code for the final URL, and test it before it reaches a visiting card, counter, or referral partner.",
     relatedSlugs: [
-      "paperchai-custom-domain-launch-checklist-local-business-india",
+      "kritvani-custom-domain-launch-checklist-local-business-india",
       "mobile-contact-page-local-service-business-india",
       "google-review-link-qr-code-local-business-website-india",
     ],
@@ -759,17 +759,17 @@ export const blogRegistry: readonly BlogArticle[] = [
         ],
       },
       {
-        heading: "Prepare the PaperChai page before generating anything",
+        heading: "Prepare the Kritvani page before generating anything",
         paragraphs: [
-          "Sign in to PaperChai and open the live site you intend to share. Review the first screen on a phone: could a referred customer tell within a few seconds who the business is, what it offers, and what happens after they tap the main action? Check the business name, service description, coverage or appointment model, phone or WhatsApp route, and any price wording against the owner’s current operating facts. A referral may arrive weeks after a card was handed out, so do not build the code around a seasonal offer or a promise that will disappear quickly.",
-          "Publish only when the page is a real customer destination. PaperChai can give a business one owned place to update its public information and republish the same site; it does not decide who answers an enquiry or keep external print materials current. If the business uses a custom domain, prefer the canonical public address once it is connected and tested. If it is still using its PaperChai address, use the stable live URL—not a dashboard link, editor link, or draft preview that asks a visitor to sign in.",
+          "Sign in to Kritvani and open the live site you intend to share. Review the first screen on a phone: could a referred customer tell within a few seconds who the business is, what it offers, and what happens after they tap the main action? Check the business name, service description, coverage or appointment model, phone or WhatsApp route, and any price wording against the owner’s current operating facts. A referral may arrive weeks after a card was handed out, so do not build the code around a seasonal offer or a promise that will disappear quickly.",
+          "Publish only when the page is a real customer destination. Kritvani can give a business one owned place to update its public information and republish the same site; it does not decide who answers an enquiry or keep external print materials current. If the business uses a custom domain, prefer the canonical public address once it is connected and tested. If it is still using its Kritvani address, use the stable live URL—not a dashboard link, editor link, or draft preview that asks a visitor to sign in.",
         ],
       },
       {
         heading: "Generate a code for the final public URL",
         paragraphs: [
           "Copy the exact public URL from a private browser window, then use a QR-code tool the business can trust and access later. Keep a small private record of the destination URL, the tool or account used, and where the code will appear. Avoid inventing a shorter URL merely to make the printed code look clever. A short link controlled by a former agency, a personal account, or an unknown free service can become another point of failure when the business needs to update a page.",
-          "Choose a plain, high-contrast code with enough clear space around it for a camera to recognise it. Do not place it over a busy photograph, shrink it until its squares blur, or replace the centre with a logo unless the final printed version has been tested. The goal is not decoration. It is a dependable path from an offline recommendation to the one page the business owns. Keep the destination unchanged after printing whenever possible; edit the website content through PaperChai instead of replacing a working URL for every small update.",
+          "Choose a plain, high-contrast code with enough clear space around it for a camera to recognise it. Do not place it over a busy photograph, shrink it until its squares blur, or replace the centre with a logo unless the final printed version has been tested. The goal is not decoration. It is a dependable path from an offline recommendation to the one page the business owns. Keep the destination unchanged after printing whenever possible; edit the website content through Kritvani instead of replacing a working URL for every small update.",
         ],
       },
       {
@@ -790,7 +790,7 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "Review the code whenever the customer route changes",
         paragraphs: [
           "Put a brief quarterly check on the owner’s calendar. Scan one printed copy, open the linked page on mobile data, verify the business name and service information, and try the main enquiry route. Repeat the check after a domain change, business rename, phone-number change, move, temporary closure, or change in who responds to leads. Replace damaged signage and retire old cards when their message is no longer true; do not rely on a QR destination to silently correct a printed promise that has become misleading.",
-          "The useful PaperChai routine is small: maintain one customer-ready page, use its stable public address, label the code honestly, and test the path before and after distribution. PaperChai helps the business publish and improve that owned page, while the business remains responsible for the real service, printed materials, and timely human response. A QR code will not create demand by itself, but it can make a warm local referral easier to act on when the next step is accurate and simple.",
+          "The useful Kritvani routine is small: maintain one customer-ready page, use its stable public address, label the code honestly, and test the path before and after distribution. Kritvani helps the business publish and improve that owned page, while the business remains responsible for the real service, printed materials, and timely human response. A QR code will not create demand by itself, but it can make a warm local referral easier to act on when the next step is accurate and simple.",
         ],
       },
     ],
@@ -845,7 +845,7 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "If you add human verification, complete both halves of the setup",
         paragraphs: [
           "A challenge service can be appropriate when automated submissions continue after the basic controls are in place. Choose one that works on a phone, can be reached with a keyboard, and has a clear privacy review path for the business. Test it with the actual contact flow, including slow connections and an expired challenge. Give a visitor an understandable retry option and a monitored alternative contact route if the challenge cannot load. Do not make WhatsApp the only fallback if the business does not reliably answer it.",
-          "The visible widget is only one half of a protection. The website must send its token to the server and validate it before accepting the enquiry; a browser-only check can be bypassed by someone posting directly to the endpoint. Keep any verification secret in server-side configuration, never in the page, a client bundle, a spreadsheet, or an email template. Cloudflare’s current Turnstile documentation makes the same point: its token must be validated through the server-side Siteverify flow. PaperChai can help a business review a website journey, but a provider integration should be implemented and tested through the platform’s normal security controls.",
+          "The visible widget is only one half of a protection. The website must send its token to the server and validate it before accepting the enquiry; a browser-only check can be bypassed by someone posting directly to the endpoint. Keep any verification secret in server-side configuration, never in the page, a client bundle, a spreadsheet, or an email template. Cloudflare’s current Turnstile documentation makes the same point: its token must be validated through the server-side Siteverify flow. Kritvani can help a business review a website journey, but a provider integration should be implemented and tested through the platform’s normal security controls.",
         ],
       },
       {
@@ -859,7 +859,7 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "Review the form after changes, not just the inbox",
         paragraphs: [
           "After changing a form, test the full path on a phone and desktop browser. Complete it with a harmless labelled test enquiry only if the normal process permits it, then check the confirmation and delivery route. Use the Tab key to reach every field, validation message, challenge, and submit button. A customer should be able to correct an error without losing a long message. Verify that call and WhatsApp alternatives still make sense for someone who cannot use the form.",
-          "Review the small spam log and genuine-enquiry count after a reasonable period. Keep a safeguard only when it reduces unwanted traffic without creating a new obstacle for real people. PaperChai websites should make it easy for a customer to understand the offer and get a response; they should not promise that any single anti-spam tool will stop all abuse. The useful outcome is modest and measurable: fewer irrelevant messages, a working route for genuine enquiries, and an owner who can notice when either side changes.",
+          "Review the small spam log and genuine-enquiry count after a reasonable period. Keep a safeguard only when it reduces unwanted traffic without creating a new obstacle for real people. Kritvani websites should make it easy for a customer to understand the offer and get a response; they should not promise that any single anti-spam tool will stop all abuse. The useful outcome is modest and measurable: fewer irrelevant messages, a working route for genuine enquiries, and an owner who can notice when either side changes.",
         ],
       },
     ],
@@ -928,7 +928,7 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "Build clarity first, then expand deliberately",
         paragraphs: [
           "Before publishing another language version, use this short check: name the customer task; write the source facts; have a fluent reviewer check meaning and tone; make every contact route and confirmation rule match; add a visible way to switch pages; and assign one person to update both copies. Seek a professional translator or a subject expert when the page covers health, legal, financial, safety, or regulated claims. A confident-looking machine translation is not evidence that a high-stakes promise is correct.",
-          "PaperChai can help you publish a clear owned website and review its customer journey before you share the link. Begin with the language version you can genuinely maintain, then test it on the phone your customers use. When there is a proven need and an accountable editor, expand from the same verified source facts rather than duplicating a page in a hurry. A smaller, accurate site gives a local customer a better start than a multilingual site that leaves them unsure whom to contact or what will happen next.",
+          "Kritvani can help you publish a clear owned website and review its customer journey before you share the link. Begin with the language version you can genuinely maintain, then test it on the phone your customers use. When there is a proven need and an accountable editor, expand from the same verified source facts rather than duplicating a page in a hurry. A smaller, accurate site gives a local customer a better start than a multilingual site that leaves them unsure whom to contact or what will happen next.",
         ],
       },
     ],
@@ -985,7 +985,7 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "Test the information as an unfamiliar visitor would",
         paragraphs: [
           "After saving an attribute and updating the website, open the public Business Profile and website in a private browser on a phone. Check that the location, hours, directions, and access note do not contradict one another. Follow the main contact route and make sure it reaches the person who can answer an arrival question. On a desktop browser, use the Tab key to reach the address, directions, and contact controls; important access information should not be visible only after a hover or inside an unlabeled icon. Use a harmless labelled test enquiry only when the normal process permits it.",
-          "Review the details after any move, building work, change in entrance, new floor, new parking arrangement, or change to appointment rules. PaperChai can help a business keep its owned website's visit and contact information easy to update; it does not inspect premises, decide which Google attribute applies, or guarantee how Google displays an edit. The sustainable routine is straightforward: verify the physical facts, select only truthful profile attributes, explain the customer route on the website, and revisit both whenever the location changes. That gives a potential visitor useful information before an unnecessary trip.",
+          "Review the details after any move, building work, change in entrance, new floor, new parking arrangement, or change to appointment rules. Kritvani can help a business keep its owned website's visit and contact information easy to update; it does not inspect premises, decide which Google attribute applies, or guarantee how Google displays an edit. The sustainable routine is straightforward: verify the physical facts, select only truthful profile attributes, explain the customer route on the website, and revisit both whenever the location changes. That gives a potential visitor useful information before an unnecessary trip.",
         ],
       },
     ],
@@ -1043,14 +1043,14 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "Turn repeated feedback into a clearer website route",
         paragraphs: [
           "One review can be an individual experience; a pattern is a prompt to inspect the customer journey. Group the internal notes by a small set of practical themes: finding the right service, price expectations, location coverage, arrival windows, booking confirmation, contact response, or cancellation rules. Look for the point at which a visitor could reasonably have been confused. Do not turn a single harsh comment into a public policy or add a long defensive FAQ. Change only the piece of information the business can maintain truthfully.",
-          "For example, if people repeatedly ask whether a WhatsApp message confirms a visit, label the action ‘Ask about availability’ and state the normal confirmation process beside it. If customers expected a salon to accept walk-ins during appointment-only hours, state that next to the phone and booking routes. If a freelancer receives price complaints because every enquiry starts with a blank form, add a simple starting-price or quote-process explanation only when it reflects the real service. Publish the change through the normal PaperChai controls and keep the same live URL, rather than creating a temporary page that customers will not find later.",
+          "For example, if people repeatedly ask whether a WhatsApp message confirms a visit, label the action ‘Ask about availability’ and state the normal confirmation process beside it. If customers expected a salon to accept walk-ins during appointment-only hours, state that next to the phone and booking routes. If a freelancer receives price complaints because every enquiry starts with a blank form, add a simple starting-price or quote-process explanation only when it reflects the real service. Publish the change through the normal Kritvani controls and keep the same live URL, rather than creating a temporary page that customers will not find later.",
         ],
       },
       {
         heading: "Test the public path after improving it",
         paragraphs: [
           "After a website update, open the business profile and site in a private browser on a phone. Read a recent reply, follow the website link, and check that the page gives the same practical answer: what the business offers, where it serves, whether a request is pending or confirmed, and how a person can get help. Test the main call, WhatsApp, or enquiry action with a harmless labelled check only if the normal process permits it. Also reach the action with a keyboard on desktop. Do not use a real customer request as a test.",
-          "PaperChai can help a business keep its owned website contact, booking, and service information clear; it does not write public replies, verify a Google profile, remove reviews, or decide individual disputes. The durable habit is modest: check reviews on a schedule, reply only with safe and useful public information, follow up through a monitored private route, and improve the website when the same question keeps appearing. That gives prospective customers a more useful signal than a scripted thank-you or a public argument ever could.",
+          "Kritvani can help a business keep its owned website contact, booking, and service information clear; it does not write public replies, verify a Google profile, remove reviews, or decide individual disputes. The durable habit is modest: check reviews on a schedule, reply only with safe and useful public information, follow up through a monitored private route, and improve the website when the same question keeps appearing. That gives prospective customers a more useful signal than a scripted thank-you or a public argument ever could.",
         ],
       },
     ],
@@ -1114,17 +1114,17 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "Review coverage when the business changes, not only when leads slow down",
         paragraphs: [
           "Service areas should change with real operations: a new technician, a move, a lost vehicle, different opening hours, or a decision to stop visiting a distant locality. Review the Google profile and website together after any of those changes, then revisit the public view. Keep hours, service names, booking links, and the enquiry message aligned as well. A business can be visible in a wider area and still disappoint people if the public route is silent about travel time, eligibility, or the fact that appointments need confirmation.",
-          "PaperChai can help an owner keep the website’s service statement and contact action clear on the same stable site URL. It does not change Google Business Profile settings, decide which places a business can serve, or answer leads on the owner’s behalf. The useful routine is modest: set accurate named areas in Google, explain the real coverage on the website, test one enquiry route, and revise both whenever operations change. That gives local customers information they can act on without exposing a private address or overpromising availability.",
+          "Kritvani can help an owner keep the website’s service statement and contact action clear on the same stable site URL. It does not change Google Business Profile settings, decide which places a business can serve, or answer leads on the owner’s behalf. The useful routine is modest: set accurate named areas in Google, explain the real coverage on the website, test one enquiry route, and revise both whenever operations change. That gives local customers information they can act on without exposing a private address or overpromising availability.",
         ],
       },
     ],
   },
   {
-    slug: "paperchai-diwali-website-refresh-workflow-india",
-    title: "PaperChai workflow: refresh your website before Diwali",
+    slug: "kritvani-diwali-website-refresh-workflow-india",
+    title: "Kritvani workflow: refresh your website before Diwali",
     description:
-      "A practical PaperChai workflow for Indian service businesses to refresh customer details, publish an honest Diwali update, and check every enquiry route.",
-    category: "PaperChai workflow",
+      "A practical Kritvani workflow for Indian service businesses to refresh customer details, publish an honest Diwali update, and check every enquiry route.",
+    category: "Kritvani workflow",
     publishedAt: "2026-10-23",
     updatedAt: "2026-10-23",
     readingMinutes: 6,
@@ -1134,12 +1134,12 @@ export const blogRegistry: readonly BlogArticle[] = [
       "A lit candle and small festive decorations arranged on a table",
     keywords: [
       "update local business website before Diwali India",
-      "PaperChai Diwali website refresh workflow",
+      "Kritvani Diwali website refresh workflow",
       "Diwali special hours local service website India",
       "prepare WhatsApp enquiries for Diwali business closure",
     ],
     promotionCaption:
-      "Diwali is on 8 November in 2026. Before the rush, give customers one honest answer about your hours, availability, and best enquiry route. This PaperChai workflow helps you review, publish, and test the details they will actually use.",
+      "Diwali is on 8 November in 2026. Before the rush, give customers one honest answer about your hours, availability, and best enquiry route. This Kritvani workflow helps you review, publish, and test the details they will actually use.",
     sections: [
       {
         heading: "Treat the Diwali refresh as a customer-route check",
@@ -1156,23 +1156,23 @@ export const blogRegistry: readonly BlogArticle[] = [
         ],
       },
       {
-        heading: "Review the PaperChai site before you publish",
+        heading: "Review the Kritvani site before you publish",
         paragraphs: [
-          "Open the existing site in PaperChai and review the public facts a customer will see: business name, phone, WhatsApp number, location or service area, opening-hours text, services, and the main action. PaperChai's edit flow lets an owner update details and republish to the same live URL, so a well-maintained link can remain the reference shared from a Google Business Profile, QR code, or customer message. Change only the facts that are true for this period; a seasonal refresh is not a reason to rewrite the whole site.",
-          "If the live site was originally built from business information, compare the imported details with the operating note rather than assuming they are still current. A field-service business may need to remove a service that has no staff coverage. A consultant may need to change an open-ended ‘Book now’ instruction to an honest request-and-confirmation route. PaperChai can present the business's chosen information, but it cannot decide staffing, approve an appointment, or monitor an unattended contact channel. Keep those responsibilities with a named person before publishing.",
+          "Open the existing site in Kritvani and review the public facts a customer will see: business name, phone, WhatsApp number, location or service area, opening-hours text, services, and the main action. Kritvani's edit flow lets an owner update details and republish to the same live URL, so a well-maintained link can remain the reference shared from a Google Business Profile, QR code, or customer message. Change only the facts that are true for this period; a seasonal refresh is not a reason to rewrite the whole site.",
+          "If the live site was originally built from business information, compare the imported details with the operating note rather than assuming they are still current. A field-service business may need to remove a service that has no staff coverage. A consultant may need to change an open-ended ‘Book now’ instruction to an honest request-and-confirmation route. Kritvani can present the business's chosen information, but it cannot decide staffing, approve an appointment, or monitor an unattended contact channel. Keep those responsibilities with a named person before publishing.",
         ],
       },
       {
         heading: "Update Google and external booking tools separately",
         paragraphs: [
-          "The PaperChai website is an owned customer destination; it does not update Google Business Profile hours, an external calendar, or a WhatsApp Business profile for you. When public opening hours change, use Google Business Profile's Special hours controls for the applicable dates. Google's current guidance says special hours are appropriate for temporary changes and recommends confirming official-holiday hours even when they stay the same. Follow the labels in the live account, which can differ by profile and category.",
+          "The Kritvani website is an owned customer destination; it does not update Google Business Profile hours, an external calendar, or a WhatsApp Business profile for you. When public opening hours change, use Google Business Profile's Special hours controls for the applicable dates. Google's current guidance says special hours are appropriate for temporary changes and recommends confirming official-holiday hours even when they stay the same. Follow the labels in the live account, which can differ by profile and category.",
           "Then check any external scheduler or marketplace independently. A customer should not see a closed notice on the website, an open status on Maps, and a bookable time elsewhere with no explanation. If the business accepts requests but confirms them later, use that exact distinction everywhere. Avoid making a duplicate Google profile, changing the public business name for a festival, or directing customers to an unmonitored personal number as a quick workaround. Consistency is more valuable than adding another channel.",
         ],
       },
       {
         heading: "Run a five-minute customer test after republishing",
         paragraphs: [
-          "Use a private browser or a phone that is not signed in as the owner. Open the live PaperChai URL from the Google profile if it is linked there, then check the homepage, affected service information, call link, WhatsApp link, and booking or enquiry action. Read the result as someone who does not know the business: can they tell whether the service is available, what happens after they enquire, and when they should expect a reply? Test keyboard access to the primary action on a desktop browser as well.",
+          "Use a private browser or a phone that is not signed in as the owner. Open the live Kritvani URL from the Google profile if it is linked there, then check the homepage, affected service information, call link, WhatsApp link, and booking or enquiry action. Read the result as someone who does not know the business: can they tell whether the service is available, what happens after they enquire, and when they should expect a reply? Test keyboard access to the primary action on a desktop browser as well.",
           "If the usual process permits it, send one clearly labelled harmless test enquiry and confirm the responsible person receives it. Do not use a real customer's booking as a test and do not put customer details into a shared planning note. Record the date, route, and outcome privately. The check is complete only when the public page and the human response agree. A correct page with a silent WhatsApp inbox still leaves the customer stranded.",
         ],
       },
@@ -1180,7 +1180,7 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "Set a post-festival review now",
         paragraphs: [
           "Put one reminder in the operating note for the first working day after the change. Reopen the site, remove or revise only the seasonal wording, and test the contact route again. Check Google special hours and any external calendar separately. This prevents an old Diwali closure notice from becoming a January problem, and it gives the business a repeatable pattern for future local holidays, staff training, or a planned move.",
-          "The next useful PaperChai step is simple: sign in, review the existing site's public details, update the honest customer message, and republish only when the person answering enquiries is ready. Use the same live URL in the customer channels the business maintains. PaperChai helps make the owned website easy to review and share; the business owner remains responsible for the real availability, Google settings, and customer response. A small, tested refresh is enough to make a busy period less confusing.",
+          "The next useful Kritvani step is simple: sign in, review the existing site's public details, update the honest customer message, and republish only when the person answering enquiries is ready. Use the same live URL in the customer channels the business maintains. Kritvani helps make the owned website easy to review and share; the business owner remains responsible for the real availability, Google settings, and customer response. A small, tested refresh is enough to make a busy period less confusing.",
         ],
       },
     ],
@@ -1244,7 +1244,7 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "Verify the public profile and prevent the same problem returning",
         paragraphs: [
           "After the provider has had time to act, repeat the original customer check in a signed-out browser and on a phone. Search the business, open every visible booking option, and confirm that each destination matches the service, location, and action the label promises. Test the website link, too. If the usual workflow permits it, submit a harmless test request or use a clearly labelled internal test path, then remove test data through the normal process. Check keyboard access and mobile readability before deciding the journey is complete.",
-          "Add this to a modest monthly public-information check: Google Business Profile website link, booking destinations, phone, hours, service list, and the website’s primary contact action. Review it after changing a booking provider, redesigning the site, pausing a service, moving location, or giving a new person responsibility for enquiries. PaperChai can help keep the owned website route clear, but the business must manage its Google and provider accounts. The practical goal is not to make every possible link disappear; it is to ensure each live route gives a ready customer an accurate next step.",
+          "Add this to a modest monthly public-information check: Google Business Profile website link, booking destinations, phone, hours, service list, and the website’s primary contact action. Review it after changing a booking provider, redesigning the site, pausing a service, moving location, or giving a new person responsibility for enquiries. Kritvani can help keep the owned website route clear, but the business must manage its Google and provider accounts. The practical goal is not to make every possible link disappear; it is to ensure each live route gives a ready customer an accurate next step.",
         ],
       },
     ],
@@ -1308,7 +1308,7 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "Review the route monthly instead of chasing more buttons",
         paragraphs: [
           "Once the link is live, review it after real use. Are visitors asking the same question because the service page is vague? Are messages arriving after hours with no acknowledgement? Are customers trying to make a booking when the business only intended to offer a consultation? Improve the page copy, action label, and response process before adding popups, automation, or more channels. The point is a reliable route for a real customer, not the largest possible message count.",
-          "Do one light monthly test: open the link on a phone, verify the active business account, review the response-hours wording, and compare the website, Google Business Profile, and any printed QR code. Remove old links when staff or numbers change. PaperChai can help a business keep its website contact journey clear, but the business must decide who answers and what it can promise. A good WhatsApp button is modest: it reaches the right person, explains what happens next, and does not expose customers to unnecessary pressure or data requests.",
+          "Do one light monthly test: open the link on a phone, verify the active business account, review the response-hours wording, and compare the website, Google Business Profile, and any printed QR code. Remove old links when staff or numbers change. Kritvani can help a business keep its website contact journey clear, but the business must decide who answers and what it can promise. A good WhatsApp button is modest: it reaches the right person, explains what happens next, and does not expose customers to unnecessary pressure or data requests.",
         ],
       },
     ],
@@ -1372,7 +1372,7 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "Secure the handover, then test what a customer sees",
         paragraphs: [
           "Once access is granted, open People and access and list the current owners, managers, and pending invitations. Give each real person their own Google account; Google explicitly says this avoids password sharing. The business owner should understand who can change the profile and why. Remove access only after confirming the new owner can sign in and the former person no longer needs it. If roles must change, use the profile’s own controls and respect any timing or eligibility restrictions Google shows instead of assuming that a transfer is immediate.",
-          "Finally, compare the public profile with the website one field at a time: name, primary phone, website, hours, service area or address, services, and booking route. Open the website link from Maps on a phone, test a harmless enquiry when the usual process permits it, and verify keyboard users can reach the contact action. Record the date, changed field, and responsible owner in the small private note. PaperChai can help a business maintain its website, but it cannot request or accept Google profile ownership on the business’s behalf. The useful outcome is modest: one legitimate owner, one accurate public customer journey, and no duplicate listing created out of panic.",
+          "Finally, compare the public profile with the website one field at a time: name, primary phone, website, hours, service area or address, services, and booking route. Open the website link from Maps on a phone, test a harmless enquiry when the usual process permits it, and verify keyboard users can reach the contact action. Record the date, changed field, and responsible owner in the small private note. Kritvani can help a business maintain its website, but it cannot request or accept Google profile ownership on the business’s behalf. The useful outcome is modest: one legitimate owner, one accurate public customer journey, and no duplicate listing created out of panic.",
         ],
       },
     ],
@@ -1436,7 +1436,7 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "Verify the result and build a light monthly habit",
         paragraphs: [
           "After responding, check the profile again from a signed-out or private view and compare it with the website on a phone. Open the main website link, call or enquiry action, directions route where relevant, and booking page. Test only a harmless enquiry when the normal process permits it, then remove test data through the usual process. Check keyboard access as well: a customer should be able to understand any change notice and reach the contact option without relying on a popup or an image.",
-          "Add a short monthly check for the owner: review Business Profile notifications, then compare the public name, hours, contact route, service area or address, and website link with the business’s current operating facts. Record only material changes and their owner. PaperChai can help keep the business website clear and maintainable, but it cannot accept Google updates or decide whether a suggested edit is true. The useful outcome is simple: customers see information the business can stand behind and reach a person or action that actually works.",
+          "Add a short monthly check for the owner: review Business Profile notifications, then compare the public name, hours, contact route, service area or address, and website link with the business’s current operating facts. Record only material changes and their owner. Kritvani can help keep the business website clear and maintainable, but it cannot accept Google updates or decide whether a suggested edit is true. The useful outcome is simple: customers see information the business can stand behind and reach a person or action that actually works.",
         ],
       },
     ],
@@ -1478,7 +1478,7 @@ export const blogRegistry: readonly BlogArticle[] = [
       {
         heading: "Update the website without creating a dead end",
         paragraphs: [
-          "Remove the service from the normal PaperChai site controls wherever it is offered, and edit related copy so remaining services are described honestly. If the old page has a close substitute, a brief factual note can direct a visitor there: ‘We no longer offer X; ask about Y if it fits your need.’ Do not pretend that a different service is equivalent when it is not. If there is no relevant alternative, make the contact route suitable for a general question or remove the old call to action rather than sending a person to a blank page.",
+          "Remove the service from the normal Kritvani site controls wherever it is offered, and edit related copy so remaining services are described honestly. If the old page has a close substitute, a brief factual note can direct a visitor there: ‘We no longer offer X; ask about Y if it fits your need.’ Do not pretend that a different service is equivalent when it is not. If there is no relevant alternative, make the contact route suitable for a general question or remove the old call to action rather than sending a person to a blank page.",
           "A former service page can still receive links from a customer’s bookmark, a social post, or Google. Keep the customer outcome in mind when choosing how the site handles it. A short maintained explanation and a relevant next step are often kinder than a generic error page. Do not leave an old price, ‘Book now’ label, or payment instruction beside the notice. For a paid appointment or project, stop new payment requests first, then verify that the booking, form, and confirmation journey no longer imply that the discontinued work can be reserved.",
         ],
       },
@@ -1500,7 +1500,7 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "Test the new customer journey and review it once",
         paragraphs: [
           "After publishing, use a private browser and a phone to open the homepage, service menu, old saved link if available, Google profile website link, booking action, contact form, call link, and WhatsApp prompt. Look for the retired service by its ordinary customer name, not just the exact internal label. Confirm that a harmless test enquiry, where the usual workflow permits it, reaches the right person and receives a truthful response. Keyboard users should be able to reach and understand the replacement action without a hidden popup or an unexplained disabled button.",
-          "Review related enquiries after a few weeks. If people keep asking for the retired service, identify the source: an old social post, a printed QR code, unclear wording, or a real gap in the remaining offer. Correct the controlled route rather than adding keyword-heavy paragraphs about work the business does not do. PaperChai can help a local business keep its public site current, but it cannot decide the operating choice or update third-party profiles automatically. The durable result is modest and useful: customers see today’s services, existing commitments receive proper care, and no public route invites a request the business cannot fulfil.",
+          "Review related enquiries after a few weeks. If people keep asking for the retired service, identify the source: an old social post, a printed QR code, unclear wording, or a real gap in the remaining offer. Correct the controlled route rather than adding keyword-heavy paragraphs about work the business does not do. Kritvani can help a local business keep its public site current, but it cannot decide the operating choice or update third-party profiles automatically. The durable result is modest and useful: customers see today’s services, existing commitments receive proper care, and no public route invites a request the business cannot fulfil.",
         ],
       },
     ],
@@ -1570,11 +1570,11 @@ export const blogRegistry: readonly BlogArticle[] = [
     ],
   },
   {
-    slug: "paperchai-manage-website-appointment-requests-india",
+    slug: "kritvani-manage-website-appointment-requests-india",
     title: "Manage website appointment requests with a daily workflow",
     description:
-      "A PaperChai workflow for Indian service businesses: route booking requests, confirm the right details, update status, and review the handoff every day.",
-    category: "PaperChai workflow",
+      "A Kritvani workflow for Indian service businesses: route booking requests, confirm the right details, update status, and review the handoff every day.",
+    category: "Kritvani workflow",
     publishedAt: "2026-10-16",
     updatedAt: "2026-10-16",
     readingMinutes: 6,
@@ -1584,12 +1584,12 @@ export const blogRegistry: readonly BlogArticle[] = [
       "An open laptop, notebook, and coffee cup on a wooden work desk",
     keywords: [
       "manage appointment requests from small business website India",
-      "PaperChai booking request workflow",
+      "Kritvani booking request workflow",
       "track website appointment enquiries local service business",
       "follow up online booking requests India",
     ],
     promotionCaption:
-      "A booking form is only useful when every request reaches a real person and gets a clear next step. This PaperChai workflow covers the daily routine: route the notification, confirm availability, update the request status, and review what needs a follow-up.",
+      "A booking form is only useful when every request reaches a real person and gets a clear next step. This Kritvani workflow covers the daily routine: route the notification, confirm availability, update the request status, and review what needs a follow-up.",
     sections: [
       {
         heading: "Treat every request as a conversation waiting for an owner",
@@ -1599,24 +1599,24 @@ export const blogRegistry: readonly BlogArticle[] = [
         ],
       },
       {
-        heading: "Set up the PaperChai handoff before sharing the booking link",
+        heading: "Set up the Kritvani handoff before sharing the booking link",
         paragraphs: [
-          "In the relevant PaperChai site dashboard, open Online booking and first decide whether bookings are enabled. Set the notification email to an inbox that a responsible person actively monitors, not an account that belonged to a former staff member or outside helper. Choose a short button label that matches the promise, such as ‘Request an appointment’ when a person still confirms availability. If customers can select a service, use clear current service names or reuse the services already listed on the site rather than creating a second, inconsistent menu.",
-          "PaperChai can also offer built-in scheduling, an optional external calendar link, and a WhatsApp number on the booking form. Pick the route the business can actually support. Built-in slots help when the weekly hours and blackout dates are current; an external calendar may fit an existing process; WhatsApp can be a useful fallback when it reaches a monitored business account. Do not enable several routes just to look responsive. If two channels give different answers, the customer has to solve the business’s internal process.",
+          "In the relevant Kritvani site dashboard, open Online booking and first decide whether bookings are enabled. Set the notification email to an inbox that a responsible person actively monitors, not an account that belonged to a former staff member or outside helper. Choose a short button label that matches the promise, such as ‘Request an appointment’ when a person still confirms availability. If customers can select a service, use clear current service names or reuse the services already listed on the site rather than creating a second, inconsistent menu.",
+          "Kritvani can also offer built-in scheduling, an optional external calendar link, and a WhatsApp number on the booking form. Pick the route the business can actually support. Built-in slots help when the weekly hours and blackout dates are current; an external calendar may fit an existing process; WhatsApp can be a useful fallback when it reaches a monitored business account. Do not enable several routes just to look responsive. If two channels give different answers, the customer has to solve the business’s internal process.",
         ],
       },
       {
         heading: "Use a small daily triage sequence",
         paragraphs: [
           "At the start and end of the working day, open Recent requests in the site dashboard and work from oldest unanswered request first. Read the visitor’s preferred contact details, selected service, requested slot when present, and any notes. Check the live booking settings before replying if the request looks surprising: a stale service title, incorrect weekly window, or missed blackout date is a site problem to fix, not a reason to blame the visitor. Keep customer messages and any sensitive context in the normal business system rather than copying them into a public note or a social post.",
-          "Then give the customer a real outcome. Confirm a suitable time, ask one focused question needed to offer one, explain that the proposed time is unavailable and offer an alternative, or politely say the work is outside scope. Send the response through the contact route the business normally uses and update the request status in PaperChai so another team member does not repeat or miss the follow-up. A status is a handoff signal, not proof that a customer has read a message, so use it honestly.",
+          "Then give the customer a real outcome. Confirm a suitable time, ask one focused question needed to offer one, explain that the proposed time is unavailable and offer an alternative, or politely say the work is outside scope. Send the response through the contact route the business normally uses and update the request status in Kritvani so another team member does not repeat or miss the follow-up. A status is a handoff signal, not proof that a customer has read a message, so use it honestly.",
         ],
       },
       {
         heading: "Make availability and public links agree",
         paragraphs: [
           "When native scheduling is on, test a normal slot and a date the business cannot take appointments before promoting the link. Weekly hours, slot length, and blackout dates should describe the appointment window—not merely the hours a phone might be answered. If the business uses an external calendar, open it as a visitor would and check that it still loads, identifies the business, and does not reveal another customer’s details. A calendar link that fails or opens the wrong account is worse than a simple request form with a timely reply.",
-          "If the business places the booking link on its Google Business Profile, Google’s current guidance says that a business can add booking links where eligible and that Google reviews business links. Keep the PaperChai page accessible without a special login, and do not promise a particular Google approval time or position in Maps. The owned website comes first: test its button, confirmation, notification email, and WhatsApp fallback on a phone and in a private browser before sending more visitors there.",
+          "If the business places the booking link on its Google Business Profile, Google’s current guidance says that a business can add booking links where eligible and that Google reviews business links. Keep the Kritvani page accessible without a special login, and do not promise a particular Google approval time or position in Maps. The owned website comes first: test its button, confirmation, notification email, and WhatsApp fallback on a phone and in a private browser before sending more visitors there.",
         ],
       },
       {
@@ -1629,8 +1629,8 @@ export const blogRegistry: readonly BlogArticle[] = [
       {
         heading: "Next step: make the booking promise match the real workflow",
         paragraphs: [
-          "Open your PaperChai site dashboard, review Online booking, and send one harmless test request through the live site if the normal process permits it. Confirm that the right inbox receives it, the customer-facing message is truthful about whether the request is pending or confirmed, and the request can be given a clear status after a real response. Also test the flow with a keyboard and on a phone, where many local customers will meet it first.",
-          "PaperChai gives a local business one place to maintain the public booking route and review incoming requests; it does not decide availability, send a human reply, or guarantee a Google listing’s review outcome. Start a new PaperChai site or improve an existing one, publish only the contact and booking details the business can support, and keep the same working route in the public places customers use to enquire.",
+          "Open your Kritvani site dashboard, review Online booking, and send one harmless test request through the live site if the normal process permits it. Confirm that the right inbox receives it, the customer-facing message is truthful about whether the request is pending or confirmed, and the request can be given a clear status after a real response. Also test the flow with a keyboard and on a phone, where many local customers will meet it first.",
+          "Kritvani gives a local business one place to maintain the public booking route and review incoming requests; it does not decide availability, send a human reply, or guarantee a Google listing’s review outcome. Start a new Kritvani site or improve an existing one, publish only the contact and booking details the business can support, and keep the same working route in the public places customers use to enquire.",
         ],
       },
     ],
@@ -1680,14 +1680,14 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "Update the website’s customer routes as one release",
         paragraphs: [
           "Change the visible name wherever a visitor decides whether to contact the business: the homepage, footer, contact page, booking page, service pages, policies, confirmation messages, and any downloadable estimate or brochure. Update image text, page titles, and email sender labels where the normal site controls support them. Keep the click-to-call number, WhatsApp destination, enquiry form recipient, map link, and booking route working through the release. A correct new name above a dead phone link still fails the customer.",
-          "Use the normal PaperChai controls for public site details instead of adding a one-off browser script or a second ad-hoc landing page. Test on a phone and in a private browser after publishing. Open the website from an old saved link if available, tap the phone and WhatsApp actions, send only a harmless test request if the normal process permits it, and read the confirmation. The person receiving it should be able to identify the new public name and tell a returning customer they have reached the right business.",
+          "Use the normal Kritvani controls for public site details instead of adding a one-off browser script or a second ad-hoc landing page. Test on a phone and in a private browser after publishing. Open the website from an old saved link if available, tap the phone and WhatsApp actions, send only a harmless test request if the normal process permits it, and read the confirmation. The person receiving it should be able to identify the new public name and tell a returning customer they have reached the right business.",
         ],
       },
       {
         heading: "Edit Google and controlled listings carefully, then monitor",
         paragraphs: [
           "Use the Google account that normally manages the verified Business Profile. Compare its public name, category, phone, website, hours, address or service area, and services with the fact sheet before submitting an edit. Google may review changes, and its policies can reject significant changes to a business name or category, so do not promise a particular approval time or Maps visibility. Give helpers appropriate access rather than sharing the owner’s password, and keep the business owner involved in a change that affects a public identity.",
-          "Once the owned website and profile are accurate, update social profiles, payment messages, and directories the business actively controls. Check the public result while signed out over the following weeks and keep a dated private record of what was changed and when. If customers still reach an old route, correct that controlled source or add a brief factual bridge on the website. PaperChai can help maintain the public site, but it cannot decide Google’s rebrand result or preserve visibility. The practical success measure is simpler: a returning customer recognises the business and can reach a monitored, truthful next step.",
+          "Once the owned website and profile are accurate, update social profiles, payment messages, and directories the business actively controls. Check the public result while signed out over the following weeks and keep a dated private record of what was changed and when. If customers still reach an old route, correct that controlled source or add a brief factual bridge on the website. Kritvani can help maintain the public site, but it cannot decide Google’s rebrand result or preserve visibility. The practical success measure is simpler: a returning customer recognises the business and can reach a monitored, truthful next step.",
         ],
       },
     ],
@@ -1729,7 +1729,7 @@ export const blogRegistry: readonly BlogArticle[] = [
       {
         heading: "Update the website’s call and message routes together",
         paragraphs: [
-          "Change the visible number and the action behind it in the same publishing pass. A call link should open the new number, and a WhatsApp link should start a message to the intended business account. Use the normal PaperChai site controls or the product’s approved contact setting rather than adding a one-off browser script or an ad-hoc form. If you offer both calls and WhatsApp, label them honestly: for example, ‘Call for urgent availability’ and ‘WhatsApp for a non-urgent enquiry’. A visitor should not have to guess whether a message will be seen.",
+          "Change the visible number and the action behind it in the same publishing pass. A call link should open the new number, and a WhatsApp link should start a message to the intended business account. Use the normal Kritvani site controls or the product’s approved contact setting rather than adding a one-off browser script or an ad-hoc form. If you offer both calls and WhatsApp, label them honestly: for example, ‘Call for urgent availability’ and ‘WhatsApp for a non-urgent enquiry’. A visitor should not have to guess whether a message will be seen.",
           "Give customers a second reliable path when sensible, such as a monitored enquiry form or booking request. That helps when a caller has poor signal, cannot talk, or reaches the site outside response hours. Ask only for what is needed to respond, explain the reply window if you can stand behind it, and show the same service area, hours, and business name beside the contact action. The best outcome is a clear next step, not a page crowded with duplicate buttons.",
         ],
       },
@@ -1751,7 +1751,7 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "Keep ownership with the business, not a helper",
         paragraphs: [
           "Before closing the task, make sure the business owner knows where the number is managed, who can change the website contact setting, and who holds the Google Business Profile access. This is especially important after an agency engagement, a staff change, or a switch from a personal SIM to a business line. Document the public number, transition date, responsible owner, and the places checked; avoid storing credentials or customers’ messages in that document. Revisit the list after a rebrand, relocation, or change in hours.",
-          "PaperChai can help a local business keep its site’s public contact path clear, but it cannot guarantee carrier forwarding, Google edit approval, or a customer’s response time. Publish only the contact details the business can support, then use the same website URL and primary contact route consistently wherever customers are invited to enquire. The useful result is straightforward: someone who sees an old reference or a new listing can still find a truthful, working way to start a conversation.",
+          "Kritvani can help a local business keep its site’s public contact path clear, but it cannot guarantee carrier forwarding, Google edit approval, or a customer’s response time. Publish only the contact details the business can support, then use the same website URL and primary contact route consistently wherever customers are invited to enquire. The useful result is straightforward: someone who sees an old reference or a new listing can still find a truthful, working way to start a conversation.",
         ],
       },
     ],
@@ -1800,7 +1800,7 @@ export const blogRegistry: readonly BlogArticle[] = [
       {
         heading: "Protect the website and enquiry route while Google reviews it",
         paragraphs: [
-          "Google may review a correction rather than changing the result immediately, so make the channels you control useful in the meantime. On the PaperChai site, show the real business name, actual service area or visit address, current hours, and one monitored enquiry route. A customer who lands from an old Maps result should be able to work out whether the business is still operating, where it serves, and how to ask a question. Do not use a banner to promise that a listing has been removed or that reviews will transfer on a particular date; those decisions are Google’s to make.",
+          "Google may review a correction rather than changing the result immediately, so make the channels you control useful in the meantime. On the Kritvani site, show the real business name, actual service area or visit address, current hours, and one monitored enquiry route. A customer who lands from an old Maps result should be able to work out whether the business is still operating, where it serves, and how to ask a question. Do not use a banner to promise that a listing has been removed or that reviews will transfer on a particular date; those decisions are Google’s to make.",
           "Test the customer journey on a phone after the public facts are aligned. Open both Maps results, tap each website link and phone number, then compare the site’s contact page, directions link, booking path, and WhatsApp or email route. A good outcome is not merely fewer search results. It is one honest route from a profile to the correct business, with no surprise address, disconnected phone, or request sent to an unattended inbox. If a former website or phone is no longer controlled by the business, remove or correct it through the relevant owner rather than asking customers to guess which listing is current.",
         ],
       },
@@ -1808,7 +1808,7 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "Keep a short correction record and know when to ask for help",
         paragraphs: [
           "Keep a dated private note of the profile URLs, what each represented, the action requested, the account used, and the outcome. This makes a later ownership question or customer report easier to explain without relying on memory. Once the correct profile is stable, review it quarterly or after a move, name change, agency transition, or major website update. Check the public result while signed out, not only inside the account that manages it. The business owner should retain appropriate account access rather than leaving the only owner role with an outside helper.",
-          "Ask Google support through the official path when two distinct eligible businesses were incorrectly merged, when the relevant ownership route does not resolve access, or when the profile status presents a specific issue you cannot safely correct. Prepare the business name, Maps links, exact address or service-area model, website, phone number, signage details where relevant, and a concise timeline. PaperChai can help the business publish a clear, consistent public site, but it cannot decide a Google merge or ownership outcome. Next, make the website’s name, location model, and contact route truthful, then use that same public URL consistently on the one profile that represents the business.",
+          "Ask Google support through the official path when two distinct eligible businesses were incorrectly merged, when the relevant ownership route does not resolve access, or when the profile status presents a specific issue you cannot safely correct. Prepare the business name, Maps links, exact address or service-area model, website, phone number, signage details where relevant, and a concise timeline. Kritvani can help the business publish a clear, consistent public site, but it cannot decide a Google merge or ownership outcome. Next, make the website’s name, location model, and contact route truthful, then use that same public URL consistently on the one profile that represents the business.",
         ],
       },
     ],
@@ -1866,7 +1866,7 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "Review the rule when the work changes",
         paragraphs: [
           "A cancellation rule needs review when the business adds staff, changes service length, begins travelling farther, takes advances, uses a new scheduler, or notices a repeated source of confusion. Look at actual questions without storing more customer information than needed. If people repeatedly ask whether an advance moves to a new date, improve that sentence. If customers choose the wrong contact route, make the button clearer. If the rule routinely feels unfair to either side, change the operating rule first and then update every public message together.",
-          "A good policy does not guarantee fewer cancellations or protect a business from every difficult situation. It does give a ready customer a respectful, realistic next step and gives the owner a process they can follow consistently. PaperChai can help a local business or independent professional publish a clear service and booking journey, but the owner remains responsible for the actual availability, payment terms, and decisions behind it. Before sharing a booking link, make sure the policy, confirmation, reminder, and person answering enquiries all tell the same honest story.",
+          "A good policy does not guarantee fewer cancellations or protect a business from every difficult situation. It does give a ready customer a respectful, realistic next step and gives the owner a process they can follow consistently. Kritvani can help a local business or independent professional publish a clear service and booking journey, but the owner remains responsible for the actual availability, payment terms, and decisions behind it. Before sharing a booking link, make sure the policy, confirmation, reminder, and person answering enquiries all tell the same honest story.",
         ],
       },
     ],
@@ -1929,17 +1929,17 @@ export const blogRegistry: readonly BlogArticle[] = [
       {
         heading: "Next step: publish only the details you can stand behind",
         paragraphs: [
-          "Before sharing the new location widely, review the site on a phone one more time and remove every outdated address, pin, and instruction you control. PaperChai can help you create or refresh a clear public site, but the business owner must decide what is true about access, hours, privacy, and service coverage. Start a new PaperChai site or review an existing one, publish after the essential details agree, and use that public URL consistently in the Google profile and customer messages. A well-managed relocation is not a visibility trick; it is a reliable handoff from search to a real visit or conversation.",
+          "Before sharing the new location widely, review the site on a phone one more time and remove every outdated address, pin, and instruction you control. Kritvani can help you create or refresh a clear public site, but the business owner must decide what is true about access, hours, privacy, and service coverage. Start a new Kritvani site or review an existing one, publish after the essential details agree, and use that public URL consistently in the Google profile and customer messages. A well-managed relocation is not a visibility trick; it is a reliable handoff from search to a real visit or conversation.",
         ],
       },
     ],
   },
   {
-    slug: "paperchai-block-holiday-booking-dates-india",
+    slug: "kritvani-block-holiday-booking-dates-india",
     title: "Block holiday dates before bookings arrive on your website",
     description:
-      "A PaperChai workflow for local businesses in India: set accurate availability, block closure dates, test customer booking, and keep Google hours aligned.",
-    category: "PaperChai workflow",
+      "A Kritvani workflow for local businesses in India: set accurate availability, block closure dates, test customer booking, and keep Google hours aligned.",
+    category: "Kritvani workflow",
     publishedAt: "2026-10-09",
     updatedAt: "2026-10-09",
     readingMinutes: 6,
@@ -1949,12 +1949,12 @@ export const blogRegistry: readonly BlogArticle[] = [
       "An open paper planner with handwritten dates and a pen on a desk",
     keywords: [
       "block holiday dates on booking website India",
-      "PaperChai blackout dates booking workflow",
+      "Kritvani blackout dates booking workflow",
       "local business holiday booking availability India",
       "manage appointment closures on service website India",
     ],
     promotionCaption:
-      "A booking button should not promise a slot when your team is closed. This PaperChai workflow shows how to set weekly availability, block holiday dates, test the customer journey, and keep Google hours in step before the next busy period.",
+      "A booking button should not promise a slot when your team is closed. This Kritvani workflow shows how to set weekly availability, block holiday dates, test the customer journey, and keep Google hours in step before the next busy period.",
     sections: [
       {
         heading: "Start with the promise a customer should see",
@@ -1964,9 +1964,9 @@ export const blogRegistry: readonly BlogArticle[] = [
         ],
       },
       {
-        heading: "Set the regular booking window in PaperChai first",
+        heading: "Set the regular booking window in Kritvani first",
         paragraphs: [
-          "Open the relevant PaperChai site dashboard and find Online booking. Confirm that the notification email belongs to a person who will actually monitor requests, then name the services customers can select. PaperChai can reuse the services listed on the site, which is helpful only after those labels are current and clear. A customer choosing ‘Bridal consultation’ or ‘AC service visit’ should not land in a generic request queue with no owner or acknowledgement.",
+          "Open the relevant Kritvani site dashboard and find Online booking. Confirm that the notification email belongs to a person who will actually monitor requests, then name the services customers can select. Kritvani can reuse the services listed on the site, which is helpful only after those labels are current and clear. A customer choosing ‘Bridal consultation’ or ‘AC service visit’ should not land in a generic request queue with no owner or acknowledgement.",
           "For businesses using built-in scheduling, switch it on and set the weekly hours and slot length to the real appointment window, not simply the longest hours shown on a public sign. A studio may be open for walk-ins from 10 am but only take consultations from noon; a field-service business may need a final slot well before the end of its working day. Mark days closed when no slots should be offered. Save the settings before adding exceptions, so the normal pattern is easy to understand when the busy period is over.",
         ],
       },
@@ -1974,7 +1974,7 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "Block full closure dates without changing the whole week",
         paragraphs: [
           "In the same built-in scheduling section, add each full closure under Blackout dates in YYYY-MM-DD format, one date per line, then save. For example, a business closed on 2026-10-20 and 2026-10-21 enters those two dates rather than turning off every Tuesday and Wednesday. The setting removes available slots for those specific dates while leaving the regular weekly schedule in place for other weeks. Keep the list limited to dates the business has actually decided to close; speculative blocks create the same friction as an inaccurate open slot.",
-          "A blackout date controls PaperChai’s built-in slot availability. It does not change the operating hours shown on Google, an external calendar, a WhatsApp profile, or a printed notice. If the business also uses an external scheduler, update that provider separately and test its calendar; do not assume an embedded calendar reads PaperChai blackout dates. If the business is open but cannot take appointments, say that plainly on the website or in the reply process rather than telling customers the whole business is closed.",
+          "A blackout date controls Kritvani’s built-in slot availability. It does not change the operating hours shown on Google, an external calendar, a WhatsApp profile, or a printed notice. If the business also uses an external scheduler, update that provider separately and test its calendar; do not assume an embedded calendar reads Kritvani blackout dates. If the business is open but cannot take appointments, say that plainly on the website or in the reply process rather than telling customers the whole business is closed.",
         ],
       },
       {
@@ -1987,8 +1987,8 @@ export const blogRegistry: readonly BlogArticle[] = [
       {
         heading: "Keep Google and the website truthful, then review after the closure",
         paragraphs: [
-          "Update Google Business Profile special hours separately when the public opening hours change. Google’s current guidance treats special hours as dates that need their own confirmation; they are not automatically supplied by a website booking tool. Review the public profile while signed out, along with the PaperChai site, phone message, and any social bio. A customer should not see ‘open today’ on Maps, a closed door, and an apparently bookable website without an explanation of what is still available.",
-          "After the closure, remove or revise only the blackout dates that no longer apply, then repeat the quick live-site check. PaperChai is a practical place to keep the booking path and requests together, but it cannot decide who is staffed, which work fits, or whether a Google profile is accurate. Begin a new site or review the existing one in PaperChai, publish only after the details are correct, and use the public link for the customer routes you maintain. The outcome worth measuring is modest: visitors see an honest next step and the business receives requests it can actually handle.",
+          "Update Google Business Profile special hours separately when the public opening hours change. Google’s current guidance treats special hours as dates that need their own confirmation; they are not automatically supplied by a website booking tool. Review the public profile while signed out, along with the Kritvani site, phone message, and any social bio. A customer should not see ‘open today’ on Maps, a closed door, and an apparently bookable website without an explanation of what is still available.",
+          "After the closure, remove or revise only the blackout dates that no longer apply, then repeat the quick live-site check. Kritvani is a practical place to keep the booking path and requests together, but it cannot decide who is staffed, which work fits, or whether a Google profile is accurate. Begin a new site or review the existing one in Kritvani, publish only after the details are correct, and use the public link for the customer routes you maintain. The outcome worth measuring is modest: visitors see an honest next step and the business receives requests it can actually handle.",
         ],
       },
     ],
@@ -2426,12 +2426,12 @@ export const blogRegistry: readonly BlogArticle[] = [
     ],
   },
   {
-    slug: "paperchai-custom-domain-launch-checklist-local-business-india",
+    slug: "kritvani-custom-domain-launch-checklist-local-business-india",
     title:
-      "PaperChai workflow: a custom-domain launch checklist for a local business website in India",
+      "Kritvani workflow: a custom-domain launch checklist for a local business website in India",
     description:
-      "Connect a custom domain to a PaperChai site, verify the public customer journey, then update Google and contact links with a calm launch checklist.",
-    category: "PaperChai guides",
+      "Connect a custom domain to a Kritvani site, verify the public customer journey, then update Google and contact links with a calm launch checklist.",
+    category: "Kritvani guides",
     publishedAt: "2026-10-02",
     readingMinutes: 8,
     image:
@@ -2439,13 +2439,13 @@ export const blogRegistry: readonly BlogArticle[] = [
     imageAlt:
       "A laptop displaying a business website beside a notebook and coffee",
     keywords: [
-      "PaperChai custom domain launch checklist local business India",
+      "Kritvani custom domain launch checklist local business India",
       "connect custom domain to small business website India",
       "custom domain website checklist freelancer India",
       "update Google Business Profile after website domain change India",
     ],
     promotionCaption:
-      "A custom domain is only the beginning of a launch. Use this PaperChai checklist to connect the address, test the live customer journey, and update the links people actually use—without breaking enquiries along the way.",
+      "A custom domain is only the beginning of a launch. Use this Kritvani checklist to connect the address, test the live customer journey, and update the links people actually use—without breaking enquiries along the way.",
     sections: [
       {
         heading: "Choose the domain that customers can say and type",
@@ -2455,10 +2455,10 @@ export const blogRegistry: readonly BlogArticle[] = [
         ],
       },
       {
-        heading: "Connect the address in PaperChai before publicising it",
+        heading: "Connect the address in Kritvani before publicising it",
         paragraphs: [
-          "Publish the PaperChai site before changing DNS. In the dashboard, add the custom domain in the site settings and use the exact DNS records PaperChai provides at the registrar. Copy values carefully, including any host name, rather than guessing from a similar setup guide. Keep unrelated mail records intact. DNS changes can take time to propagate, so do not delete a working address, announce the new one, or repeatedly change records while the connection is still being verified. A single clean configuration is easier to diagnose than several competing records.",
-          "When PaperChai confirms the connection, open both the bare domain and the `www` version in a private browser. Decide which one is the canonical public address and verify the other resolves or redirects consistently. Check that the browser shows a secure HTTPS connection. Google’s current guidance treats a secure, mobile-friendly site as part of a good user experience; a successful domain connection is not enough if customers see a certificate warning, a blank page, or an old site from their saved link.",
+          "Publish the Kritvani site before changing DNS. In the dashboard, add the custom domain in the site settings and use the exact DNS records Kritvani provides at the registrar. Copy values carefully, including any host name, rather than guessing from a similar setup guide. Keep unrelated mail records intact. DNS changes can take time to propagate, so do not delete a working address, announce the new one, or repeatedly change records while the connection is still being verified. A single clean configuration is easier to diagnose than several competing records.",
+          "When Kritvani confirms the connection, open both the bare domain and the `www` version in a private browser. Decide which one is the canonical public address and verify the other resolves or redirects consistently. Check that the browser shows a secure HTTPS connection. Google’s current guidance treats a secure, mobile-friendly site as part of a good user experience; a successful domain connection is not enough if customers see a certificate warning, a blank page, or an old site from their saved link.",
         ],
       },
       {
@@ -2471,7 +2471,7 @@ export const blogRegistry: readonly BlogArticle[] = [
       {
         heading: "Move public links in a deliberate order",
         paragraphs: [
-          "Once the new domain works, update the sources customers are most likely to use: the Google Business Profile website field, Maps or booking links where applicable, WhatsApp Business profile, social bio, email signature, and the QR code at a reception desk or on a brochure. Change one known link at a time and record the date. The Google Business Profile should point to the public, canonical PaperChai address—not a dashboard URL, a temporary preview, or a link shortened by an unknown service. Keep the old working URL available until the new path has been tested everywhere it matters.",
+          "Once the new domain works, update the sources customers are most likely to use: the Google Business Profile website field, Maps or booking links where applicable, WhatsApp Business profile, social bio, email signature, and the QR code at a reception desk or on a brochure. Change one known link at a time and record the date. The Google Business Profile should point to the public, canonical Kritvani address—not a dashboard URL, a temporary preview, or a link shortened by an unknown service. Keep the old working URL available until the new path has been tested everywhere it matters.",
           "Do not create several nearly identical domains for every suburb, service, or spelling variation. They create a renewal burden and can confuse customers about which website is official. One maintained address with clear service and coverage pages is usually more useful. If an older domain already has printed material or search visibility, plan a proper redirect before retiring it. A redirect preserves the customer’s route; a dead link turns a referral or Google result into a frustrating dead end.",
         ],
       },
@@ -2486,7 +2486,7 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "Put renewal and maintenance on the owner’s calendar",
         paragraphs: [
           "Set two reminders: one several weeks before domain renewal and one monthly for a five-minute public check. Open the canonical domain, the Google Business Profile link, and the main enquiry or booking route. Review after changing staff, hours, service areas, pricing, email, WhatsApp number, or the person who handles DNS. Keep credentials and recovery codes out of public notes, but make sure the business owner can find them when a contractor is unavailable. Small maintenance habits are much cheaper than discovering a lapsed domain after a customer reports it.",
-          "This is a PaperChai workflow because the platform gives a local business a place to publish and keep its customer path current, but the business remains responsible for the domain and public facts. A memorable address will not create trust on its own. It earns its value when every route—Google, a recommendation, a QR code, or a WhatsApp profile—leads to an accurate, usable site where a real customer can take the next informed step. That is the launch standard worth maintaining after the announcement is over.",
+          "This is a Kritvani workflow because the platform gives a local business a place to publish and keep its customer path current, but the business remains responsible for the domain and public facts. A memorable address will not create trust on its own. It earns its value when every route—Google, a recommendation, a QR code, or a WhatsApp profile—leads to an accurate, usable site where a real customer can take the next informed step. That is the launch standard worth maintaining after the announcement is over.",
         ],
       },
     ],
@@ -2848,12 +2848,12 @@ export const blogRegistry: readonly BlogArticle[] = [
     ],
   },
   {
-    slug: "paperchai-google-maps-service-area-website-workflow-india",
+    slug: "kritvani-google-maps-service-area-website-workflow-india",
     title:
-      "PaperChai workflow: turn a Google Maps listing into a service-area website in India",
+      "Kritvani workflow: turn a Google Maps listing into a service-area website in India",
     description:
       "Use the real details in your Google Maps listing to create, review, and publish a clearer service-area website without copying stale claims or promising a booking too early.",
-    category: "PaperChai workflow",
+    category: "Kritvani workflow",
     publishedAt: "2026-09-25",
     readingMinutes: 8,
     image:
@@ -2862,24 +2862,24 @@ export const blogRegistry: readonly BlogArticle[] = [
       "Two independent business owners reviewing a website plan together at a table",
     keywords: [
       "create service area website from Google Maps listing India",
-      "PaperChai Google Maps website workflow",
+      "Kritvani Google Maps website workflow",
       "local service business website from Google Business Profile India",
       "freelancer website from Google Maps listing India",
     ],
     promotionCaption:
-      "Your Google Maps listing already holds the beginnings of a useful website. This PaperChai workflow shows how to turn those real details into a clear service-area page, review every claim, and publish only when the contact path is ready. Read the checklist before you share your next link.",
+      "Your Google Maps listing already holds the beginnings of a useful website. This Kritvani workflow shows how to turn those real details into a clear service-area page, review every claim, and publish only when the contact path is ready. Read the checklist before you share your next link.",
     sections: [
       {
         heading: "Start with the customer promise, not the page design",
         paragraphs: [
           "A Google Maps listing is often the closest thing a small Indian service business has to a public fact sheet. It may contain the business name, category, phone number, hours, photos, reviews, and the language customers use when they describe the work. That makes it a valuable starting point for a website, but it is not a finished website. A visitor who moves from Maps to a site still needs to understand what the business can help with, where or how it works, and what will happen after they get in touch.",
-          "Before opening PaperChai, write one sentence that the page must make clear. For example: ‘We provide scheduled AC servicing for homes in Kothrud, Karve Nagar, and nearby Pune localities,’ or ‘I provide remote bookkeeping support for independent retailers and consultants.’ This is not advertising copy. It is a working promise that sets the boundary for every decision that follows. If the owner cannot confirm the service, audience, or coverage, pause and clarify it before a website turns an old listing detail into a public commitment.",
+          "Before opening Kritvani, write one sentence that the page must make clear. For example: ‘We provide scheduled AC servicing for homes in Kothrud, Karve Nagar, and nearby Pune localities,’ or ‘I provide remote bookkeeping support for independent retailers and consultants.’ This is not advertising copy. It is a working promise that sets the boundary for every decision that follows. If the owner cannot confirm the service, audience, or coverage, pause and clarify it before a website turns an old listing detail into a public commitment.",
         ],
       },
       {
         heading: "Bring in real listing details, then treat them as a draft",
         paragraphs: [
-          "In PaperChai, start with the Google Maps route: search by business name and city, or use a Google Maps share link. The goal is to create a usable first draft from information customers already see rather than to invent a business story from a blank page. A Maps listing can supply useful raw material, including the public name, visible contact details, operating context, photos, and customer language. It can make the first pass much faster for a salon, clinic, repair professional, tutor, consultant, or freelancer.",
+          "In Kritvani, start with the Google Maps route: search by business name and city, or use a Google Maps share link. The goal is to create a usable first draft from information customers already see rather than to invent a business story from a blank page. A Maps listing can supply useful raw material, including the public name, visible contact details, operating context, photos, and customer language. It can make the first pass much faster for a salon, clinic, repair professional, tutor, consultant, or freelancer.",
           "Imported information is evidence to review, not proof that every field is still right. Check the public name against current signage or invoices. Check the phone number, core category, business hours, photos, services, and links. Remove an old service instead of hoping it will not be noticed. Do not turn a customer review into a promise that every customer will receive the same outcome. If a business works from home and does not receive visitors, do not let an address-like detail imply a public shop. Google’s current local-business guidance likewise stresses accurate, useful business information; the website should describe the operation a customer can actually use today.",
         ],
       },
@@ -2887,13 +2887,13 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "Build the page around fit, coverage, proof, and one next step",
         paragraphs: [
           "A focused one-page site needs a clear order. Put the main service and the customer it helps near the top. Follow with a short service list, a truthful service-area or delivery explanation, and a small amount of proof that the owner can stand behind. Proof might be a real review, a relevant photo with permission, a qualification, or a straightforward process explanation. For a freelance professional working remotely, replace locality with the working arrangement and who the service suits. For a business that travels to customers, name only the areas it regularly covers rather than a large city or state it cannot serve consistently.",
-          "Then choose one primary contact action. A customer who still needs an estimate, locality check, or technician availability should see ‘Request availability’ or ‘Ask for an estimate,’ not ‘Book now.’ A confirmed appointment label is appropriate only where the business has a maintained scheduling process that genuinely reserves a slot. PaperChai can present calls, WhatsApp, and booking options; configure only the routes the owner will monitor. Keep the public phone number, message prompt, and service wording aligned with the Google listing so a person does not have to wonder whether they have reached the same business.",
+          "Then choose one primary contact action. A customer who still needs an estimate, locality check, or technician availability should see ‘Request availability’ or ‘Ask for an estimate,’ not ‘Book now.’ A confirmed appointment label is appropriate only where the business has a maintained scheduling process that genuinely reserves a slot. Kritvani can present calls, WhatsApp, and booking options; configure only the routes the owner will monitor. Keep the public phone number, message prompt, and service wording aligned with the Google listing so a person does not have to wonder whether they have reached the same business.",
         ],
       },
       {
         heading: "Review the generated site as the person who will receive the enquiry",
         paragraphs: [
-          "PaperChai lets you review and edit the generated website before publishing. Use that review as an operations check, not merely a spelling pass. Read the first screen on a phone: can a new visitor identify the service, the relevant area or delivery model, and the next action without scrolling through a brand story? Open every phone, WhatsApp, directions, and booking link. Check that a tap on a WhatsApp button opens the intended message, that the number is current, and that a booking request is not presented as a confirmed appointment before someone has checked it.",
+          "Kritvani lets you review and edit the generated website before publishing. Use that review as an operations check, not merely a spelling pass. Read the first screen on a phone: can a new visitor identify the service, the relevant area or delivery model, and the next action without scrolling through a brand story? Open every phone, WhatsApp, directions, and booking link. Check that a tap on a WhatsApp button opens the intended message, that the number is current, and that a booking request is not presented as a confirmed appointment before someone has checked it.",
           "Review every claim that creates an expectation. Replace ‘best’, ‘trusted by thousands’, ‘same-day everywhere’, or a broad coverage statement unless it is specific, current, and supportable. Make any price wording explain what the amount refers to and what could change it. Use images the business has rights to use, with a short description that makes sense to someone who cannot see the image. Ask the person who handles calls and messages to read the page too. They will often spot the question a page still leaves unanswered: travel fee, visit timing, required documents, minimum order, or the distinction between an enquiry and a booking.",
         ],
       },
@@ -2901,7 +2901,7 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "Publish deliberately and use the first enquiries as feedback",
         paragraphs: [
           "Publish only when the page reflects a live business process. Then add the maintained site URL to the Google Business Profile website field and test it in a private browser window on a phone and desktop. Google’s business-link guidance says eligible links should lead to a working, accessible destination; a page behind sign-in, a broken short link, or a campaign page that soon expires is a poor hand-off. The same page can be shared in a WhatsApp Business profile, Instagram bio, or printed QR code when those routes describe the same service and contact expectation.",
-          "For the next two weeks, note what suitable customers ask before they take action. If callers repeatedly ask whether you visit their locality, clarify the service-area line. If people assume a request has reserved a slot, change the button and confirmation wording. If a recurring question is too detailed for the page, add a concise FAQ or a clear contact prompt rather than a wall of text. Google recommends helpful, people-first content; for a local business, the practical version is simple: make the next customer’s decision easier. PaperChai can accelerate the initial website draft, but accuracy, prompt replies, and regular review are what make that website useful after it goes live.",
+          "For the next two weeks, note what suitable customers ask before they take action. If callers repeatedly ask whether you visit their locality, clarify the service-area line. If people assume a request has reserved a slot, change the button and confirmation wording. If a recurring question is too detailed for the page, add a concise FAQ or a clear contact prompt rather than a wall of text. Google recommends helpful, people-first content; for a local business, the practical version is simple: make the next customer’s decision easier. Kritvani can accelerate the initial website draft, but accuracy, prompt replies, and regular review are what make that website useful after it goes live.",
         ],
       },
     ],
@@ -3491,12 +3491,12 @@ export const blogRegistry: readonly BlogArticle[] = [
     ],
   },
   {
-    slug: "paperchai-google-reviews-website-proof-workflow-india",
+    slug: "kritvani-google-reviews-website-proof-workflow-india",
     title:
-      "PaperChai workflow: turn Google reviews into useful website proof in India",
+      "Kritvani workflow: turn Google reviews into useful website proof in India",
     description:
-      "Use real Google Business Profile feedback to strengthen a local business website, then review context, permissions, and the enquiry path before publishing with PaperChai.",
-    category: "PaperChai workflow",
+      "Use real Google Business Profile feedback to strengthen a local business website, then review context, permissions, and the enquiry path before publishing with Kritvani.",
+    category: "Kritvani workflow",
     publishedAt: "2026-09-11",
     readingMinutes: 8,
     image:
@@ -3506,11 +3506,11 @@ export const blogRegistry: readonly BlogArticle[] = [
     keywords: [
       "add Google reviews to small business website India",
       "use Google Business Profile reviews on local service website",
-      "PaperChai Google reviews website workflow",
+      "Kritvani Google reviews website workflow",
       "show genuine customer feedback on freelancer website India",
     ],
     promotionCaption:
-      "Your best website proof may already be in your Google Business Profile. This PaperChai workflow shows how to turn genuine customer feedback into a clear, reviewable website section—without inventing claims or publishing before you are ready. Read the guide, then build from the details customers already trust.",
+      "Your best website proof may already be in your Google Business Profile. This Kritvani workflow shows how to turn genuine customer feedback into a clear, reviewable website section—without inventing claims or publishing before you are ready. Read the guide, then build from the details customers already trust.",
     sections: [
       {
         heading: "Treat reviews as evidence, not decoration",
@@ -3522,14 +3522,14 @@ export const blogRegistry: readonly BlogArticle[] = [
       {
         heading: "Prepare a small, accurate source pack",
         paragraphs: [
-          "Before opening PaperChai, collect the business name, category, current contact details, normal hours, and a handful of reviews you are comfortable using as context. Select feedback that represents the work you want more of, not just the highest rating. A home-repair business might choose comments about punctual communication and a completed repair; a consultant might select feedback that describes the problem solved. Keep a note of the original review URL or date so the owner can recheck it later.",
+          "Before opening Kritvani, collect the business name, category, current contact details, normal hours, and a handful of reviews you are comfortable using as context. Select feedback that represents the work you want more of, not just the highest rating. A home-repair business might choose comments about punctual communication and a completed repair; a consultant might select feedback that describes the problem solved. Keep a note of the original review URL or date so the owner can recheck it later.",
           "Read every selected review in full. A short quote can change meaning when separated from its surrounding sentence, and a customer may have mentioned private information that does not belong on a public website. Avoid lifting a reviewer’s full name, photograph, phone number, address, medical details, or project-sensitive information into the site. If a review is vague, mixed, old, or attached to a service you no longer offer, leave it out. The strongest source pack is small enough to verify and current enough to represent the business honestly.",
         ],
       },
       {
-        heading: "Use PaperChai for the first draft, then take ownership of it",
+        heading: "Use Kritvani for the first draft, then take ownership of it",
         paragraphs: [
-          "In PaperChai, start with the Google Business Profile route by searching for the business name and city or using a Google Maps share link. PaperChai can turn the real photos, reviews, hours, and business details customers already see on Google into a focused one-page website. That gives a small business a practical starting point instead of a blank canvas. It does not make the imported details permanently correct, and it does not remove the owner’s responsibility to review every public claim.",
+          "In Kritvani, start with the Google Business Profile route by searching for the business name and city or using a Google Maps share link. Kritvani can turn the real photos, reviews, hours, and business details customers already see on Google into a focused one-page website. That gives a small business a practical starting point instead of a blank canvas. It does not make the imported details permanently correct, and it does not remove the owner’s responsibility to review every public claim.",
           "When the draft is ready, begin at the opening section. Confirm that the business name, category, phone number, service area, and hours still match the live operation. Then find the customer-proof section and read it as someone who has never met the business. Does it make a believable point about the service? Does it overstate a review? Is there enough surrounding explanation for a visitor to understand what is offered? Remove anything that feels generic, dated, or too personal. A shorter, true section is more useful than a crowded page of borrowed praise.",
         ],
       },
@@ -3550,8 +3550,8 @@ export const blogRegistry: readonly BlogArticle[] = [
       {
         heading: "Publish carefully and refresh the proof as work evolves",
         paragraphs: [
-          "PaperChai lets you review the generated website before publishing, so use that final pause. Check spelling, links, image rights, accessibility text, service claims, and the contact path. Confirm that the featured feedback still reflects live services and that a business owner can explain its source if a customer asks. Publish only when the page makes a clear promise the business can keep. A first version does not need every review, every photo, or a full history of the business to earn trust.",
-          "Set a short quarterly review. Read new Google feedback, remove proof tied to retired services, and notice which customer questions still appear before people enquire. Add one helpful answer to the service section or FAQ when it genuinely reduces uncertainty. Never manufacture reviews, pay for favourable public feedback, or selectively pressure only happy customers to post. PaperChai can make the website-building step faster; the durable value still comes from real work, accurate context, and an owner who keeps the promise current.",
+          "Kritvani lets you review the generated website before publishing, so use that final pause. Check spelling, links, image rights, accessibility text, service claims, and the contact path. Confirm that the featured feedback still reflects live services and that a business owner can explain its source if a customer asks. Publish only when the page makes a clear promise the business can keep. A first version does not need every review, every photo, or a full history of the business to earn trust.",
+          "Set a short quarterly review. Read new Google feedback, remove proof tied to retired services, and notice which customer questions still appear before people enquire. Add one helpful answer to the service section or FAQ when it genuinely reduces uncertainty. Never manufacture reviews, pay for favourable public feedback, or selectively pressure only happy customers to post. Kritvani can make the website-building step faster; the durable value still comes from real work, accurate context, and an owner who keeps the promise current.",
         ],
       },
     ],
@@ -4054,12 +4054,12 @@ export const blogRegistry: readonly BlogArticle[] = [
     ],
   },
   {
-    slug: "paperchai-resume-to-portfolio-website-workflow-india",
+    slug: "kritvani-resume-to-portfolio-website-workflow-india",
     title:
-      "PaperChai workflow: turn your resume into a portfolio website in India",
+      "Kritvani workflow: turn your resume into a portfolio website in India",
     description:
-      "Use your resume as a starting point for a focused professional website, then review the proof, project stories, and contact path before publishing with PaperChai.",
-    category: "PaperChai workflow",
+      "Use your resume as a starting point for a focused professional website, then review the proof, project stories, and contact path before publishing with Kritvani.",
+    category: "Kritvani workflow",
     publishedAt: "2026-08-28",
     readingMinutes: 8,
     image:
@@ -4067,13 +4067,13 @@ export const blogRegistry: readonly BlogArticle[] = [
     imageAlt:
       "Independent professionals reviewing portfolio work together on a laptop",
     keywords: [
-      "turn resume into portfolio website with PaperChai India",
+      "turn resume into portfolio website with Kritvani India",
       "freelancer portfolio website from CV India",
       "create professional website from resume for independent consultant",
-      "PaperChai resume website workflow",
+      "Kritvani resume website workflow",
     ],
     promotionCaption:
-      "A resume lists where you have been. A good portfolio helps the next client see how you can help. Our Friday PaperChai workflow shows how to turn a CV into a clear, reviewable website—without inventing claims or publishing before you are ready.",
+      "A resume lists where you have been. A good portfolio helps the next client see how you can help. Our Friday Kritvani workflow shows how to turn a CV into a clear, reviewable website—without inventing claims or publishing before you are ready.",
     sections: [
       {
         heading: "Start with the client decision, not the chronology of your resume",
@@ -4083,7 +4083,7 @@ export const blogRegistry: readonly BlogArticle[] = [
         ],
       },
       {
-        heading: "Prepare a small source pack before opening PaperChai",
+        heading: "Prepare a small source pack before opening Kritvani",
         paragraphs: [
           "Gather the current resume or CV, a short professional introduction, two or three examples of work, and the contact method you genuinely monitor. For each example, write a few private notes: the client or context you may name, the problem, your contribution, and an outcome you can support. If the work is confidential, use a permission-safe description such as ‘redesigned onboarding for a B2B product’ rather than uploading a client document, private dashboard, or unpublished campaign. A clear explanation is usually more useful than a crowded gallery.",
           "Decide which facts should remain off the site. A portfolio rarely needs a home address, personal identification number, full CV history, former clients’ contact details, or a private salary record. For a freelancer, one professional email or enquiry form is often enough. For a consultant who takes calls, add the hours and usual response time rather than publishing an always-available promise. This small source pack makes review easier: you know what is approved, what needs rewriting, and what should never become public copy.",
@@ -4092,7 +4092,7 @@ export const blogRegistry: readonly BlogArticle[] = [
       {
         heading: "Use the resume route as a draft, then make the homepage specific",
         paragraphs: [
-          "In PaperChai, choose the Resume or CV starting option and add the document you are comfortable using as a source. PaperChai can create a starting website from that material; it is not a reason to publish the first draft unchanged. Read the top section first. Replace generic phrases such as ‘passionate professional’ with the service, audience, and outcome that are actually true. A website should never claim a qualification, award, client relationship, location, or result that the owner cannot stand behind.",
+          "In Kritvani, choose the Resume or CV starting option and add the document you are comfortable using as a source. Kritvani can create a starting website from that material; it is not a reason to publish the first draft unchanged. Read the top section first. Replace generic phrases such as ‘passionate professional’ with the service, audience, and outcome that are actually true. A website should never claim a qualification, award, client relationship, location, or result that the owner cannot stand behind.",
           "Then scan the main sections as a customer would. Is the primary service obvious before the career history? Does each listed capability help someone understand a real offer, or is it an internal job-title phrase? Remove duplicate tool lists and stale roles that distract from the work you want. If you offer more than one distinct service, group them in plain language and say when each is appropriate. The aim is not to squeeze every keyword into the page. It is to leave a visitor with a useful, accurate picture of what you do.",
         ],
       },
@@ -4100,7 +4100,7 @@ export const blogRegistry: readonly BlogArticle[] = [
         heading: "Turn selected work into short, credible project stories",
         paragraphs: [
           "A portfolio item needs context, not a dramatic claim. Use a simple pattern: the kind of project, the challenge, what you personally did, and what changed. For example, a freelance content writer might say that they created a launch email sequence and help centre articles for a small software team, then note that the work gave customers a clearer onboarding path. If a measurable result is public and attributable, state it precisely. If it is not, describe the deliverable and the decision it supported instead of guessing at an impact number.",
-          "Add images only when you have the right to use them and they help the visitor understand the work. A screenshot can expose customer data; a logo may need approval; a stock image should not be presented as a client project. In PaperChai, review every imported image, caption, and link before publishing. One strong, explained example is more convincing than six anonymous tiles. Google’s current people-first guidance similarly favours original, substantial information over pages assembled mainly to attract search traffic. Your first-hand explanation is the part another portfolio cannot copy.",
+          "Add images only when you have the right to use them and they help the visitor understand the work. A screenshot can expose customer data; a logo may need approval; a stock image should not be presented as a client project. In Kritvani, review every imported image, caption, and link before publishing. One strong, explained example is more convincing than six anonymous tiles. Google’s current people-first guidance similarly favours original, substantial information over pages assembled mainly to attract search traffic. Your first-hand explanation is the part another portfolio cannot copy.",
         ],
       },
       {
@@ -4113,7 +4113,7 @@ export const blogRegistry: readonly BlogArticle[] = [
       {
         heading: "Publish deliberately, then keep the portfolio useful",
         paragraphs: [
-          "PaperChai lets you review the generated site before you publish. Use that pause. Read the page aloud for claims that feel inflated, check every external link, and confirm that the contact details, location or remote availability, and portfolio examples are current. Ask a trusted colleague to name the service they think you offer after a quick scan; if their answer is vague, improve the opening rather than adding more sections. Publishing a smaller, accurate site is better than waiting for a flawless, exhaustive archive.",
+          "Kritvani lets you review the generated site before you publish. Use that pause. Read the page aloud for claims that feel inflated, check every external link, and confirm that the contact details, location or remote availability, and portfolio examples are current. Ask a trusted colleague to name the service they think you offer after a quick scan; if their answer is vague, improve the opening rather than adding more sections. Publishing a smaller, accurate site is better than waiting for a flawless, exhaustive archive.",
           "After publication, keep a light maintenance note. Update the portfolio after a new public case study, a changed service, a new availability pattern, or a retired contact method. Do not add a blog post for every job or change the date of old work just to make it look fresh. A portfolio will not guarantee enquiries, interviews, or search rankings. It can do something more dependable: show the right person what you do, give them evidence they can assess, and make a professional first conversation easier to start.",
         ],
       },

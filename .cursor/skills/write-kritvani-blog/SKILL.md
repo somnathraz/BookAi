@@ -1,13 +1,13 @@
 ---
-name: write-paperchai-blog
+name: write-kritvani-blog
 description: >-
-  Write or update PaperChai journal posts in blog-registry.ts with current
+  Write or update Kritvani journal posts in blog-registry.ts with current
   Google SEO rules (snippets, alt text, BlogPosting schema, sitemap freshness,
   people-first India local-business content). Use when adding a blog article,
   journal post, or SEO content for /blog.
 ---
 
-# Write PaperChai blog (SEO-ready)
+# Write Kritvani blog (SEO-ready)
 
 ## When to use
 
@@ -22,11 +22,11 @@ copy-paste Codex brief.
 1. **People-first content** — solve one real local-business or freelancer task in India. No keyword stuffing, no doorway pages, no near-duplicate of an existing slug/title.
 2. **Visible HTML wins** — all value must live in `sections` text. Schema/meta only describe what the page shows.
 3. **One URL, one intent** — unique `slug`. Check the registry first; never reuse a slug.
-4. **Snippets** — title ~45–60 chars (layout adds ` — PaperChai`); description 140–160 chars, benefit-first, no trailing keyword lists.
+4. **Snippets** — title ~45–60 chars (layout adds ` — Kritvani`); description 140–160 chars, benefit-first, no trailing keyword lists.
 5. **Alt text** — one short, accurate sentence of what the image shows + context. No “image of…”, no keyword dumps. Decorative-only images would use `alt=""` (heroes are meaningful, so always write real alt).
 6. **Schema we already emit** — `BlogPosting` + `BreadcrumbList` from registry fields. Do **not** invent FAQ/HowTo rich-result markup (Google retired those rich results). Do not add fake author Persons.
 7. **Sitemap freshness** — set `updatedAt` when you edit an existing post; keep `publishedAt` stable. Dates are `YYYY-MM-DD`.
-8. **Internal links** — in body copy, mention related PaperChai journal topics naturally when useful; related-rail is automatic by category.
+8. **Internal links** — in body copy, mention related Kritvani journal topics naturally when useful; related-rail is automatic by category.
 9. **No Semrush/Similarweb dependency** — write for Search Console + helpful content, not third-party “SEO score” APIs.
 10. **Ship only registry entries** — no new MDX/CMS files; append one object at the **top** of `blogRegistry`.
 
@@ -39,7 +39,7 @@ Append **one** `BlogArticle` object at the top of `blogRegistry` (newest first).
   slug: "kebab-case-unique-intent-india", // 4–10 words, no dates
   title: "Clear task-focused title under ~60 chars",
   description: "140–160 chars. State the outcome for an Indian local business or independent professional.",
-  category: "Local growth" | "Website foundations" | "PaperChai workflow" | "PaperChai guides" | "Independent work" | "Practical guide",
+  category: "Local growth" | "Website foundations" | "Kritvani workflow" | "Kritvani guides" | "Independent work" | "Practical guide",
   publishedAt: "YYYY-MM-DD", // today UTC unless scheduled
   updatedAt: "YYYY-MM-DD",   // same as publishedAt for new posts
   readingMinutes: 7,         // match real length (~900–1200 words → 7–8)
@@ -95,8 +95,8 @@ Append **one** `BlogArticle` object at the top of `blogRegistry` (newest first).
 ## Pasteable user prompt (for Codex)
 
 ```text
-Add one new PaperChai journal article to src/features/content/blog/blog-registry.ts
-following .cursor/skills/write-paperchai-blog/SKILL.md and
+Add one new Kritvani journal article to src/features/content/blog/blog-registry.ts
+following .cursor/skills/write-kritvani-blog/SKILL.md and
 src/features/content/blog/CODEX_BLOG_PROMPT.md.
 
 Topic: <TOPIC>

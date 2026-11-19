@@ -35,7 +35,7 @@ export async function generateMetadata({
     keywords: [
       `${category.name} website India`,
       "local business website guides",
-      "PaperChai journal",
+      "Kritvani journal",
     ],
   });
 }

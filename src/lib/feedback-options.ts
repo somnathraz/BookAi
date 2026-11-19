@@ -7,7 +7,7 @@ export const FEEDBACK_FEATURE_OPTIONS = [
   "Hindi & regional languages",
   "Instagram import",
   "LinkedIn import",
-  "Remove PaperChai branding",
+  "Remove Kritvani branding",
   "Analytics & insights",
   "E-commerce / payments",
   "Blog or news section",

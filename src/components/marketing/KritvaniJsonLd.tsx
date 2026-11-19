@@ -2,8 +2,8 @@ import { LOGO_PATH, PRODUCT_NAME } from "@/lib/brand";
 import { DEFAULT_DESCRIPTION } from "@/lib/seo";
 import { getAppBaseUrl } from "@/lib/site-url";
 
-/** Organization + WebSite schema for PaperChai marketing pages. */
-export function PaperChaiJsonLd() {
+/** Organization + WebSite schema for Kritvani marketing pages. */
+export function KritvaniJsonLd() {
   const url = getAppBaseUrl();
   const graph = [
     {

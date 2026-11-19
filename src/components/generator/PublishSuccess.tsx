@@ -118,7 +118,7 @@ export function PublishSuccess({
           We&apos;d love your feedback
         </p>
         <p className="mx-auto mt-1 max-w-sm text-center text-sm leading-6 text-[#3d4f48] dark:text-stone-300">
-          Rate your experience. One tap helps us improve PaperChai for the next business.
+          Rate your experience. One tap helps us improve Kritvani for the next business.
         </p>
 
         {!submitted ? (

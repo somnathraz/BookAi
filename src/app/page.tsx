@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { Studio } from "@/components/generator/Studio";
-import { PaperChaiJsonLd } from "@/components/marketing/PaperChaiJsonLd";
+import { KritvaniJsonLd } from "@/components/marketing/KritvaniJsonLd";
 import { RecentJournal } from "@/components/marketing/RecentJournal";
 import { recentBlogArticles } from "@/features/content/blog/blog-helpers";
 import { listRecentPublicSites } from "@/features/site-management/application/list-recent-public-sites";
@@ -24,7 +24,7 @@ export default async function Home() {
 
   return (
     <>
-      <PaperChaiJsonLd />
+      <KritvaniJsonLd />
       <Studio
         recentSites={recentSites}
         journalSlot={<RecentJournal articles={recentBlogArticles(4)} />}

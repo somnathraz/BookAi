@@ -464,7 +464,7 @@ export async function sendSitePublishedEmail(
       <div style="margin:20px 0 0;padding:16px;border-radius:14px;background:#f4f7f5;border:1px solid #dce8e2">
         <p style="margin:0 0 8px;font-weight:600;color:#214f43">Want more from your site?</p>
         <p style="margin:0;color:#555;font-size:14px;line-height:1.6">
-          Basic unlocks up to 5 sites, your own domain, email + WhatsApp booking, and no PaperChai branding.
+          Basic unlocks up to 5 sites, your own domain, email + WhatsApp booking, and no Kritvani branding.
         </p>
         ${emailButton(details.pricingUrl, "See Basic features")}
       </div>`
@@ -529,7 +529,7 @@ export async function sendUpgradeNudgeEmail(
   const lines = [
     intro,
     "",
-    "Basic adds custom domain, booking, more sites, and removes PaperChai branding.",
+    "Basic adds custom domain, booking, more sites, and removes Kritvani branding.",
     "",
     `Upgrade: ${details.pricingUrl}`,
     `My sites: ${details.dashboardUrl}`,
@@ -544,7 +544,7 @@ export async function sendUpgradeNudgeEmail(
       <li>Connect your own domain (we show the DNS steps)</li>
       <li>Email + WhatsApp booking for enquiries</li>
       <li>Up to 5 sites and unlimited edits</li>
-      <li>Remove PaperChai branding</li>
+      <li>Remove Kritvani branding</li>
     </ul>
     ${emailButton(details.pricingUrl, "Upgrade to Basic")}
     <p style="margin:16px 0 0"><a href="${details.dashboardUrl}" style="color:#214f43;font-weight:600">Go to My sites</a></p>`;

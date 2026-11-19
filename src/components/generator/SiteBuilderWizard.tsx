@@ -167,7 +167,7 @@ function LivePreviewPanel({
           <span className="size-2 rounded-full bg-current opacity-20" />
           <span className="size-2 rounded-full bg-current opacity-20" />
           <span className="ml-2 truncate text-[10px] text-muted-foreground">
-            {name.trim() || "your-name"}.paperchai.com
+            {name.trim() || "your-name"}.sites.kritvani.com
           </span>
         </div>
 
@@ -402,13 +402,13 @@ export function SiteBuilderWizard({
   useEffect(() => {
     const current = window.history.state ?? {};
     window.history.replaceState(
-      { ...current, paperchaiBuilder: true, builderStep: initialStep },
+      { ...current, kritvaniBuilder: true, builderStep: initialStep },
       ""
     );
 
     function onPopState(event: PopStateEvent) {
       const historyStep = Number(event.state?.builderStep);
-      if (event.state?.paperchaiBuilder && historyStep >= 1 && historyStep <= 3) {
+      if (event.state?.kritvaniBuilder && historyStep >= 1 && historyStep <= 3) {
         setStep(historyStep);
       }
     }
@@ -430,7 +430,7 @@ export function SiteBuilderWizard({
     const boundedStep = Math.max(1, Math.min(3, nextStep));
     const current = window.history.state ?? {};
     window.history.pushState(
-      { ...current, paperchaiBuilder: true, builderStep: boundedStep },
+      { ...current, kritvaniBuilder: true, builderStep: boundedStep },
       ""
     );
     setStep(boundedStep);
@@ -442,14 +442,14 @@ export function SiteBuilderWizard({
       const previousStep = step - 1;
       const current = window.history.state ?? {};
       window.history.replaceState(
-        { ...current, paperchaiBuilder: true, builderStep: previousStep },
+        { ...current, kritvaniBuilder: true, builderStep: previousStep },
         ""
       );
       setStep(previousStep);
       return;
     }
     const current = window.history.state;
-    if (current?.paperchaiBuilder) {
+    if (current?.kritvaniBuilder) {
       window.history.back();
       return;
     }

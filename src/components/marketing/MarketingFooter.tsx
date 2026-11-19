@@ -77,7 +77,7 @@ export function GeneratedSiteFooter({
   className,
 }: {
   ownerName: string;
-  /** When false, hide the PaperChai badge (Basic+). */
+  /** When false, hide the Kritvani badge (Basic+). */
   showBranding?: boolean;
   className?: string;
 }) {

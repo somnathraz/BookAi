@@ -112,7 +112,7 @@ export default function DashboardBillingPage() {
       const url = URL.createObjectURL(blob);
       const anchor = document.createElement("a");
       anchor.href = url;
-      anchor.download = "paperchai-data-export.json";
+      anchor.download = "kritvani-data-export.json";
       document.body.appendChild(anchor);
       anchor.click();
       anchor.remove();

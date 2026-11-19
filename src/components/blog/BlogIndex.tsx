@@ -44,7 +44,7 @@ export function BlogIndex({
           <div className="relative mx-auto flex min-h-[min(760px,calc(100svh-4rem))] max-w-6xl items-end px-6 pb-14 pt-28 sm:pb-20">
             <div className="max-w-3xl">
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald-200">
-                PaperChai journal · {featured.category}
+                Kritvani journal · {featured.category}
               </p>
               <h1 className="mt-5 font-[family-name:var(--font-editorial)] text-5xl leading-[0.96] tracking-[-0.035em] sm:text-6xl lg:text-7xl">
                 {featured.title}
@@ -73,7 +73,7 @@ export function BlogIndex({
       ) : (
         <header className="mx-auto max-w-6xl px-6 pb-8 pt-20">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-800 dark:text-emerald-300">
-            PaperChai journal
+            Kritvani journal
           </p>
           <h1 className="mt-4 font-[family-name:var(--font-editorial)] text-5xl tracking-[-0.035em]">
             Guides for local businesses

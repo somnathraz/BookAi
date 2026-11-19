@@ -10,7 +10,7 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Thank you",
-  description: "Your PaperChai Basic plan is active.",
+  description: "Your Kritvani Basic plan is active.",
   path: "/dashboard/billing/success",
   noIndex: true,
 });
@@ -38,7 +38,7 @@ export default async function BillingSuccessPage({
         </h1>
         <p className="mt-3 text-sm text-muted-foreground">
           Your subscription is active. You can create up to 5 sites, connect a custom domain, and
-          remove PaperChai branding.
+          remove Kritvani branding.
         </p>
 
         <div className="mt-6 w-full rounded-2xl border bg-card/60 p-5 text-left text-sm">

@@ -108,7 +108,7 @@ export interface BookingConfig {
   calendarUrl?: string;
   /** Custom primary button label, e.g. "Request appointment". */
   buttonLabel?: string;
-  /** PaperChai-native slot scheduling (Phase 4). */
+  /** Kritvani-native slot scheduling (Phase 4). */
   native?: NativeSchedulingConfig;
 }
 

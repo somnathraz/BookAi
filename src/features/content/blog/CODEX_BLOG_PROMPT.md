@@ -1,8 +1,8 @@
-# PaperChai journal: research, write, verify, learn
+# Kritvani journal: research, write, verify, learn
 
-This is the reusable editorial workflow for https://paperchaiapp.com/blog.
+This is the reusable editorial workflow for https://kritvani.com/blog.
 Read it before each scheduled or manual article run, together with AGENTS.md.
-It adapts the supplied SomSite checklist to PaperChai's publishing system.
+It adapts the supplied SomSite checklist to Kritvani's publishing system.
 
 ## Scope and publishing contract
 
@@ -21,7 +21,7 @@ It adapts the supplied SomSite checklist to PaperChai's publishing system.
   skip. A manual extra article requires an explicit request.
 - If no useful distinct topic survives review, skip with a reason and record the
   candidates considered. Do not publish a rewrite to satisfy a daily quota.
-- On Fridays, choose a useful PaperChai workflow with product steps verified in
+- On Fridays, choose a useful Kritvani workflow with product steps verified in
   the repository. Include a concise Instagram/LinkedIn image-post caption in
   `promotionCaption`. Preparing copy does not authorize posting to social media.
 
@@ -61,7 +61,7 @@ Record a short brief for each candidate in the run notes:
    repeated customer questions, or an explicitly unvalidated hypothesis.
 5. A practical deliverable: worked example, decision checklist, sample brief,
    or troubleshooting sequence.
-6. A real PaperChai next step and two relevant existing blog destinations.
+6. A real Kritvani next step and two relevant existing blog destinations.
 
 Prefer audience fit, original useful detail, and product relevance over raw
 popularity. Reject overlaps before drafting. Do not make interchangeable city
@@ -95,7 +95,7 @@ The body must be useful without metadata. Include:
 - A short checklist expressed through the supported heading/paragraph structure,
   rather than raw Markdown list syntax.
 - When to seek help and what information to prepare.
-- A final "Next step" section connecting the advice to a relevant PaperChai action
+- A final "Next step" section connecting the advice to a relevant Kritvani action
   and the existing CTA, without a generic sales pitch.
 
 Use one detailed example rather than naming many professions without explaining
@@ -112,7 +112,7 @@ urgency, keyword stuffing, and unsupported virality claims.
 
 ## 4. Fill metadata using the registry contract
 
-| Supplied template concept | PaperChai representation |
+| Supplied template concept | Kritvani representation |
 | --- | --- |
 | title / metaTitle | `title`, used for the visible H1 and page metadata |
 | description | `description` |
@@ -126,14 +126,14 @@ urgency, keyword stuffing, and unsupported virality claims.
 - Use a unique descriptive kebab-case slug. Check the entire registry. Keep old
   slugs and publication dates stable.
 - Aim for a 45–60-character title with one clear intent and no brand suffix; the
-  layout adds PaperChai. These are house limits, not Google's display guarantees.
+  layout adds Kritvani. These are house limits, not Google's display guarantees.
 - Write a benefit-first **140–160-character description**, within the supplied
   120–160 range. Do not append keyword lists.
 - Set `publishedAt` and `updatedAt` to the actual run's publish date, equal for
   a new post, as ISO `YYYY-MM-DD`. Only change `updatedAt` after a material edit.
 - Use 3–5 natural keyword phrases, primary first. This is editorial metadata;
   Google does not use the keywords meta tag for ranking.
-- Categories: Local growth, Website foundations, PaperChai workflow, PaperChai
+- Categories: Local growth, Website foundations, Kritvani workflow, Kritvani
   guides, Independent work, or Practical guide.
 - Select a relevant licensed Unsplash photo with
   `auto=format&fit=crop&w=1800&q=85`. Inspect the actual photo, verify its source
@@ -148,7 +148,7 @@ The page supplies one H1 from `title`; section headings become H2s.
 Paragraph strings are plain text. Do not insert raw HTML, MDX, H1s, or Markdown
 links and assume they become rendered elements.
 
-The existing Related guides block is PaperChai's Related Reading section. Verify
+The existing Related guides block is Kritvani's Related Reading section. Verify
 it contains at least **two distinct relevant internal blog links** resolving to
 real registry slugs, neither the current article. Check the actual output of
 `getRelatedBlogArticles`; matching a category does not ensure relevance. If the
@@ -162,7 +162,7 @@ link model belongs in a separate explicitly authorized implementation change.
 
 Reuse BlogPosting, BreadcrumbList, article Open Graph metadata, canonical URL,
 and registry-driven sitemap/RSS. Confirm metadata matches visible content.
-PaperChai remains the Organization publisher; do not invent a personal author.
+Kritvani remains the Organization publisher; do not invent a personal author.
 Do not add FAQPage or HowTo rich-result markup for this journal. If 2–4 Q&As are
 useful, put them visibly in the supported section structure without repeating
 another guide just to add keywords.

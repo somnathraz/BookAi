@@ -1,5 +1,5 @@
 /**
- * Client-side GA4 helpers for PaperChai (paperchaiapp.com).
+ * Client-side GA4 helpers for Kritvani (kritvani.com).
  * No-ops outside production or when gtag / measurement ID is missing.
  */
 

@@ -2409,7 +2409,7 @@ export function GeneratedSite({
   /** Public slug — required for the booking form API. */
   slug?: string;
   showBookingWhatsApp?: boolean;
-  /** Hide PaperChai footer badge on published sites (Basic+). */
+  /** Hide Kritvani footer badge on published sites (Basic+). */
   showBranding?: boolean;
   theme: ThemeMode;
   /** When provided the theme is controlled by the parent (e.g. the Studio

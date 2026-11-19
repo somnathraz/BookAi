@@ -109,7 +109,7 @@ export default async function BlogArticlePage({
               <Clock3 className="size-3.5" />
               {article.readingMinutes} min read
             </span>
-            <span>By PaperChai</span>
+            <span>By Kritvani</span>
           </div>
         </header>
         <figure className="relative mx-auto aspect-[16/8] max-w-6xl overflow-hidden px-6">
@@ -172,7 +172,7 @@ export default async function BlogArticlePage({
               href="/?new"
               className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-emerald-800 hover:text-emerald-700 dark:text-emerald-300"
             >
-              Create a site with PaperChai
+              Create a site with Kritvani
               <ArrowRight className="size-4" />
             </Link>
           </div>

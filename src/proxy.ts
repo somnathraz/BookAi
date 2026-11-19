@@ -1,9 +1,39 @@
 import { NextResponse, type NextRequest } from "next/server";
 
+import { LEGACY_APP_DOMAINS } from "@/lib/brand";
 import { getSiteSlugByVerifiedHost } from "@/lib/custom-domain";
-import { getSiteRootDomain, subdomainFromHost } from "@/lib/site-url";
+import {
+  getCanonicalAppDomain,
+  getSiteRootDomain,
+  subdomainFromHost,
+} from "@/lib/site-url";
 
-// Wildcard subdomain routing: glamzone.paperchaiapp.com → /glamzone
+/**
+ * Where a legacy-domain request should go, or null if the host isn't legacy.
+ *   paperchaiapp.com/x, www.paperchaiapp.com/x → https://kritvani.com/x
+ *   glamzone.paperchaiapp.com/x                → https://glamzone.sites.kritvani.com/x
+ */
+function legacyRedirectTarget(
+  hostname: string,
+  appDomain: string,
+  siteRoot: string | null
+): { host: string; slugPrefix: string | null } | null {
+  for (const legacy of LEGACY_APP_DOMAINS) {
+    if (hostname === legacy || hostname === `www.${legacy}`) {
+      return { host: appDomain, slugPrefix: null };
+    }
+    if (hostname.endsWith(`.${legacy}`)) {
+      const sub = subdomainFromHost(hostname, legacy);
+      if (!sub) return { host: appDomain, slugPrefix: null };
+      return siteRoot
+        ? { host: `${sub}.${siteRoot}`, slugPrefix: null }
+        : { host: appDomain, slugPrefix: sub };
+    }
+  }
+  return null;
+}
+
+// Wildcard subdomain routing: glamzone.sites.kritvani.com → /glamzone
 // Custom domains: www.example.com → /glamzone (after DNS + verification)
 //
 // When NEXT_PUBLIC_SITE_DOMAIN is set, a request to a site subdomain is
@@ -41,11 +71,27 @@ export async function proxy(req: NextRequest) {
     );
   }
 
+  const hostname = host.split(":")[0].toLowerCase().replace(/\.$/, "");
+  const appDomain = getCanonicalAppDomain();
+
+  // Old paperchaiapp.com URLs → permanent redirect to the Kritvani equivalent.
+  const legacy = legacyRedirectTarget(hostname, appDomain, root);
+  if (legacy) {
+    const target = req.nextUrl.clone();
+    target.protocol = "https:";
+    target.hostname = legacy.host;
+    target.port = "";
+    if (legacy.slugPrefix) {
+      target.pathname = `/${legacy.slugPrefix}${target.pathname === "/" ? "" : target.pathname}`;
+    }
+    return withPlatformHeaders(NextResponse.redirect(target, 308), requestId);
+  }
+
   // www.<apex> would otherwise serve a full duplicate of the apex site, which
   // Search Console reports as "Alternate page with proper canonical tag".
-  if (root && host.split(":")[0].toLowerCase() === `www.${root}`) {
+  if (hostname === `www.${appDomain}`) {
     const canonical = req.nextUrl.clone();
-    canonical.hostname = root;
+    canonical.hostname = appDomain;
     canonical.port = "";
     return withPlatformHeaders(NextResponse.redirect(canonical, 308), requestId);
   }
@@ -57,7 +103,7 @@ export async function proxy(req: NextRequest) {
   // The apex never maps to a customer site, so marketing pages must not depend
   // on the database. A failed lookup also falls through to the app instead of
   // turning every request into a 500.
-  const isAppHost = root !== null && host.split(":")[0].toLowerCase() === root;
+  const isAppHost = hostname === appDomain || hostname === root;
   if (!slug && !isAppHost) {
     try {
       slug = await getSiteSlugByVerifiedHost(host);

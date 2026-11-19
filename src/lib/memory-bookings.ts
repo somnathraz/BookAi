@@ -3,14 +3,14 @@ import "server-only";
 type SiteBooking = { siteId: string };
 
 const memoryState = globalThis as typeof globalThis & {
-  __paperchaiBookings?: SiteBooking[];
+  __kritvaniBookings?: SiteBooking[];
 };
 
 export function memoryBookings<T extends SiteBooking>(): T[] {
-  if (!memoryState.__paperchaiBookings) {
-    memoryState.__paperchaiBookings = [];
+  if (!memoryState.__kritvaniBookings) {
+    memoryState.__kritvaniBookings = [];
   }
-  return memoryState.__paperchaiBookings as T[];
+  return memoryState.__kritvaniBookings as T[];
 }
 
 export function deleteMemoryBookingsForSite(siteId: string): number {

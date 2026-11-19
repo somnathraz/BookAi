@@ -7,7 +7,7 @@ export function customDomainAllowed(plan: Plan): boolean {
   return env.customDomainAllowFree;
 }
 
-/** Hide "Built with PaperChai" on published sites — Basic; free when BRANDING_ALLOW_FREE=true. */
+/** Hide "Built with Kritvani" on published sites — Basic; free when BRANDING_ALLOW_FREE=true. */
 export function brandingRemovalAllowed(plan: Plan): boolean {
   if (plan === "basic") return true;
   return env.brandingAllowFree;

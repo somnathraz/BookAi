@@ -220,7 +220,7 @@ export function AboutFlow3D() {
                 <div className="flex items-center gap-2 border-b border-border/70 px-3 py-2 dark:border-white/10">
                   <span className="size-1.5 rounded-full bg-[#34a853]" />
                   <span className="font-mono text-[10px] text-foreground">
-                    glowgrace.paperchaiapp.com
+                    glowgrace.sites.kritvani.com
                   </span>
                   <span className="ml-auto text-[9px] font-semibold text-[#214f43] dark:text-[#9cc2b3]">
                     Live

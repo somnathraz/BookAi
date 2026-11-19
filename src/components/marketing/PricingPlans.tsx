@@ -64,7 +64,7 @@ const TIERS: Tier[] = [
       "Everything in Free",
       "Up to 5 sites & unlimited edits",
       "Connect your own custom domain",
-      "Remove PaperChai branding",
+      "Remove Kritvani branding",
       "Email + WhatsApp booking",
       "Built-in scheduling & Calendly embed",
     ],

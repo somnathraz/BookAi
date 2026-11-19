@@ -29,7 +29,7 @@ const STEPS = [
     icon: MapPin,
     step: "01",
     title: "Find your business",
-    body: "Search by business name and city. PaperChai can also use a Google Maps Share link, resume, existing website, or short guided brief.",
+    body: "Search by business name and city. Kritvani can also use a Google Maps Share link, resume, existing website, or short guided brief.",
   },
   {
     icon: Sparkles,

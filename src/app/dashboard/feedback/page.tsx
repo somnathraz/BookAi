@@ -7,7 +7,7 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Feedback",
-  description: "Rate PaperChai and tell us which features you want next.",
+  description: "Rate Kritvani and tell us which features you want next.",
   path: "/dashboard/feedback",
   noIndex: true,
 });

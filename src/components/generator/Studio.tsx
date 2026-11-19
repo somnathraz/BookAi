@@ -103,7 +103,7 @@ const proofSignals = [
   {
     icon: Link2,
     label: "Your own link",
-    value: "Free PaperChai address",
+    value: "Free Kritvani address",
   },
 ];
 
@@ -121,7 +121,7 @@ const detailPoints = [
   {
     number: "03",
     title: "Publish and share",
-    body: "Go live on a free PaperChai link. Nothing publishes without your approval.",
+    body: "Go live on a free Kritvani link. Nothing publishes without your approval.",
   },
 ];
 
@@ -248,7 +248,7 @@ export function Studio({
 
   useEffect(() => {
     function onStudioHistory(event: PopStateEvent) {
-      const historyStep = event.state?.paperchaiStudioStep as Step | undefined;
+      const historyStep = event.state?.kritvaniStudioStep as Step | undefined;
       if (historyStep === "preview" && site) {
         setStep("preview");
       } else if (historyStep === "review") {
@@ -436,11 +436,11 @@ export function Studio({
     const returnStep: Step =
       step === "review" ? "review" : activeSource ? "source" : "chooser";
     window.history.replaceState(
-      { ...currentHistory, paperchaiStudioStep: returnStep },
+      { ...currentHistory, kritvaniStudioStep: returnStep },
       ""
     );
     window.history.pushState(
-      { ...currentHistory, paperchaiStudioStep: "preview" },
+      { ...currentHistory, kritvaniStudioStep: "preview" },
       ""
     );
     setInitialValues(exactInput);
@@ -458,7 +458,7 @@ export function Studio({
   function openEditor() {
     const currentHistory = window.history.state ?? {};
     window.history.pushState(
-      { ...currentHistory, paperchaiStudioStep: "review" },
+      { ...currentHistory, kritvaniStudioStep: "review" },
       ""
     );
     setStep("review");
@@ -498,7 +498,7 @@ export function Studio({
     function onPreviewMessage(event: MessageEvent) {
       if (event.origin !== window.location.origin) return;
       if (
-        event.data?.type === "paperchai-preview-theme" &&
+        event.data?.type === "kritvani-preview-theme" &&
         (event.data.theme === "light" || event.data.theme === "dark")
       ) {
         changePreviewTheme(event.data.theme);
@@ -784,7 +784,7 @@ export function Studio({
                   className="mb-5 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-[#214f43] dark:text-[#9cc2b3]"
                 >
                   <span className="size-1.5 rounded-full bg-[#214f43] dark:bg-[#9cc2b3]" />
-                  PaperChai
+                  Kritvani
                 </motion.p>
                 <motion.h1
                   variants={fadeUp}
@@ -796,7 +796,7 @@ export function Studio({
                   variants={fadeUp}
                   className="mt-6 max-w-xl text-pretty text-base leading-7 text-[#5c615b] dark:text-[#aeb4ad] sm:text-lg"
                 >
-                  Find your business and PaperChai turns its real photos, reviews,
+                  Find your business and Kritvani turns its real photos, reviews,
                   hours, and details into a website you control.
                 </motion.p>
                 <motion.div id="create" variants={fadeUp} className="mt-8 max-w-2xl">
@@ -962,7 +962,7 @@ export function Studio({
                 </h2>
               </div>
               <p className="max-w-xl text-lg leading-8 text-stone-600 dark:text-stone-300">
-                PaperChai turns the proof customers already trust on Google into a
+                Kritvani turns the proof customers already trust on Google into a
                 focused mobile website with calls, directions, WhatsApp, and booking.
               </p>
             </motion.div>
@@ -996,7 +996,7 @@ export function Studio({
               <div className="bg-[#214f43] p-7 text-white sm:p-10">
                 <div className="flex items-center gap-2 text-sm font-semibold">
                   <Sparkles className="size-4" />
-                  What PaperChai creates
+                  What Kritvani creates
                 </div>
                 <p className="mt-8 text-3xl font-semibold tracking-tight">Your business website</p>
                 <p className="mt-3 max-w-sm leading-7 text-white/65">
@@ -1168,7 +1168,7 @@ export function Studio({
               <div className="flex w-full min-w-0 flex-col gap-5">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                   <div className="min-w-0">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#214f43] dark:text-[#9cc2b3]">PaperChai studio</p>
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#214f43] dark:text-[#9cc2b3]">Kritvani studio</p>
                     <h2 className="mt-1 text-2xl font-semibold tracking-[-0.025em] text-[#11130f] dark:text-stone-50">
                       {editingSiteId ? "Edit your site" : "Build your site"}
                     </h2>

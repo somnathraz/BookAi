@@ -7,7 +7,7 @@ import { getAppBaseUrl } from "@/lib/site-url";
 export const DEFAULT_TITLE = `${PRODUCT_NAME} — Turn your business into a website`;
 
 export const DEFAULT_DESCRIPTION =
-  "Find your business or start from a resume, an existing site, or a short guided brief. PaperChai creates a polished website you can review before publishing.";
+  "Find your business or start from a resume, an existing site, or a short guided brief. Kritvani creates a polished website you can review before publishing.";
 
 export const SITE_KEYWORDS = [
   "AI website builder",

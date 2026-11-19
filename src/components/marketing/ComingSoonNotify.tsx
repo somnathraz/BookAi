@@ -77,7 +77,7 @@ export function ComingSoonNotify() {
             Help choose what ships next
           </p>
           <h2 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
-            Which source should PaperChai add next?
+            Which source should Kritvani add next?
           </h2>
           <p className="mt-2 max-w-lg text-sm leading-6 text-muted-foreground">
             Vote with one tap. Add your email only if you want a launch update

@@ -22,7 +22,7 @@ export function normalizeCustomDomain(raw: string): string | null {
 }
 
 export function customDomainTxtHost(domain: string): string {
-  return `_paperchai-verification.${domain}`;
+  return `_kritvani-verification.${domain}`;
 }
 
 export function hostsForCustomDomain(domain: string): string[] {
@@ -142,11 +142,18 @@ export async function verifySiteCustomDomain(
   }
 
   const txtHost = customDomainTxtHost(stored.customDomain);
-  const verified = await txtIncludesToken(txtHost, stored.customDomainVerifyToken);
+  // Owners who started setup before the rename were told to add the old
+  // `_paperchai-verification` host — accept it so they don't have to redo DNS.
+  const verified =
+    (await txtIncludesToken(txtHost, stored.customDomainVerifyToken)) ||
+    (await txtIncludesToken(
+      `_paperchai-verification.${stored.customDomain}`,
+      stored.customDomainVerifyToken
+    ));
   if (!verified) {
     return {
       ok: false,
-      error: `TXT record not found yet. Add _paperchai-verification.${stored.customDomain} and try again in a few minutes.`,
+      error: `TXT record not found yet. Add _kritvani-verification.${stored.customDomain} and try again in a few minutes.`,
     };
   }
 

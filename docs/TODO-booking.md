@@ -1,6 +1,6 @@
 # Booking system — TODO
 
-> **Goal:** Let visitors on a published site request an appointment / table / session, and let the site owner receive it — by **email** (Basic) and **WhatsApp** (Pro), without leaving PaperChai for v1 of booking.
+> **Goal:** Let visitors on a published site request an appointment / table / session, and let the site owner receive it — by **email** (Basic) and **WhatsApp** (Pro), without leaving Kritvani for v1 of booking.
 
 Status: **Phase 1–4 shipped**
 
@@ -199,7 +199,7 @@ Public POST body:
 - [x] `BookingConfig.calendarUrl` — Calendly, Cal.com, Google Calendar, Outlook links
 - [x] `BookingSection`: **Pick a time** tab with inline iframe (or link-out fallback)
 - [x] URL allowlist + validation in `src/lib/calendar-embed.ts` and PATCH API
-- [x] No PaperChai calendar storage — owner manages calendar externally
+- [x] No Kritvani calendar storage — owner manages calendar externally
 - [x] Dashboard field with helper copy
 
 ### Phase 4 — Native scheduling (later)

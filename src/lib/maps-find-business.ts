@@ -21,7 +21,7 @@ export const MAPS_FIND_MOBILE_STEPS: MapsFindStep[] = [
   {
     title: "Come back and paste it",
     detail:
-      "Return to PaperChai and paste that Share link so we import the right location.",
+      "Return to Kritvani and paste that Share link so we import the right location.",
   },
 ];
 
@@ -44,7 +44,7 @@ export const MAPS_FIND_DESKTOP_STEPS: MapsFindStep[] = [
   {
     title: "Paste it back here",
     detail:
-      "Return to PaperChai and paste the link to create your site.",
+      "Return to Kritvani and paste the link to create your site.",
   },
 ];
 

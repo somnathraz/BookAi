@@ -5,7 +5,7 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Edit site",
-  description: "Update your published PaperChai site and republish to the same URL.",
+  description: "Update your published Kritvani site and republish to the same URL.",
   path: "/edit",
   noIndex: true,
 });

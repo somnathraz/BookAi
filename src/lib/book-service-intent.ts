@@ -1,6 +1,6 @@
 /** Cross-section intent: service card → booking form with that service selected. */
 
-export const BOOK_SERVICE_EVENT = "paperchai:book-service";
+export const BOOK_SERVICE_EVENT = "kritvani:book-service";
 
 export interface BookServiceDetail {
   service: string;

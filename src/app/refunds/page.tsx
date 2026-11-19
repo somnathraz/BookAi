@@ -11,7 +11,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Refund & Cancellation Policy",
   description:
-    "PaperChai's baseline subscription cancellation and 7-day refund policy for Basic plan charges.",
+    "Kritvani's baseline subscription cancellation and 7-day refund policy for Basic plan charges.",
   path: "/refunds",
 });
 

@@ -1,4 +1,4 @@
-# PaperChai editorial pipeline audit
+# Kritvani editorial pipeline audit
 
 Observed 2026-10-06. Scope: the local repository, public search discovery, and
 accessible public pages. This pipeline update adds no new article and preserves
@@ -86,8 +86,8 @@ or broad social views alone should not decide what to publish next.
 
 ## References
 
-- [PaperChai homepage](https://paperchaiapp.com/)
-- [Service-menu article found in public search](https://paperchaiapp.com/blog/service-menu-local-business-website-india)
+- [Kritvani homepage](https://kritvani.com/)
+- [Service-menu article found in public search](https://kritvani.com/blog/service-menu-local-business-website-india)
 - [Google: people-first content and word count](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)
 - [Google: title links](https://developers.google.com/search/docs/appearance/title-link)
 - [Google: supported meta tags](https://developers.google.com/search/docs/crawling-indexing/special-tags)

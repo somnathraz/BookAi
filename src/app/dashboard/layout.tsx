@@ -4,7 +4,7 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "My sites",
-  description: "View and manage your published PaperChai sites.",
+  description: "View and manage your published Kritvani sites.",
   path: "/dashboard",
   noIndex: true,
 });

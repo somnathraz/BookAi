@@ -109,7 +109,7 @@ export async function startBasicCheckout(email: string, period: unknown) {
       email,
       app_plan: "basic",
       billing_period: period,
-      product: "paperchai",
+      product: "kritvani",
     },
   });
 
@@ -124,7 +124,7 @@ export async function startBasicCheckout(email: string, period: unknown) {
   return {
     key,
     subscriptionId: subscription.id,
-    name: "PaperChai",
+    name: "Kritvani",
     description: basicCheckoutDescription(period),
     prefill: { email },
     notes: { app_plan: "basic", billing_period: period },

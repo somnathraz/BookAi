@@ -35,7 +35,7 @@ export function DraftSitePreview() {
       onThemeChange={(nextTheme) => {
         setTheme(nextTheme);
         window.parent.postMessage(
-          { type: "paperchai-preview-theme", theme: nextTheme },
+          { type: "kritvani-preview-theme", theme: nextTheme },
           window.location.origin
         );
       }}

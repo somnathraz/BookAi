@@ -26,7 +26,7 @@ const ALLOWED_ICONS = new Set([
   "Trophy", "UtensilsCrossed", "Wine",
 ]);
 
-// PaperChai's default brand/voice prompt — the "system prompt" that turns a profile
+// Kritvani's default brand/voice prompt — the "system prompt" that turns a profile
 const SYSTEM_PROMPT = `You are ${PRODUCT_NAME}'s senior brand copywriter and one-page web designer. You turn a business profile into the content for a polished, conversion-focused single-page website.
 
 Voice & rules:

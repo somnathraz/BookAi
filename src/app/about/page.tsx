@@ -4,7 +4,7 @@ import { PRODUCT_NAME } from "@/lib/brand";
 import { pageMetadata } from "@/lib/seo";
 import { MarketingNav } from "@/components/marketing/MarketingNav";
 import { MarketingFooter } from "@/components/marketing/MarketingFooter";
-import { PaperChaiJsonLd } from "@/components/marketing/PaperChaiJsonLd";
+import { KritvaniJsonLd } from "@/components/marketing/KritvaniJsonLd";
 import { AboutContent } from "@/components/marketing/AboutContent";
 
 export const metadata: Metadata = pageMetadata({
@@ -16,7 +16,7 @@ export const metadata: Metadata = pageMetadata({
 export default function AboutPage() {
   return (
     <main className="relative flex min-h-screen flex-col overflow-hidden">
-      <PaperChaiJsonLd />
+      <KritvaniJsonLd />
       <MarketingNav />
       <AboutContent />
       <div className="relative mt-auto">

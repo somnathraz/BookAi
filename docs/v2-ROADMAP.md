@@ -1,4 +1,4 @@
-# PaperChai v2 — roadmap
+# Kritvani v2 — roadmap
 
 High-level plan for what we're building next. Each doc has phases, checklists, and file lists.
 
@@ -26,7 +26,7 @@ High-level plan for what we're building next. Each doc has phases, checklists, a
 
 Until Razorpay is live, gate Basic features with env overrides:
 
-- `BRANDING_ALLOW_FREE=true` — hide PaperChai footer for all plans
+- `BRANDING_ALLOW_FREE=true` — hide Kritvani footer for all plans
 - `CUSTOM_DOMAIN_ALLOW_FREE=true` — allow domain connect on free plan
 
 Or set `accounts.plan` to `basic` in Postgres (`pro` is treated as Basic for legacy rows).

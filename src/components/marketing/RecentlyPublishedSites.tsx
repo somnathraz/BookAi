@@ -80,7 +80,7 @@ function SiteTile({ site, index }: { site: PublicSiteCard; index: number }) {
 }
 
 /**
- * Homepage gallery of recently published PaperChai sites.
+ * Homepage gallery of recently published Kritvani sites.
  * Accepts server-fetched sites; falls back to a client fetch when empty.
  */
 export function RecentlyPublishedSites({
@@ -127,7 +127,7 @@ export function RecentlyPublishedSites({
             Recently published
           </p>
           <h2 className="mt-4 text-4xl font-semibold tracking-[-0.04em] text-stone-950 dark:text-stone-50 sm:text-5xl">
-            Live sites from PaperChai
+            Live sites from Kritvani
           </h2>
         </div>
         <p className="max-w-sm text-sm leading-6 text-stone-500 dark:text-stone-400">

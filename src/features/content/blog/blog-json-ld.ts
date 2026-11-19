@@ -50,7 +50,7 @@ export function blogIndexJsonLd(articles: readonly BlogArticle[]) {
   return {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: "PaperChai journal",
+    name: "Kritvani journal",
     description:
       "Practical guides for creating a clearer website, getting more enquiries, and sharing your work with confidence.",
     url: absoluteUrl("/blog"),

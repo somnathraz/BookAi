@@ -1,105 +1,73 @@
-# Wildcard subdomain sites (`glamzone.paperchaiapp.com`)
+# Wildcard subdomain sites (`glamzone.sites.kritvani.com`)
 
 This guide turns on **subdomain publishing** so every generated site is served at
-`https://<slug>.<your-domain>` instead of `paperchaiapp.com/<slug>`.
+`https://<slug>.<your-domain>` instead of `kritvani.com/<slug>`.
 
 The code is already wired:
 
 - `src/proxy.ts` rewrites `<slug>.<domain>` → the `/[slug]` route.
 - `src/lib/site-url.ts` builds `https://<slug>.<domain>` share links.
-- Path URLs (`paperchaiapp.com/<slug>`) keep working as a fallback.
+- Path URLs (`kritvani.com/<slug>`) keep working as a fallback.
 
-You only need to (1) set one env var and (2) add a wildcard DNS record on Vercel.
+Production setup for Kritvani: the app is on `kritvani.com`, customer sites are on
+`<slug>.sites.kritvani.com`. DNS stays on Cloudflare (the domain is registered there,
+so its nameservers can't move to Vercel).
 
 ---
 
-## 1. Set the env var
-
-Add your **apex domain** (no `https://`, no path) in every environment you deploy.
+## 1. Env vars (Vercel → book-ai → Settings → Environment Variables)
 
 ```bash
-NEXT_PUBLIC_SITE_DOMAIN=paperchaiapp.com
+NEXT_PUBLIC_APP_URL=https://kritvani.com
+NEXT_PUBLIC_SITE_DOMAIN=sites.kritvani.com
 ```
 
-- **Local** (`.env` / `.env.local`): optional — `<slug>.localhost:3000` works without it,
-  but set it if you want to test the real domain logic.
-- **Vercel**: Project → **Settings → Environment Variables** → add
-  `NEXT_PUBLIC_SITE_DOMAIN = paperchaiapp.com` for **Production** (and Preview if you want).
+`NEXT_PUBLIC_SITE_DOMAIN` is the root that customer slugs sit under, **not** the apex.
+Changing it needs a redeploy (it's baked into the client bundle).
 
-> It must start with `NEXT_PUBLIC_` so the value is available in the browser for
-> building share links. After changing it, **redeploy** (env changes need a new build).
+Local dev doesn't need either — `<slug>.localhost:3000` works out of the box.
 
 ---
 
-## 2. Add the domains in Vercel
+## 2. Domains on the `book-ai` Vercel project
 
-Project → **Settings → Domains**, then add **both**:
-
-| Domain | Why |
+| Domain | Purpose |
 | --- | --- |
-| `paperchaiapp.com` | Your main app + path URLs |
-| `*.paperchaiapp.com` | Every site subdomain (`glamzone.…`, `krishnas.…`, …) |
+| `kritvani.com` | App, marketing, blog, path URLs (`kritvani.com/<slug>`) |
+| `www.kritvani.com` | 308 → `kritvani.com` |
+| `*.sites.kritvani.com` | Every customer site |
+| `paperchaiapp.com`, `www.`, `*.` | Legacy — 308 to the kritvani equivalents until the domain lapses |
 
-Vercel will show the DNS records it needs. The exact records depend on **where your
-DNS is hosted** (see step 3).
-
-> Add `www.paperchaiapp.com` too if you want it; the proxy treats `www` as the
-> app, not a site.
+The invoice app (`paperchai` Vercel project) lives separately at `paperchai.kritvani.com`.
 
 ---
 
-## 3. Configure DNS
+## 3. Cloudflare DNS (zone `kritvani.com`) — all **DNS only / grey cloud**
 
-Pick the option that matches your setup.
+| Type | Name | Value |
+| --- | --- | --- |
+| `A` | `@` | `216.198.79.1` |
+| `A` | `@` | `64.29.17.1` |
+| `CNAME` | `www` | `72a53af7970d38c3.vercel-dns-017.com` |
+| `CNAME` | `*.sites` | `72a53af7970d38c3.vercel-dns-017.com` |
+| `NS` | `_acme-challenge.sites` | `ns1.vercel-dns.com` |
+| `NS` | `_acme-challenge.sites` | `ns2.vercel-dns.com` |
+| `CNAME` | `paperchai` | `e97b9202ee30ce22.vercel-dns-017.com` (invoice app) |
 
-### Option A — Domain registered with / using Vercel nameservers (easiest, recommended)
+The two `NS` records delegate only the ACME challenge to Vercel, which lets Vercel
+issue the `*.sites.kritvani.com` wildcard certificate while everything else stays on
+Cloudflare. Don't proxy (orange-cloud) any of these — it breaks Vercel's SSL.
 
-This is required for **automatic wildcard SSL** (`*` certificates).
-
-1. In Vercel → **Settings → Domains**, add `paperchaiapp.com`.
-2. Vercel shows two **nameservers**, e.g.:
-   ```
-   ns1.vercel-dns.com
-   ns2.vercel-dns.com
-   ```
-3. At your **registrar** (GoDaddy, Namecheap, Google Domains, etc.), replace the
-   existing nameservers with Vercel's.
-4. Wait for propagation (minutes–hours). Vercel then auto-issues SSL for both
-   `paperchaiapp.com` and `*.paperchaiapp.com`.
-
-✅ Nothing else to do — wildcard + SSL are handled by Vercel.
-
-### Option B — Keep DNS at your provider (Cloudflare, Route53, etc.)
-
-Add these records at your DNS provider:
-
-| Type | Name / Host | Value | Notes |
-| --- | --- | --- | --- |
-| `A` | `@` (apex) | `76.76.21.21` | Vercel's apex IP (confirm the value Vercel shows you) |
-| `CNAME` | `www` | `cname.vercel-dns.com` | optional |
-| `CNAME` | `*` | `cname.vercel-dns.com` | **the wildcard — this is the important one** |
-
-Then in Vercel → **Settings → Domains**, click **Refresh / Verify** on
-`paperchaiapp.com` and `*.paperchaiapp.com` until both show **Valid Configuration**.
-
-> **Cloudflare gotcha:** for the wildcard `*` record, set the proxy status to
-> **DNS only (grey cloud)**, not proxied (orange cloud). Proxied wildcards can break
-> Vercel's SSL issuance. Apex/www can stay proxied if you prefer.
-
-> **Wildcard SSL note:** some providers don't issue wildcard certs unless Vercel
-> controls DNS. If `*.paperchaiapp.com` won't go "Valid", use **Option A**
-> (Vercel nameservers) for the wildcard.
+Record values come from Vercel → Domains (or `get_domain_config`); re-check them there
+if Vercel ever changes its recommended targets.
 
 ---
 
 ## 4. Verify
 
-After DNS is valid and you've redeployed:
-
-1. Generate a site (note its slug, e.g. `glamzone`).
-2. Visit `https://glamzone.paperchaiapp.com` → it should render that site.
-3. Visit `https://paperchaiapp.com/glamzone` → still works (fallback).
-4. The dashboard's **Open live site** button now points at the subdomain URL.
+1. `https://kritvani.com` renders the app.
+2. `https://<slug>.sites.kritvani.com` renders that site; `https://kritvani.com/<slug>` still works.
+3. `https://paperchaiapp.com/anything` 308s to `https://kritvani.com/anything`.
 
 Local dev check (no DNS needed):
 
@@ -114,12 +82,12 @@ http://glamzone.localhost:3000
 ## How it works (quick reference)
 
 ```
-Request: glamzone.paperchaiapp.com/
+Request: glamzone.sites.kritvani.com/
         │
         ▼
 src/proxy.ts
-  host = "glamzone.paperchaiapp.com"
-  root = NEXT_PUBLIC_SITE_DOMAIN = "paperchaiapp.com"
+  host = "glamzone.sites.kritvani.com"
+  root = NEXT_PUBLIC_SITE_DOMAIN = "sites.kritvani.com"
   slug = "glamzone"            (apex / www / api / _next are ignored)
         │  rewrite (not redirect)
         ▼
@@ -135,8 +103,8 @@ src/proxy.ts
 
 ## Plan / cost notes
 
-- A `*.paperchaiapp.com` wildcard domain works on **all Vercel plans**, including
-  **Hobby (free)** — wildcard SSL just needs Vercel's nameservers (Option A).
+- A `*.sites.kritvani.com` wildcard domain works on **all Vercel plans**, including
+  **Hobby (free)** — wildcard SSL works via the `_acme-challenge` NS delegation above.
 - Vercel **Hobby is non-commercial**. For a paid product, move to **Pro** (~$20/mo)
   for terms compliance and higher limits.
 - This sets up subdomains on **your** domain. Letting customers point **their own**
@@ -151,9 +119,9 @@ Dashboard → **Settings** → **Custom domain** (Basic or Pro).
 ### Flow
 
 1. Owner enters `theirbiz.com` and saves.
-2. PaperChai shows two DNS records:
-   - **TXT** `_paperchai-verification.theirbiz.com` = verification token (proves ownership)
-   - **CNAME** `www` → `{slug}.paperchaiapp.com`
+2. Kritvani shows two DNS records:
+   - **TXT** `_kritvani-verification.theirbiz.com` = verification token (proves ownership)
+   - **CNAME** `www` → `{slug}.sites.kritvani.com`
 3. Owner clicks **Check DNS** — we look up the TXT record.
 4. Owner adds `www.theirbiz.com` in **Vercel → Project → Domains** (required for TLS).
 5. `proxy.ts` routes `www.theirbiz.com` to the site slug.

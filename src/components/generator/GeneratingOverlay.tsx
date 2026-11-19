@@ -41,7 +41,7 @@ export function GeneratingOverlay({
         <Loader2 className="size-8 animate-spin text-[#214f43] dark:text-[#9cc2b3]" />
       </div>
       <div>
-        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#214f43] dark:text-[#9cc2b3]">PaperChai studio</p>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#214f43] dark:text-[#9cc2b3]">Kritvani studio</p>
         <h2 className="mt-2 text-2xl font-semibold tracking-[-0.025em] text-[#11130f] dark:text-stone-50">
           {editMode ? "Updating your site…" : "Building your site…"}
         </h2>

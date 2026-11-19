@@ -12,7 +12,7 @@ Status: **Shipped (Phases 1–3)** · Target: **v2**
 ### Done before edit mode
 
 - [x] **Publish redirect** — after generate, `window.location.assign()` to canonical live URL (not inline preview)
-- [x] **Canonical URL** — `APP_DOMAIN` + `getPublicSiteUrl(slug, { host })` so links use `paperchaiapp.com` / `<slug>.paperchaiapp.com`, not Vercel preview URLs; local dev uses `<slug>.localhost:3000`
+- [x] **Canonical URL** — `APP_DOMAIN` + `getPublicSiteUrl(slug, { host })` so links use `kritvani.com` / `<slug>.sites.kritvani.com`, not Vercel preview URLs; local dev uses `<slug>.localhost:3000`
 
 ---
 
@@ -36,7 +36,7 @@ Status: **Shipped (Phases 1–3)** · Target: **v2**
 
 1. **Dashboard** — `Edit` button on each site card → `/edit/[id]` (or `/?edit=<id>`)
 2. **Preview bar** (post-publish) — `Edit` → review step with `siteId` set; **Save & publish** updates in place
-3. **Deep link** — `paperchaiapp.com/edit/<id>` (auth-gated)
+3. **Deep link** — `kritvani.com/edit/<id>` (auth-gated)
 
 ### Edit flow (MVP)
 

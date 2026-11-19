@@ -106,7 +106,7 @@ export function CustomDomainPanel({ siteId }: { siteId: string }) {
         <div>
           <h2 className="font-semibold">Custom domain</h2>
           <p className="text-sm text-muted-foreground">
-            Connect your own domain (Basic). Visitors see your brand, not a PaperChai URL.
+            Connect your own domain (Basic). Visitors see your brand, not a Kritvani URL.
           </p>
         </div>
         {state.verified ? (
@@ -153,7 +153,7 @@ export function CustomDomainPanel({ siteId }: { siteId: string }) {
             <li>
               <span className="text-foreground">TXT</span> — host{" "}
               <code className="rounded bg-muted px-1 py-0.5 text-xs">
-                {state.txtHost ?? `_paperchai-verification.${state.domain}`}
+                {state.txtHost ?? `_kritvani-verification.${state.domain}`}
               </code>
               <br />
               value{" "}

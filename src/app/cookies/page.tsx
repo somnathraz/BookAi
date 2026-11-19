@@ -7,7 +7,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Cookie Policy",
   description:
-    "How PaperChai uses essential cookies and similar technologies for sessions, preferences and service reliability.",
+    "How Kritvani uses essential cookies and similar technologies for sessions, preferences and service reliability.",
   path: "/cookies",
 });
 

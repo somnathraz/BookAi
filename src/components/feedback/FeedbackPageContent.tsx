@@ -158,7 +158,7 @@ export function FeedbackPageContent() {
             Feedback
           </p>
           <h1 className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-[#11130f] dark:text-stone-50 sm:text-3xl">
-            Help us improve PaperChai
+            Help us improve Kritvani
           </h1>
           <p className="mt-2 text-sm leading-6 text-muted-foreground">
             Rate your experience and tell us which features you want next. Saved to your account
@@ -187,7 +187,7 @@ export function FeedbackPageContent() {
                 1. How was your experience?
               </h2>
               <p className="mt-1 text-xs text-muted-foreground">
-                Building, publishing, or editing your site on PaperChai.
+                Building, publishing, or editing your site on Kritvani.
               </p>
               <div className="mt-4 flex items-center gap-1">
                 {[1, 2, 3, 4, 5].map((value) => (

@@ -23,7 +23,7 @@ export const metadata: Metadata = pageMetadata({
     "local business website India",
     "Google Business Profile website guide",
     "small business website tips India",
-    "PaperChai journal",
+    "Kritvani journal",
   ],
   alternatesTypes: {
     "application/rss+xml": absoluteUrl("/blog/rss.xml"),

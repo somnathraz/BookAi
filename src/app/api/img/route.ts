@@ -14,7 +14,7 @@ export const GET = createApiRoute("media.proxy", async (request) => {
   const upstream = await fetch(raw, {
     redirect: "follow",
     headers: {
-      "user-agent": "Mozilla/5.0 (compatible; PaperChaiBot/1.0)",
+      "user-agent": "Mozilla/5.0 (compatible; KritvaniBot/1.0)",
       referer: "https://www.google.com/",
     },
   });

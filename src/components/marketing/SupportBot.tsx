@@ -17,7 +17,7 @@ import { ApiClientError, apiClient } from "@/platform/api/api-client";
 
 const SUPPORT_WHATSAPP = "917008257342";
 const WA_URL = `https://wa.me/${SUPPORT_WHATSAPP}?text=${encodeURIComponent(
-  "Hi PaperChai — I need help creating my website."
+  "Hi Kritvani — I need help creating my website."
 )}`;
 const IDLE_NUDGE_MS = 14000;
 
@@ -337,7 +337,7 @@ export function SupportBot({
         <div className="flex h-[min(32rem,72svh)] w-[min(22.5rem,calc(100vw-1.5rem))] flex-col overflow-hidden rounded-[1.35rem] border border-[#11130f]/10 bg-[#f7f7f3] shadow-[0_28px_80px_-28px_rgba(17,19,15,0.55)] dark:border-white/10 dark:bg-[#121412]">
           <div className="flex items-center justify-between gap-3 border-b border-[#11130f]/10 bg-[#214f43] px-4 py-3 text-white dark:border-white/10">
             <div className="min-w-0">
-              <p className="text-sm font-semibold">PaperChai guide</p>
+              <p className="text-sm font-semibold">Kritvani guide</p>
               <p className="text-[11px] text-white/65">Build your site step by step</p>
             </div>
             <div className="flex items-center gap-1">

@@ -13,7 +13,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Terms of Service",
   description:
-    "Terms governing access to PaperChai, including subscriptions, acceptable use, payments, and liability limits.",
+    "Terms governing access to Kritvani, including subscriptions, acceptable use, payments, and liability limits.",
   path: "/terms",
 });
 

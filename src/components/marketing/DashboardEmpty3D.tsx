@@ -59,7 +59,7 @@ export function DashboardEmpty3D() {
             <Plus className="size-5 text-muted-foreground" />
           </div>
           <p className="mt-3 text-xs font-medium text-muted-foreground">Your first site</p>
-          <p className="mt-0.5 font-mono text-[10px] text-muted-foreground/70">yoursite.paperchaiapp.com</p>
+          <p className="mt-0.5 font-mono text-[10px] text-muted-foreground/70">yoursite.sites.kritvani.com</p>
         </motion.div>
 
         {/* maps input cue */}
