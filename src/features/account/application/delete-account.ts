@@ -3,8 +3,10 @@ import "server-only";
 import {
   deleteAccountByEmail,
   getAccountBilling,
+  listSites,
   type DeletedAccountSummary,
 } from "@/lib/accounts";
+import { removeSiteDomain } from "@/lib/vercel-domains";
 import { deleteAccountFeedback } from "@/lib/feedback";
 import { deleteOtpsForEmail, normalizeEmail } from "@/lib/otp";
 import { cancelSubscriptionNow } from "@/lib/razorpay";
@@ -39,11 +41,13 @@ export async function deleteAccount(
     }
   }
 
+  const slugs = (await listSites(session)).map((s) => s.slug);
   const summary = await deleteAccountByEmail(session);
   await Promise.all([
     deleteAccountFeedback(session),
     deleteOtpsForEmail(session),
     deleteNotificationRequestsForEmail(session),
+    ...slugs.map((slug) => removeSiteDomain(slug)),
   ]);
 
   return summary;

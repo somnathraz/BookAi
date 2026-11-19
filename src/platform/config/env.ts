@@ -37,4 +37,8 @@ export const env = {
   brandingAllowFree: optionalEnv("BRANDING_ALLOW_FREE") === "true",
   bookingAllowFree: optionalEnv("BOOKING_ALLOW_FREE"),
   smtpPassword: optionalEnv("SES_SMTP_PASSWORD") ?? optionalEnv("GMAIL_APP_PASSWORD"),
+  // Per-site subdomain registration (src/lib/vercel-domains.ts).
+  vercelApiToken: optionalEnv("VERCEL_API_TOKEN"),
+  vercelProjectId: optionalEnv("VERCEL_PROJECT_ID"),
+  vercelTeamId: optionalEnv("VERCEL_TEAM_ID"),
 } as const;

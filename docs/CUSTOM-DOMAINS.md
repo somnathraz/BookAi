@@ -61,6 +61,11 @@ The two `NS` records delegate only the ACME challenge to Vercel, which lets Verc
 issue the `*.sites.kritvani.com` wildcard certificate while everything else stays on
 Cloudflare. Don't proxy (orange-cloud) any of these — it breaks Vercel's SSL.
 
+**Customer site certificates:** Vercel can't issue the `*.sites` wildcard while DNS is on
+Cloudflare, so each published site's `<slug>.sites.kritvani.com` is added to the Vercel project
+individually (`src/lib/vercel-domains.ts`, on publish / delete) and gets its own certificate.
+Needs `VERCEL_API_TOKEN`, `VERCEL_PROJECT_ID`, `VERCEL_TEAM_ID`. Hobby caps a project at ~50 domains.
+
 Record values come from Vercel → Domains (or `get_domain_config`); re-check them there
 if Vercel ever changes its recommended targets.
 

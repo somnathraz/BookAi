@@ -2,6 +2,7 @@ import "server-only";
 
 import { deleteSite, getPlan, getSiteById, listSites, planLimit } from "@/lib/accounts";
 import { unregisterMemCustomDomain } from "@/lib/custom-domain";
+import { removeSiteDomain } from "@/lib/vercel-domains";
 import { ApiError } from "@/platform/http/api-error";
 
 export async function listOwnedSites(email: string) {
@@ -42,6 +43,7 @@ export async function deleteOwnedSite(email: string, siteId: string) {
     throw new ApiError(404, "site_not_found", "Site not found or already deleted.");
   }
   if (deleted.customDomain) unregisterMemCustomDomain(deleted.customDomain);
+  await removeSiteDomain(deleted.slug);
   return deleted;
 }
 

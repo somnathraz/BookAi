@@ -34,6 +34,644 @@ export function blogArticleModifiedAt(article: BlogArticle): string {
 /** Editorial source of truth. Scheduled publishing adds a reviewed article here. */
 export const blogRegistry: readonly BlogArticle[] = [
   {
+    slug: "about-page-independent-professional-website-india",
+    title: "Write an About page that helps customers choose your service",
+    description:
+      "A practical guide for Indian freelancers and local service businesses to write an honest About page that builds trust without oversharing personal details.",
+    category: "Website foundations",
+    publishedAt: "2026-11-19",
+    updatedAt: "2026-11-19",
+    readingMinutes: 5,
+    image:
+      "https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "Independent professional speaking with a client across a desk in a bright workspace",
+    keywords: [
+      "how to write an about page for freelancer website India",
+      "local service business about page examples India",
+      "what to include on an independent professional website about page",
+      "trustworthy about page for small business website India",
+    ],
+    relatedSlugs: [
+      "testimonial-page-local-service-business-india",
+      "turn-freelance-resume-into-portfolio-website",
+      "professional-enquiry-email-small-business-website-india",
+    ],
+    sections: [
+      {
+        heading: "Give a customer a reason to continue, not a life story",
+        paragraphs: [
+          "An About page is often opened after a visitor has understood the service but before they decide whether to send an enquiry. A person looking for a tutor, photographer, tax consultant, home-repair professional, designer, or therapist may want a few practical answers: who will handle the work, what kind of problems do they take on, and does this business seem real and suitable? The page should make that decision easier. It does not need a dramatic origin story, a long CV, or a promise to be the best in a city.",
+          "Start with a plain sentence that connects the person or business to the customer work. For example: ‘I help independent retailers in Pune turn scattered service information into clear, phone-friendly websites,’ or ‘Riya and the studio team provide appointment-only bridal makeup consultations in South Bengaluru.’ This immediately says who is speaking, who they help, and what the relationship may be. Google’s current people-first content guidance also encourages content that gives readers useful, trustworthy information rather than text written mainly to attract search traffic. Write for the visitor who has already landed on the page.",
+        ],
+      },
+      {
+        heading: "Use a simple proof-and-fit structure",
+        paragraphs: [
+          "A strong small-business About page can usually be built from four short parts. First, identify the business or practitioner and the service focus. Second, explain relevant experience, training, approach, or local knowledge. Third, describe the kind of client or job that is a good fit. Finally, give one honest next step. A freelance web designer might explain that they build and maintain compact sites for local service businesses, show a few relevant project types, state that they begin with a written brief, and link to a consultation request.",
+          "Choose proof a visitor can understand and, where possible, verify. That may be years practising a trade, a relevant qualification, a professional registration when it is appropriate to publish, a portfolio, named service areas, or a clear explanation of how work is reviewed. Do not inflate a short course into expertise, use a client logo without permission, or turn every small project into a claim of leadership. If the business is new, say what is true instead: the owner’s relevant background, the focused offer, and the care taken in the process. Specific and modest is more convincing than grand and vague.",
+        ],
+      },
+      {
+        heading: "Explain your way of working before asking for contact details",
+        paragraphs: [
+          "People often visit an About page because they are unsure what working with the business will feel like. One short process paragraph can reduce that uncertainty. A home-service professional can explain that they first confirm locality and job type before offering a visit window. A consultant can say that the first call clarifies goals and scope before a proposal. A photographer can state that availability is checked before an event date is confirmed. Use ordinary language and keep requests, estimates, and confirmed bookings distinct.",
+          "This is also the right place to state meaningful boundaries. A solo practitioner may take a limited number of projects each month, work remotely, travel only within a stated area, or answer new enquiries on business days. These are useful customer facts, not weaknesses to hide. Pair them with the route that fits: ‘Share your preferred date and locality; we reply to new requests within one business day.’ Do not publish a response promise, service area, qualification, or availability claim here if it conflicts with the contact page, Google Business Profile, or confirmation message.",
+        ],
+      },
+      {
+        heading: "Show personality without publishing private information",
+        paragraphs: [
+          "A recognisable photo, a short first-person introduction, and a few relevant working details can make an independent business feel easier to approach. Use an image that shows the person, team, workspace, or real service context only when everyone pictured has agreed to its use. Give it useful alt text such as ‘Ceramic tutor preparing materials in her Jaipur studio,’ not a list of keywords. If a portrait is unavailable, a genuine work photograph or a restrained illustration can still support the page.",
+          "Keep personal safety and privacy in view. A home-based professional does not need to publish a residential address, family details, identity documents, a daily routine, or a private phone number to appear legitimate. A brief city or service-area reference is usually enough when location matters. Do not expose client names, messages, before-and-after material, or project budgets without clear permission. Trust comes from accurate information and a dependable contact route, not from making more of someone’s private life searchable.",
+        ],
+      },
+      {
+        heading: "Link claims to the pages that answer the next question",
+        paragraphs: [
+          "An About page should guide a visitor onward rather than repeat the whole website. Link a service claim to the relevant service page, a project example to a portfolio item, a customer quote to a consented testimonial, and the next action to the right contact or appointment-request page. Keep the links descriptive: ‘See website refresh projects’ or ‘Request an interior consultation’ is clearer than ‘Learn more’. A visitor should be able to move from confidence to a practical decision without returning to the menu and guessing.",
+          "Check every statement for ownership. If the page says ‘we’, make it clear whether that means one person, an employed team, or an external collaborator. If the business works through a marketplace or referral partner, do not imply that every enquiry is handled directly. If awards, accreditations, licences, or reviews are mentioned, identify the real source and remove them when they are no longer current. Google’s guidance on helpful, reliable content highlights clear sourcing and background as trust signals; for a small business, accuracy matters more than decorative badges.",
+        ],
+      },
+      {
+        heading: "Run a five-minute reader test before publishing",
+        paragraphs: [
+          "Open the page on a phone and ask someone unfamiliar with the business to scan it. Within a few seconds, can they say what the business does, who it is for, and what makes it a plausible fit? Can they find the relevant service, contact route, and response expectation? Check that the page has a clear heading, readable paragraphs, an accessible image description, visible link labels, and keyboard-reachable actions. Remove repetition, unsupported superlatives, and unrelated search phrases that make the writing sound less human.",
+          "Review the page whenever the service focus, team, qualifications, location, or enquiry process changes. In Kritvani, begin with the customer’s decision: state the real service, add proof you can stand behind, explain the first working step, and point to one monitored contact route. A maintained About page will not guarantee a search position or replace good service, but it can make a capable local business easier to understand and safer to choose.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "evaluate-seo-advice-local-business-website-india",
+    title: "How to evaluate SEO advice for a local business website",
+    description:
+      "A practical checklist for Indian local businesses and freelancers to assess SEO advice, avoid risky shortcuts, and choose improvements customers can use.",
+    category: "Website foundations",
+    publishedAt: "2026-11-18",
+    updatedAt: "2026-11-18",
+    readingMinutes: 5,
+    image:
+      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "Independent professional reviewing a website plan on a laptop beside paper notes",
+    keywords: [
+      "how to evaluate SEO advice for local business website India",
+      "SEO agency checklist for Indian freelancers and service businesses",
+      "safe SEO recommendations for a small business website",
+      "questions to ask before paying for website SEO India",
+    ],
+    relatedSlugs: [
+      "improve-service-page-low-ctr-search-console-india",
+      "local-service-website-google-ai-search-basics-india",
+      "google-search-console-setup-local-business-website-india",
+    ],
+    sections: [
+      {
+        heading: "Treat an SEO recommendation as a business decision",
+        paragraphs: [
+          "A local salon, consultant, home-repair professional, or independent designer may receive a confident message promising first-page rankings, AI visibility, or hundreds of backlinks. The offer can sound technical enough to make a website owner feel they must decide immediately. Start with a simpler question: what would this proposed change improve for a person who is trying to choose, contact, or trust the business? If nobody can explain that in ordinary language, it is not ready to buy or publish.",
+          "Google’s current guidance on third-party SEO tools and advice makes an important distinction: outside help can be useful, but no provider controls Google Search or can guarantee a particular ranking. A sensible recommendation should name the affected page, describe the customer problem, state the proposed work, and explain how the owner can check it afterwards. This keeps a business from paying for a mysterious ‘SEO package’ when it may actually need a clearer service page, a working contact route, or an old phone number corrected.",
+        ],
+      },
+      {
+        heading: "Ask for the page, query, and evidence",
+        paragraphs: [
+          "Before approving work, ask which exact URL will change and why. A useful answer might be: ‘Your home physiotherapy page receives impressions for home visits in South Bengaluru, but the first screen does not say which localities you cover. We will add an accurate service-area explanation and test the enquiry action on a phone.’ That is specific enough for the owner to review. It does not promise that every searcher will see the page or that every visitor will enquire.",
+          "Ask what evidence led to the suggestion. It might be a screen recording of a broken mobile form, a Search Console query trend, an accessibility issue, or an out-of-date public listing. Keep the business’s own access to Search Console, analytics, domain, and Google Business Profile. A consultant can be granted the least access needed to do agreed work, but an owner should not need to chase a former provider for the account that records their website’s history. Do not share passwords, recovery codes, or full payment details to obtain a report.",
+        ],
+      },
+      {
+        heading: "Prefer improvements a customer can notice",
+        paragraphs: [
+          "Good website work often looks modest. A service page might state what is included, who it suits, the real service area, and how availability is confirmed. A photographer’s portfolio may get meaningful image descriptions and short project context. A booking page may stop implying that a request is a confirmed appointment. These changes make the page easier to use whether a visitor arrives from Google, a shared link, a Business Profile, or a social post.",
+          "Request before-and-after evidence for changes to public content. Read the finished page on a phone without logging in, follow its call, WhatsApp, email, or form action, and make sure the wording matches the business’s actual capacity. If a recommendation involves structured data, redirects, a sitemap, or a noindex tag, ask what visible page it relates to and what could go wrong. Technical work can be valid, but it should not be a substitute for checking the public customer path.",
+        ],
+      },
+      {
+        heading: "Recognise claims that need a pause",
+        paragraphs: [
+          "Pause when someone guarantees rankings, says they have a special arrangement with Google, or will not identify the work before payment. Be wary of offers to add invisible keyword text, create many near-identical city pages, publish reviews the business did not receive, buy links, or change a Business Profile name to include a long list of services. Those tactics can mislead customers and can conflict with Google’s published guidance. A report full of unfamiliar scores is not evidence by itself; ask what decision each score supports.",
+          "The same caution applies to fashionable add-ons. A special ‘AI SEO’ file, a large batch of AI-written articles, or schema added to every page is not automatically useful. Google says normal Search fundamentals apply to its AI search features and does not require a special AI text file or special structured data for inclusion. If an agency proposes a new tool, ask what it can and cannot measure, whether the business owns the resulting data, its ongoing cost, and whether the change is reversible.",
+        ],
+      },
+      {
+        heading: "Set a small, measurable scope",
+        paragraphs: [
+          "For a small business, begin with one customer route rather than a twelve-month bundle. Agree on the page, the content or technical change, the person approving factual claims, the access required, the cost, and a completion date. Choose a practical success check: the page is indexed and readable, the correct phone link works, a customer can understand the service area, or a completed period shows whether relevant impressions and clicks changed. Search traffic can fluctuate, so do not treat one day or one keyword position as a verdict.",
+          "Record what changed and keep a copy of the page text, redirects, and account permissions. If the provider leaves, this note makes it much easier to continue safely. For a business handling sensitive enquiries, also confirm that the proposed work does not add unnecessary form fields, trackers, or public customer information. The owner remains responsible for what the site promises, even when someone else writes or configures it.",
+        ],
+      },
+      {
+        heading: "Use outside help without giving up control",
+        paragraphs: [
+          "A trustworthy SEO specialist can save time by finding real problems and explaining trade-offs. The useful relationship is collaborative: they show evidence, make a bounded recommendation, document the work, and leave the business able to understand its own website. The business should be able to say what each important page is for, who can edit it, and how a prospective customer reaches the right person.",
+          "In Kritvani, start with the website the customer can actually use: a truthful service explanation, current contact details, an honest response expectation, and a phone-friendly next step. Then make one evidence-led improvement at a time and review its public result. That routine will not manufacture a ranking guarantee, but it does create a clearer, more dependable website that remains useful after the latest SEO pitch has passed.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "professional-enquiry-email-small-business-website-india",
+    title: "Choose a professional email for your business website",
+    description:
+      "A practical guide for local businesses and freelancers choosing a monitored, secure email address for website enquiries without exposing a personal inbox.",
+    category: "Website foundations",
+    publishedAt: "2026-11-17",
+    updatedAt: "2026-11-17",
+    readingMinutes: 5,
+    image:
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1800&q=85",
+    imageAlt: "Person seated at a desk using a laptop",
+    keywords: [
+      "professional enquiry email for small business website India",
+      "business email address for local service website India",
+      "choose email inbox for freelancer website enquiries",
+      "secure website contact email for independent professional India",
+    ],
+    relatedSlugs: [
+      "set-enquiry-response-time-local-service-website-india",
+      "privacy-notice-website-contact-form-india",
+      "website-enquiry-form-fields-local-service-business-india",
+    ],
+    sections: [
+      {
+        heading: "Choose an inbox that belongs to the business",
+        paragraphs: [
+          "An email address on a website is more than a line in the footer. It is a route for quote requests, project files, privacy questions, and the occasional urgent correction. A local tutor, photographer, repair professional, or independent consultant should publish an address only when someone can reliably open it, recognise a genuine enquiry, and reply. A personal address can work at the beginning, but it becomes fragile when it is shared with family mail, tied to a former employee, or forgotten after a busy season.",
+          "If the business owns a domain, an address such as hello@businessname.in or enquiries@businessname.in gives customers a stable route that can outlast a change of staff or email provider. It is not a ranking shortcut and it does not make an unattended inbox trustworthy. Its practical benefit is ownership: the business can keep the public address while changing who receives the mail behind it. If a custom-domain mailbox is not ready, it is safer to publish one monitored address the owner controls than to invent a polished-looking address that nobody checks.",
+        ],
+      },
+      {
+        heading: "Pick one clear purpose before creating several addresses",
+        paragraphs: [
+          "Most very small businesses need one public enquiry address, not a maze of departments. ‘hello@’ or ‘enquiries@’ works when one person handles new work. A freelance architect who receives detailed project requests might use ‘projects@’; a repair business that already separates customer support from estimates could use ‘service@’ and ‘quotes@’. Choose words a customer will understand without needing to know the company structure.",
+          "Do not create sales@, support@, billing@, careers@, and accounts@ merely because larger companies use them. Extra addresses add routing rules, access decisions, and more places for a customer to wait without an answer. If two public addresses genuinely exist, label the difference beside each one: ‘New project enquiries’ and ‘Existing booking support’, for example. Test that both reach the responsible person. A customer should never have to guess whether a message about a delayed visit belongs to an inbox that is checked once a month.",
+        ],
+      },
+      {
+        heading: "Keep the public address separate from private access",
+        paragraphs: [
+          "The address customers see does not need to reveal a personal name, household account, or the login used to control the domain. Keep registrar access, recovery details, billing notices, and owner-level sign-in information in a private business record. Make sure at least one business owner can recover the domain and mailbox if a developer, agency, or staff member leaves. A web designer can be given the access needed to connect a form, but should not be the only person able to reset the public inbox.",
+          "Turn on two-step verification for the account that controls the inbox, use a unique password, and store recovery methods safely. Google describes two-step verification as an extra layer of protection if a password is stolen, and warns never to share verification codes. Those habits matter because a compromised enquiry inbox can expose customer messages and be used to send convincing fake quotes. Do not send passwords, recovery codes, identity documents, payment details, or sensitive customer material through a website contact form just to set up the address.",
+        ],
+      },
+      {
+        heading: "Make email one part of an honest contact path",
+        paragraphs: [
+          "Put the email address where it helps a visitor decide what to do: near the enquiry form, on the contact page, and in the footer only if the footer remains readable on a phone. State what it is for and pair it with a realistic reply expectation. For an illustrative home baker, ‘Email order details and preferred collection date; new requests are reviewed within one business day’ is clearer than ‘Contact us anytime.’ The customer knows what to include, while the owner has not promised an immediate confirmation.",
+          "Email should be an alternative, not necessarily the primary route. A visitor may prefer a form, WhatsApp, or a scheduled call; another may need email because a message needs attachments or a written record. Keep the wording consistent across those routes. An email acknowledgement should not call a request a confirmed booking, and a form confirmation should not promise a faster response than the inbox can deliver. If the business asks customers to send project files, explain the file type or safer next step without inviting passwords, government IDs, card details, or private client records by email.",
+        ],
+      },
+      {
+        heading: "Run a five-minute ownership and delivery check",
+        paragraphs: [
+          "Before publishing, send a harmless test from an account outside the business. Confirm that the message arrives, its reply reaches the sender, and the display name is recognisable. On a phone, tap the email link and make sure it opens the intended address without a typo. Then check the address in the site header, contact page, form confirmation, Google Business Profile if the owner has chosen to publish it there, and social profiles the business controls. Update the source of any old address rather than leaving two competing contact routes live.",
+          "Write down who monitors the inbox, who has recovery access, the normal reply window, and what should happen during leave or a high-demand period. This is a private operating note, not website copy. Recheck it when the business changes domain, staff, phone number, service area, or contact process. If messages are regularly missed, simplify: use one monitored address, reduce duplicate buttons, and adjust the website’s expectation before advertising a faster reply. A dependable route is more valuable than a clever email name.",
+        ],
+      },
+      {
+        heading: "Next step: publish the address only after it is ready",
+        paragraphs: [
+          "In Kritvani, add the business-controlled contact route only after the owner has tested it and agreed who will monitor it. Keep the public page focused on the customer’s next action: the service needed, useful preparation details, and an honest response window. Use the contact-form privacy notice to explain what happens to enquiry information, and review the page on a phone before sharing it.",
+          "Start with one stable enquiry address and one clear alternative route. Once both are working, a Kritvani site can make the contact path easy to find without turning a personal inbox into public infrastructure. The customer gets a written way to ask a considered question, and the business keeps control of the route it depends on.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "set-enquiry-response-time-local-service-website-india",
+    title:
+      "How to set a realistic enquiry response time on your local service website",
+    description:
+      "A practical guide for Indian local service businesses and freelancers to set clear, honest reply expectations for website, call, and WhatsApp enquiries.",
+    category: "Website foundations",
+    publishedAt: "2026-11-16",
+    updatedAt: "2026-11-16",
+    readingMinutes: 5,
+    image:
+      "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "Two colleagues discussing notes beside an open laptop at a worktable",
+    keywords: [
+      "how to set enquiry response time on local service website India",
+      "website reply time for WhatsApp enquiries small business India",
+      "local service business contact page response expectation",
+      "freelancer website enquiry acknowledgement wording India",
+    ],
+    relatedSlugs: [
+      "website-enquiry-form-fields-local-service-business-india",
+      "add-whatsapp-chat-google-business-profile-website-india",
+      "mobile-contact-page-local-service-business-india",
+    ],
+    sections: [
+      {
+        heading: "A response time is part of the service promise",
+        paragraphs: [
+          "A visitor who taps a WhatsApp button or sends a website form has usually made a small but important decision: they think the business may be able to help. Silence after that moment creates uncertainty. They may send the same request to several providers, call repeatedly, or assume the service is unavailable. A short, truthful reply expectation on the website helps a local business set the next step before an enquiry reaches the inbox.",
+          "This is not a promise to be online all day. A solo photographer who is shooting weddings, a home-repair professional travelling between jobs, or a consultant in client meetings may not be able to answer immediately. The useful promise is the one the owner can keep during an ordinary busy week. ‘We reply to new enquiries within one business day’ is more credible than ‘instant response’ when only one person monitors the phone.",
+        ],
+      },
+      {
+        heading: "Measure the real handoff before writing any copy",
+        paragraphs: [
+          "For one week, note when a new website form, call, email, or WhatsApp message can first be reviewed and when the customer receives a useful acknowledgement. Do not count a rushed emoji, an automated receipt with no next step, or a reply sent after midnight just to make the number look better. Look for the normal pattern: perhaps messages received by 5 pm are answered that day, while weekend requests are handled on Monday morning.",
+          "Then choose one shared standard across routes where possible. A business that says ‘reply within two hours’ beside WhatsApp but leaves website forms unanswered for two days trains customers to use the most disruptive channel. If a call is genuinely the fastest way to reach someone, label it clearly. If every request still needs a manual availability check, say ‘Send your locality and preferred date; we will confirm availability by the next business day’ rather than suggesting that a message reserves a slot.",
+        ],
+      },
+      {
+        heading: "Put the expectation beside the action, not in a hidden policy",
+        paragraphs: [
+          "The best place for a reply window is close to the button or form that starts the conversation. A tutoring site might use ‘Ask about a trial class — replies Monday to Saturday, usually within one business day.’ A repair business could say ‘Request a visit estimate — send the appliance model and area; we will reply during working hours.’ The wording tells a visitor both when to expect contact and what information will prevent a second back-and-forth.",
+          "Use the same plain-language expectation on the contact page, form confirmation, and any automatic WhatsApp greeting. The sentences do not need to be identical, but they should not conflict. Do not put a response claim in the page title, image alt text, or a line far below the form where a phone visitor is unlikely to see it. Google recommends people-first content and does not guarantee visibility from any particular wording; this detail is primarily for the person deciding whether to wait or contact someone else.",
+        ],
+      },
+      {
+        heading: "Separate acknowledgement, estimate, and booking confirmation",
+        paragraphs: [
+          "Customers read ‘we got your message’ differently from ‘your work is accepted’ and ‘your appointment is confirmed.’ Keep those stages distinct. An acknowledgement can say that the request arrived and give the ordinary reply window. A follow-up can ask for photos, a brief, location, or preferred time. A booking confirmation should be sent only after the business has checked the diary, travel distance, price conditions, and any deposit rule.",
+          "This distinction matters especially for jobs that require inspection or a custom quote. A cleaner may need the home size and locality; a designer may need project scope; a therapist may need to confirm the consultation format. Avoid automatic language such as ‘Your appointment is booked’ unless the system actually allocates and protects the slot. Clear stages reduce disappointed customers and give the owner room to review each request safely.",
+        ],
+      },
+      {
+        heading: "Plan for days when the normal promise will not hold",
+        paragraphs: [
+          "A response window needs an exception plan. Before a holiday, a full-day event, illness, or a period of high demand, change the visible contact note and automated acknowledgement before the backlog arrives. For example: ‘We are reviewing new cake orders from Tuesday; requests received this weekend will be answered then.’ Remove or revise the notice as soon as normal handling resumes. An old delay message is almost as confusing as an unanswered form.",
+          "Keep the promise modest when capacity is uncertain. If the business cannot assess urgent work after hours, do not use emergency wording merely to collect more leads. If someone else covers messages, agree which enquiries they can acknowledge and which need the owner’s answer. Record the answer route privately—shared inbox, business phone, or dashboard—without putting staff schedules, personal numbers, or customer details on the public site.",
+        ],
+      },
+      {
+        heading: "Make the contact page easy to use while customers wait",
+        paragraphs: [
+          "A helpful contact page can answer the questions that otherwise create duplicate messages. State the service area or remote-working model, typical visit or consultation process, information needed for an estimate, and any booking boundary. Keep the form short: name, safe contact detail, the service needed, and a concise note are usually enough to begin. Do not ask for identity documents, payment details, or sensitive personal information simply because a customer is trying to get a faster response.",
+          "Give a sensible alternative when one route is unavailable. A customer who cannot make a phone call may prefer a form or WhatsApp; a visitor with weak data may need a call number. Label each route by purpose, not by marketing language: ‘Call during weekday hours,’ ‘Message about availability,’ or ‘Request a written estimate.’ Test the routes from a phone, including the confirmation message, before publishing. A clear promise only helps if the message reaches the right person.",
+        ],
+      },
+      {
+        heading: "Review the promise monthly, not only when someone complains",
+        paragraphs: [
+          "Once a month, compare the stated response time with a small sample of real enquiries. If most first replies now take two business days, change the site or improve the process before advertising a faster turnaround. If a new staff member or workflow makes replies reliably quicker, update the wording carefully and test it for a few weeks. The goal is a dependable customer experience, not an impressive number.",
+          "Kritvani can help a business publish a clear contact path and keep its public copy current, but the owner remains responsible for monitoring it and confirming appointments or estimates. Start with one statement the business can honour, place it beside the primary action, and make the confirmation message match. That small operational detail gives a prospective customer a clearer reason to wait—and gives the business a calmer way to manage the next conversation.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "write-alt-text-service-photos-local-business-website-india",
+    title: "How to write alt text for service photos on a local business website",
+    description:
+      "A practical guide for Indian local businesses and freelancers to write useful alt text for service photos without turning it into a list of keywords.",
+    category: "Website foundations",
+    publishedAt: "2026-11-15",
+    updatedAt: "2026-11-15",
+    readingMinutes: 5,
+    image:
+      "https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "Small business team reviewing a project together at a desk",
+    keywords: [
+      "how to write alt text for local business service photos India",
+      "accessible website image descriptions for Indian freelancers",
+      "alt text examples for service business website portfolio",
+      "image SEO without keyword stuffing local business website",
+    ],
+    relatedSlugs: [
+      "accessibility-statement-local-service-website-india",
+      "turn-before-after-reels-into-website-proof-india",
+      "google-business-profile-photos-local-service-website-india",
+    ],
+    sections: [
+      {
+        heading: "Alt text is for the customer who cannot see the photo",
+        paragraphs: [
+          "A website photo can answer a useful question before a customer sends an enquiry. A salon visitor may want to see the kind of work offered; a tutor’s parent may want to understand the teaching setting; a designer may want to show the scale of a completed project. But a photo alone cannot give the same answer to a person using a screen reader, a text-only browser, or a slow connection. Alt text is the short replacement description that gives the image a purpose when it is not visible.",
+          "It is not a hidden place to repeat ‘best electrician in Delhi’ or every locality a business serves. Google’s current image guidance says alt text should be useful and in context, and warns against keyword stuffing. That matches the practical test: if a visitor heard the description read aloud, would it help them understand why the photo is on this particular page? If not, it needs less marketing language and more truthful detail.",
+        ],
+      },
+      {
+        heading: "First decide whether the image carries information",
+        paragraphs: [
+          "Not every image needs a spoken description. A purely decorative background texture, divider flourish, or repeated icon that adds no new meaning should be treated as decorative by the site template, so it does not become noise for assistive technology. Do not write alt text merely because a field is available. The important distinction is whether removing the picture would leave a visitor without useful information.",
+          "A service photo usually does carry information when it shows the work, the customer setting, a relevant product, an access detail, or an example that helps someone decide. A photo of a home-repair technician checking a washing machine on a service page can explain the kind of visit offered. A photograph of a quiet consultation room can help when the page invites appointment-only clients. If the same fact is already stated in the adjacent sentence, the image may need only a brief description—or may be decorative—rather than a second long explanation.",
+        ],
+      },
+      {
+        heading: "Describe the useful detail in the page’s context",
+        paragraphs: [
+          "Start with what the visitor needs to know, not every object in the frame. On a physiotherapy home-visit page, ‘Physiotherapist guiding a seated mobility exercise during a home visit’ is more useful than ‘Woman in blue shirt holding an elastic band in a living room.’ On a baker’s order page, ‘Box of assorted eggless cupcakes prepared for a birthday order’ tells a customer something relevant, while a list of frosting colours does not.",
+          "Use the surrounding page to decide the level of detail. A portfolio image might need the service and result: ‘Before-and-after view of a compact kitchen reorganised with open shelving.’ A staff photo on an about page might simply say, ‘Three members of the studio team standing beside a worktable.’ Avoid phrases such as ‘image of’ or ‘photo of’; a screen reader already announces the image. Keep the wording natural and short enough that it does not interrupt the page’s flow.",
+        ],
+      },
+      {
+        heading: "Do not make a visual claim the business cannot support",
+        paragraphs: [
+          "Alt text is public copy, so it needs the same accuracy check as a headline or caption. Do not label a staged stock photo as the owner’s team, describe an illustration as a completed customer project, or imply an outcome that the picture does not prove. If a beauty professional uses a reference image to set a mood, describe it as a decorative salon interior only when that is clear and appropriate—or leave it decorative. It should not become evidence of a service, location, or result the business does not offer.",
+          "Take extra care with customer work. Get permission before publishing an identifiable person, private home, vehicle number, document, child, or client material. Crop or choose another image if a background reveals an address, account detail, school name, or other private information. A concise description such as ‘Custom wardrobe installation in progress’ can be enough; it does not need the client’s name, exact address, or personal circumstances to make the work understandable.",
+        ],
+      },
+      {
+        heading: "Handle before-and-after and text-heavy images with nearby copy",
+        paragraphs: [
+          "A before-and-after image needs enough context for a visitor to understand what changed and what the business actually did. Use a short alt text for each state, such as ‘Kitchen wall before repainting, with peeling paint near the window’ and ‘Kitchen wall after repainting in a light neutral colour.’ Put longer details—scope, timing, materials, customer permission, and limits—in the visible case-study text. An alt field is not the right place for a full project report.",
+          "Likewise, do not put essential prices, instructions, addresses, hours, or booking rules only inside a graphic. Repeat that information as normal page text near the image, where it can be read, translated, copied, searched, and updated. If an infographic genuinely has many details, provide a brief alt summary and a complete text explanation beside it. This helps every visitor, including someone whose connection does not load the graphic.",
+        ],
+      },
+      {
+        heading: "Use a small review routine before publishing",
+        paragraphs: [
+          "Before adding a photo, ask five quick questions: Is it relevant to this page? Does it show real work or is it clearly labelled as illustrative? Does the description name the useful subject or action? Would it still make sense if read aloud without the image? Have private or identifying details been removed or permitted? Answering these questions is more reliable than copying a generic phrase across every image.",
+          "Then preview the page on a phone and confirm the image does not hide the service explanation, contact action, or price conditions. If the editor offers an alt-text field, add the description there; do not put it only in a filename or a caption. Kritvani can help a business publish clear pages, but it cannot confirm that a photo is owned, permitted, current, or an accurate record of the work. Keep the final decision with the person who knows the service and the customer relationship.",
+        ],
+      },
+      {
+        heading: "Build a website that still works when images do not",
+        paragraphs: [
+          "The goal is not to optimise every photograph for a search engine. It is to make the service page complete even when a visitor cannot see a picture. Keep the core offer, service area or working model, meaningful limits, proof in publishable text, and next contact step visible in ordinary language. Good photos can then support the decision rather than carry the entire page.",
+          "Start with the images that matter most: the homepage lead image, main service examples, portfolio proof, and any picture that contains information a customer needs before enquiring. Replace vague descriptions such as ‘service image’ with a truthful, contextual line, and leave decorative graphics quiet. That modest improvement makes a Kritvani site easier to use for more customers while keeping the public story honest and maintainable.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "kritvani-local-service-website-brief-workflow-india",
+    title: "Kritvani workflow: write a clear local website brief",
+    description:
+      "A practical Kritvani workflow for Indian local businesses and freelancers to turn real service details into a clear, reviewable website brief.",
+    category: "Kritvani workflow",
+    publishedAt: "2026-11-13",
+    updatedAt: "2026-11-13",
+    readingMinutes: 5,
+    image:
+      "https://images.unsplash.com/photo-1668608321326-6a82b70558bc?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "Person writing notes beside a laptop, mug, and desk supplies",
+    keywords: [
+      "how to write a website brief for local service business India",
+      "Kritvani manual brief workflow",
+      "freelancer website brief checklist India",
+      "what to include in a small business website brief",
+    ],
+    promotionCaption:
+      "A good website brief is not a marketing slogan—it is the set of facts a customer needs to decide what to do next. This Kritvani workflow helps you turn your real service, area, proof, and contact route into a reviewable first draft before you publish.",
+    relatedSlugs: [
+      "create-local-business-website-from-google-maps-listing",
+      "kritvani-resume-to-portfolio-website-workflow-india",
+      "website-enquiry-form-fields-local-service-business-india",
+    ],
+    sections: [
+      {
+        heading: "A brief prevents a polished site from making the wrong promise",
+        paragraphs: [
+          "A local electrician, home baker, designer, or independent consultant can have plenty to say about their work and still struggle to start a website. The usual problem is not a lack of ideas. It is that the facts live in WhatsApp chats, a Google Business Profile, a résumé, old invoices, and someone’s memory. A website brief gathers the decisions a visitor needs before a draft turns those fragments into public promises.",
+          "Use a brief when no imported source is the complete current picture, or when the business wants to begin with its own words. It is not a long agency document. One page of agreed facts is enough: what the business helps with, who it is for, where or how it works, what proof can be shown, and what a visitor should do next. Google’s current guidance favours helpful, people-first pages; a clear brief is a practical way to make the customer, rather than a keyword list, the starting point.",
+        ],
+      },
+      {
+        heading: "Write the customer promise before opening the editor",
+        paragraphs: [
+          "Start with one sentence that a new customer could use to decide whether to continue. For an illustrative Pune appliance technician, that might be: ‘Scheduled washing-machine repairs for homes in Kothrud and nearby areas; send the model and locality to request availability.’ It states a real service, a sensible boundary, and a next step. ‘Fast, affordable solutions for all your needs’ does none of those jobs.",
+          "Then add the limits that would change a customer’s decision. Is the work remote, at the customer’s location, appointment-only, or available from a visitable studio? Are there areas, project sizes, days, languages, or lead times the owner cannot support? Do not turn every exception into a homepage warning. Include the ones that prevent the most likely misunderstanding. A home-based business should not imply walk-ins; a consultant should not imply instant availability simply because an enquiry button is visible.",
+        ],
+      },
+      {
+        heading: "Collect five small groups of facts, not a pile of copy",
+        paragraphs: [
+          "First, record identity: the public business name and the one contact method someone actively monitors. Second, record the offer: two or three core services in ordinary customer language, plus any useful service area or remote-working boundary. Third, record decision details: what affects a quote, what a visitor should prepare, and what happens after an enquiry. Fourth, record proof that can be published honestly, such as a permitted project example, a qualification, or a short customer comment whose meaning is not altered. Finally, record what must stay private: a home address, personal documents, customer messages, login details, or confidential project material.",
+          "This is also the moment to resolve contradictions. If the old Instagram bio says ‘available across India’ but the owner only takes work in two cities, the brief should contain the current scope—not both versions. If a price is only a starting point, note what changes it. If a phone number is for urgent calls while WhatsApp is for routine enquiries, say so. A brief becomes useful when a future edit has one truthful source to return to.",
+        ],
+      },
+      {
+        heading: "Use the Kritvani manual brief as a draft, not an approval button",
+        paragraphs: [
+          "In Kritvani, choose Manual brief when the business needs to type the essentials rather than begin from a Google listing, résumé, or reference site. Add the prepared facts in plain language and use the draft to see what a first-time visitor will understand. The manual route is useful precisely because it does not require a business to copy another website or pretend an old public listing is complete.",
+          "Review the first screen before adding more sections. Can someone tell the business name, service, relevant location or delivery model, and next action? Read each claim as the owner: remove an award, outcome, client name, image, or availability promise that cannot be supported. Keep one main contact route easy to find, then check any secondary link has a clear purpose. Kritvani can help structure and publish the information supplied; it cannot verify operating facts, gain permission to use a client example, or answer an unattended enquiry.",
+        ],
+      },
+      {
+        heading: "Test the brief against a real customer decision",
+        paragraphs: [
+          "Before publishing, ask someone who is not involved in the business to look at the preview on a phone. Give them a small task: find out whether this service fits a customer in a named locality, or find the right way to request a consultation. If they cannot answer without asking the owner, improve the opening and the contact wording before decorating the page. Test the chosen action yourself as well: tap the call, WhatsApp, booking, or form route and make sure it reaches the intended destination.",
+          "Do a final five-question check: Is the service current? Is the area or remote boundary honest? Is the proof permitted and specific? Is the contact route monitored? Does the page explain what happens after the visitor acts? Google’s Search Essentials notes that good practices do not guarantee crawling, indexing, or visibility. That is why this check is about a customer-ready page first, not a promise of rankings or enquiries.",
+        ],
+      },
+      {
+        heading: "Next step: publish only the brief you can maintain",
+        paragraphs: [
+          "When the owner can stand behind the facts and the contact route works, publish the Kritvani site and share the stable public link where customers already look for it. Keep the brief in a private note and revisit it when services, hours, coverage, prices, or the person answering enquiries changes. A smaller site with a dependable message is easier to maintain than a broad site built from guesses.",
+          "If the business already has useful source material, use the existing Kritvani guides for building from a Google Maps listing or turning a résumé into a portfolio. If it does not, start with the manual brief and one honest customer promise. The goal is not to fill every section on day one. It is to give the right customer enough reliable information to take the next step with confidence.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "home-based-service-business-address-website-google-india",
+    title:
+      "Should a home-based service business show its address online? A safer customer-first checklist",
+    description:
+      "A practical guide for Indian home-based service businesses and freelancers deciding when to show an address on their website and Google Business Profile.",
+    category: "Website foundations",
+    publishedAt: "2026-11-12",
+    updatedAt: "2026-11-12",
+    readingMinutes: 5,
+    image:
+      "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "Independent professional working at a desk in a bright home office",
+    keywords: [
+      "should home based business show address on website India",
+      "hide home address Google Business Profile service area business India",
+      "home based freelancer website contact page privacy India",
+      "service area business address website checklist India",
+    ],
+    relatedSlugs: [
+      "set-service-area-google-business-profile-india",
+      "privacy-notice-website-contact-form-india",
+      "mobile-contact-page-local-service-business-india",
+    ],
+    sections: [
+      {
+        heading: "An address is a customer promise, not a credibility badge",
+        paragraphs: [
+          "A home baker in Indore, freelance designer in Kochi, or plumber working from a residential flat may feel that a full street address makes a new website look established. It can create the wrong expectation. If customers cannot visit, collect an order, or receive a consultation there, it can send them to a private home. Start with the customer journey: can someone reasonably arrive during stated hours and receive the stated service?",
+          "Google makes the same distinction in its current Business Profile guidance. A service-area business visits or delivers to customers and should hide its address and show its service area instead. A hybrid business that genuinely receives customers at a staffed, signed location may show both. Use this as a prompt to publish only location information that is accurate, safe, and useful for the way the business operates.",
+        ],
+      },
+      {
+        heading: "Decide which of three customer situations applies",
+        paragraphs: [
+          "First, a customer-facing premises has a real visit path: people can come there, the business name is appropriately displayed, someone is available during the published hours, and the page explains what a visitor can do. A tailoring studio that accepts fittings by appointment may list its address, appointment condition, landmark where needed, and a route or contact action. Check the address carefully before publishing it. Do not use a friend’s office, a mailbox, a virtual office, or a co-working address merely to look local when customers cannot actually meet the business there.",
+          "Second, a service-area business works at the customer’s place or delivers there. A cleaner, electrician, at-home tutor, or photographer who travels for shoots normally needs coverage information, not a home address. State the cities, neighbourhoods, or other areas the business can genuinely serve and explain how availability is confirmed. Third, a remote professional may not need a location at all beyond an honest statement such as ‘Consultations online across India’ or a relevant city for context. Do not invent an office, local phone line, or walk-in option. Being clear about the operating model is more reassuring than pretending every business has a storefront.",
+        ],
+      },
+      {
+        heading: "Build the website contact page around the next useful step",
+        paragraphs: [
+          "For a visitable location, put the complete public address where a customer expects it: the contact page, relevant booking page, and a clear map or directions link if it helps. Match the visible address to the booking instructions. ‘Visits by confirmed appointment’ is valuable when walk-ins are not possible. Test the map and directions link in a private browser on a phone; it should open the intended place, not a pin at the centre of a locality or a personal residence accidentally exposed by an old listing. Keep the contact action visible even when a map is present.",
+          "For a home-based or mobile business, replace the address block with practical decision details: service area, online or on-site mode, lead time or hours for replies, and the safest way to ask about availability. For example: ‘Home appliance repairs across central Kochi. Send the appliance type, locality, and preferred visit time; availability is confirmed before a visit.’ That gives a potential customer a route without revealing a home or encouraging an unannounced visit. It also makes the page more useful than a vague ‘Contact us’ heading followed only by a form.",
+        ],
+      },
+      {
+        heading: "Keep Google Business Profile and website facts aligned",
+        paragraphs: [
+          "Open the public Google Business Profile while signed out and compare it with the public website. Check the business name, phone number, website destination, address visibility, service area, hours, and main contact route. Google says a service-area business should have one profile for its overall served area and should hide an address when it does not receive customers there. A business that has a staffed customer location and also travels may use both the address and service area. Make changes only in the verified business owner’s profile; a Kritvani page cannot update that profile for them.",
+          "Do not respond to an old or unwanted map pin by pasting a different address into the website footer. First determine whether the incorrect address is on the Profile, a directory, an old social account, or an outdated page. Correct the source and note the date. If the website needs a locality signal, use a truthful service-area sentence in normal page text rather than a precise residential address. Consistency helps customers tell whether the website is official, but privacy and accuracy come before matching an unreliable third-party listing.",
+        ],
+      },
+      {
+        heading: "Share only the details needed to start an enquiry",
+        paragraphs: [
+          "A public contact page does not need to become an operations manual. Publish a business-controlled phone number, email address, form, or WhatsApp route only when the owner can monitor it. Explain whether calls, messages, or bookings are answered at particular times. Avoid putting personal identity documents, private family information, daily travel routes, entry instructions, recovery contacts, or a residential address in a footer, downloadable brochure, page metadata, or image caption. A photo can reveal more than expected too: check visible house numbers, vehicle plates, school names, and other background details before using it as proof of work.",
+          "If a customer must share an address for an on-site quote or visit, collect it only through the agreed enquiry or booking route after explaining why it is needed. Ask for the minimum useful detail first, such as locality and service type, then confirm a visit before requesting exact directions. Make the privacy notice easy to reach from the form and keep it truthful about how enquiries are handled. This small boundary protects both sides: the business avoids unsolicited visits, and the customer knows what will happen before sending personal details.",
+        ],
+      },
+      {
+        heading: "Run a calm public check after any location change",
+        paragraphs: [
+          "After changing an address, service area, or contact route, open the homepage, contact page, key service page, Google Business Profile, and primary social bio in a private browser. Check mobile as well as desktop. Follow the phone, WhatsApp, form, booking, and map links as a customer would, using harmless tests where permitted. Look for old footers, PDF brochures, saved map embeds, image captions, and search results that may still point to a former address. Correct owned sources first; Google and directories may take time to process their own updates.",
+          "Choose the honest customer model, publish only the location detail that supports it, give people a working next step, and review public routes after a change. For most independent businesses, a clear service area and dependable enquiry path build more trust than an address customers should never use.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "google-search-wrong-snippet-local-business-website-india",
+    title: "Google Search shows the wrong website description? Improve the page, not the keywords",
+    description:
+      "A practical guide for Indian local businesses and freelancers to correct a confusing Google Search snippet by improving the page customers actually visit.",
+    category: "Website foundations",
+    publishedAt: "2026-11-11",
+    updatedAt: "2026-11-11",
+    readingMinutes: 5,
+    image:
+      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "Independent professional reviewing website search information on a laptop beside notes",
+    keywords: [
+      "Google Search showing wrong description local business website India",
+      "fix confusing Google search snippet for service website",
+      "meta description for Indian freelancer website service page",
+      "Google search result text does not match website business",
+    ],
+    relatedSlugs: [
+      "google-search-old-phone-number-after-website-update-india",
+      "google-search-show-business-name-favicon-local-website-india",
+      "google-search-console-url-inspection-local-business-website-india",
+    ],
+    sections: [
+      {
+        heading: "A confusing snippet can send the right customer away",
+        paragraphs: [
+          "A photographer in Jaipur may search for her business and find a Google result that mentions an old mini-session offer. A Pune accountant may see a line lifted from a footer instead of the service he now provides. A tutor may find that the result makes a visitor think lessons are only online. These are customer-route problems, not a cue to scatter keywords across every page. Before changing the site, record the search query, exact result URL, title link, and text below it.",
+          "Google calls this result text a snippet. It is generated automatically, mainly from the page content, and can differ depending on what a person searched for. Google may use a meta description when it believes that gives a more accurate summary, but the business cannot manually choose the wording shown for every query. That is a useful boundary: aim to make the page unambiguous for a real visitor, then give Google clear, truthful source material. Do not promise an instant display change to a customer or replace a working page because one result looks odd today.",
+        ],
+      },
+      {
+        heading: "Confirm that the result really leads to the page you mean",
+        paragraphs: [
+          "Open the result and check the full address after the page loads. An old service URL, a PDF, a blog post, a contact page, or a redirected campaign link can each produce a separate result. If the snippet refers to a discontinued offer, the correct work may be on that old page rather than the homepage. Note whether the page is still meant to be public and whether it serves a customer purpose. Do not hide a useful current service page merely to remove an unflattering sentence from search.",
+          "Then inspect the public page while signed out, on a phone as well as a desktop. Read the opening heading, first paragraphs, service description, price guidance, FAQ answers, footer, and main contact action. The text Google selected is often a clue that a visitor could also misunderstand. A decorator whose page opens with a five-year-old offer before explaining current consultations has a content-order problem. Move the current answer higher, remove stale public copy, and make the next action match the service that is actually available.",
+        ],
+      },
+      {
+        heading: "Give each important page one honest job",
+        paragraphs: [
+          "Start with the page most likely to meet the customer’s need: a home page for the overall business, a service page for a specific offer, or a location page only when it contains genuinely distinct local information. Its visible heading should say what the visitor can get, for whom, and where location matters. ‘Home physiotherapy visits in South Bengaluru’ is clearer than ‘Welcome to our services’. Follow it with a short explanation of the work, a meaningful condition such as appointment confirmation or travel coverage, and an action that does not overpromise.",
+          "Avoid using one generic paragraph on every service page. A tax-return consultation, a bridal makeup booking, and an appliance-repair visit each need different decision details. Describe the actual scope, any boundary that affects eligibility or price, and what the visitor should send or choose next. Use the language customers understand; accuracy matters more than sounding technical. If a page has no independent job beyond repeating another page with a city name changed, consolidate it instead.",
+        ],
+      },
+      {
+        heading: "Write a description for the searcher, not for a robot",
+        paragraphs: [
+          "Where the website editor offers a page description, write one concise sentence that accurately summarises that specific page. It can bring together useful facts that are scattered through the page: the service, the customer type, the service area or remote boundary, and the next step. For example: ‘Request a home appliance repair visit across central Kochi; tell us the appliance, locality, and preferred time and we will confirm availability.’ Only use a sentence the business can honour.",
+          "Do not fill this field with location names, competitors, superlatives, phone numbers, or a string of phrases such as ‘plumber Delhi best plumber emergency plumber’. Google’s current guidance says descriptions made from long keyword lists are not helpful and are less likely to be used as snippets. Reusing the same description for every page is also unhelpful when the pages have different purposes. Prioritise the homepage, the main services, the contact or booking page, and high-traffic pages if time is limited. The customer still needs the same clear answer in visible page text.",
+        ],
+      },
+      {
+        heading: "Keep titles, headings, and customer actions aligned",
+        paragraphs: [
+          "The blue result title is a separate element from the snippet. Google automatically builds title links from several signals, including the page title, prominent visible title, headings, and links to the page. That is why a tidy meta description alone cannot fix a title that says something different from the page. Check that the browser title, visible main heading, menu label, and Google Business Profile website destination all identify the same current service. A visitor should not click ‘Wedding photography’ and land on a generic design portfolio.",
+          "Make the call to action equally specific. A business that must inspect a job can say ‘Request an estimate’ and ask for locality and service type. A professional with fixed consultation slots can say ‘Book a consultation’ only when the calendar is current. Test the action in a private browser on a phone. A better snippet cannot compensate for a broken WhatsApp link, a form that never reaches anyone, or a page that claims same-day service when no one can reply. Search appearance and customer experience should describe one dependable path.",
+        ],
+      },
+      {
+        heading: "Request a revisit once, then judge the public result calmly",
+        paragraphs: [
+          "After a meaningful correction is live, a verified owner can inspect the exact canonical URL in Google Search Console and request indexing once where eligible. Google must recrawl and reprocess the page before it can notice changed source material, which can take days or weeks. The request is not a command to use a particular snippet. Do not submit the same unchanged URL repeatedly, add hidden text, or block a page from indexing simply because you dislike the preview.",
+          "Set a date to check the original queries again after normal processing time. Open the result, confirm the visible page remains accurate, and test the contact route. If Google still selects a different but truthful part of the page, leave it alone unless a customer would genuinely be misled. If it selects stale copy, revisit the exact URL and find the remaining source. The useful Kritvani routine is small: keep each owned page current, state the real service and next action plainly, then let the result reflect a page that is already ready for a customer. Kritvani can help publish that clear page; it cannot guarantee Google’s wording, position, or enquiries.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "local-service-website-google-ai-search-basics-india",
+    title: "Do you need AI SEO for a local service website? Start with the customer page",
+    description:
+      "A practical guide for Indian local businesses and independent professionals to improve a website for Google’s AI search features without buying unsupported AI SEO fixes.",
+    category: "Website foundations",
+    publishedAt: "2026-11-10",
+    updatedAt: "2026-11-10",
+    readingMinutes: 5,
+    image:
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1800&q=85",
+    imageAlt:
+      "Independent professional reviewing a service website on a laptop beside a notebook",
+    keywords: [
+      "AI SEO for local service business website India",
+      "how to appear in Google AI Overviews local business website",
+      "Google AI Mode website basics for Indian freelancers",
+      "do local businesses need llms.txt for Google Search",
+    ],
+    relatedSlugs: [
+      "service-page-not-indexed-google-search-console-india",
+      "local-business-schema-markup-website-india",
+      "google-search-console-setup-local-business-website-india",
+    ],
+    sections: [
+      {
+        heading: "The useful question is not ‘How do I rank in AI?’",
+        paragraphs: [
+          "A freelancer may see an offer for ‘AI SEO’, an AI-ready website badge, or a new file called llms.txt and wonder whether a simple website is already behind. For a photographer in Pune, a home tutor in Jaipur, or a repair professional in Kochi, the more useful question is smaller: can a person who finds this page understand the service, check whether it is relevant locally, and take the next honest step? Google’s current guidance for AI Overviews and AI Mode says its normal Search fundamentals still apply. There is no separate requirement, special schema type, or guaranteed route into an AI answer.",
+          "That is reassuring because it keeps the work close to the business. A clear, crawlable service page can help a customer arriving from a traditional result, an AI feature, a shared link, or a Google Business Profile. A mysterious technical add-on cannot repair a page that never says what is offered, where it is offered, who it is for, or how to enquire. Treat AI-search claims as a reason to check the customer path, not a reason to publish a rushed second version of the website.",
+        ],
+      },
+      {
+        heading: "Start with one real customer question",
+        paragraphs: [
+          "Choose a question a potential customer genuinely asks before contacting the business. A tax consultant might answer ‘Do you help salaried professionals file an income-tax return?’ A wedding photographer might answer ‘What is included in a half-day event package?’ A physiotherapist might explain whether home visits are available in a particular area. Put the answer on the most relevant existing service page, in plain language the owner can stand behind. Do not create a dozen nearly identical city pages or a long list of every imaginable question merely to sound comprehensive.",
+          "The page should separate facts from promises. State the service, the area or remote-working scope, any meaningful limitation, and the next action. ‘Interior consultations in Bengaluru; site visits by confirmed appointment’ is more useful than ‘India’s best design solutions’. If prices, availability, turnaround, qualifications, or eligibility vary, explain the condition instead of inventing a universal answer. This gives a visitor something practical to assess and gives the business a page it can keep accurate when its work changes.",
+        ],
+      },
+      {
+        heading: "Make important details available as normal page text",
+        paragraphs: [
+          "Google’s advice for AI features includes making important content available in text, keeping internal links usable, and providing a good page experience. For a small business, that means the central service explanation should not exist only in a brochure image, an Instagram embed, a video with no supporting copy, or a WhatsApp chat. Add a descriptive page title and heading, short sections that answer the customer’s decision points, and a visible contact or booking route. Use images to show work or build trust, but give them useful alternative text rather than hiding the only explanation inside a graphic.",
+          "Check the page on a phone without being signed into the editor. Can a person read the service area, notice an appointment-only rule, and reach the correct contact route without zooming or hunting? Is the enquiry form working, and does the confirmation set a response expectation the business can meet? These checks are more valuable than repeatedly rewriting a paragraph with an AI tool. If a visitor cannot complete the path, extra keywords will not create a reliable enquiry.",
+        ],
+      },
+      {
+        heading: "Keep website facts aligned with the business’s public presence",
+        paragraphs: [
+          "A local service website is only one source in a customer’s journey. Compare its business name, phone number, address or service area, hours, and website link with the verified Google Business Profile. Correct a conflict at the source rather than adding both versions to the page. Google specifically recommends keeping Business Profile information current as part of its guidance for sites in AI search features. It is still the owner’s responsibility to manage the profile and decide what the business can truthfully offer.",
+          "This does not mean copying a profile description onto every page. A therapist working online across India may not need a street address on a service page; a home-service electrician should not imply walk-in premises. Use only the details that are relevant and safe to publish. If the business has multiple locations, give each one a clear customer destination instead of routing every local link to a generic page. Consistency should reduce uncertainty for people, not manufacture a larger footprint than the business has.",
+        ],
+      },
+      {
+        heading: "Skip the AI-search shortcuts Google does not require",
+        paragraphs: [
+          "Do not pay for an llms.txt file, special ‘AI schema’, forced content chunking, or a secret keyword formula on the promise that it will place a business in Google AI Overviews or AI Mode. Google says it does not use special AI text files or special structured data for these features, and that pages do not need to be rewritten in a particular AI-friendly style. Structured data can still be worthwhile when it accurately represents visible information and supports an eligible Search feature, but it is not a visibility guarantee and should not be used to claim details customers cannot see.",
+          "Be equally cautious with reports that claim to show an AI ranking for every query. Google’s systems can show different links for different searches, locations, and contexts. A third-party dashboard can be useful for organising work, but it does not have access to Google’s internal ranking systems. Keep access to Search Console with the business owner, avoid sharing passwords, and judge any recommendation by a simple standard: does it make the public page clearer or more usable for a real customer?",
+        ],
+      },
+      {
+        heading: "Measure the customer path, then improve one thing",
+        paragraphs: [
+          "Verify the site in Search Console if the owner has not already done so. Google reports traffic from its AI features within the Web search type, so there is no need to build a parallel reporting system just to check whether the website is ‘AI ready’. Look for meaningful trends in impressions and clicks over a completed period, then pair them with the page’s real outcome: a usable enquiry, booking request, phone call, or portfolio visit. Do not interpret a single day of data as proof that a service page has succeeded or failed.",
+          "The sensible Kritvani routine is modest. Pick one important customer question, publish a truthful answer on the appropriate service page, make the contact action easy to use on a phone, compare key public details with the Business Profile, and review the result after enough time has passed. Kritvani can help keep an owned website clear and publishable; it cannot guarantee inclusion in an AI response, a Google position, or a volume of leads. The durable improvement is a page that makes sense even when search interfaces change again.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "google-search-old-phone-number-after-website-update-india",
     title: "Google Search still shows your old phone number? Fix the source first",
     description:
