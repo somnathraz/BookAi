@@ -1,9 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 import { BRAND_DOMAIN, LEGACY_APP_DOMAINS } from "@/lib/brand";
-
-/** Internal route for the kritvani.com brand page (see src/app/kritvani-home). */
-const BRAND_HOME_PATH = "/kritvani-home";
 import { getSiteSlugByVerifiedHost } from "@/lib/custom-domain";
 import {
   getCanonicalAppDomain,
@@ -90,38 +87,15 @@ export async function proxy(req: NextRequest) {
     return withPlatformHeaders(NextResponse.redirect(target, 308), requestId);
   }
 
-  // The bare company domain shows the brand page at "/" only. Any other path
-  // there (e.g. links from when the builder briefly lived on the apex) goes to
-  // the same path on the builder. Static assets never reach the proxy.
+  // The company apex (kritvani.com) will get its own site in a separate repo.
+  // Until that project takes over the domain, send it to the builder with a
+  // temporary redirect so it never serves a duplicate of the builder.
   if (hostname === BRAND_DOMAIN || hostname === `www.${BRAND_DOMAIN}`) {
-    const path = req.nextUrl.pathname;
-    if (hostname === BRAND_DOMAIN && path === "/") {
-      const home = req.nextUrl.clone();
-      home.pathname = BRAND_HOME_PATH;
-      return withPlatformHeaders(
-        NextResponse.rewrite(home, { request: { headers: requestHeaders } }),
-        requestId
-      );
-    }
-    if (hostname === BRAND_DOMAIN && path === "/robots.txt") {
-      return withPlatformHeaders(
-        NextResponse.next({ request: { headers: requestHeaders } }),
-        requestId
-      );
-    }
     const target = req.nextUrl.clone();
     target.protocol = "https:";
     target.port = "";
-    target.hostname = path === "/" ? BRAND_DOMAIN : appDomain;
-    return withPlatformHeaders(NextResponse.redirect(target, 308), requestId);
-  }
-
-  // The brand page's internal route is only reachable through the apex.
-  if (req.nextUrl.pathname === BRAND_HOME_PATH) {
-    return withPlatformHeaders(
-      NextResponse.redirect(`https://${BRAND_DOMAIN}/`, 308),
-      requestId
-    );
+    target.hostname = appDomain;
+    return withPlatformHeaders(NextResponse.redirect(target, 307), requestId);
   }
 
   // www.<apex> would otherwise serve a full duplicate of the apex site, which

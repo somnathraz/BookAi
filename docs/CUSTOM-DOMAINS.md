@@ -40,7 +40,7 @@ Local dev doesn't need either — `<slug>.localhost:3000` works out of the box.
 | `paperchaiapp.com`, `www.`, `*.` | Legacy — proxy.ts 308s to the kritvani equivalents until the domain lapses |
 
 The invoice app (`paperchai` Vercel project) lives separately at `paperchai.kritvani.com`.
-The bare `kritvani.com` / `www` serve a separate static brand page (Vercel project `kritvani-home`).
+The bare `kritvani.com` / `www` temporarily 307 to `builder.kritvani.com` until the Kritvani brand site (separate repo) takes over the domain.
 
 ---
 
